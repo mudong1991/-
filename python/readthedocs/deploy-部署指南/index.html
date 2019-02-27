@@ -1,0 +1,862 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RTDServerInstallHelp 1.0.0 文档</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="None" href="index.html#document-index"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="http://deploy.rtd4cdforward.io/zh_CN/latest/" />
+
+<link rel="stylesheet" href="/media/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="text/javascript" src="_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = 'index'
+</script>
+
+<script type="text/javascript" src="_static/readthedocs-dynamic-include.js"></script>
+
+<!-- end RTD <extrahead> --></head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html#document-index" class="icon icon-home"> RTDServerInstallHelp
+          
+
+          
+          </a>
+
+          
+            
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-server">服务器安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-rtd">ReadTheDocs部署</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html#document-index">RTDServerInstallHelp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html#document-index">Docs</a> &raquo;</li>
+      
+    <li>RTDServerInstallHelp 1.0.0 文档</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rtdserver">
+<h1>RTDServer安装和配置<a class="headerlink" href="#rtdserver" title="永久链接至标题">¶</a></h1>
+<p>ReadTheDocs的服务器是使用Ubuntu搭建,以下是搭建过程中的一些经验.</p>
+<p>内容目录:</p>
+<div class="toctree-wrapper compound">
+<span id="document-server"></span><div class="section" id="id1">
+<h2>服务器安装<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id2">
+<h3>系统安装<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id3">
+<h4>系统镜像<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h4>
+<p>ISO下载可以通过国内的一些镜像地址进行下载,这里使用的是 <a class="reference external" href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/">清华大学镜像</a> ,版本为 <strong>Ubuntu 14.04 Desktop 版</strong> (镜像太大,这里就不提供下载了).</p>
+<div class="admonition attention">
+<p class="first admonition-title">注意</p>
+<p class="last">1. 在安装时,最新的Ubuntu版本为 <strong>16.10</strong> ,尝试过 <strong>16.04</strong>,但是由于系统内置了 <strong>Python-2.7.12</strong>,而 <strong>APT</strong> 上 <strong>python-dev</strong> 为 <em>2.7.11</em> 无法安装,
+因此缺少 <strong>Python.h</strong> ,需要通过源码编译的Python库无法正常编译.由于对Ubuntu不是很熟悉,遂放弃,选择了低版本.</p>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">注意</p>
+<ol class="last arabic simple" start="2">
+<li>尝试过使用 Ubuntu Server版 , 而后发现 <strong>Server版</strong> 仅适合不需要编译的项目,上面没有 <strong>gcc</strong>, 没有 <strong>unzip</strong>,遂,弃之...</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id5">
+<h4>虚拟机<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
+<p>系统安装在VMWare上,默认系统安装完后会自动安装VMTools.</p>
+<p>如果VM没有自动安装 <cite>VM Tools</cite> ,可以手动选择安装 <cite>VM Tools</cite> .将 <cite>VM Tools</cite> 拷贝到磁盘目录下,解压,然后执行install.pl即可.</p>
+<p><strong>作用: 虚拟机分辨率按照窗口大小进行自适应.</strong></p>
+</div>
+<div class="section" id="id6">
+<h4>代理<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h4>
+<p>由于网络限制,先安装代理客户端.安装完毕之后将`src`中的配置文件 <cite>proxychains.conf</cite> 拷到/etc目录下.修改配置文件,至于配置内容这里就不列出了.</p>
+<p>使用方式:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">proxychains4</span> <span class="o">&lt;</span><span class="n">program_name</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">program_params</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h4>源配置<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
+<p>打开系统配置,选择配置源.如下图:</p>
+<img alt="_images/ubuntu_softeware_update_settings.png" src="_images/ubuntu_softeware_update_settings.png" />
+<p>更新APT列表:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">proxychains4</span> <span class="n">apt</span> <span class="n">update</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pip">
+<h4>pip 源配置<a class="headerlink" href="#pip" title="永久链接至标题">¶</a></h4>
+<p>复制 <a class="reference download internal" href="_downloads/pip.conf" download=""><code class="xref download docutils literal"><span class="pre">pip.conf</span></code></a> 到 <cite>/etc</cite> 目录下, 加快pip的在线安装速度.</p>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>软件安装<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>一些常用的软件并没有被内置到桌面版中,需要手动安装.</p>
+<div class="section" id="vim">
+<h4>vim<a class="headerlink" href="#vim" title="永久链接至标题">¶</a></h4>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo proxychains4 apt install vim
+
+<span class="c1"># 如果报 vim-common 的版本不匹配的话, 先卸载 vim-common,然后再执行安装,vim会自动安装vim-common</span>
+sudo proxychains4 apt remove vim-common
+</pre></div>
+</div>
+</div>
+<div class="section" id="sshd">
+<h4>sshd<a class="headerlink" href="#sshd" title="永久链接至标题">¶</a></h4>
+<p>默认的配置的下,ubuntu是不支持ssh连接的.需要安装openssh-server才能使用.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># openssh-server 包含了client</span>
+sudo proxychains4 apt install openssh-server
+</pre></div>
+</div>
+</div>
+<div class="section" id="nginx">
+<h4>Nginx<a class="headerlink" href="#nginx" title="永久链接至标题">¶</a></h4>
+<p>Python的Web服务器我们使用Nginx.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo proxychains4 apt install nginx
+</pre></div>
+</div>
+</div>
+<div class="section" id="svn">
+<h4>SVN<a class="headerlink" href="#svn" title="永久链接至标题">¶</a></h4>
+<p>RTD源码挂载SVN上.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装svn</span>
+sudo proxychains4 apt install subversion
+</pre></div>
+</div>
+</div>
+<div class="section" id="python-pip">
+<h4>python-pip<a class="headerlink" href="#python-pip" title="永久链接至标题">¶</a></h4>
+<p>直接使用apt安装pip:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">proxychains4</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="python-virtualenv">
+<h4>python-virtualenv<a class="headerlink" href="#python-virtualenv" title="永久链接至标题">¶</a></h4>
+<p>直接使用apt安装virtualenv:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">proxychains4</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">virtualenv</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="elasticsearch">
+<h4>ElasticSearch<a class="headerlink" href="#elasticsearch" title="永久链接至标题">¶</a></h4>
+<p>在 <cite>Ubuntu 16.04</cite> 上,可以直接使用apt安装,遗憾的是14.04上并没有 <cite>ElasticSearch</cite>,只能手动安装.</p>
+<p><a class="reference download internal" href="_downloads/elasticsearch-1.7.3.deb" download=""><code class="xref download docutils literal"><span class="pre">ElasticSearch-1.7.3.deb</span></code></a> , <a class="reference download internal" href="_downloads/elasticsearch-analysis-icu-2.7.0.zip" download=""><code class="xref download docutils literal"><span class="pre">elasticsearch-analysis-icu-2.7.0</span></code></a></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 先通过apt安装jre</span>
+sudo proxychains4 apt install openjdk-7-jre
+
+<span class="c1"># 安装 ElasticSearch</span>
+<span class="c1"># dpkg -i path_to_elasticsearch-1.7.3.deb</span>
+dpkg -i ./elasticsearch-1.7.3.deb
+
+<span class="c1"># 安装 icu 插件</span>
+./plugin -u file:./elasticsearch-analysis-icu-2.7.0.zip -i elasticsearch-analysis-icu
+
+<span class="c1"># 赋予当前用户权限</span>
+sudo chown -R rtdroot.rtdroot /usr/share/elasticsearch/
+
+<span class="c1"># 如果是apt安装还需要给以下目录权限</span>
+sudo chown -R rtdroot.rtdroot /etc/elasticsearch/
+sudo chown -R rtdroot.rtdroot /var/log/elasticsearch/
+sudo chown -R rtdroot.rtdroot /var/lib/elasticsearch/
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">注意</p>
+<p class="last">1. 通过apt安装的ElasticSearch,运行plugin会报找不到配置文件的错误.将plugin的运行结果形成的java命令行转储为shell脚本直接执行java命令则可以成功运行.
+<a class="reference download internal" href="_downloads/plugin.java.sh" download=""><code class="xref download docutils literal"><span class="pre">plugin.java.sh</span></code></a> ,使用方式同plugin.</p>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">注意</p>
+<ol class="arabic simple" start="2">
+<li>通过deb安装的ElasticSearch,目录结构如下:</li>
+</ol>
+<img alt="_images/ubuntu_es_file_struct.png" src="_images/ubuntu_es_file_struct.png" />
+<p>其相关目录是直接建立在share目录下的.而通过apt安装的ElasticSearch的目录如下:</p>
+<img alt="_images/ubuntu_es_file_struct_link.png" src="_images/ubuntu_es_file_struct_link.png" />
+<p>相关目录是软链接.</p>
+<p class="last"><strong>通过deb安装的ElasticSearch需要给相关目录权限,否则会报权限错误.</strong></p>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">注意</p>
+<p>3. 通过deb安装的ElasticSearch,没有data和config.data目录自己建一个就好了.没有config目录以及里面的配置文件.
+config目录自己建一个,配置文件包含: <a class="reference download internal" href="_downloads/elasticsearch.yml" download=""><code class="xref download docutils literal"><span class="pre">elasticsearch.yml</span></code></a> 和 <a class="reference download internal" href="_downloads/logging.yml" download=""><code class="xref download docutils literal"><span class="pre">logging.yml</span></code></a>.</p>
+<p class="last"><strong>配置文件中包含了目录结构信息,data和log的路径都在yml配置路径中</strong></p>
+</div>
+</div>
+<div class="section" id="redis">
+<h4>Redis<a class="headerlink" href="#redis" title="永久链接至标题">¶</a></h4>
+<p>RTD的任务队列在非饥渴模式下会使用Redis数据库.</p>
+<p>安装Redis <a class="reference download internal" href="_downloads/redis-3.0.7.tar.gz" download=""><code class="xref download docutils literal"><span class="pre">Redis-3.0.7</span></code></a> :</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 解压</span>
+tar -xvzf redis-3.0.7.tar.gz
+<span class="c1"># 编译</span>
+make
+<span class="c1"># 安装</span>
+sudo make install
+
+<span class="c1"># 运行目录和配置文件</span>
+mkdir -p ~/workspace/redis/
+cp redis.conf ~/workspace/redis/
+
+<span class="c1"># 直接使用默认配置启动redis</span>
+redis-server ~/workspace/redis/redis.conf <span class="p">&amp;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id9">
+<h3>可选软件<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<div class="section" id="vncserver">
+<h4>VNCServer<a class="headerlink" href="#vncserver" title="永久链接至标题">¶</a></h4>
+<p>VNCServer提供了图形界面远程访问的可能性,当前服务器装在虚拟机上,与共享方式相比,安装VNC会相对来说方便一些(<em>虚拟机共享会将虚拟机文件移动至其指定的位置</em>).</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># vnc server 有很多,这里选择的是 x11vnc</span>
+sudo proxychains4 apt install x11vnc
+
+<span class="c1"># 配置vnc密码</span>
+sudo x11vnc --stordpasswd /etc/x11vnc.pass
+
+<span class="c1"># 创建服务</span>
+sudo vim /lib/systemd/system/x11vnc.service
+
+<span class="c1"># x11vnc.service文件内容如下</span>
+<span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span><span class="o">=</span>Start x11vnc at startup.
+<span class="nv">After</span><span class="o">=</span>multi-user.target
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">Type</span><span class="o">=</span>simple
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -rfbauth /etc/x11vnc.pass -rfbport <span class="m">5900</span> -shared -o /var/log/x11vnc.log
+<span class="o">[</span>Install<span class="o">]</span>
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+
+<span class="c1"># ubuntu 14.04 创建 /etc/init/x11vnc.conf</span>
+start on login-session-start
+script
+/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -rfbauth /etc/x11vnc.pass -rfbport <span class="m">5900</span> -shared -o /var/log/x11vnc.log
+end script
+
+<span class="c1"># 配置防火墙,服务等</span>
+sudo ufw allow 5900
+sudo systemctl <span class="nb">enable</span> x11vnc.service
+sudo systemctl daemon-reload
+
+<span class="c1"># 启动服务</span>
+sudo service x11vnc start
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">小技巧</p>
+<p class="last">如果无法访问连接上的话,可以在terminal中手动执行上面的命令,查看运行输出结果.也可以在上面的命令行后面指定日志存放路径.</p>
+</div>
+</div>
+<div class="section" id="bind9">
+<h4>bind9<a class="headerlink" href="#bind9" title="永久链接至标题">¶</a></h4>
+<p>安装bind9以提供DNS解析,使我们可以通过域名来解析站点(需配置访问PC的DNS服务器),不用每次部署都去修改相关脚本的IP设置(也可以安装Bower和Gulp重新生成相关脚本).</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装bind9</span>
+sudo proxychains4 apt install bind9
+</pre></div>
+</div>
+</div>
+<div class="section" id="texlive-latex">
+<h4>texlive-latex<a class="headerlink" href="#texlive-latex" title="永久链接至标题">¶</a></h4>
+<p>如果你需要编译PDF文档,那么texlive-latex则是必选的组件. <strong>但是,尽管在各种报错解决了之后,生成的PDF在一些换行处理上还是有问题,也许是设置上的问题,也许是缺陷,因此,不建议开启PDF生成功能!!</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装pdflatex</span>
+sudo proxychains4 apt install texlive-latex-base
+
+<span class="c1"># 安装中文语言包</span>
+sudo proxychains4 apt install texlive-lang-cjk
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">注意</p>
+<p class="last">1. 安装pdflatex时预到了不少问题,主要是 <cite>apt install</cite> 的时候报错,后来也试过给系统装上了中文语言包.
+给系统装的时候也报错,后来把这两个给remove了,然后再进行的安装,后来再安装相同的包的时候就没有报错了, <strong>猜测跟系统的语言包还是有点关系的</strong> .另外, CJK 这里只安装了 <cite>cjk-chinese</cite> .</p>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">注意</p>
+<ol class="last arabic simple" start="2">
+<li>pdf生成的时候遇到了Unicode编码问题,通过增加配置项解决.另外如果标题作者也带中文的话,则需要修改为: <strong>u&#8217;\unexpanded{中文作者}&#8217;</strong></li>
+</ol>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Fix for CJK, gbsn stand for Chinese Simplified</span>
+<span class="k">if</span> <span class="n">project</span><span class="o">.</span><span class="n">language</span> <span class="ow">and</span> <span class="n">project</span><span class="o">.</span><span class="n">language</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;zh&quot;</span><span class="p">,</span> <span class="s2">&quot;zh_CN&quot;</span><span class="p">]:</span>
+    <span class="n">latex_elements_zh_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2"># Fix for CJK, gbsn stand for Chinese Simplified</span>
+<span class="s2">latex_elements_zh = {</span>
+<span class="s2">    &#39;preamble&#39;: &#39;&#39;&#39;</span>
+<span class="s2">    </span><span class="se">\\\\</span><span class="s2">hypersetup{unicode=true}</span>
+<span class="s2">    </span><span class="se">\\\\</span><span class="s2">usepackage{CJKutf8}</span>
+<span class="s2">    </span><span class="se">\\\\</span><span class="s2">AtBeginDocument{</span><span class="se">\\\\</span><span class="s2">begin{CJK}{UTF8}{gbsn}}</span>
+<span class="s2">    </span><span class="se">\\\\</span><span class="s2">AtEndDocument{</span><span class="se">\\\\</span><span class="s2">end{CJK}}</span>
+<span class="s2">    &#39;&#39;&#39;</span>
+<span class="s2">}</span>
+
+<span class="s2">if latex_elements:</span>
+<span class="s2">    latex_elements.update(latex_elements_zh)</span>
+<span class="s2">else:</span>
+<span class="s2">    latex_elements = latex_elements_zh</span>
+<span class="s2">&quot;&quot;&quot;</span>
+    <span class="n">rtd_string</span> <span class="o">+=</span> <span class="n">latex_elements_zh_str</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">注意</p>
+<p class="last">3. pdf生成的时候还遇到了png报错的问题,原因是png不可识别.而这里的png图片是通过RTX的截图保存所得来的.因大部分截图应该都是通过RTX的截图来的,
+因此修改了源代码中的相关部分,在生成pdf前,先用convert把图片给转换一次.</p>
+</div>
+</div>
+</div>
+</div>
+<span id="document-rtd"></span><div class="section" id="readthedocs">
+<h2>ReadTheDocs部署<a class="headerlink" href="#readthedocs" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id1">
+<h3>源码获取<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<p>当前源代码放在了我自己的SVN服务器上.从SVN下载源码.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 本地路径创建,请随意</span>
+mkdir -p ~/workspace/projects/rtd
+<span class="nb">cd</span> ~/workspace/projects/rtd
+
+<span class="c1"># 源代码获取</span>
+svn co http://10.2.25.3/svn/OpenSourcePythonCodes/ReadTheDocs/trunk/ .
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">注意</p>
+<p class="last">当前SVN上的代码是已经完成了Bower和Gulp安装,生成了相关静态文件后的结果.如果是直接从GitHub上下载的源码,则还需要初始化Bower和Gulp来下载和构建静态文件.</p>
+</div>
+</div>
+<div class="section" id="pyhton">
+<h3>Pyhton虚拟环境<a class="headerlink" href="#pyhton" title="永久链接至标题">¶</a></h3>
+<p>在有proxychains的情况下,直接在线安装pyhton环境.不过建立虚拟环境还是直接用离线的方式比较效率.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 虚拟环境目录</span>
+<span class="nb">cd</span> ~/workspace/projects/rtd/env/
+
+<span class="c1"># virtualenv初始化</span>
+python -mvirtualenv --no-site-packages .
+
+<span class="c1"># 当前环境变量导出</span>
+<span class="nb">source</span> bin/activate
+
+<span class="c1"># RTD 编译Python 模块所需要的包</span>
+sudo proxychains4 apt install libxml2-dev libxslt1-dev zlib1g-dev
+
+<span class="c1"># python模块安装</span>
+proxychains4 pip install -r ../requirements/deploy_local.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>数据库初始化<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<p>数据库这里我们还是使用sqlite,其本身的部署环境使用的是 <strong>Postgres</strong> .</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 回到项目根目录</span>
+<span class="nb">cd</span> ~/workspace/projects/rtd/
+
+<span class="c1"># 数据库同步</span>
+python manage.py migrate
+
+<span class="c1"># 创建超级用户</span>
+python manage.py createsuperuser
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>项目运行配置<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<div class="section" id="gunicorn">
+<h4>Gunicorn<a class="headerlink" href="#gunicorn" title="永久链接至标题">¶</a></h4>
+<p>按照RTD的部署结构图,Django是运行在Gunicorn上的. <cite>settings.deploy</cite> 设置相关的运行配置,包括`Django`的`INSTALL_APPS`.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 前台运行,运行成功后,进程进入阻塞状态</span>
+gunicorn readthedocs.wsgi:application -b 127.0.0.1:8000
+
+<span class="c1"># 后台运行</span>
+nohup gunicorn readthedocs.wsgi:application -b 127.0.0.1:8000 <span class="p">&amp;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="nginx">
+<h4>Nginx<a class="headerlink" href="#nginx" title="永久链接至标题">¶</a></h4>
+<p>Ubuntu下默认的配置文件在 <cite>/etc/nginx/</cite> 目录下. 默认安装的版本为 <cite>1.4.6</cite>.</p>
+<p>在该版本下, 基础配置文件在 <cite>nginx.conf</cite> 中. 如无特殊需求,可不必修改.</p>
+<p>站点配置文件在 <cite>sites-available</cite> 目录中, <cite>nginx.conf</cite> 中配置了加载 <cite>sites-enabled</cite> 目录下的配置文件,因此,正如其名称一样,要启用站点配置,将文件从 <cite>available</cite> 软链接到 <cite>enabled</cite> 目录即可.</p>
+<p>配置站点,主要内容如下:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>server {
+    location / {
+            proxy_pass http://127.0.0.1:8000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h4>静态资源配置<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h4>
+<p>RTD的部分静态文件是靠Bower和Gulp生成的,而实际使用的是 <cite>media</cite> 目录下的内容,因此需要做一些软链接来提供静态资源访问.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 切换到media目录</span>
+<span class="nb">cd</span> ~/workspace/projects/rtd/media/
+
+<span class="c1"># 软链接</span>
+<span class="c1"># fonts</span>
+ln -sf ./static/core/font/ fonts
+<span class="nb">cd</span> font
+ln -sf ../static/core/font/fontawesome-webfont.* .
+ln -sf ../static/core/font/fontawesome-webfont.eot ./fontawesome_webfont.eot
+ln -sf ../static/core/font/fontawesome-webfont.svg ./fontawesome_webfont.svg
+ln -sf ../static/core/font/fontawesome-webfont.ttf ./fontawesome_webfont.ttf
+ln -sf ../static/core/font/fontawesome-webfont.eot ./fontawesome_webfont.eot
+
+<span class="c1"># css</span>
+<span class="nb">cd</span> ../css/
+ln -sf ../static/core/css/*.css
+
+<span class="c1"># js</span>
+<span class="nb">cd</span> ../javascript/
+ln -sf ../static/core/js/*.js .
+ln -sf ../static/vendor/underscore-standalone.js ./underscore.js
+<span class="nb">cd</span> jquery/
+ln -sf ../../static/vendor/jquery-standalone.js ./jquery-2.0.3.min.js
+ln -sf ../../static/vendor/jquery-migrate-standalone.js ./jquery-migrate-1.2.1.min.js
+ln -sf ../../static/vendor/jquery-ui-standalone.js ./jquery-ui-1.8.24.custom.min.js
+</pre></div>
+</div>
+</div>
+<div class="section" id="elasticsearch">
+<h4>ElasticSearch默认索引<a class="headerlink" href="#elasticsearch" title="永久链接至标题">¶</a></h4>
+<p>ElasticSearch在启动之后并为创建默认的索引集合.需要手动创建.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># 在项目根目录下执行python(虚拟环境)</span>
+<span class="kn">from</span> <span class="nn">readthedocs.search.indexes</span> <span class="kn">import</span> <span class="n">Index</span><span class="p">,</span> <span class="n">PageIndex</span><span class="p">,</span> <span class="n">ProjectIndex</span><span class="p">,</span> <span class="n">SectionIndex</span>
+
+<span class="c1"># 创建默认索引</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
+<span class="n">index_name</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">timestamped_index</span><span class="p">()</span>
+<span class="n">index</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">index_name</span><span class="p">)</span>
+<span class="n">index</span><span class="o">.</span><span class="n">update_aliases</span><span class="p">(</span><span class="n">index_name</span><span class="p">)</span>
+
+<span class="c1"># 更新映射</span>
+<span class="n">proj</span> <span class="o">=</span> <span class="n">ProjectIndex</span><span class="p">()</span>
+<span class="n">proj</span><span class="o">.</span><span class="n">put_mapping</span><span class="p">()</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">PageIndex</span><span class="p">()</span>
+<span class="n">page</span><span class="o">.</span><span class="n">put_mapping</span><span class="p">()</span>
+<span class="n">sec</span> <span class="o">=</span> <span class="n">SectionIndex</span><span class="p">()</span>
+<span class="n">sec</span><span class="o">.</span><span class="n">put_mapping</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="redis">
+<h4>Redis<a class="headerlink" href="#redis" title="永久链接至标题">¶</a></h4>
+<p>Redis在目前的使用下几乎不需要什么额外的配置,其主要作用是消息队列存放.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 修改redis的工作路径</span>
+dir /home/rtdroot/workspace/redis/
+
+<span class="c1"># 修改日志文件的路径,默认为/dev/null</span>
+logfile <span class="s2">&quot;/home/rtdroot/workspace/redis/redis.log&quot;</span>
+</pre></div>
+</div>
+<p>后台启动Redis:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">nohup</span> <span class="n">redis</span><span class="o">-</span><span class="n">server</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">rtdroot</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">redis</span><span class="o">/</span><span class="n">redis</span><span class="o">.</span><span class="n">conf</span> <span class="o">&amp;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="celery">
+<h4>Celery<a class="headerlink" href="#celery" title="永久链接至标题">¶</a></h4>
+<p>Celery在这里使用的是DjCelery,所以其配置直接使用的Django的配置.</p>
+<p>后台启动Celery:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 启用Python虚拟环境</span>
+<span class="nb">source</span> /home/rtdroot/workspace/projects/rtd/env/bin/activate
+
+<span class="c1"># 切换到工作目录</span>
+<span class="nb">cd</span> /home/rtdroot/workspace/projects/rtd/
+
+<span class="c1"># 后台启动celery worker,可以用通过 kill -15 &lt;pid_of_main&gt; 来结束掉worker</span>
+nohup python manage.py celery worker -l info -Q celery,web &gt; logs/celery_worker.log <span class="p">&amp;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dns">
+<h4>DNS配置<a class="headerlink" href="#dns" title="永久链接至标题">¶</a></h4>
+<p>为了支持域名解析,我们需要配置DNS服务器来解析自己的域名.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">以下配置只是保证域名能正常解析,并不一定是最优的配置方式.</p>
+</div>
+<ol class="arabic simple">
+<li>配置正向解析, 域名 -&gt; IP</li>
+</ol>
+<p>先配置域名解析服务器对应的正向解析域:</p>
+<div class="highlight-lisp"><div class="highlight"><pre><span></span><span class="c1">; BIND reverse data file for cdforward.org</span>
+<span class="c1">;</span>
+<span class="c1">; This task effects after several tries</span>
+<span class="c1">;</span>
+<span class="nv">$TTL</span>	<span class="mi">86400</span>
+<span class="nv">@</span>		<span class="nv">IN</span>		<span class="nv">SOA</span>		<span class="nv">cdforward.org.</span> <span class="nv">root.cdforward.org.</span> <span class="p">(</span>
+				<span class="nv">2</span>					<span class="c1">; Serial</span>
+				<span class="nv">604800</span>				<span class="c1">; Refresh</span>
+				<span class="nv">86400</span>				<span class="c1">; Retry</span>
+				<span class="nv">2419200</span>				<span class="c1">; Expire</span>
+				<span class="mi">86400</span> <span class="p">)</span>				<span class="c1">; Negative Cache TTL</span>
+<span class="c1">;</span>
+<span class="nv">@</span>		<span class="nv">IN</span>	<span class="nv">NS</span>	<span class="nv">ns.cdforward.org.</span>
+<span class="nv">@</span>		<span class="nv">IN</span>	<span class="nv">A</span>	<span class="nv">10.2.25.113</span>
+<span class="nv">ns</span>		<span class="nv">IN</span>	<span class="nv">A</span>	<span class="nv">10.2.25.113</span>
+</pre></div>
+</div>
+<p>再配置ReadTheDocs对应的正向解析域:</p>
+<div class="highlight-lisp"><div class="highlight"><pre><span></span><span class="c1">; BIND reverse data file for rtd4cdforward.io</span>
+<span class="c1">;</span>
+<span class="c1">; This task effects after several tries</span>
+<span class="c1">;</span>
+<span class="nv">$TTL</span>	<span class="mi">86400</span>
+<span class="nv">@</span>		<span class="nv">IN</span>		<span class="nv">SOA</span>		<span class="nv">rtd4cdforward.io.</span>	<span class="nv">root.rtd4cdforward.io.</span> <span class="p">(</span>
+				<span class="nv">2</span>						<span class="c1">; Serial</span>
+				<span class="nv">604800</span>					<span class="c1">; Refresh</span>
+				<span class="nv">86400</span>					<span class="c1">; Retry</span>
+				<span class="nv">2419200</span>					<span class="c1">; Expire</span>
+				<span class="mi">86400</span> <span class="p">)</span>					<span class="c1">; Negative Cache TTL</span>
+<span class="c1">;</span>
+<span class="nv">@</span>		<span class="nv">IN</span>	<span class="nv">NS</span>	<span class="nv">ns.cdforward.org.</span>		<span class="c1">; use ns.cdforward.org as ns</span>
+<span class="nv">@</span>		<span class="nv">IN</span>	<span class="nv">A</span>	<span class="nv">10.2.25.113</span>				<span class="c1">; local ip</span>
+<span class="nv">www</span>		<span class="nv">IN</span>	<span class="nv">A</span>	<span class="nv">10.2.25.113</span>				<span class="c1">; provide www</span>
+<span class="nb">*</span>		<span class="nv">IN</span>	<span class="nv">A</span>	<span class="nv">10.2.25.113</span>				<span class="c1">; provide subdomain</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>配置逆向解析, IP -&gt; 域名</li>
+</ol>
+<p>因为DNS服务器和我们的文档服务器都在一个上面,因此仅配置一个即可.</p>
+<div class="highlight-lisp"><div class="highlight"><pre><span></span><span class="c1">; BIND reverse data file for 10.2.25.113</span>
+<span class="c1">;</span>
+<span class="c1">; This task effects after several tries</span>
+<span class="c1">;</span>
+<span class="nv">$TTL</span>	<span class="mi">86400</span>
+<span class="nv">@</span>		<span class="nv">IN</span>		<span class="nv">SOA</span>		<span class="nv">cdforward.org.</span> <span class="nv">root.cdforward.org.</span> <span class="p">(</span>
+				<span class="nv">2</span>					<span class="c1">; Serial</span>
+				<span class="nv">604800</span>				<span class="c1">; Refresh</span>
+				<span class="nv">86400</span>				<span class="c1">; Retry</span>
+				<span class="nv">2419200</span>				<span class="c1">; Expire</span>
+				<span class="mi">86400</span> <span class="p">)</span>				<span class="c1">; Negative Cache TTL</span>
+<span class="c1">;</span>
+<span class="nv">@</span>		<span class="nv">IN</span>	<span class="nv">NS</span>	<span class="nv">cdforward.org.</span>
+<span class="nv">113</span>		<span class="nv">IN</span>	<span class="nv">PTR</span>	<span class="nv">ns.cdforward.org.</span>	<span class="c1">; 10.2.25.113 is point to ns.cdforward.org</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">小技巧</p>
+<p class="last">DNS的解析是反向的,从右到左.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li>包含以上配置文件.</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span>
+<span class="o">//</span> <span class="n">Do</span> <span class="nb">any</span> <span class="n">local</span> <span class="n">configuration</span> <span class="n">here</span>
+<span class="o">//</span>
+
+<span class="o">//</span> <span class="n">Consider</span> <span class="n">adding</span> <span class="n">the</span> <span class="mi">1918</span> <span class="n">zones</span> <span class="n">here</span><span class="p">,</span> <span class="k">if</span> <span class="n">they</span> <span class="n">are</span> <span class="ow">not</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">your</span>
+<span class="o">//</span> <span class="n">organization</span>
+<span class="o">//</span><span class="n">include</span> <span class="s2">&quot;/etc/bind/zones.rfc1918&quot;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">domain</span> <span class="o">-&gt;</span> <span class="n">ip</span>
+<span class="n">zone</span> <span class="s2">&quot;cdforward.org&quot;</span> <span class="ow">in</span> <span class="p">{</span>
+	<span class="nb">type</span> <span class="n">master</span><span class="p">;</span>
+	<span class="n">file</span> <span class="s2">&quot;/etc/bind/db.cdforward.org&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">zone</span> <span class="s2">&quot;rtd4cdforward.io&quot;</span> <span class="ow">in</span> <span class="p">{</span>
+	<span class="nb">type</span> <span class="n">master</span><span class="p">;</span>
+	<span class="n">file</span> <span class="s2">&quot;/etc/bind/db.rtd4cdforward.io&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="o">//</span> <span class="n">ip</span> <span class="o">-&gt;</span> <span class="n">domain</span>
+<span class="n">zone</span> <span class="s2">&quot;25.2.10.in-addr.arpa&quot;</span> <span class="ow">in</span> <span class="p">{</span>
+	<span class="nb">type</span> <span class="n">master</span><span class="p">;</span>
+	<span class="n">file</span> <span class="s2">&quot;/etc/bind/db.25.2.10&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>重启服务器之后,配置生效. 可以通过 <cite>dig</cite> 或者 <cite>nslookup</cite> 来测试.</p>
+<div class="admonition attention">
+<p class="first admonition-title">注意</p>
+<p class="last">客户端PC需要配置DNS指向这里的DNS服务器才能解析域名.</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h4>站点域名配置<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
+<p><cite>Django</cite> 默认的 <cite>Site</cite> 的域名是 <cite>example.com</cite>,在一些内置模块中会使用该域名,如邮件.</p>
+<p>可以登陆到Django的Admin后台修改该地址.</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>项目运行<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>运行相关的内容在各项配置下实际均有说明,这里做一个总结.</p>
+<div class="section" id="id7">
+<h4>后台运行<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
+<p>总结起来需要运行的命令包含如下:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 1. 后台运行 ElasticSearch</span>
+/usr/share/elasticsearch/bin/elasticsearch -d
+
+<span class="c1"># 2. 后台运行 Redis</span>
+nohup redis-server /home/rtdroot/workspace/redis/redis.conf <span class="p">&amp;</span>
+
+<span class="c1"># 3. 启动Python虚拟环境</span>
+<span class="nb">cd</span> /home/rtdroot/workspace/projects/rtd/
+<span class="nb">source</span> env/bin/activate
+
+<span class="c1"># 4. 后台运行 Celery</span>
+nohup python manage.py celery worker -l info -Q celery,web &gt; logs/celery_worker.log <span class="p">&amp;</span>
+
+<span class="c1"># 5. 后台运行 Gunicorn</span>
+nohup gunicorn readthedocs.wsgi:application -b 127.0.0.1:8000 <span class="p">&amp;</span>
+
+<span class="c1"># 6. Nginx &amp; Bind9 在当前安装情况下都是系统服务,随系统启动.可通过如下命令重启</span>
+sudo service nginx restart
+sudo service bind9 restart
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h4>运行日志<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h4>
+<p>各模块的运行日志所在路径如下:</p>
+<ol class="arabic">
+<li><p class="first">ElasticSearch:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">elasticsearch</span><span class="o">/</span><span class="n">logs</span><span class="o">/</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Redis:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">rtdroot</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">redis</span><span class="o">/</span><span class="n">redis</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Celery:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">rtdroot</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">rtd</span><span class="o">/</span><span class="n">logs</span><span class="o">/</span><span class="n">celery_worker</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Gunicorn(Django):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">rtdroot</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">rtd</span><span class="o">/</span><span class="n">logs</span><span class="o">/</span><span class="n">rtd</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Nginx:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">系统服务日志(nginx,bind9等):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">syslog</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; 版权所有 2016, BenjaminXT.
+      
+        <span class="commit">
+          Revision <code>89M</code>.
+        </span>
+      
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="/zh_CN/latest/">latest</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="//rtd4cdforward.io/projects/deploy/downloads/htmlzip/latest/">htmlzip</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="//rtd4cdforward.io/projects/deploy/?fromdocs=deploy">Project Home</a>
+          </dd>
+          <dd>
+            <a href="//rtd4cdforward.io/builds/deploy/?fromdocs=deploy">Builds</a>
+          </dd>
+      </dl>
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+
+    </div>
+  </div>
+
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/translations.js"></script>
+
+  
+
+  
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

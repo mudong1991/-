@@ -1,0 +1,252 @@
+0.17.2 (2016-08-04)
+-------------------
+
+* New CHANNELS_WS_PROTOCOLS setting if you want Daphne to accept certain
+  subprotocols
+
+* WebsocketBindingWithMembers allows serialization of non-fields on instances
+
+* Class-based consumers have an .as_route() method that lets you skip using
+  route_class
+
+* Bindings now work if loaded after app ready state
+
+
+0.17.1 (2016-07-22)
+-------------------
+
+* Bindings now require that `fields` is defined on the class body so all fields
+  are not sent by default. To restore old behaviour, set it to ['__all__']
+
+* Bindings can now be declared after app.ready() has been called and still work.
+
+* Binding payloads now include the model name as `appname.modelname`.
+
+* A worker_ready signal now gets triggered when `runworker` starts consuming
+  messages. It does not fire from within `runserver`.
+
+
+0.17.0 (2016-07-19)
+-------------------
+
+* Data Binding framework is added, which allows easy tying of model changes
+  to WebSockets (and other protocols) and vice-versa.
+
+* Standardised WebSocket/JSON multiplexing introduced
+
+* WebSocket generic consumers now have a 'close' argument on send/group_send
+
+
+0.16.1 (2016-07-12)
+-------------------
+
+* WebsocketConsumer now has a http_user option for auto user sessions.
+
+* consumer_started and consumer_finished signals are now available under
+  channels.signals.
+
+* Database connections are closed whenever a consumer finishes.
+
+
+0.16.0 (2016-07-06)
+-------------------
+
+* websocket.connect and websocket.receive are now consumed by a no-op consumer
+  by default if you don't specify anything to consume it, to bring Channels in
+  line with the ASGI rules on WebSocket backpressure.
+
+* You no longer need to call super's setUp in ChannelTestCase.
+
+
+0.15.1 (2016-06-29)
+-------------------
+
+* Class based consumers now have a self.kwargs
+
+* Fixed bug where empty streaming responses did not send headers or status code
+
+
+0.15.0 (2016-06-22)
+-------------------
+
+* Query strings are now decoded entirely by Django. Must be used with Daphne
+  0.13 or higher.
+
+
+0.14.3 (2016-06-21)
+-------------------
+
+* + signs in query strings are no longer double-decoded
+
+* Message now has .values(), .keys() and .items() to match dict
+
+
+0.14.2 (2016-06-16)
+-------------------
+
+* Class based consumers now have built-in channel_session and
+  channel_session_user support
+
+
+0.14.1 (2016-06-09)
+-------------------
+
+* Fix unicode issues with test client under Python 2.7
+
+
+0.14.0 (2016-05-25)
+-------------------
+
+* Class-based consumer pattern and WebSocket consumer now come with Channels
+  (see docs for more details)
+
+* Better testing utilities including a higher-level Client abstraction with
+  optional HTTP/WebSocket HttpClient variant.
+
+
+0.13.1 (2016-05-13)
+-------------------
+
+* enforce_ordering now queues future messages in a channel rather than
+  spinlocking worker processes to achieve delays.
+
+* ConsumeLater no longer duplicates messages when they're requeued below the
+  limit.
+
+
+0.13.0 (2016-05-07)
+-------------------
+
+* Backpressure is now implemented, meaning responses will pause sending if
+  the client does not read them fast enough.
+
+* DatabaseChannelLayer has been removed; it was not sensible.
+
+
+0.12.0 (2016-04-26)
+-------------------
+
+* HTTP paths and query strings are now expected to be sent over ASGI as
+  unescaped unicode. Daphne 0.11.0 is updated to send things in this format.
+
+* request.FILES reading bug fixed
+
+
+0.11.0 (2016-04-05)
+-------------------
+
+* ChannelTestCase base testing class for easier testing of consumers
+
+* Routing rewrite to improve speed with nested includes and remove need for ^ operator
+
+* Timeouts reading very slow request bodies
+
+
+0.10.3 (2016-03-29)
+-------------------
+
+* Better error messages for wrongly-constructed routing lists
+
+* Error when trying to use signed cookie backend with channel_session
+
+* ASGI group_expiry implemented on database channel backend
+
+
+0.10.2 (2016-03-23)
+-------------------
+
+* Regular expressions for routing include() can now be Unicode under Python 3
+
+* Last-resort error handling for HTTP request exceptions inside Django's core
+  code. If DEBUG is on, shows plain text tracebacks; if it is off, shows
+  "Internal Server Error".
+
+
+0.10.1 (2016-03-22)
+-------------------
+
+* Regular expressions for HTTP paths can now be Unicode under Python 3
+
+* route() and include() now importable directly from `channels`
+
+* FileResponse send speed improved for all code (previously just for staticfiles)
+
+
+0.10.0 (2016-03-21)
+-------------------
+
+* New routing system
+
+* Updated to match new ASGI single-reader-channel name spec
+
+* Updated to match new ASGI HTTP header encoding spec
+
+
+0.9.5 (2016-03-10)
+------------------
+
+* `runworker` now has an --alias option to specify a different channel layer
+
+* `runserver` correctly falls back to WSGI mode if no channel layers configured
+
+
+0.9.4 (2016-03-08)
+------------------
+
+* Worker processes now exit gracefully (finish their current processing) when
+  sent SIGTERM or SIGINT.
+
+* `runserver` now has a shorter than standard HTTP timeout configured
+  of 60 seconds.
+
+
+0.9.3 (2016-02-28)
+------------------
+
+* Static file serving is significantly faster thanks to larger chunk size
+
+* `runworker` now refuses to start if an in memory layer is configured
+
+
+0.9.2 (2016-02-28)
+------------------
+
+* ASGI spec updated to include `order` field for WebSocket messages
+
+* `enforce_ordering` decorator introduced
+
+* DatabaseChannelLayer now uses transactions to stop duplicated messages
+
+
+0.9.1 (2016-02-21)
+------------------
+
+* Fix packaging issues with previous release
+
+
+0.9 (2016-02-21)
+----------------
+
+* Staticfiles support in runserver
+
+* Runserver logs requests and WebSocket connections to console
+
+* Runserver autoreloads correctly
+
+* --noasgi option on runserver to use the old WSGI-based server
+
+* --noworker option on runserver to make it not launch worker threads
+
+* Streaming responses work correctly
+
+* Authentication decorators work again with new ASGI spec
+
+* channel_session_user_from_http decorator introduced
+
+* HTTP Long Poll support (raise ResponseLater)
+
+* Handle non-latin1 request body encoding
+
+* ASGI conformance tests for built-in database backend
+
+* Moved some imports around for more sensible layout

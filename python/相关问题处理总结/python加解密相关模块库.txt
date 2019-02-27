@@ -1,0 +1,128 @@
+一、binascii（binascii：二进制和ASCII互转）
+	1、字符串 <----->二进制
+		binascii.b2a_hex('hello')
+		binascii.hexlify('hello')
+		# 68656c6c6f
+
+		binascii.a2b_hex('68656c6c6f')
+		binascii.unhexlify('68656c6c6f')
+		# hello
+		上面的函数hexlify和b2a_hex实际是一个函数，建议使用hexlify。作用是返回的二进制数据的十六进制表示。
+		hex和hexlify的区别：hex只转换整型数据。hex(23):0x17
+	2、ASCII <----->字符
+		chr(i)   返回ASCII码中整数对应的单个字符串。例如，chr(97)返回字符串'a'。和ord刚好相反。该参数必须是在范围[0..255]。
+		unichr(i)   是chr的unicode版本，例如，unichr（97）返回字符串u'a'。
+		ord(c)   chr和unichr的反          向操作。例如，ord('a')返回整数97,ord('\u2020')(返回8224。这是CHR()（8位字符串和unichr逆的unicode对象）。
+		Hexlify的优势在于可以同时处理多个字符。下面2个操作有一定类似性，返回值都是字符串，不过hexlify去掉了’0x’。
+			>>> hex(ord('a'))
+			'0x61'
+			>>> hexlify('a')
+			'61'
+	\x：ascii按照输出数转换为16进制的实际位数输出。
+二、base64（base64编码解码，编码都是ASICII形式）
+	Base64编码是一种“防君子不防小人”的编码方式。广泛应用于MIME协议，作为电子邮件的传输编码，生成的编码可逆，后一两位可能有“=”，生成的编码都是ascii字符。
+  	base64模块真正用的上的方法只有8个，分别是:
+  		encode, decode, encodestring, decodestring, b64encode,b64decode, urlsafe_b64decode,urlsafe_b64encode。
+  	他们8个可以两两分为4组，
+  		*encode,decode一组，专门用来编码和 解码文件的,也可以对StringIO里的数据做编解码；
+  		*encodestring,decodestring一组，专门用来编码和解码字符串；
+  		*b64encode和b64decode一组，用来编码和解码字符串，并且有一个替换符号字符的功能。这个功能是这样的：因为base64编码后的字符除 了英文字母和数字外还有三个字符 + / =, 其中=只是为了补全编码后的字符数为4的整数，而+和/在一些情况下需要被替换的，b64encode和b64decode正是提供了这样的功能。至于什 么情况下+和/需要被替换，最常见的就是对url进行base64编码的时候。
+  		*urlsafe_b64encode和urlsafe_b64decode 一组，这个就是用来专门对url进行base64编解码的，实际上也是调用的前一组函数。
+三、M2Crypto（加解密数据、操作密钥、操作SSL协议普遍使用了OpenSSL）
+	下面是几个模块的大致介绍: 
+		M2Crypto.BIO 用于操作IO抽象类型。 
+		M2Crypto.BN 用于操作大数 
+		M2Crypto.DH 用于操作Diffie-Hellman key exchange protocol 
+		 M2Crypto.EVP 高级的加密解密接口。与直接使用具体的加密算法不同。使用该接口，可以用相同的编程方式，调用不同的算法处理数据。它包含了对称加密算法与非对称加密算法的支持。 
+		M2Crypto.EC 椭圆曲线非对称加密算法 
+		M2Crypto.DSA DSA非对称加密算法 
+		M2Crypto.RSA RSA非对称加密算法 
+		M2Crypto.Rand 操作随机数 
+		M2Crypto.SSL 操作SSL协议 
+		M2Crypto.X509 操作X509 
+	如前所述，我们需要使用EVP.Cipher这个比较抽象的API，而不是具体的算法。与EVP.MessageDigest()类似，EVP.Cipher主要提供四个函数： 
+	EVP.Cipher.__init__(self, alg, key, iv, op, key_as_bytes=0, d='md5', salt='12345678', i=1, padding=1) 
+	 EVP.Cipher.update(self, data) 
+	 EVP.Cipher.final() 
+	 EVP.Cipher.set_padding(self, padding=1) 
+	   
+	下面是一段使用blowfish算法将明文"fish is here"加密成密文的函数代码： 
+	  
+	def blowfish_encrypt(s, password): 
+	      out=StringIO() 
+	      m=EVP.Cipher("bf_ecb", password, "123456", 1, 1, "sha1", "saltsalt", 5, 1) 
+	      out.write(m.update(s)) 
+	      out.write(m.final()) 
+	      return out.getvalue() 
+	   
+	可以发现，最主要的是Cipher的构造函数: 
+	EVP.Cipher.__init__(self, alg, key, iv, op, key_as_bytes=0, d='md5', salt='12345678', i=1, padding=1) 
+	   
+	 alg是指算法的名字，OpenSSL支持以下算法： 
+	des_cbc des_ecb des_cfb des_ofb 
+	 des_ede_cbc des_ede des_ede_ofb des_ede_cfb 2DES算法 
+	des_ede3_cbc des_ede3 des_ede3_ofb des_ede3_cfb 3DES算法 
+	desx_cbc 
+	 rc4 
+	 rc4_40 密钥为40位的RC4算法 
+	idea_cbc idea_ecb idea_cfb idea_ofb idea_cbc 
+	 rc4_cbc rc2_ecb rc2_cfb rc2_ofb 
+	 rc2_40_cbc rc2_64_cbc 
+	 bf_cbc bf_ecb bf_cfb bv_ofb Blowfish算法 
+	cast5_cbc cast5_ecb cast5_cfb cast5_ofb 
+	 rc5_32_12_16_cbc rc5_32_12_16_ecb rc5_32_12_16_cfb rc5_32_12_16_ofb 
+	   
+	 key是加密所用的密钥。传入的是一段二进制数据，其长度是密钥的长度。不过，如果后面的参数key_as_bytes==1，那key是一个普通的任意长度的字符串，将与salt,i参数一起生成一个真正的密钥。比如说,假设算法alg的密钥长度是16，如果key_as_bytes==0，那么key应该传入"\xff\xff"两个字节的字符串。如果key_as_bytes==1，则可以传入类似于123456这样子的字符串。 
+	  
+	iv是指初始向量。与加密算法所使用的加密块的长度一致。有些加密算法并不使用iv这个变量。如果key_as_bytes==1。虽然OpenSSL的key_to_bytes()函数可以使用alt,key,salt,d,i四个参数生成真正的密钥和iv。但是M2Crypto内部并没有这样子做。而是直接使用原来的iv.如果iv的长度超过了加密算法所使用的加密块的长度，超过的长度会被截取。 
+	  
+	op用于指示解密或者加密操作。op==1表示加密操作;op==0表示解密操作。在做逆操作的时候，除了op不一样，其它参数应当保持一致。 
+	  
+	key_as_bytes参数如前所述。如果key_as_bytes==1。M2Crypto会使用alg, key, d, salt, i五个参数生成真正的密钥(注意，没有使用IV)。如果key_as_bytes==0，表示传入的是真正的密钥，d, salt, i三个参数就没有意义了。 
+	  
+	d是指生成密钥时所使用的散列算法。可以选择md5, sha1等。最好使用sha1，因为md5的破解看来只是时间问题了。  
+	   
+	salt是指生成密钥时所使用的盐。M2Crypto默认是123456。 
+	  
+	i是指生成密钥时所迭代的次数。迭代次数越多，使用暴力攻击就越不容易。 
+
+	padding是指填充加密块。大多数加密算法是以块为单位进行加密的。明文被切分为一个个固定大小的块。然后分别进行加密，得到与原来大小一致的加密块。但是明文的长度并不一定是加密块长度的整数倍。因此在处理最后一个块时需要进行填充。常用的填充算法是PKCS padding.如果没有允许padding并且最后一段明文不足以达到加密块的长度。EVP_EncryptFinal_ex()会返回一个错误。如果padding是允许的，但是密文最后并没有包含一个正确的填充块，EVP_DecryptoFinal()就会返回一个错误。padding默认是允许的。 
+
+	AES(英文：Advanced Encryption Standard，中文：高级加密标准)，是一种区块加密标准。AES将原始数据分成多个4×4字节矩阵来处理，通过预先定义的密钥对每个字节矩阵中的每个字节进行异或、替换、移位以及线性变换操作来达到加密的目的。密钥长度可以是128，192或256比特。
+
+	下面是一个利用Python M2Crypto库，并使用aes_128_ecb算法进行加密和解密的例子。首先介绍一下几个关键的点：
+	1、iv(Initialization vector)，即初始化向量，用于避免相同的数据多次加密都产生相同的密文。最大长度为16字节，超出16字节部分会被忽略，最好是随机产生以增加加密的强度。
+	2、ECB (Electronic codebook，ECB)，它会对每个4×4字节矩阵都用同一个密钥进行加密，而且沒有使用 IV。优点是每个字节矩阵都可以独立进行加密，因此可以同时对每个字节矩阵进行加密；缺点是对于相关的数据，加密之后的密文都是一样的。
+	3、Padding，由于AES是以4×4字节矩阵作为单位进行处理，因为待加密数据必须是16的倍数，若不足16的倍数，将会进行填充操作。aes_128_ecb算法加密默认填充模式是pkcs5。
+
+	from M2Crypto.EVP import Cipher
+	from M2Crypto import m2
+	from M2Crypto import util
+
+	ENCRYPT_OP = 1 # 加密操作
+	DECRYPT_OP = 0 # 解密操作
+
+	iv = '\0' * 16 # 初始化变量，对于aes_128_ecb算法无用
+	PRIVATE_KEY = 'dd7fd4a156d28bade96f816db1d18609' # 密钥
+
+	def Encrypt(data):
+	  '使用aes_128_ecb算法对数据加密'
+	  cipher = Cipher(alg = 'aes_128_ecb', key = PRIVATE_KEY, iv = iv, op = ENCRYPT_OP)
+	  buf = cipher.update(data)
+	  buf = buf + cipher.final()
+	  del cipher
+	  # 将明文从字节流转为16进制
+	  output = ''
+	  for i in buf:
+	    output += '%02X' % (ord(i))
+	  return output
+
+	def Decrypt(data):
+	  '使用aes_128_ecb算法对数据解密'
+	  # 将密文从16进制转为字节流
+	  data = util.h2b(data)
+	  cipher = Cipher(alg = 'aes_128_ecb', key = PRIVATE_KEY, iv = iv, op = DECRYPT_OP)
+	  buf = cipher.update(data)
+	  buf = buf + cipher.final()
+	  del cipher
+	  return buf 

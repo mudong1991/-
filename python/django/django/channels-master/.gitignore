@@ -1,0 +1,14 @@
+*.egg-info
+dist/
+build/
+docs/_build
+__pycache__/
+*.sqlite3
+.tox/
+*.swp
+*.pyc
+.coverage.*
+TODO
+
+IDE and Tooling files
+.idea/*

@@ -1,0 +1,651 @@
+一、数据类型
+	type():判断数据类型
+	isinstance（）：判断数据类型
+	dir(obj) ：查看对象的可用方法
+二、常用操作符：
+	+；-；*；/；%；**；//
+	<;<=;
+	and;or;not
+	字符串拼接：+号两边必须是同类型
+				，号两个字符串分开的
+三、if和循环
+	small=x if x<y else y
+	断言：assert 3>4：后面条件为假程序自动抛出异常asserttionerror
+	while循环：
+		while 条件:
+			循环本
+	for循环
+		for 目标 表达式:
+			循环本
+	iterable (yield):迭代对象，简单地讲，yield 的作用就是把一个函数变成一个 generator，带有 yield 的函数不再是一个普通函数，Python 解			释器会将其视为一个generator，调用 fab(5) 不会执行 fab 函数，而是返回一个 iterable 对象！在 for 循环执行时，每次循环都会执		行 fab 函数内部的代码，执行到 yield b 时，fab 函数就返回一个迭代值，下次迭代时，代码从 yield b 的下一条语句继续执行，而函		数的本地变量看起来和上次中断执行前是完全一样的，于是函数继续执行，直到再次遇到 yield。
+		文件读取例子：
+		 def read_file(fpath): 
+    			BLOCK_SIZE = 1024 
+    			with open(fpath, 'rb') as f: 
+        		while True: 
+           			 block = f.read(BLOCK_SIZE) 
+           			 if block: 
+                			yield block 
+            			 else: 
+                			return
+	enumerate：可枚举，enumerate(list)
+四、列表[]：
+	menber=['hello','mudong']
+	len(list)  max(list) min(list)、sum(list)、cmp(x, y)
+
+	1、向列表添加元素：
+		menber.append('string')  -> 添加单个字符串
+		menber.extend(['string1','string2'])  -> 插入多个插入字符串，参数是一个列表
+		menber.insert(0,'string3') ->指定插入位置
+	2、删除列表元素：
+		menber.remove('string')
+		del menber[1]
+		name=menber.pop();menber.pop(1)
+	3、查看
+		menber[1:3]
+		menber[1:]
+		menber[:]
+	5、改
+		temp=menber[1]
+		menber[0]=menber[1]
+		menber[1]=temp
+	4、比较
+		默认列表的比较，只比较第一个元素的大小
+	5、二维列表：
+		list5=['adb',['m','d'],'hello']
+		list5[1][1]='d'
+	6、统计元素
+		menber.count('string') 统计出现的个数
+		menber.index('string',3,7) 起始位置统计第一次出现的位置
+	7、reverse 元素翻转排序
+		menber.reverse()
+	8、排序sort(func,key,reverse=Flase)
+		menber.sort() 从小到大
+		menber.sort(reverse=True) 从大到小
+	9、元素的拷贝
+		list1=list[:]	相当于拷贝数据，list1不会根据list改变
+		list2=list   拷贝list 相当于重命名，list2会根据list改变
+	10、高级特性
+
+		filter(lambda x:x>5,[1,3,6,5,9,2])  /*得出一个大于5的列表，fliter返回函数结果诶True的数据*/	
+		reduce(lambda x,y:x*y,range(1,6))   /*5的阶乘*/	
+		
+		zip(list1,list2,list3)  -> 组合列表
+		map(None,list1,list2,list3)  -> 遍历函数，组合列表 
+		sorted(list, lambda x,y:y-x) [1,2,3]->[3,2,1]  /*排序算法*/
+
+五、元组（，），戴上枷锁的列表：
+	temp=(1,2,3)
+	1、元素不能增加 修改
+	2、8*(8,)  -> (8,8,8,8,8,8,8,8)
+	3、更新  删除一个元组
+		元组增加元素（改变地址了）：
+			temp=temp[:1] + ('m',) +temp[1:]
+		同样字符串也可以
+			str1=str[:5]+'插入的字符串'+str[5:]
+六、字符串
+	
+	1、string(字符串)：
+		str.capitalize(string)     /*string首字母大写*/
+		string.replace('old','new')  /*替换string里面的字符串*/
+		string.split('分隔符')  /*结果是一个列表形式*/
+			s.repalce(' ', '')
+			''.join([x for x in s if x != " "])
+			''.join(str2.split())  /*去除字符串中的空格符*/
+		s.strip() / s.lstrip/ s.rstrip /*去除字符串两端空格*/
+	
+		
+	2、随机数
+		secret=random.randint(1,10)
+	3、format():
+		"{0} love {1}.{2}".format("i",'mudong','com')
+		"{a} love {b}.{c}".format(a="i",b='mudong',c='com')
+	4、%转义符：
+		'%c' % 97：asic马
+		'%s' % 'hello':字符串
+		‘%d’ % 4:数字
+		转义辅助：
+		%m.n  m表示最小占位数，n表示小数点位数
+		%-：表示左对齐
+		%+在正数前面加+
+		%#：在八进制前面显示‘0’
+		%0显示的数字前面填充‘0’
+七、序列：
+	1、迭代：
+		str1="i love python"
+		list(str1)
+	2、len(list) max(list) min(list)
+	3、sorted(list)
+	4、list(reversed(numbers))
+	5、list(enumerate(numbers))
+		list(zip(list1,list2))成对打包
+八、函数
+	1、函数定义def function(): 
+	2、形参与实参
+	3、默认值
+	4、收集参数*params  ,function（params）是一个元组
+	5、全部变量与局部变量
+		局部要改变全局变量：局部定义全局变量global
+	6、内嵌函数：
+		def funX():
+			x=5
+			def funY()
+				print "10"
+			return funY()
+		执行def funX()结果是10
+	7、闭包：
+		1、闭包概念
+			def funX(x)
+				def funY(y):
+					return x*y
+				return funY
+			调用：funX(8)(5)
+		2、栈与函数内变量
+			def funX():                           等同于->                   def funX():
+				x=[5]                                                           x=5
+				def funY():														def funY():
+					x[0] *= x[0]													nonlocal x
+					return x[0]															x *=x
+				return funY()															return x
+			执行结果是 25														return funY()
+九、lambda表达式
+	1、定义：
+		g=lambda x,y: x+y
+		g(2,4)
+	2、filter过滤器:filter(条件，数据) 讲满足条件为true的数据返回出来
+		filter(lambda x:x>5,[1,2,3,4,10,11])  ->[10,11]
+	3、map将条件处理后得到结果放回出来
+		map(lambda x:x*2,[1,2])  ->[2,4]
+	4、reduce（迭代换算）
+		reduce(lambda 	x,y:x*y,range(1,6))   /*5的阶乘*/	
+	http://www.cnblogs.com/longdouhzt/archive/2012/05/19/2508844.html
+十、字典：
+	1、定义字典：dict={key1:values1,key2:values2}
+		也可以用工厂函数dict创建字典
+		注：
+			整数工厂函数是int()：int1=int(123)
+			字符串工厂函数str(): str1=str('mudong')
+			序列工厂函数是list(): list1=list('abc')
+			元组工厂函数是tuple(): tuple1=tuple('abc')
+		例如：
+			>>> a=[1,2,3,4]
+			>>> b=['a','b','c']
+			>>> zip(a,b)
+			[(1, 'a'), (2, 'b'), (3, 'c')]
+			>>> dict1=dict(zip(a,b))
+			>>> dict1
+			{1: 'a', 2: 'b', 3: 'c'}
+	2、dict[key1]=valuse3
+		将key的值改成values3
+	2、dict[key3]=valuse3
+		字典将增加一个key3值为values3
+十一：集合
+	1、定义：set1={1,2,3}元素唯一 且不能索引，可以利用集合对列表进行去重：
+			set1=set([1,2,3,4,4])->list(set1)
+	2、增加：set1.add('m')
+	3、查:'m' in set1
+	4、删：set1.remove('m')
+	5、冰冻集合 set2=frozenset([1,23,4])
+	6、交集：set1 & set2
+	7、并集：set1 | set2
+	8、差集：set1 - set2 等同于 set1.difference(set2)
+
+十二：文件：
+	1、f=open('path','r')
+	2、for each_line in f: ->一行一行的读取
+	3、f.readlines() ->读取所有行，并用列表存
+	4、f.readline() ->杜取一行
+	5、f.seek(offset，where) ->改变文件指针
+		f.tell()获取指针位置
+	6、f.write(string)将string字符串写入文件
+		f.writelines(list) 将list中的字符串一行一行的写入文件
+	7、f.close() 关闭文件
+		f.flush()推送缓存数据
+十三、OS(operation system)模块
+	1、os.getcwd() 返回当前目录
+		os.chdir(path) 改变目录
+		os.listdir(path='.')  os.listdir(os.curdir) 列举当前目录中的文件名(.表示当前目录，'..'上级目录)
+		os.mkdir(path) 创建单层目录，如果目录存在抛出异常
+		os.mkdirs(path) 创建多层目录
+		os.remove(path) 删除文件
+		os.removedir(path) 删除单层目录
+		os.removedirs(path) 删除多层目录
+		os.rename(old,new) 将old文件重命名为new
+		os.system(command) 运行系统的shell命令
+		os.sep 输出系统路径分隔符
+		os.linesep 输出系统终止符
+		os.name 代指当前使用的操作系统
+	2、os.path 模块
+		basename(path) 去掉目录路径，返回文件名
+		dirname(path) 去掉文件名，返回路径
+		join(path1,path2) 将两个路径组合成一个路径
+		split(path) 分割路径
+		splittxt(path) 分离文件名与扩展名
+		getsize(file) 文件尺寸
+		getatime(file)、getctime(file)、getmtime(file) 浮点型时间，可用gmtime()转换
+		exists(path)
+		isabs(path) 判断是绝对路径还是相对路径
+		isfile
+		isdir
+		islink
+		ismount
+		samefile(path1,path2)
+十四:永久储存pickle
+	1、import pickle
+		以二进制的形式存入列表
+		pickle_file=open('test.pkl','wb')
+		pickle.dump=(list1,pickle)
+		pickle_file.close()
+	2、引出列表
+		pickle_file =open('test.pkl','rb')
+		list2=pickle.load(pickle_file)
+十五、异常处理exception
+		1、assetError
+			importError
+			keyError
+		2、try:
+			检测范围
+			except Exception[as reson]:
+				异常处理exception
+			finally:
+				无论如何都要执行的代码
+		3、raise引发异常
+			raise ZeroDivisionError('除数为0异常')
+十六、else语句与with语句
+	#! /usr/local/bin/python
+	#coding:utf8
+
+	def issusu(num):
+			count = num // 2
+			while count>1:
+					if num%count ==0:
+							print('%d的最大公约数是：%d' % (num,count))
+							break
+					count -=1
+			else:
+					print('%d是一个素数!'% num)
+	num=int(input('请输入一个整数：'))
+
+	issusu(num)
+十七、面向对象
+	1、python类的定义：
+		使用class关键字定义一个类，并且类名的首字母必须大写：
+		python类的结构：
+		class 类名：
+			成员变量：
+			成员函数：
+	例：
+		class Myclass():
+			def fun(self):
+				print "I am function"
+	2、python定义方法的第一个默认参数self
+		class ball():
+			def setName(self,name):
+				self.name=name
+			def kick(self)
+				print("我是%s" % self.name)
+		>>>a=ball()
+		>>>b=ball()
+		>>>a.setName('球A')
+		>>>b.setName('球B')
+		>>>a.kick() != b.kick()
+	3、默认__init__()
+		class ball():
+			def __init__(self,name):
+				self.name=name
+			def kick(self)
+				print("我是%s" % self.name)
+		>>>a=ball('mudong')
+		>>>a.name
+		>>>a.kick()
+	4、私有变量，变量前面加_
+		class ball:
+			_name = "muodng"
+		>>>p=ball()
+		>>>p._ball__name
+	5、继承:
+ 				子类		父类、基类或超类
+		class DerivedClassName(BaseClassName):
+				def __init__(self):
+					self.
+		①、如果子类中定义与父类同名的方法或属性，则会覆盖父类对应的方法或属性。
+		②、如果不想父类方法被覆盖，方法有
+			*调用未绑定的父类方法
+				def __init__(self):
+					BaseClassName.__init__(self)
+			*使用super函数
+				def __init__(self):
+					super().__init__()
+		③、多层继承：
+			class Chlid(base1,base2)
+		
+	6、类、类对象、实例对象
+			class C：
+				count=0
+			>>>C.count   #类对象
+			>>>c=C()     #实例对象
+	7、如果属性名与方法名相同，属性会覆盖方法
+	8、一些相关的BIF
+		*issubclass(class,classinfo) #检查子类
+			classinfo可以是一个类对象组成的元组，只要class与其中一个候选类的子类，返回true
+		*isinstance(object,classinfo) #检查实例化对象
+		
+		*hasattr(object,name) #测试一个对象是否有相应的属性
+		*getattr(object,name[,default]) #getattr(c,'y',"你访问的对象属性不存在")
+		*setattr(object,name[,default]) #建立属性
+		*delattr(object,name[,default]) #删除属性，delattr(c,'y',"你访问的对象属性不存在")
+		
+		*property(fget=None,fset=None,fdel=None,doc=None)                *属性设置属性
+	9、魔法方法
+		1、__new__(cls，)
+			构造实例化对象第一个调用的方法：
+			class  CapStr(str):
+				def __new__(cls,string):
+					string=string.upper()
+					return str.__new__(cls,string)
+		2、__del__(self) 删除对象
+		3、算数运算：
+			__add__(self,other)
+			
+			>>> class New_int(int):
+			...     def __add__(self,other):
+			...             return int.__sub__(self,other)
+			...     def __sub__(self,other):
+			...             return int.__add__(self,other)
+			... 
+			>>> a=New_int(5)
+			>>> b=New_int(2)
+			>>> a+b
+			3
+			
+			反运算：__radd__(self,other)
+			增量赋值：__iadd__ (self,other)  #+=
+	10、属性访问	
+		__getattr__(self,name):访问一个不存在属性的行为
+		__getattribute__(self,name):访问一个属性的行为：
+		__setattr__(self,name,value):设置一个属性的行为
+		__delattr__(self,name):删除一个属性的行为 
+		
+		例子：
+		  1 #! usr/local/bin/python
+		  2 #coding:utf8
+		  3 
+		  4 class C(object):
+		  5         def __getattribute__(self,name):
+		  6                 print("执行了getattribute")
+		  7                 super(C,self).__getattribute__(name)
+		  8         def __getattr__(self,name):
+		  9                 print("执行了getattr")
+		 10         def __setattr__(self,name,value):
+		 11                 print("执行了setattr")
+		 12                 super(C,self).__setattr__(name,value)
+		 13         def __delattr__(self,name):
+		 14                 print("执行了delattr")
+		 15                 super(C,self).__delattr__(name)
+		 16 
+		 class Rectangle(object):
+		 17         def __init__(self,width=0,height=0):
+		 18                 self.width=width
+		 19                 self.height=height
+		 20         def __setattr__(self,name,value):
+		 21                 if name=='square':
+		 22                         self.width=value
+		 23                         self.height=value
+		 24                 else:
+		 25                         super(Rectangle,self).__setattr__(name,value)  另外：self.__dict__[name]=value
+		 26         def getArea(self):
+		 27                 return self.width*self.height
+	11、property原理(描述符)
+		__get__(self,instance,owner) 当实例对象调用属性要获取值，调用此函数
+			__set__(self,instance,value)	当实例对象调用属性要赋值，调用此函数
+			__delete__(self,instance)	当实例对象要删除属性，调用此函数
+		
+		例如：
+		   class Myproperty():
+		 29         def __init__(self,fget=None,fset=None,fdel=None):
+		 30                 self.fget=fget
+		 31                 self.fset=fset
+		 32                 self.fdel=fdel
+		 33         def __get__(self,instance,owner):
+		 34                 return self.fget(instance)
+		 35         def __set__(self,instance,value):
+		 36                 self.fset(instance,value)
+		 37         def __delete__(self,instance):
+		 38                 self.fdel(instance)
+		 39 class D():
+		 40         def __init__(self):
+		 41                 self._x=None
+		 42         def getX(self):
+		 43                 return self._x
+		 44         def setX(self,value):
+		 45                 self._x=value
+		 46         def delX(self):
+		 47                 del self._x
+		 48         x=Myproperty(getX,setX,delX)
+	12、协议protocols（接口）
+		他规定你哪些方法必须要定义，是一种指南，
+		容器
+		不可变：__len__()  __getitem__()
+		可变：出了len 和getitem要定义外__setitem__和__delitem__()两个要定义
+	13、魔法方法迭代器：__iter__()、__next__()	
+十八、模块
+	1.容器 —> 数据的封装
+		函数-> 语句的封装
+		类 -> 方法属性的封装
+		模块 -> 模块就是程序
+	2、模块：模块名与脚本的文件名相同：
+		例如我们编写一个名为items.py的脚本，则可以在另外一个脚本中用importi items 语句来到导入它。
+	3、包：python的模块可以按目录组织为包
+		创建一个包的步骤是：
+		1、建立一个名字为包名字的文件夹
+		2、在该文件夹下创建一个__init__.py文件
+		3、根据需要在该文件夹下存放脚本文件、已编译扩展及子包
+		4、import pack.m1, pack.m2, pack.m3
+	4、引入包模块方法
+		1、import pack.m1
+		2、import pack.m1 as alias
+		3、from pack.m1 import hanshu  ->可直接用函数
+	5、__name__='__main__' 搜索路径和包
+		import sys
+		sys.path.append('路径')
+	
+	#：引入系统库模块：timeit.__doc__
+		print(timeit.__doc__)
+		dir(timeit)
+		
+十九、正则表达式re
+	import re
+	res =r'abc'
+	re.findall(res,'asdfadsfa')
+	[]:常用来指定一个字符集；[a-z]
+		元字符在字符集中不起作用[akm$]
+		补集匹配不在区间范围内的字符[^5]
+	^:匹配行首，放在匹配字符串的前面
+	$：匹配行尾，放在匹配字符串的尾部
+	\:转义符：
+		\d:[0-9]
+		\D:[^0-9]
+		\s:[\t\n\r\f\v]
+		\S:[^\t\n\r\f\v]
+		\w:[a-zA-Z0-9]
+		\W:[^a-zA-Z0-9]
+	元字符：
+		重复：\d{8} 重复8次
+		*:前面字符重复0次或者更多次
+		+：前面重复1次或者更多次
+		？：前面的符号重复一次或者0次
+		最大匹配最小匹配：+、+？
+		{m,n}至少重复m次，最多重复n次，{0，}等同于*，{1，}等同于+，{0,1}等同于？
+	
+
+	
+	使用正则表达式
+		-re模块提供了一个正则表达式引擎的接口，可以让你讲REstring编译成对象并用它们来进行匹配。
+		-编译正则表达式：compile()
+			#!python
+			>>>import re 
+			>>>p= re.compile("ab*")
+			>>>print p
+			>>>p.findall("abbbbbb")
+		md_re=re.compile(r'mudong',re.I)不区分大小写
+		md_re=re.compile(r'mu.dong','mu\ndong',re.S)可以匹配到空格符
+		re.M匹配的字符串多行
+		re.S正则是多行
+		方法/属性：
+		math（）：决定RE是否在字符串开始匹配的位置     /*http://www.pythontab.com/html/2013/pythonjichu_0201/199.html*/
+		search（）：扫描字符串，找到这个RE匹配的位置
+		findall（）：找到RE匹配的所有子串，并把它们作为一个列表返回
+		finditer():找到RE匹配的所有子串，并把它们作为一个迭代器返回
+		/*注意：如果没有匹配到，match（）和search（）将返回None。匹配成功的话就会返回一个‘MathObject’实例
+		sub（）：替换
+			re.sub(r'm.*?','python','mu mdasu1 mdsfasdfasdfau3')
+		subn（）；替换体现替换个数,返回的是一个元组。
+		re.split(r'[\+\*]','192+168*23')
+		（）分组：结果会得出分组后匹配的结果
+二十、爬虫
+	import urllib.request
+	response=urllib.request.urlopen("")
+二十一、深拷贝-浅拷贝
+	浅拷贝：只对引用拷贝copy.copy() 
+	深拷贝：对对象的资源拷贝copy.deepcopy() 
+	import copy
+二十二、文件的读写
+	读文件：
+		file= open(/lujing)    /  file= file(/lujing)
+		file.read()
+		file.close()
+	写文件：
+		file= open(/lujing,'w'/'r+')    /  file= file(/lujing)
+		file.write()
+		file.close()
+	文件对象方法：
+		FileObject.close() 关闭文件
+		String=FileObject.readline([size])
+		List = FileObject.readlines([size])
+		String = FileObject.read([size])
+		FileObject.next()
+		FileObject.write(string)
+		FileObject.writelines(list)
+		FileObject.seek(偏移量，选项)选项0：文件头；选项2：文件尾；选项1：偏移
+		FileObject.flush()提交更新
+	文件读写模式：
+		r以读方式打开文件，可读取文件信息。
+		w以写方式打开文件，可向文件写入信息。如文件存在，则清空该文件，再写入新内容
+		a以追加模式打开文件（即一打开文件，文件指针自动移到文件末尾），如果文件不存在则创建
+		r+以读写方式打开文件，可对文件进行读和写操作。
+		w+消除文件内容，然后以读写方式打开文件。
+		a+以读写方式打开文件，并把文件指针移到文件尾。
+		b以二进制模式打开文件，而不是以文本模式。该模式只对Windows或Dos有效，类Unix的文件是用二进制模式进行操作的。
+	
+二十三、OS模块
+	目录操作需要调用os模块：import os     例如：os.mkdir('/root/mudong')
+	os.makedirs('a/b/c',mode=511)
+	os.listdir(path)   列出一个文件夹下文件，以list形式显示
+	os.path.join(fpath,filename)  拼接路径
+	os.isdir()判断是否是目录
+	os.isfile()判断是否是文件
+	os.getcwd()返回当前目录
+	os.walk(path):该函数返回一个元组，改元组有三个元素，这三个元素分别表示遍历的路径名，目录列表和文件列表
+		遍历path里面的文件：path='/tmp/testdir'
+		for path,d,filelist in os.walk(path):
+			for filename in filelist:
+				os.path.join(path,filename)
+
+二十四、 异常处理：
+	try：
+		f=open('abc.txt')
+		print hello
+	except  IOError,msg:
+		print "the file is no cunzai"
+	except NameError,msg:
+		pass
+	finally:
+		f.close()
+	抛出异常：
+	if 'a' >5:
+		raise TypeError("Error:'a'must be integer")
+
+二十五、 MySQLdb
+	import MySQLdb
+	conn = MySQLdb.connect(user='root',passwd='',host='127.0.0.1')
+	cur=conn.cursor()创建游标
+	conn.select_db('week')
+	cur.execute('insert into userinfo()')
+	sqlli=cur.execute("insert into userinfo() value(%s,%s,%s)")
+	增：cur.execute(sqli,('mudong',5,'m'))               另外：	cur.executemany(sqli,[('mudong',5,'m'),('mudong2',6,'m2'),('mudong3',6,'m3')])    
+	删：cur.execute('delete from userinfo where id =20')
+	查：cur.execute('select * from userinfo')
+		cur.fetchone()
+		cur.scroll(0,'absolute')
+		取多个cur.fetchonemany(查询个数)                另外：cur.fetchone(cur.execute('select*from userinfo'))
+	cur.close()
+	conn.close()
+
+
+
+
+
+
+
+安装：
+1）下载并解压Python 2.7.9的源代码
+cd /opt
+wget --no-check-certificate https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tar.xz
+tar xf Python-2.7.9.tar.xz
+cd Python-2.7.9
+
+2）编译与安装Python 2.7.9
+
+./configure --prefix=/usr/local
+make && make altinstall
+
+3）将python命令指向Python 2.7.9
+
+ln -s /usr/local/bin/python2.7 /usr/local/bin/python
+
+4）检查Python版本
+
+sh
+sh-4.1# python -V
+Python 2.7.9
+
+在 Unix/Linux 设置环境变量
+
+    在 csh shell: 输入
+    setenv PATH "$PATH:/usr/local/bin/python" , 按下"Enter"。
+
+    在 bash shell (Linux): 输入
+    export PATH="$PATH:/usr/local/bin/python" ，按下"Enter"。
+
+    在 sh 或者 ksh shell: 输入
+    PATH="$PATH:/usr/local/bin/python" , 按下"Enter"。
+
+注意: /usr/local/bin/python 是Python的安装目录。
+
+
+
+
+从pip官网 https://pypi.python.org/pypi/pip 下载pip的源代码
+
+#解压
+tar -zxvf pip-1.5.5.tar.gz 
+
+
+cd pip-1.5.5
+#安装
+Python setup.py install
+
+
+这个时候会报错说少了setuptools
+
+
+从setuptools官网 https://pypi.python.org/pypi/setuptools下载setuptools原来
+
+#解压
+tar -zxvf setuptools-3.6.tar.gz 
+cd setuptools-3.6
+#安装
+python setup.py install
+
+
+再次安装pip就OK了。

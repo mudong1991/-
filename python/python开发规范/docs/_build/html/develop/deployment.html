@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>环境部署说明 &mdash; 【RC1022A】 1.0.0 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="【RC1022A】 1.0.0 文档" href="../index.html" />
+    <link rel="up" title="开发说明" href="index.html" />
+    <link rel="next" title="项目结构" href="architecture.html" />
+    <link rel="prev" title="开发环境说明" href="installation.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="architecture.html" title="项目结构"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="开发环境说明"
+             accesskey="P">上一页</a> |</li>
+        <li><a href="../index.html">【RC1022A】 1.0.0 文档</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">开发说明</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="deployment">
+<span id="id1"></span><h1>环境部署说明<a class="headerlink" href="#deployment" title="永久链接至标题">¶</a></h1>
+<p>本文包含了项目部署的说明以及数据库部署的说明.</p>
+<div class="section" id="web">
+<span id="deployment-web"></span><h2>Web部署<a class="headerlink" href="#web" title="永久链接至标题">¶</a></h2>
+<p>Web部署在linux + apache环境下(<em>假设apache已安装完毕,如未安装apache,可以使用slackware或者Kylin的ISO进行安装或者使用其他项目的ISO安装包</em>).</p>
+<div class="section" id="apache">
+<h3>apache配置<a class="headerlink" href="#apache" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p class="first"><strong>mod_wsgi</strong></p>
+<blockquote>
+<div><p>我们使用mod_wsgi来支撑 <strong>apache</strong> 下的 <strong>python</strong> 运行环境,Apache需要加载以下模块:</p>
+<div class="highlight-rest"><div class="highlight"><pre>LoadModule wsgi_module modules/mod_wsgi.so
+</pre></div>
+</div>
+<p><em>(需将mod_wsgi.so拷贝到modules目录下)</em></p>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>web配置</strong></p>
+<blockquote>
+<div><p><strong>apache</strong> 加载了mod_wsgi模块后,需要配置apache的工作目录以及工作环境:</p>
+<div class="highlight-rest"><div class="highlight"><pre>WSGIScriptAlias / /var/www/vdp/vdp/wsgi.py # wsgi文件路径
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="deployment-db">
+<span id="id2"></span><h2>数据库部署<a class="headerlink" href="#deployment-db" title="永久链接至标题">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">內容目录</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">环境部署说明</a><ul>
+<li><a class="reference internal" href="#web">Web部署</a><ul>
+<li><a class="reference internal" href="#apache">apache配置</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#deployment-db">数据库部署</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>上一个主题</h4>
+  <p class="topless"><a href="installation.html"
+                        title="上一章">开发环境说明</a></p>
+  <h4>下一个主题</h4>
+  <p class="topless"><a href="architecture.html"
+                        title="下一章">项目结构</a></p>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/develop/deployment.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>快速搜索</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="转向" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    输入相关的术语，模块，类或者函数名称进行搜索
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="architecture.html" title="项目结构"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="开发环境说明"
+             >上一页</a> |</li>
+        <li><a href="../index.html">【RC1022A】 1.0.0 文档</a> &raquo;</li>
+          <li><a href="index.html" >开发说明</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; 版权所有 2015, Benjamin.
+      由 <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b2 创建。
+    </div>
+  </body>
+</html>

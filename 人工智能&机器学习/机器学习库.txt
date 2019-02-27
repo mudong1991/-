@@ -1,0 +1,8 @@
+1）Jieba 目前使用最为广泛的中文分词组件。下载地址：https://pypi.python.org/pypi/jieba/
+2）Gensim 用于主题模型、文档索引和大型语料相似度索引的python库，主要用于自然语言处理（NLP）和信息检索（IR）。下载地址：https://pypi.python.org/pypi/gensim 本实例中的维基中文语料处理和中文词向量模型构建需要用到该模块。
+3）Pandas 用于高效处理大型数据集、执行数据分析任务的python库，是基于Numpy的工具包。下载地址：https://pypi.python.org/pypi/pandas/0.20.1
+4）Numpy 用于存储和处理大型矩阵的工具包。下载地址：https://pypi.python.org/pypi/numpy
+5）Scikit-learn 用于机器学习的python工具包，python模块引用名字为sklearn，安装前还需要Numpy和Scipy两个Python库。官网地址：http://scikit-learn.org/stable/
+6）Matplotlib Matplotlib是一个python的图形框架，用于绘制二维图形。下载地址：https://pypi.python.org/pypi/matplotlib
+7）Tensorflow Tensorflow是一个采用数据流图用于数值计算的开源软件库，用于人工智能领域。 官网地址：http://www.tensorfly.cn/ 下载地址：https://pypi.python.org/pypi/tensorflow/1.1.0
+2 数据获取

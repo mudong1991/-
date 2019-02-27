@@ -1,0 +1,55 @@
+一、scrapy命令行工具
+1、创建项目
+	scrapy startproject ScrapyDemo
+2、创建爬虫文件
+	scrapy genspider mydomain mydomain.com
+3、开始爬虫
+	scrapy crawl demo
+4、命令帮助
+	scrapy -h
+	
+	全局命令：（不需要项目）
+		startproject
+		settings  获取Scrapy的设定
+		runspider  在未创建项目的情况下，运行一个编写在Python文件中的spider。
+		shell  命令调试
+		fetch 使用Scrapy下载器(downloader)下载给定的URL，并将获取到的内容送到标准输出。
+		view  因此该命令可以用来检查spider所获取到的页面，并确认这是您所期望的。
+		version  输出Scrapy版本。配合 -v 运行时，该命令同时输出Python, Twisted以及平台的信息，方便bug提交。
+	项目(Project-only)命令: （需要项目）
+		crawl
+		check
+		list   列出项目中所有可用的spider，每行输出一个spider
+		edit   编辑器
+		parse    获取给定的URL并使用相应的spider分析处理。
+		genspider
+		deploy  将项目部署到Scrapyd服务。
+		bench 运行benchmark测试
+	COMMANDS_MODULE:COMMANDS_MODULE = 'mybot.commands'  用于查找添加自定义Scrapy命令的模块。
+
+5、部署
+	需要安装scrapyd和scrapyd-client
+
+	scrapyd使用：
+		scrapyd  运行scrapyd
+
+		curl http://localhost:6800/daemonstatus.json 检查服务状态
+		curl http://localhost:6800/addversion.json -F project=myproject -F version=r23 -F egg=@myproject.egg  增加版本到一个工程中，如果不存在就创建
+		curl http://localhost:6800/schedule.json -d project=myproject -d spider=somespider  运行一个工程的爬虫进程
+		curl http://localhost:6800/cancel.json -d project=myproject -d job=6487ec79947edab326d6db28a2d86511e8247444  取消一个爬虫进程
+		curl http://localhost:6800/listprojects.json  列出所有的爬虫工程
+		curl http://localhost:6800/listversions.json?project=myproject  列出所有的爬虫工程版本
+		curl http://localhost:6800/listspiders.json?project=myproject  列出所有的爬虫工程中的爬虫
+		curl http://localhost:6800/listjobs.json?project=myproject  	列出爬虫工程下的爬虫任务
+		curl http://localhost:6800/delversion.json -d project=myproject -d version=r99  删除一个爬虫工程版本
+		curl http://localhost:6800/delproject.json -d project=myproject   删除一个爬虫工程和他所有的版本
+	
+
+	scrapyd-client使用：
+		scrapyd-deploy <target> -p <project>    发布爬虫工程到scrapyd服务中  // 这里会转成addversion.json来执行
+		scrapyd-deploy -L scrapyd1  		查看当前项目下scrapyd1服务下的爬虫工程
+		scrapyd-deploy -l 			查看当前项目下所有scrapyd服务
+
+		
+		
+		

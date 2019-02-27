@@ -1,0 +1,102 @@
+1. 跨机器拷贝文件:
+scp 10.30.36.20:/var/*.* .    ----> scp 源文件(含路径) 目标文件(含路径)
+scp -r ...                    ----> 递归拷贝,即连带目录一起拷贝
+
+2. 修改数据库远程访问
+vi /etc/my.cnf
+注释掉
+bind-address = 127.0.0.1
+如果还是不行,则再加上权限
+GRANT ALL PRIVILEGES ON *.* TO root@"%" IDENTIFIED BY "HickWall512";
+
+3. 执行程序
+当前目录下:
+./* ... 即需要加上 "./"
+
+4. 设置目录权限
+chmod -R 777 directory
+
+5. 数据打包解包
+tar zcvf filename files       ---->将files打包到filename里面去,如果包含目录,则目录将被包含在打包的文件里.打包的文件后缀应为tar.gz
+
+tar zxvf filename             ---->同上解包
+
+
+6. 查找文件
+find filename 		      ---->查找当前目录下文件名为filename的文件,filename可以包含路径.
+
+7. ``
+在Shell脚本里,被``括起来的会被直接以命令形式执行.
+
+
+
+
+N2N
+8. 管控安装:新建虚拟机,删除软驱,设置ISO镜像路径.进入虚拟机系统.
+选择手动安装,Manul.
+cd cdrom  ----->进入cdrom目录
+./install ----->进行安装
+安装完毕之后通过rc.inet1.conf配置接口,rc.inet1 restart 使配置生效.
+
+9. MCP控制: 	关闭MCP ----> killall -9 mcpd
+		启动MCP ----> /usr/local/bin/mcpd  -d -f /usr/local/conf/mcpd.conf
+
+10. 数据抓包:
+tcpdump -i br0 udp  and port 8000 -xxx
+
+11. 路由添加:
+route add default gw 10.135.140.1 metric 1
+
+12. 文件连接
+
+
+13. Java 文件版本选择
+通过 alternatives --display java,显示当前选择的版本.
+通过 alternatives --config java,配置当前生效的版本.
+
+其他的版本选择也可以,不过需要先使用--install进行相关的安装.
+
+
+14. Linux DNS配置
+文件:/etc/resolv.conf 配置 nameserver 61.139.2.69,系统会自动读取.
+
+
+15. 终端快捷键
+下述所有命令以bash为主。
+
+Ctrl + A 切换到命令行开始 这个操作跟键盘 Home 键实现的结果一样的。
+
+Ctrl + E 切换到命令行末尾 这个操作跟键盘 END 键实现的结果一样的。
+
+Ctrl + L 清除屏幕内容 效果等同于 clear 命令。
+
+Ctrl + U 清除剪切光标之前的内容 这个命令很有用，在 vi 里也是有效的。我有时看见同事一个字一个字的删除shell命令，十分崩溃！其实完全可以用一个Ctrl + u搞定。
+
+Ctrl + K 剪切清除光标之后的内容
+
+Ctrl + y 粘贴刚才所删除的字符 此命令比较强悍，删除的字符有可能是几个字符串，但极有可能是一行命令。
+
+Ctrl + R 在历史命令中查找 这个非常好用，输入关键字就调出以前的命令了。这个命令我强烈推荐，有时history比较多时，想找一个比较复杂的，直接在这里，shell会自动查找并调用，方便极了
+
+Ctrl + C 终止命令
+
+Ctrl + D 退出shell，logout 
+
+Ctrl+P（↑）显示上一条命令
+
+Ctrl+N（↓）显示下一条命令
+
+下面再被充大家不是太熟悉，比较使用的操作方式，需要敲入命令后按回车执行：
+
+!! 重复执行最后一条命令
+
+history 显示你所有执行过的编号+历史命令 这个可以配合!编辑来执行某某命令
+
+!$ 显示系统最近的一条参数
+
+最后这个比较有用，比如我先用 cat /etc/sysconfig/network-scripts/ifconfig-eth0，然后我想用vim编辑。一般的做法是先用↑ 显示最后一条命令，然后用Home移动到命令最前，删除cat，然后再输入vim命令。其实完全可以用vim !$来代替。
+
+16. 文件内容查看
+	vi & vim : 文件编辑命令,不用的系统上使用不同的命令,优先尝试vim(比vi更加强大即人性化)
+	cat 	 : 输出所有文件内容
+	tail 	 : 动态查看文件内容,一般使用为tail -f xxx,追加到文件的内容将会被打印出来.

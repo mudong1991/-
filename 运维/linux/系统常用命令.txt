@@ -1,0 +1,27 @@
+centos gcc安装
+yum install gcc libffi-devel python-devel openssl-devel
+
+可以使用一下命令查使用内存最多的10个进程    
+ps -aux | sort -k4nr | head -n 10
+
+可以使用一下命令查使用CPU最多的10个进程   
+ps -aux | sort -k3nr | head -n 10
+
+
+查看系统版本 cat /etc/issue |  uname -a  |  cat /proc/version | cat /etc/centos-release
+
+关闭防火墙
+systemctl stop firewalld.service #停止firewall
+systemctl disable firewalld.service #禁止firewall开机启动
+firewall-cmd --state #查看默认防火墙状态（关闭后显示notrunning，开启后显示running）
+
+杀死端口进程
+kill -9 $(netstat -tlnp | grep :8080 | awk '{print $7}' | awk -F '/' '{print $1}')
+
+
+清理内容
+echo 1 > /proc/sys/vm/drop_caches
+
+
+修改网卡ip
+vim /etc/sysconfig/network-scripts/ifcfg-eth0  

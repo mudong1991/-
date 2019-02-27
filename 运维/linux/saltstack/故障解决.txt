@@ -1,0 +1,2 @@
+1¡¢¸ü»»ÁËmasterºó
+rm -rf /etc/salt/pki/minion/minion_master.pub

@@ -1,0 +1,19 @@
+1、进入容器
+docker run -it --rm docker-wordpress-nginx /bin/bash
+sudo docker exec -it blog /bin/bash  
+
+2、删除基于镜像的所有容器
+sudo docker ps -a | awk '{ print $1,$2 }' | grep  这里是镜像的名称| awk '{print $1 }' | xargs -I {} sudo docker rm {}
+
+
+3、配置文件
+vim /etc/sysconfig/docker
+vim /etc/docker/daemon.json 配置加速等
+
+4、拷贝文件
+docker cp xxx:/path/to/somewhere /local/path
+
+
+
+常见错误处理方式：
+1、dockerd守护进程启动失败：rm /var/lib/docker -rf

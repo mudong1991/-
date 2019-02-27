@@ -1,0 +1,24 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+// domain -> ip
+zone "cdforward.org" in {
+	type master;
+	file "/etc/bind/db.cdforward.org";
+};
+
+zone "rtd4cdforward.io" in {
+	type master;
+	file "/etc/bind/db.rtd4cdforward.io";
+};
+
+// ip -> domain
+zone "25.2.10.in-addr.arpa" in {
+	type master;
+	file "/etc/bind/db.25.2.10";
+};

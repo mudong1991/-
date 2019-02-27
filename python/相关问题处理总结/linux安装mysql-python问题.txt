@@ -1,0 +1,49 @@
+http://blog.csdn.net/diaoruiqing/article/details/8702040
+1、首先mysql、python环境肯定要有吧！
+假定mysql安装在/usr/local/mysql
+2、下载MySQL-python-1.2.3.tar.gz 并解压
+http://downloads.sourceforge.net/project/mysql-python/mysql-python-test/1.2.3c1/MySQL-python-1.2.3c1.tar.gz?use_mirror=nchc
+解压：tar zxvf MySQL-python-1.2.3.tar.gz
+3、进入 MySQL-python-1.2.3 修改setup_posix.py文件
+visetup_posix.py
+修改行：#mysql_config.path = "mysql_config"#注释掉
+为：mysql_config.path ="/usr/local/mysql/bin/mysql_config"
+若果不修改会报错误：mysql_config not found
+    原因：mysql_config命令没有找到。
+4、在保证有setuptools的情况下执行以下三个代码（如果没有setuptools，请参考上一篇文）
+sudo python setup.py build
+sudo python setup.py install
+如果报错 出现error: command 'gcc' failed with exit status 1的解决方法
+ >>> yum install MySQL-p*
+
+>>>yum install python-devel
+
+>>>cd MySQL-python-1.2.3
+>>> python setup.py build
+>>> python setup.py install
+5、精华：
+报错：./directadmin: error while loading shared libraries: libmysqlclient.so.16: cannot open shared object file: No such file or directory
+或：
+Traceback (most recent call last):
+  File "existuser.py", line 2, in <module>
+    import MySQLdb
+  File "build/bdist.linux-x86_64/egg/MySQLdb/__init__.py", line 19, in <module>
+  File "build/bdist.linux-x86_64/egg/_mysql.py", line 7, in <module>
+  File "build/bdist.linux-x86_64/egg/_mysql.py", line 6, in __bootstrap__
+ ImportError: libmysqlclient.so.18: cannot open shared object file: No such file or directory
+是mysql-lib无法正确加载导致的
+将/usr/local/mysql/lib 下的libmysqlclient.so.16 或  libmysqlclient.so.18 文件在/usr/lib下建立软连接
+ln -s /usr/local/mysql/lib/libmysqlclient.so.16 /usr/lib/
+ln -s /usr/local/mysql/lib/libmysqlclient.so.18 /usr/lib/
+如出现：“File exists”  ！！  该文件之前指向了错误的路径  删除之后重新建立
+如果还是不好使，可能是/usr/lib没有被加载调用。添加配置：
+系统要确认动态库的地址，把动态库的路径放到/etc/ld.so.conf中
+建议：在/etc/ld.so.conf.d/上新建动态库相应的文件配置文件*.conf，
+在该文件中填上该动态库的绝对路径
+此例：
+vim /etc/ld.so.conf.d/ld.mysql.so.conf
+/usr/local/mysql/lib
+
+运行 ldconfig 重建 /etc/ld.so.cache
+
+应该就好用了

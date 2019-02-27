@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>开发环境说明 &mdash; 【RC1022A】 1.0.0 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="【RC1022A】 1.0.0 文档" href="../index.html" />
+    <link rel="up" title="开发说明" href="index.html" />
+    <link rel="next" title="环境部署说明" href="deployment.html" />
+    <link rel="prev" title="开发说明" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="deployment.html" title="环境部署说明"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="开发说明"
+             accesskey="P">上一页</a> |</li>
+        <li><a href="../index.html">【RC1022A】 1.0.0 文档</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">开发说明</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installation">
+<span id="id1"></span><h1>开发环境说明<a class="headerlink" href="#installation" title="永久链接至标题">¶</a></h1>
+<p>本文说明了本项目的开发环境,包含所使用的开发工具配置、Python解释器 &amp; 扩展包依赖关系等.</p>
+<div class="section" id="id2">
+<h2>开发工具配置<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt><strong>PyCharm4+</strong> , <a class="reference external" href="file://10.135.140.30/开发工具/Python/">下载</a> 。</dt>
+<dd><p class="first">相比之前的PyCharm版本, <strong>PyCharm4+</strong> 集成了 <strong>IPython</strong> ，有助于调试开发。</p>
+<p><strong>需装插件</strong></p>
+<ul class="last simple">
+<li>Atlassian Connector for IntelliJ IDE (<em>通过PyCharm自带的插件管理工具安装</em>)</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="python">
+<h2>Python环境配置<a class="headerlink" href="#python" title="永久链接至标题">¶</a></h2>
+<p>本项目中所使用的python模块(包)如下:</p>
+<blockquote>
+<div><em>推荐使用虚拟环境配置Python解释环境(避免多个项目环境差异带来的冲突)，包路径参见</em><a class="reference internal" href="architecture.html#architecture-dir"><em>目录结构</em></a>。</div></blockquote>
+<ul>
+<li><p class="first">pip &amp; setuptools (<em>通过PyCharm创建虚拟环境后,建议升级到最新版本</em>)</p>
+</li>
+<li><p class="first">Django 1.7.3 (<em>Web框架-Django</em>)</p>
+</li>
+<li><dl class="first docutils">
+<dt>DjangoRestFramework 3.0.3 (<em>Ajax请求基于RESTFul API-DjangoRestFramework</em>)</dt>
+<dd><ul class="first last simple">
+<li>依赖于 Django</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Sphinx (<em>文档生成工具</em>)</dt>
+<dd><ul class="first last">
+<li><p class="first">依赖于 docutils 0.12 (<em>reStructuredText工具套件</em>)</p>
+</li>
+<li><dl class="first docutils">
+<dt>依赖于 Jinja2 2.7.3 (<em>页面模板语言</em>)</dt>
+<dd><ul class="first last simple">
+<li>依赖于 markupsafe 0.23 (<em>标记扩展库</em>)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>依赖于 Pygments 2.0.1 (<em>语法高亮包</em>)</dt>
+<dd><ul class="first last simple">
+<li>依赖于 Cython 0.21.2 (<em>Python的C扩展包</em>)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">依赖于 six 1.9.0 (<em>Python2和Python3兼容包</em>)</p>
+</li>
+<li><dl class="first docutils">
+<dt>依赖于 Babel 1.3 (<em>国际化包</em>)</dt>
+<dd><ul class="first last simple">
+<li>依赖于 Colorama 0.3.3 (<em>关键字着色包</em>)</li>
+<li>依赖于 pytz 2014.10 (<em>Python时区扩展包</em>)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">依赖于 snowballstemmer 1.2.0 (<em>随机算法包</em>)</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Pillow 2.7.0 (<em>Python图形包,如没有配置编译环境,需使用安装包安装,然后拷贝安装后的文件至虚拟环境目录</em>)</p>
+</li>
+<li><p class="first">lxml 3.4.1 (<em>xml操作扩展包,如没有配置编译环境,需使用安装包安装,然后拷贝安装后的文件至虚拟环境目录</em>)</p>
+</li>
+<li><dl class="first docutils">
+<dt>DjangoCaptcha 0.2.12 (<em>验证码扩展包</em>)</dt>
+<dd><ul class="first last simple">
+<li>依赖于 Pillow</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dm_pypyodbc 1.1.9 (<em>达梦数据库ORM驱动引擎</em>)</dt>
+<dd><ul class="first last simple">
+<li>依赖于 pypyodbc 1.3.7 (<em>Python ODBC 数据库驱动,内部修改后的版本</em>)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">MySqlDB 1.2.5 (<em>Mysql数据库ORM驱动引擎,如没有配置编译环境,需使用安装包安装,然后拷贝安装后的文件至虚拟环境目录</em>)</p>
+</li>
+<li><p class="first">django-pyc 0.2 (<em>Python自动编译包</em>)</p>
+</li>
+<li><p class="first">xlrd 0.9.3 (<em>excel扩展包</em>)</p>
+</li>
+<li><p class="first">xlwd 0.7.5 (<em>excel扩展包</em>)</p>
+</li>
+<li><p class="first">django-filter 0.7 (<em>django Model 过滤器扩展包</em>)</p>
+</li>
+<li><p class="first">ipaddress 1.0.6 (<em>python ip 地址扩展包,包含IPv4和IPv6</em>)</p>
+</li>
+</ul>
+<p><em>根据项目情况添加其他的相关的包</em></p>
+</div>
+<div class="section" id="id4">
+<h2>数据库<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p><em>为了避免数据库结构不统一,数据库应尽量使用统一的服务器.</em></p>
+<p>根据项目需求选择Mysql或者达梦(DM)数据库.在 <em>10.135.140.30</em> 上新建虚拟机,部署数据库.</p>
+<p>数据库部署见 <a class="reference internal" href="deployment.html#deployment-db"><em>数据库部署</em></a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">內容目录</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">开发环境说明</a><ul>
+<li><a class="reference internal" href="#id2">开发工具配置</a></li>
+<li><a class="reference internal" href="#python">Python环境配置</a></li>
+<li><a class="reference internal" href="#id4">数据库</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>上一个主题</h4>
+  <p class="topless"><a href="index.html"
+                        title="上一章">开发说明</a></p>
+  <h4>下一个主题</h4>
+  <p class="topless"><a href="deployment.html"
+                        title="下一章">环境部署说明</a></p>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/develop/installation.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>快速搜索</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="转向" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    输入相关的术语，模块，类或者函数名称进行搜索
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="deployment.html" title="环境部署说明"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="开发说明"
+             >上一页</a> |</li>
+        <li><a href="../index.html">【RC1022A】 1.0.0 文档</a> &raquo;</li>
+          <li><a href="index.html" >开发说明</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; 版权所有 2015, Benjamin.
+      由 <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b2 创建。
+    </div>
+  </body>
+</html>

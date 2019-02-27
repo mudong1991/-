@@ -1,0 +1,214 @@
+一、连接数据库
+	1、登录：mysql -uroot -p -hlocalhost
+		-u：指定用户名
+		-p: 密码
+		-h：主机名
+		--prompt=name: 设置命令提示符
+		--delimiter=name,指定分隔符
+		-V,--version,输出版本信息并且退出
+	2、退出：exit、quit、\q
+	3、mysql常用命令
+		SELECT VERSION(); 显示当前版本
+		SELECT NOW(); 显示当前时间
+		SELECT USER(); 显示当前用户
+	4、修改命令提示符：
+		prompt \D\d\h\u
+二、数据库操作DDL
+	*注：所有的database可以换成schema
+	1、创建数据库
+		CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name [[DEFAULT] CHARACTER SET [=] charset_name]
+	2、查看服务器下数据库列表
+		show databases;
+	3、查看指定数据的定义
+		show create database db_name;
+	4、修改数据库
+		alter database db_name default character set utf8;
+	5、打开指定数据库
+		use db_name
+	6、删除指定数据
+		drop database if exist db_name
+	7、常用命令
+		show warnings;查看上一条操作的警告
+		select database();得到当前打开的数据库名称
+	8、获取帮助
+		? 、help
+三、数据类型
+	1、整型
+		TINYINT
+		SMALLINT
+		MEDIUMINT
+		INT
+		BIGINT
+	2、浮点型
+		float
+		bouble
+		decimal 定点付点数以字符串形式存储
+	3、字符型
+		CHAR(M) M默认为5，占用空间大，读取速度快,默认会去掉后面的空格，前面的不会
+		VARCHAR(M)  根据M的大小决定，咱用空间小，读取速度慢，默认保留后面的空格，前面不会
+		TINYTEXT
+		TEXT   读取速度最慢
+		MEDIUMTEXT
+		LONGTEXT
+		可枚举的:ENUM('value1','value2') 只能取一个值，会自动去除value的空格，索引号是1、2、、、
+		集合类型:set('value1','value2') 可以取多个值 索引号是1、2、4、8、、、
+	4、日期型
+		time、date、datetime、timestamp、
+		year  1901-2155
+	5、二进制
+	6、布尔类型 tinyint(1)
+四、数据表操作
+	1、数据表存储引擎
+		查看数据支持引擎：show engines\G;
+		查看显示支持的存储引擎信息：show variables like "have%";
+		查看mysql常用存储引擎：show variables like "storage_engine"
+		mysql常用存储引擎及特点:
+			InnoDB  优点:存储在硬盘、支持事务索引，缺点读写速度慢
+			MyISAM  优点：存储在硬盘、空间内存使用低、插入速度快， 缺点：不支持事务索引
+			MEMORY  优点：存储在内存中，读写速度快，  缺点：不安全，常用于创建零时表
+	2、创建数据表
+		create table if not exists table_name()engine=InnoDB charset='utf8' AUTO_INCREMENT=100;
+		查看数据表:show tables;
+	3、查看数据表机构
+		DESC tbl_name;
+		DESCRIBE tbl_name;
+		SHOW COLUMNS FROM tbl_name;
+		扩展： unsigned 代表无符号(不要-的)
+			   zerofill 0填充（默认无符号），显示最大值长度
+	4、删除表
+		drop table tbl_name;
+	5、约束条件
+		主键：primary key
+		自增长：AUTO_INCREMENT  标记自增长的一般是主键，是主键的不一定自增长，对整数有意义
+		非空约束：NOT NULL，字段默认是可以为空，也就是值是NULL
+		默认值：DEFAULT
+		唯一性: UNIQUE KEY 插入字段不能重复 NULL不算重复
+		查看创建表的详细信息：show create table table_name
+	6、修改表
+		修改表名: ALTER TABLE tbl_name RENAME [TO/AS] new_name;
+				  RENAME TABLE tbl_name TO new_name;
+		添加字段：ALTER TABLE tbl_name ADD 字段名称 约束条件 [FIRST | AFTER 字段名称];  多次操作用,号隔开
+		删除字段：ALTER TABLE tbl_name DROP 字段名称;
+		修改字段：ALTER TABLE tbl_name MODIFY 字段名称 字段类型约束条件 [FIRST | AFTER 字段名称];
+				  ALTER TABLE tbl_name CHANGE 旧名称 新名称 字段类型约束条件 [FIRST | AFTER 字段名称];
+		添加删除默认值：ALTER TABLE tbl_name ALTER 字段名称 SET DEFAULT 默认值;
+						ALTER TABLE tbl_name ALTER 字段名称 DROP DEFAULT;
+		添加删除主键：ALTER TABLE tbl_name ADD PRIMARY KEY(字段名称);
+					  ALTER TABLE tbl_name DROP PRIMARY KEY;
+		添加删除唯一性：ALTER TABLE tbl_name ADD UNIQUE(字段名称);
+						ALTER TABLE tbl_name ADD CONSTRAINT symbol UNIQUE KEY uni_card(card); 为card字段添加索引名称为uni_card的唯一索引
+						ALTER TABLE tbl_name ADD CONSTRAINT symbol UNIQUE KEY mulni_test_tes1(test,test1); 复合唯一索引
+						删除：ALTER TABLE tbl_name DROP KEY uni_card;
+		设置表的存储引擎：ALTER TABLE tbl_name ENGINE=存储名称；
+		设置自增长的值：ALTER TABLE tbl_name AUTO_INCREMENT=值；
+五、表数据操作DML
+	1、插入数据
+		不指定具体字段名：INSERT tbl_name VALUES(值1,...);
+		列出具体字段名：INSERT tbl_name(字段名1,..) VALUES(值1,...);	
+		同时插入多条记录：INSERT tbl_name VALUES(值),(值)...;
+		将查询结果插入到表中:INSERT tbl_name(字段名) SELECT 字段名 FROM tbl_name；
+	2、更新数据
+		UPDATE tbl_name SET 字段名称=值 [WHERE 条件] [ORDER BY 字段名称] [LIMIT 限制条数]
+	3、删除数据
+		DELETE FROM tbl_name [WHERE 字段名称] [ORDER BY 字段名称] [LIMIT 限制条数]
+		彻底清空数据表 TRUNCATE [TABLE] tbl_name；
+	4、查询数据
+		SELECT select_expr FROM tbl_name [WHERE 条件] [ORDER BY [ASC | DESC] 分组] [GROUP BY [ASC | DESC]排序] [LIMIT 限制显示]
+		AS: 别名
+		WHERE: 条件
+			IS NOT NULL、IS NOT NULL、=、>=、<>、!=	、AND
+			BETWEEN AND
+			IN、NOT IN
+			LIKE: 模糊查询 %代表0个或者更多、_代表一个
+		GROUP BY: 分组 GROUP_CONCAT()拼接、COUNT SUM  MAX MIN AVG SUM
+			HAVING 对分组数据进行二次条件赛选
+		ORDER BY: 排序 DESC降序 ASC升序默认  RAND()随机排序
+		LIMIT:限制查询结果条数
+	5、链接查询
+		链接查询是将两个或者两个以上的表按某个条件链接起来
+		内连接查询: JOIN|CROSS　JOIN INNER JOIN,通过ON来链接两个表
+					例子:SELECT u.id,u.username,u.email,p.proName FROM cms_user as u INNER JOIN proviences AS p ON u.proId=p.id;
+		外链接：LEFT JOIN | RIGHT JOIN,存储方式只能是INNODB，
+	6、外键：[CONSTRAINT forer_name]FOREIGN KEY(depId) REFERENCES tbl_name(id) [ON DELETE CASCADE ON UPDATE CASCADE]
+		约束(DEFAULT/UPDATE)：CASCADE:从父表中删除或者更新且自动更新子表中匹配的行，
+			  SET NUNLL:父表删除或者更新，字表设置为NULL,字表保证该字段没有被设置NOT NULL,
+			  RESTRICT:拒绝父表的删除更新操作.同NO ACTION	 
+		删除外键:ALTER TABLE tbl_name DROP FOREIGN KEY 	forer_name;		  
+	7、联合查询			
+		SELECT * FROM tbl_name1 UNION SELECT * FROM tbl_name2和 NNION ALL
+	8、子查询 WHERE 子查询
+		SELECT * FROM tbl_name1 WHERE id[IN / NOT IN](SELECT id FROM tbl_name2);
+		EXISTS / NOT EXISTS
+		> ANY(SOME) 大于子查询的最小值
+		> ALL 大于子查询的最大值
+		< ANY(SOME) 小于子查询的最大值
+		< ALL 小于子查询的最小值
+		= ANY(SOME) 相当于IN
+		将查询结果插入到表中：INSERT tbl_name(id,name) SELECT id,name FROM tbl_name1;
+		创建表插入数据：CREATE TABLE tbl_name()SELECT id,name FROM tbl_name1;
+	9、正则表达式REGEXP
+		^行首
+		$行尾
+		$：匹配行尾，放在匹配字符串的尾部
+		\:转义符：
+			\d:[0-9]
+			\D:[^0-9]
+			\s:[\t\n\r\f\v]
+			\S:[^\t\n\r\f\v]
+			\w:[a-zA-Z0-9]
+			\W:[^a-zA-Z0-9]
+		元字符：
+			重复：\d{8} 重复8次
+			*:前面字符重复0次或者更多次
+			+：前面重复1次或者更多次
+			？：前面的符号重复一次或者0次
+			最大匹配最小匹配：+、+？
+			{m,n}至少重复m次，最多重复n次，{0，}等同于*，{1，}等同于+，{0,1}等同于？
+六、数据库用户及权限管理
+	1、新建用户及修改密码
+		1.1 登录MYSQL：
+		　　@>mysql -u root -p
+		　　@>密码
+　　	1.2 创建用户：j
+		　　mysql> insert into mysql.user(Host,User,Password) values("localhost","test",password("1234"));
+		    CREATE USER 'username'@'host' IDENTIFIED BY 'password'; 
+		　　这样就创建了一个名为：test 密码为：1234 的用户。
+		　　注意：此处的"localhost"，是指该用户只能在本地登录，不能在另外一台机器上远程登录。如果想远程登录的话，将"localhost"改为"%"，
+			表示在任何一台电脑上都可以登录。也可以指定某台机器可以远程登录。
+		1.3 远程访问权限
+			use mysql;
+			update db set host = '%' where user = '用户名'; （如果写成 host=localhost 那此用户就不具有远程访问权限）
+			FLUSH PRIVILEGES;
+	2、用户授权
+	　　授权格式：grant 权限 on 数据库.* to 用户名@登录主机 identified by "密码";　
+	　　2.1 登录MYSQL（有ROOT权限），这里以ROOT身份登录：
+	　　	@>mysql -u root -p
+	　　	@>密码
+	　　2.2 首先为用户创建一个数据库(testDB)：
+	　　	mysql>create database testDB;
+	　　2.3 授权test用户拥有testDB数据库的所有权限（某个数据库的所有权限）：
+	　　 	mysql>grant all privileges on testDB.* to test@localhost identified by '1234';
+	 　　	mysql>flush privileges;//刷新系统权限表
+	　　	格式：grant 权限 on 数据库.* to 用户名@登录主机 identified by "密码";　
+	　　2.4 如果想指定部分权限给一用户，可以这样来写:
+	　　	mysql>grant select,update on testDB.* to test@localhost identified by '1234';
+	　　	mysql>flush privileges; //刷新系统权限表
+	　　2.5 授权test用户拥有所有数据库的某些权限： 　 
+	　　  	mysql>grant select,delete,update,create,drop on *.* to test@"%" identified by "1234";
+			//test用户对所有数据库都有select,delete,update,create,drop 权限。
+	　  	//@"%" 表示对所有非本地主机授权，不包括localhost。（localhost地址设为127.0.0.1，如果设为真实的本地地址，不知道是否可以，没有验证。）
+	　		//对localhost授权：加上一句grant all privileges on testDB.* to test@localhost identified by '1234';即可。
+	3、删除用户及权限
+		3. 删除用户
+		 　 @>mysql -u root -p
+		　　@>密码
+		 　 mysql>Delete FROM user Where User='test' and Host='localhost';
+		 　 mysql>flush privileges;
+		 　 mysql>drop database testDB; //删除用户的数据库
+			删除账户及权限：>drop user 用户名@'%';
+			>drop user 用户名@ localhost; 
+	4. 修改指定用户密码
+	  　 	@>mysql -u root -p
+	  　　	@>密码
+	  　　	mysql>update mysql.user set password=password('新密码') where User="test" and Host="localhost";
+	  　　	mysql>flush privileges;

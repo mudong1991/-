@@ -1,0 +1,185 @@
+1、栈
+# coding:utf-8
+class Stack(object):
+    def __init__(self, size=0):
+        self.stack = []
+        self.size = size
+        self.top = -1
+
+    def is_empty(self):
+        return self.top == -1
+
+    def is_full(self):
+        return self.top + 1 == self.size
+
+    def add(self, item):
+        if self.is_full():
+            raise Exception("stack is full")
+        else:
+            self.stack.append(item)
+            self.top += 1
+
+    def delete(self):
+        if self.is_empty():
+            raise Exception("stack is empty")
+        else:
+            self.stack.pop()
+            self.top -= 1
+
+    def top(self):
+        if self.is_empty():
+            raise Exception("stack is empty")
+        else:
+            return self.stack[self.top]
+
+    def show(self):
+        print self.stack
+
+# s = Stack(5)
+# s.add(1)
+# s.add(2)
+# s.add(3)
+# s.add(4)
+# s.show()
+# s.delete()
+# s.show()
+# s.add(6)
+# s.show()
+
+
+2、队列
+# coding:utf-8
+class Queue:
+    def __init__(self, size = 24):
+        self.queue = []
+        self.size = size
+        self.front = 0
+        self.rear = 0
+
+    # 判断队列是否满了
+    def is_full(self):
+        return (self.rear - self.front + 1) == self.size
+
+    # 判断队列是否是空
+    def is_empty(self):
+        return self.rear == 0
+
+    # 在队列中增加元素
+    def add(self, item):
+        if self.is_full():
+            print "Queue is full"
+        else:
+            self.queue.append(item)
+            self.rear += 1
+
+    # 删除队列中的最后一个元素
+    def delete(self):
+        if self.is_empty():
+            print "Queue is empty"
+        else:
+            self.queue.pop(0)
+            self.rear -= 1
+
+    # 得到队首元素
+    def first(self):
+        if self.is_empty():
+            print "Queue is empty"
+        else:
+            return self.queue[self.front]
+
+    # 得到队尾元素值
+    def last(self):
+        if self.is_full():
+            print "Queue is full"
+        else:
+            return self.queue[self.rear]
+
+    # 打印队列
+    def show(self):
+        print self.queue
+
+# q = Queue(3)
+# q.add(1)
+# q.add(2)
+# q.show()
+# q.delete()
+# q.show()
+
+
+3、二叉树
+# coding:utf-8
+from Queue import Queue
+
+
+class BinaryTreeNode:
+    def __init__(self, data, left, right):
+        self.data = data
+        self.left = left
+        self.right = right
+
+
+class BinaryTree:
+    def __init__(self):
+        self.root = None
+
+    def make_tree(self, data, left, right):
+        self.root = BinaryTreeNode(data, left, right)
+
+    def is_empty(self):
+        return self.root is None
+
+    # 前序遍历
+    def pre_traverse(self, r):
+        if r.root is not None:
+            print r.root.data
+            if r.root.left is not None:
+                self.pre_traverse(r.root.left)
+            if r.root.right is not None:
+                self.pre_traverse(r.root.right)
+
+    # 中序遍历
+    def in_traverse(self, r):
+        if r.root is not None:
+            if r.root.left is not None:
+                self.in_traverse(r.root.left)
+            print r.root.data
+            if r.root.right is not None:
+                self.in_traverse(r.root.right)
+
+    # 后序遍历
+    def rear_traverse(self, r):
+        if r.root is not None:
+            if r.root.left is not None:
+                self.rear_traverse(r.root.left)
+            if r.root.right is not None:
+                self.rear_traverse(r.root.right)
+            print r.root.data
+
+    # 层层遍历
+    def level_traverse(self, r):
+        q = Queue()
+        while r is not None:
+            print r.root.data
+            if r.root.left is not None:
+                q.add(r.root.left)
+                self.level_traverse(r.root.left)
+            if r.root.right is not None:
+                q.add(r.root.right)
+                self.level_traverse(r.root.right)
+            if q.is_empty():
+                r = None
+            else:
+                r = q.delete()
+
+r = BinaryTree()
+
+ra = BinaryTree()
+ra.make_tree(2, None, None)
+rb = BinaryTree()
+rb.make_tree(3, None, None)
+
+r.make_tree(1, ra, rb)
+# r.pre_traverse(r)
+# r.in_traverse(r)
+# r.rear_traverse(r)
+r.level_traverse(r)

@@ -1,0 +1,1892 @@
+[TOC]
+
+[TOC]
+
+# Python核心编程总结
+针对于Python核心编程一书，对齐重点以及一些有意义的实例进行了总结，并增加了一些自己的理解与实践。
+
+## Regex
+正则表达式在各种编程语言中都有包含，而且正则表达是也是各种Web框架的Url解析的基础；基础的正则表达式基本大家一看都会，下面会主要针对于断言表达式给出实例；在此之前，先列出正则表达式的基础符号和扩展。
+
+### 正则表达式基础
+*注意： 下面相关内容中的模式仅适合于`Python`其他语言中也许也有相关配置，但是名字可能不一样。* 
+
+<table>
+    <tbody style="text-align: center;">
+        <tr style="font-size: 18px;">
+            <th style="text-align: center;width: 12%">字符</th>
+            <th style="width: 58%">描述</th>
+            <th>示例（正则 <-> 可匹配项）</th>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">.</td>
+            <td style="text-align: left;">点（.），在默认模式下，点通配除了换行之外的任意<b>单个</b>字符；当在<b>DOTALL</b>模式下，点通配所有字符</td>
+            <td style="font-style: italic;">
+                a.c <-> abc，adc 
+                <br/>（可匹配abc、adc等a和b中间以字符填充的字符串）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">^</td>
+            <td style="text-align: left;">^匹配以对应字符<b>开头</b>的字符串；当在<b>MULTILINE</b>模式下，^也匹配换行符<b>后面</b>的字符串</td>
+            <td style="font-style: italic;">
+                ^abc <-> abcd，abce
+                <br/>（可匹配abcd，abce等以abc为开头的字符串）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">$</td>
+            <td style="text-align: left;">$匹配以对应字符<b>结束</b>的字符串；当在<b>MULTILINE</b>模式下，$也匹配换行符<b>前面</b>的字符串</td>
+            <td style="font-style: italic;">
+                bc$ <-> abc，bbc
+                <br/>（可匹配abc，bbc等以bc为结束的字符串）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">*</td>
+            <td style="text-align: left;">*匹配以对应字符(子表达式)<b>零或者多次</b>，并且尽可能多的匹配字符串；等价于<b>{0,}</b></td>
+            <td style="font-style: italic;">
+                ab* <-> a，ab，ab……
+                <br/>（可匹配a后没有b、有一个b甚至任意数量的b）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">+</td>
+            <td style="text-align: left;">+匹配以对应字符(子表达式)<b>一次或者多次</b>，并且尽可能多的匹配字符串；等价于<b>{1,}</b></td>
+            <td style="font-style: italic;">
+                ab+ <-> ab，ab……
+                <br/>（可匹配a后有一个b甚至任意数量的b）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">?</td>
+            <td style="text-align: left;">?匹配以对应字符(子表达式)<b>零或者一次</b>；等价于<b>{0,1}</b></td>
+            <td style="font-style: italic;">
+                ab? <-> a，ab
+                <br/>（可匹配a后没有b、有一个b）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">{m}</td>
+            <td style="text-align: left;">{m}匹配对应字符(子表达式)<b>m次</b></td>
+            <td style="font-style: italic;">
+                a{6} <-> aaaaaa
+                <br/>（可匹配6个a）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">{m,n}</td>
+            <td style="text-align: left;">{m,n}匹配对应字符(子表达式)<b>m到n次</b>；{m,n}也是贪婪模式匹配，会匹配尽可能多的字符串；省略m表示下限为<b>0</b>，省略n表示上限为<b>无穷</b></td>
+            <td style="font-style: italic;">
+                a{1,6} <-> a，……，aaaaaa
+                <br/>（可匹配1~6个a）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">*?，+?，??，{m,n}?</td>
+            <td style="text-align: left;">如正上面所述，*、+和？，{m,n}都属于贪婪模式，即会尽可能匹配更多的字符串；而在这些限制符后面加上?则会使其变成非贪婪模式，匹配尽可能少的字符串</td>
+            <td style="font-style: italic;">
+                    <.*> <-> &lt;H1&gt;title&lt;/H1&gt;
+                    <br/><.*？> <-> &lt;H1&gt;
+                    <br/>（第一个可匹配出后续的相关字符串，而第二个仅会匹配到第一个匹配的字符串）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">\</td>
+            <td style="text-align: left;">将下一个字符标记为一个特殊字符、或一个原义字符、或一个向后引用、或一个八进制转义符</td>
+            <td style="font-style: italic;">
+                \* <-> *
+                <br/>（可匹配特殊字符*）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">[]</td>
+            <td style="text-align: left;">匹配集合中的字符串。
+            <ul>
+                <li>集合可以是独立字符（子表达式），将匹配其中任意一个</li>
+                <li>集合可以是以“-”连接的字符串，将匹配从a到z的字符；当-被转义，或者-在集合首位或者末位时，则匹配-本身，如[a-]则匹配a或-</li>
+                <li>特殊字符在[]失去其特殊字符的作用，如[(*?+)]，匹配的就是这些字符本身</li>
+                <li>字符集类如\w或者\s等在[]中依然有效，他们所包含的字符集合将由模式<b>LOCALE</b>或者<b>UNICODE</b>决定</li>
+                <li>当集合以^开头时，表示匹配不在指定集合中的字符；当^不在第一位时则没有任何意义；当为[^^]则表示匹配不为^的任意字符</li>
+                <li>如果需要匹配]，则需要以转义符\开始，如[[\]]可以匹配[，]中的任意一个，即[不需要转义，而]需要</li>
+            </ul>
+            </td>
+            <td style="font-style: italic;">
+                [amk] <-> a，m，k
+                <br/>（匹配a或m或k）
+                <br/>[a-z] <-> a，……，z
+                <br/>（匹配a到z中的任意字符串，以ascii编码为准）
+                <br/>[*?] <-> *，?
+                <br/>（匹配*或者?）
+                <br/>[\d] <-> 0，……，9
+                <br/>（匹配任意数字）
+                <br/>[^\D] <-> 0，……，9
+                <br/>（\D表示匹配任意非数字，而再次取反则还是表示任意数字）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">|</td>
+            <td style="text-align: left;">|匹配两边的字符串（子表达式）；匹配方向<b>从左向右</b>，即左侧匹配成功之后则返回左侧了，不会再进行右侧的匹配</td>
+            <td style="font-style: italic;">
+                a | b <-> a，b
+                <br/>（可匹配a或者b）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">(...)</td>
+            <td style="text-align: left;">匹配括号内的正则表达式，匹配后的字符串形成一个组，这个组可以用于后面的匹配，比如后面将会介绍的\number</td>
+            <td style="font-style: italic;">
+                (ab) <-> ab
+                <br/>（可匹配ab）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">(?...)</td>
+            <td style="text-align: left;">对括号表达式的扩展，?在这里起标记作用；目前支持的用法支持将在后面列出</td>
+            <td style="font-style: italic;">
+
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">(?iLmsux)</td>
+            <td style="text-align: left;">i（忽略大小写），L（本地化），m（多行模式），s（点匹配所有字符），u（Unicode编码），x（冗余模式，用于支持注释）是正则表达式的特殊标记；这些标记本身不匹配任何字符串，而是决定正则表达式结果处理的条件；可由编程语言的相关设置替代；(?x)会影响正则表达式的解析</td>
+            <td style="font-style: italic;">
+                (?i)ab <-> ab，AB，Ab，aB
+                <br/>（可匹配不区分大小写ab字符串）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">(?:...)</td>
+            <td style="text-align: left;">匹配正则表达式，但不获取匹配结果，不进行存储以供后续使用</td>
+            <td style="font-style: italic;">
+                bab(?:y|ies) <-> baby，babies
+                <br/>（匹配baby和babies，是(baby|babies)的简化形式）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">(?P&lt;name&gt;...)</td>
+            <td style="text-align: left;">与括号表达式类似，匹配表达式对应的值，并存成组以便后续使用，这里给组了一个命名，后续使用时可以直接用组名而不是序号</td>
+            <td style="font-style: italic;">
+                (?P&lt;quote&gt;['"]).*?(?P=quote) <-> 'abc'，"abc"
+                <br/>（匹配单引号扩起来的字符串或者双引号扩起的字符串，<b>后续使用组时前项将直接使用匹配的内容</b>，即'abc"是不能通过验证的）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">(?P=name)</td>
+            <td style="text-align: left;">后项引用，匹配前项名为name的组的<b>值</b></td>
+            <td style="font-style: italic;">
+                同上
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">(?#...)</td>
+            <td style="text-align: left;">注释，括号内的内容将被忽略</td>
+            <td style="font-style: italic;">
+                (?#this has no use)abc <-> abc
+                <br/>（可匹配abc，括号内的内容仅仅提供类似注释的效果，更多的时候我们用x模式写注释）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">(?=...)</td>
+            <td style="text-align: left;">前向肯定断言表达式（零宽度正预测先行断言）；与后续几个都称为断言表达式，也叫预查表达式，都是非获取行表达式；当表达式<b>匹配</b>时，<b>向前</b>查找匹配的字符串；断言表达式不消耗字符，即后续匹配将从上一个匹配之后立即开始</td>
+            <td style="font-style: italic;">
+                abc(?=ef)e <-> abcef
+                <br/>（前段匹配结果为abc，仅有abcef才能匹配出abc，如abcde因不满足ef条件因此无法匹配出abc；因为ef未被消耗，因此后续匹配将直接进行匹配，最后匹配结果为abce）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">(?!...)</td>
+            <td style="text-align: left;">前向否定断言表达式（零宽度负预测先行断言）；性质与前向肯定断言表达式类似；当表达式<b>不匹配</b>时，<b>向前</b>查找匹配的字符串；</td>
+            <td style="font-style: italic;">
+                abc(?!ef)d <-> abcde
+                <br/>（前段匹配结果为abc，不为abcef都能匹配出abc，如abcde因满足不为ef条件因此匹配出abc；因为de未被消耗，因此后续匹配将直接进行匹配，最后匹配结果为abcd）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">(?&lt;=...)</td>
+            <td style="text-align: left;">后向肯定断言表达式（零宽度正预测后行断言）；性质与前向肯定断言表达式类似；当表达式<b>匹配</b>时，<b>向后</b>查找匹配的字符串；</td>
+            <td style="font-style: italic;">
+                bc(?&lt;=abc)de <-> abcde
+                <br/>（前段匹配结果为bc；后段仅有abcde才能匹配出de，如bbcde因不满足abc条件因此无法匹配出de；最后匹配结果为bcde）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">(?&lt;!...)</td>
+            <td style="text-align: left;">后向否定断言表达式（零宽度负预测后行断言）；性质与前向肯定断言表达式类似；当表达式<b>不匹配</b>时，<b>向后</b>查找匹配的字符串；</td>
+            <td style="font-style: italic;">
+                bc(?&lt;!abc)de <-> bbcde
+                <br/>（前段匹配结果为bc；后段匹配，不为abcde都能匹配出de；最后匹配结果为bcde）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">(?(id/name)yes-pattern|no-pattern)</td>
+            <td style="text-align: left;">如果指定ID或者名称的组能匹配则继续匹配yes-pattern，否则匹配no-pattern；no-pattern可选；</td>
+            <td style="font-style: italic;">
+                (&lt;)?(\w+@\w+(?:\.\w+)+)(?(1)&gt;)  <-> &lt;user@host.com&gt;，user@host.com
+                <br/>（当匹配到&lt;时，匹配是否有&gt;，如&lt;user@host.com&gt;，没有&gt;则匹配失败；当未匹配到&lt;则不进行&gt;的匹配，因此user@host.com&gt;也能通过验证，匹配结果为user@host.com）
+            </td>
+        </tr>
+
+        <tr>
+            <td style="font-weight: bold;">\number</td>
+            <td style="text-align: left;">匹配指定序号组的<b>值</b>；组序号从<b>1</b>开始，范围为1~99，超出范围的将被当作字符处理；在[]中的所有\number都被当作字符处理</td>
+            <td style="font-style: italic;">
+                ([ab])-\1 <-> a-a，b-b
+                <br/>（可匹配a-a或者b-b，但是不能匹配a-b；再次说明一下，对组的后续的引用匹配，用的是其<b>值</b>，而不是其表达式）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">\A</td>
+            <td style="text-align: left;">仅匹配字符串开头，与^相同</td>
+            <td style="font-style: italic;">
+                \Aa\w* <-> abc
+                <br/>（可匹配a开头的字符串）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">\b</td>
+            <td style="text-align: left;">匹配单词边界字符，所谓的单词由连续的单词字符或者下划线组成，因此单词边界字符可以是空格、非单词字符或者非下划线；通常，\b用来处理\w和\W的边界，因此\b所包含的字符集受<b>UNICODE</b>和<b>LOCALE</b>模式影响；在[]中，\b表示回退，和Python的字符串保持一致</td>
+            <td style="font-style: italic;">
+                \babc\b <-> " abc "，abc.，(abc)，123 abc 123，……
+                <br/>（可匹配单词abc，但是不能匹配单词中的abc，如abcd中的abc）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">\B</td>
+            <td style="text-align: left;">匹配单词的非边界字符，与\b相反</td>
+            <td style="font-style: italic;">
+                abc\B <-> abcd，……
+                <br/>（可匹配单词abcd等等，但是不能具备边界字符的单词abc，如abc.）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">\d</td>
+            <td style="text-align: left;">匹配数字；当未指定<b>UNICODE</b>模式时，匹配0-9；当指定了后，匹配Unicode字符集中被定为数字的字符</td>
+            <td style="font-style: italic;">
+                \d{3} <-> 123，234，……
+                <br/>（可匹配3位数字字符串）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">\D</td>
+            <td style="text-align: left;">匹配非数字；与\d相反</td>
+            <td style="font-style: italic;">
+                \D{3} <-> abc，bcd，……
+                <br/>（可匹配3位非数字字符串）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">\s</td>
+            <td style="text-align: left;">匹配字符串的空白；当未指定<b>UNICODE</b>模式时，等价于[ \t\n\r\f\v]（第一个是空格）；当指定了<b>UNICODE</b>模式时，还包含Unicode字符集中被定为空白的字符</td>
+            <td style="font-style: italic;">
+                abc\sabc <-> abc abc，……
+                <br/>（可匹配abc+空白字符串+abc，包含换行等）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">\S</td>
+            <td style="text-align: left;">匹配字符串的非空白；与\s相反；</td>
+            <td style="font-style: italic;">
+                abc\Sabc <-> abc-abc，……
+                <br/>（可匹配abc+非空白字符串+abc）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">\w</td>
+            <td style="text-align: left;">匹配单词字符；默认模式下等价于[A-Za_z0-9_]；当指定为<b>UNICODE</b>或者<b>LOCALE</b>模式时，受相应的字符集影响，由[0-9_]和字符集中定义为单词的字符组成</td>
+            <td style="font-style: italic;">
+                \w* <-> zxcvbnm_!@#
+                <br/>（可匹配基本的单词字符串，结果为zxcvbnm_，匹配到！时失败，结束匹配）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">\W</td>
+            <td style="text-align: left;">匹配非单词字符，与\w相反</td>
+            <td style="font-style: italic;">
+                \W* <-> !@#$%^&*()_+|
+                <br/>（可匹配非单词字符串，结果为!@#$%^&*()，匹配到_时失败，结束匹配）
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">\Z</td>
+            <td style="text-align: left;">仅匹配字符串的末尾，与$相同</td>
+            <td style="font-style: italic;">
+                \w*a\Z <-> sa
+                <br/>（匹配以a为结尾的字符串）
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+### 正则表达式处理模块
+`re`是Python中的正则表达式处理模块，提供正则表达式相关类和方法。
+
+#### re.compile(pattern, flags=0) 
+将正则表达式编译成一个正则表达式对象（[RegexObject](#regexobject "regexobject")），可以使用对象的`match()`和`search()`方法进行匹配；可以通过指定flags值修改表达式的匹配模式（行为），值使用或运算组合，取值范围见[匹配模式](#_3 "#_3") 。
+
+例：
+```python
+prog = re.compile(pattern)
+result = prog.match(string)
+```
+等价于：
+```python
+result = re.match(pattern, string)
+```
+使用`re.compile()`所产生的正则表达式对象，可以在程序中多次使用，提高代码的可重用性。
+
+>   **注：**传递给`re.match()`、 `re.search()`或`re.compile()`的最新的正则表达式的编译结果将会自动缓存，所以只有几个正则表达式的程序不必担心编译正则表达式的性能影响。
+
+
+##### 匹配模式
+如上函数所示，最后一个参数为`flags`，也称为模式；其可取值以及作用如下所示：
+
+###### re.DEBUG
+显示编译正则表达式的调试信息
+
+###### re.I & re.IGNORECASE
+不区分大小写匹配，如[A-Z]在re.I模式下也匹配小写；该模式不受re.L影响
+
+###### re.L & re.LOCALE
+使\w、\W、\b、\B、\s和\S受本地字符集影响
+
+###### re.M & re.MULTILINE
+多行模式，主要作用于`^`和`$`，使其可以匹配多行数据；默认情况下`^`和`$`只能匹配一行数据的开始或结尾
+
+###### re.S & re.DOTALL
+在该模式下，`.`匹配所有字符
+
+###### re.U & re.UNICODE
+使\w、\W、\b、\B、\d、\D、\s和\S受Unicode字符集影响
+
+###### re.X & re.VERBOSE
+该模式可以使正则表达式写成更容易理解的形式；表达式中的一些空格将被忽略，`#`右侧的字符串将被忽略，当作注释。
+
+如下两个表达式对应的匹配内容是一致的：
+```python
+a = re.compile(r"""\d +  # the integral part
+                   \.    # the decimal point
+                   \d *  # some fractional digits""", re.X)
+
+b = re.compile(r"\d+\.\d*")  # r表示为后续的字符串按原字符串输入，不进行转义
+```
+
+
+> **注：**以上模式（标记）也适用与其他方法的`flags`参数。
+
+#### re.search(pattern, string, flags=0)
+扫描**字符串**，寻找的第一个由该正则表达式产生匹配的位置，并返回相应的`MatchObject`实例；如果字符串中的没有匹配项，返回`None`；
+
+#### re.match(pattern, string, flags=0)
+从字符串的开头开始正则表达式匹配，如果匹配成功，将返回相应的`MatchObject`实例；否则，返回`None`；
+
+>   **注意：**即使在多行模式下，`re.match()`也只匹配字符串的开头，而不是在每行的开头。
+>   如果你想要在字符串中的**任意**位置进行匹配，改用`search()` （请参见 [search vs match](#search-match "#search-match") ）。
+
+
+#### re.split(pattern, string, maxsplit=0, flags=0)
+根据正则表达式，以匹配的项为间隔将输入的字符串分离成字符串列表；如果分隔字符串存在保存的组，每个匹配的组的内容也会被返回到结果列表中；如果指定了maxsplit的值时（大于1），进行产生maxsplit次分离，剩下部分直接返回到结果列表中；如下：
+
+```python
+>>> re.split('\W+', 'Words, words, words.')
+['Words', 'words', 'words', '']
+>>> re.split('(\W+)', 'Words, words, words.')
+['Words', ', ', 'words', ', ', 'words', '.', '']
+>>> re.split('\W+', 'Words, words, words.', 1)
+['Words', 'words, words.']
+>>> re.split('[a-f]+', '0a3B9', flags=re.IGNORECASE)
+['0', '3', '9']
+
+```
+
+如果字符串的开始就有与分隔字符串匹配的项，并且分隔字符串将以组的形式保存起来，那么结果字符串将会以一个空白的字符串和分隔字符开始；该规律同样适用用结果，即结尾有匹配项的时候，列表将由分隔符和一个空串结束；如：
+
+```python
+>>> re.split('(\W+)', '...words, words...')
+['', '...', 'words', ', ', 'words', '...', '']
+
+```
+上述方式，也使得`Python`可以保持结果列表中的分隔符的位置总在基数位上，结果字符串在偶数位上，不会因为开头是否有匹配而变得不一致。
+
+>   **注意:** 对于没有匹配的，将直接返回字符串本身；
+>   
+>   另外，*flags* 参数是在`Python 2.7`之后增加的。
+
+
+#### re.findall(pattern, string, flags=0) 
+查找字符串中所有匹配正则表达式的字符串，返回匹配的字符串列表；匹配顺序从左至右，匹配到的字符串依次增加到返回的结果列表中；如果正则表达式中有组，以`tuple`的形式返回匹配的组结果列表。如：
+
+```python
+>>> re.findall(r"\w{3}_\d{3}", "abc_123,edf_456,ghi_789")
+['abc_123', 'edf_456', 'ghi_789']
+>>> re.findall(r"(\w{3})_(\d{3})", "abc_123,edf_456,ghi_789")
+[('abc', '123'), ('edf', '456'), ('ghi', '789')]
+```
+
+>   **注意:** *flags* 参数是在`Python 2.4`之后增加的。
+
+#### re.finditer(pattern, string, flags=0) 
+与`findall`类似，finditer返回的是一个返回`MatchObject`的迭代器。如下：
+
+```python
+>>> [match_item.group() for match_item in re.finditer(r"\w{3}_\d{3}", "abc_123,edf_456,ghi_789")]
+['abc_123', 'edf_456', 'ghi_789']
+```
+
+>   **注意:** *flags* 参数是在`Python 2.4`之后增加的。
+
+
+#### re.sub(pattern, repl, string, count=0, flags=0) 
+从做至右遍历字符串`string`，将匹配`pattern`的部分用`repl`替换；如果没有匹配的字符串，将不进行替换，返回原字符串，否则返回替换后的字符串；`repl`可以是一个字符串，也可以是一个函数；
+
+当`repl`是字符串时，所有反斜杠都会被处理，即`\n`会被当作换行符、`\t`会被当作制表符等等，而`\number`会使用匹配的组进行替换；例如：
+
+```python
+>>> re.sub(r'def\s+([a-zA-Z_][a-zA-Z_0-9]*)\s*\(\s*\):',
+...        r'static PyObject*\npy_\1(void)\n{',
+...        'def myfunc():')
+'static PyObject*\npy_myfunc(void)\n{'
+```
+
+当`repl`是函数时，每一个匹配的项都会调用该函数进行处理；该函数接收一个参数（类型为`MatchObject`），返回处理后的字符串；例如：
+
+```python
+>>> def dashrepl(matchobj):
+...     if matchobj.group(0) == '-': return ' '
+...     else: return '-'
+>>> re.sub('-{1,2}', dashrepl, 'pro----gram-files')
+'pro--gram files'
+>>> re.sub(r'\sAND\s', ' & ', 'Baked Beans And Spam', flags=re.IGNORECASE)
+'Baked Beans & Spam'
+
+```
+
+`pattern`可以是字符串也可以是正则表达式。
+
+可选参数`count`表示最多替换几个匹配项，默认为0，表示全部匹配；值范围为非负整数；*可空匹配* 将进行最大化匹配替换，并且其他不匹配项的两边都会加入替换项，例如：
+
+```python
+>>> re.sub('x*', '-', 'abcd')
+'-a-b-c-d-'
+>>> re.sub('x*', '-', 'abcxxxxxxd')
+'-a-b-c-d-'
+
+```
+
+当`repl`为字符串时，上面说了`\number`会使用对应的组进行替换，另外`\g<name>`或者`\g<number>`也有相同的效果；组名`name`由表达式`(?P<name>...)`定义；使用`\g<number>`有一个好处是避免歧义，如`\g<2>0`和`\20`，当有上述需求时，后者无法表达出需要意义，会使用第二十个组，而不是第二个组后加字符`0`；`\g<0>`表示整个字符串。
+
+>   **注意:** *flags* 参数是在`Python 2.7`之后增加的。
+
+
+#### re.subn(pattern, repl, string, count=0, flags=0) 
+和`re.sub`类似，只不过返回的是`tuple`（(new_string, number_of_subs_made)）类型的结果。
+
+例如：
+```python
+>>> re.subn('x*', '-', 'abcd')
+('-a-b-c-d-', 5)
+
+```
+
+>   **注意:** *flags* 参数是在`Python 2.7`之后增加的。
+
+#### re.escape(string)
+返回转义后的字符串，当你的正则表达式包含了特殊字符而又想当作普通字符匹配时，可以使用该方法进行转义。
+
+例如：
+```python
+>>> re.escape("*?+{m,n}\s")
+'\*\?\+\{m\,n\}\\s'
+
+```
+
+#### re.purge()
+清空正则表达式缓存；正如上面所述，正则表达式模块本身具备缓存机制，会自动缓存最近的几个表达式的编译结果，该方法对缓存进行清理操作；通过源码查看可以知道，2.7版本的最大的缓存数量为**100**。
+
+
+### RegexObject
+如上所述，`re.complie()`方法得到一个`RegexObject`对象实例；以下是该对象所包含的属性和方法。
+
+#### search(string[, pos[, endpos]]) 
+与`re.search`类似，增加了可选参数`pos`和`endpos`，可以指定搜索的起始位置和结束位置；当`endpos`不为空时，以下两个语句的意义是一样的：`rx.search(string, 0, 50)`与`rx.search(string[:50], 0)`。
+
+例：
+```python
+>>> pattern = re.compile("d")
+>>> pattern.search("dog")     # 匹配第一个d
+<_sre.SRE_Match object at ...>
+>>> pattern.search("dog", 1)  # 从1开始，则没有匹配项；
+
+```
+
+#### match(string[, pos[, endpos]]) 
+与`re.match`类似，可选参数与`search`方法一致。
+
+例：
+```python
+>>> pattern = re.compile("o")
+>>> pattern.match("dog")      # 因为o不是第一个字符，因此无匹配项
+>>> pattern.match("dog", 1)   # 从第二个字符开始，则o是第一项，因此可以得到匹配结果
+<_sre.SRE_Match object at ...>
+
+```
+
+#### split(string, maxsplit=0)
+与`re.split`类似。
+
+#### findall(string[, pos[, endpos]])
+与`re.findall`类似，可选参数与`search`方法一致。
+
+#### finditer(string[, pos[, endpos]])
+与`re.finditer`类似，可选参数与`search`方法一致。
+
+#### sub(repl, string, count=0)
+与`re.sub`类似。
+
+#### subn(repl, string, count=0)
+与`re.subn`类似。
+
+#### flags
+正则表达式所匹配的模式，结果是`compile`和正则表达式中代表模式的字符合并后的结果
+
+#### groups
+正则表达式中的组的数量。
+
+#### groupindex
+当正则表达式中包含组名形式的的组时，该属性是组名与索引号的映射关系字典；当正则表达式不包含组名形式的组时，该属性为空
+
+#### pattern 
+被编译的正则表达式本身
+
+### MatchObject
+`MatchObject`是正则表达式的成功匹配结果（如`search`和`match`方法在匹配成功时都返回了`MatchObject`），其值永远为`True`；而当不匹配时返回的是`None`，因此可以简单的使用`if`来判断是否有匹配；如下：
+
+```python
+match = re.search(pattern, string)
+if match:
+    process(match)
+
+```
+
+`MatchObject`包含以下的方法和属性：
+
+#### expand(template)
+和`Sub`方法一样，用正则表达式的匹配结果去替换`template`中的反斜杠开头的字符串；序列索引组（`\1`，`\2`，`\g<1>`）和命名的组（`\g<name>`）都将被替换为对应的值内容。
+
+例如：
+
+```python
+>>> ma = re.match(r"(?P<mail_id>\w+)@(?P<domain_1>\w+)\.(\w+)", "benjamin@live.cn")
+>>> ma.expand(r"name is : '\g<mail_id>' and first domain is '\g<2>' and last domain is '\3'")
+"name is : 'benjamin' and first domain is 'live' and last domain is 'cn'"
+
+```
+
+#### group([group1, ...]) 
+返回匹配结果的一个或者多个组结果；如果参数只有一个，那么返回结果就是一个字符串；如果参数有多个，那么返回一个包含对应组的`tuple`；当不带参数时，`group1`参数默认为0，返回整个匹配项；如果参数范围在[1...99]，那么返回对应的组，否则抛`IndexError`的异常；如果没有对应的匹配组，则返回`None`；如果一个组有多个匹配，返回最后一个匹配项。
+
+例如：
+```python
+>>> m = re.match(r"(\w+) (\w+)", "Isaac Newton, physicist")
+>>> m.group(0)       # 整个匹配项
+'Isaac Newton'
+>>> m.group(1)       # 第一个组
+'Isaac'
+>>> m.group(2)       # 第二个组
+'Newton'
+>>> m.group(1, 2)    # 第一个和第二个组，返回tuple
+('Isaac', 'Newton')
+
+```
+
+如果正则表达式采用命名组（(?P<name>...)），`groupN`参数也可以是组名；如果组名不存在，也会抛出`IndexError`异常。如下：
+
+```python
+>>> m = re.match(r"(?P<first_name>\w+) (?P<last_name>\w+)", "Benjamin XT")
+>>> m.group('first_name')
+'Benjamin'
+>>> m.group('last_name')
+'XT'
+
+```
+
+当然，命名组也可以使用序号进行获取：
+
+```python
+>>> m.group(1)
+'Benjamin'
+>>> m.group(2)
+'XT'
+
+```
+
+如果组有多个匹配项，仅返回最后一个匹配项，如下：
+
+```python
+>>> m = re.match(r"(..)+", "a1b2c3")  # 组(..)匹配了3次
+>>> m.group(1)                        # 仅返回最后一个匹配项.
+'c3'
+
+```
+
+#### groups([default]) 
+以`tuple`的形式返回所有的序号大于1的匹配组；`default`参数用来决定没有参与到匹配的组的默认值；
+
+例如：
+
+```python
+>>> m = re.match(r"(\d+)\.(\d+)", "24.1632")
+>>> m.groups()
+('24', '1632')
+
+```
+
+如果去掉小数部分，那么正则表达式中的后面的那个组将不会参与匹配，此时`default`将会体现出其作用，如下：
+
+```python
+>>> m = re.match(r"(\d+)\.?(\d+)?", "24")
+>>> m.groups()      # 第二个组返回None
+('24', None)
+>>> m.groups('0')   # 设置了默认之后,第二个组返回设置的默认值
+('24', '0')
+
+```
+
+#### groupdict([default])
+将所有命名组（也仅有命名组）的匹配项以`dict`形式返回，参数`default`的作用与`groups`方法中的类似；例如：
+
+```python
+>>> m = re.match(r"(?P<first_name>\w+) (?P<last_name>\w+) (\d+)", "Benjamin XT 110")
+>>> m.groupdict()
+{'first_name': 'Benjamin', 'last_name': ' XT'}
+>>> m.groups()
+('Benjamin', 'XT', '110')
+
+```
+
+#### start([group]) & end([group])
+返回指定`group`匹配项的起始或者结束位置（索引）；`group` 默认为0（意味着索引为整个匹配项的起始或结束）；如果组存在但是没有对于匹配没有作用（如没有参与匹配或者是空匹配等），则返回-1；对于一个有效的组，组对应的匹配字符串（`m.group(g)`）与`m.string[m.start(g):m.end(g)]`等效。
+
+值得注意的是，如果一个组产生的是空匹配，那么他的`m.start(group)`和`m.end(group)`将一样；例如：`m = re.search('b(c?)', 'cba')`，其中`m.start(0)`为1、`m.end(0)`为2，而`m.start(1)`和`m.end(1)`都为2；当组不存在时将会抛出`IndexError`异常，如`m.start(2)`。
+
+例：
+```python
+>>> email = "benjaminxt@liremove_thisve.cn"
+>>> m = re.search("remove_this", email)
+>>> email[:m.start()] + email[m.end():]
+'benjaminxt@live.cn'
+
+```
+
+#### span([group])
+返回指定组的匹配项的起始和结束索引（`(m.start(group), m.end(group))`），即指定组的范围；同样，如果组对于匹配没有作用，返回`(-1,-1)`；默认为0，返回整个匹配项的范围；
+
+#### pos
+返回传递给`search`或者`match`的`pos`参数（指定从字符串的何处开始进行匹配）；
+
+#### endpos
+同`pos`，返回结束位置；
+
+#### lastindex
+最后一个捕获的匹配组的索引号，如果没有匹配的组则为`None`。
+
+例如：匹配字符串'ab'时，表达式`(a)b`、`((a)(b))`和`((ab))`，`lastindex`都为1；而`(a)(b)`则`lastindex`为2。
+
+#### lastgroup
+与`lastindex`类似，不过返回的是命名组的名字，如果没有匹配的命名组，或者最后一个捕获匹配不是命令组，甚至没有命名组，返回`None`。
+
+如：匹配字符串'ab'时，`(?P<gName>(a)(b))`的`lastgroup`返回`gName`，而`((?P<gName>a)(b))`和`((a)(?P<gName>b))`则返回`None`
+
+#### re
+得到`MatchObject`所用的正则表达式
+
+
+#### string
+用于匹配的原字符串
+
+
+### search 和 match 对比
+直接看例子：
+```python
+>>> re.match("c", "abcdef")  # 匹配失败
+>>> re.search("c", "abcdef") # 匹配成功
+<_sre.SRE_Match object at ...>
+
+```
+
+有`^`的正则表达式：
+```python
+>>> re.match("c", "abcdef")  # 匹配失败
+>>> re.search("^c", "abcdef") # 匹配失败
+>>> re.search("^a", "abcdef")  # 匹配成功
+<_sre.SRE_Match object at ...>
+
+```
+
+多行模式：
+```python
+>>> re.match('X', 'A\nB\nX', re.MULTILINE)  # 匹配失败
+>>> re.search('^X', 'A\nB\nX', re.MULTILINE)  # 匹配成功
+<_sre.SRE_Match object at ...>
+
+```
+
+>   **总结：**`match` 和`search` 都是查找匹配项；`match` 从头开始匹配，`search` 从任意位置开始匹配；多行模式下，`match` 也只匹配一行，而 `search` 可以匹配多行。
+   
+
+*至此，Python的的正则表达式相关内容基本总结完毕。*
+
+
+## 下一步
+后续内容将跳开《Python核心编程 3E》这本书，因为这本书的内容实在是令人沮丧，大量篇幅的Python手册中就有的类似的代码，以及对代码的解释；包含的一些手册中不包含的内容也仅仅是浅尝辄止；对于初步入门的来说，没必要学习那么多复杂的内容；而对于已经入门的来说，这些内容还不如手册中的内容来的实在。
+
+鉴于Python的标准库并不是所有人都看过，以下将介绍Python的标准库，主要是说明其作用，上面的正则表达式其实也算手册中的一章；后续的介绍将不会如此的详细，细到函数的作用，仅会挑一些关键函数进行说明；
+
+
+## 标准库一览
+那么，我们先来看看标准库提供了哪些内容。
+
+<ul>
+    <li>1. 引言</li>
+    <li>2. 内置函数</li>
+    <li>3. 已不重要的内置函数</li>
+    <li>4. 内置常量
+        <ul>
+            <li>4.1. Constants added by the <span>site</span> module </li>
+        </ul>
+    </li>
+    <li>5. Built-in Types
+        <ul>
+            <li>5.1. Truth
+                Value Testing
+            </li>
+            <li>5.2.
+                Boolean Operations &#8212; <span>and</span>, <span>or</span>, <span>not</span></li>
+            <li>5.3.
+                Comparisons
+            </li>
+            <li>5.4. Numeric Types
+                &#8212; <span>int</span>, <span>float</span>, <span>long</span>,
+                <span>complex</span></li>
+            <li>5.5. Iterator
+                Types
+            </li>
+            <li>5.6.
+                Sequence Types &#8212; <span>str</span>, <span>unicode</span>, <span>list</span>, <span>tuple</span>,
+                <span>bytearray</span>,
+                <span>buffer</span>, <span>xrange</span></li>
+            <li>5.7.
+                Set Types &#8212; <span>set</span>, <span>frozenset</span></li>
+            <li>5.8.
+                Mapping Types &#8212; <span>dict</span></li>
+            <li>5.9. File
+                Objects
+            </li>
+            <li>5.10.
+                memoryview type
+            </li>
+            <li>5.11.
+                Context Manager Types
+            </li>
+            <li>5.12.
+                Other Built-in Types
+            </li>
+            <li>5.13.
+                Special Attributes
+            </li>
+        </ul>
+    </li>
+    <li>6. Built-in Exceptions
+        <ul>
+            <li>6.1.
+                Exception hierarchy
+            </li>
+        </ul>
+    </li>
+    <li>7. String Services
+        <ul>
+            <li>7.1. <span>string</span> &#8212; Common string
+                operations
+            </li>
+            <li>7.2. <span>re</span> &#8212; Regular expression operations
+            </li>
+            <li>7.3. <span>struct</span> &#8212; Interpret strings as
+                packed binary data
+            </li>
+            <li>7.4. <span>difflib</span> &#8212; Helpers for computing
+                deltas
+            </li>
+            <li>7.5. <span>StringIO</span> &#8212; Read and write strings
+                as files
+            </li>
+            <li>7.6. <span>cStringIO</span> &#8212; Faster version of <span>StringIO</span>
+            </li>
+            <li>7.7. <span>textwrap</span> &#8212; Text wrapping and
+                filling
+            </li>
+            <li>7.8. <span>codecs</span> &#8212; Codec registry and base
+                classes
+            </li>
+            <li>7.9. <span>unicodedata</span> &#8212; Unicode Database
+            </li>
+            <li>7.10. <span>stringprep</span> &#8212; Internet String
+                Preparation
+            </li>
+            <li>7.11. <span>fpformat</span> &#8212; Floating point
+                conversions
+            </li>
+        </ul>
+    </li>
+    <li>8. Data Types
+        <ul>
+            <li>8.1. <span>datetime</span> &#8212; Basic date and time
+                types
+            </li>
+            <li>8.2. <span>calendar</span> &#8212; General calendar-related
+                functions
+            </li>
+            <li>8.3. <span>collections</span> &#8212; High-performance
+                container datatypes
+            </li>
+            <li>8.4. <span>heapq</span> &#8212; Heap queue algorithm
+            </li>
+            <li>8.5. <span>bisect</span> &#8212; Array bisection algorithm
+            </li>
+            <li>8.6. <span>array</span> &#8212; Efficient arrays of numeric
+                values
+            </li>
+            <li><span>sets</span> &#8212; Unordered collections of unique elements
+            </li>
+            <li>8.8. <span>sched</span> &#8212; Event scheduler</li>
+            <li>8.9. <span>mutex</span> &#8212; Mutual exclusion
+                support
+            </li>
+            <li>8.10. <span>Queue</span> &#8212; A synchronized queue class
+            </li>
+            <li>8.11. <span>weakref</span> &#8212; Weak references</li>
+            <li>8.12. <span>UserDict</span> &#8212; Class wrapper for
+                dictionary objects
+            </li>
+            <li>8.13. <span>UserList</span> &#8212; Class wrapper for list
+                objects
+            </li>
+            <li>8.14. <span>UserString</span> &#8212; Class wrapper for
+                string objects
+            </li>
+            <li>8.15. <span>types</span> &#8212; Names for built-in
+                types
+            </li>
+            <li><span>new</span> &#8212; Creation of runtime internal objects
+            </li>
+            <li>8.17. <span>copy</span> &#8212; Shallow and deep copy
+                operations
+            </li>
+            <li>8.18. <span>pprint</span> &#8212; Data pretty printer
+            </li>
+            <li>8.19. <span>repr</span> &#8212; Alternate <span>repr()</span> implementation
+            </li>
+        </ul>
+    </li>
+    <li>9. Numeric and Mathematical Modules
+        <ul>
+            <li>9.1. <span>numbers</span> &#8212; Numeric abstract base
+                classes
+            </li>
+            <li><span>math</span> &#8212; Mathematical functions
+            </li>
+            <li>9.3. <span>cmath</span> &#8212; Mathematical functions for
+                complex numbers
+            </li>
+            <li>9.4. <span>decimal</span> &#8212; Decimal fixed point and
+                floating point arithmetic
+            </li>
+            <li>9.5. <span>fractions</span> &#8212; Rational numbers
+            </li>
+            <li>9.6. <span>random</span> &#8212; Generate pseudo-random
+                numbers
+            </li>
+            <li>9.7. <span>itertools</span> &#8212; Functions creating
+                iterators for efficient looping
+            </li>
+            <li>9.8. <span>functools</span> &#8212; Higher-order functions
+                and operations on callable objects
+            </li>
+            <li>9.9. <span>operator</span> &#8212; Standard operators as
+                functions
+            </li>
+        </ul>
+    </li>
+    <li>10. File and Directory Access
+        <ul>
+            <li>10.1. <span>os.path</span> &#8212; Common pathname
+                manipulations
+            </li>
+            <li>10.2. <span>fileinput</span> &#8212; Iterate over lines from
+                multiple input streams
+            </li>
+            <li>10.3. <span>stat</span> &#8212; Interpreting <span>stat()</span> results
+            </li>
+            <li>10.4. <span>statvfs</span> &#8212; Constants used with <span>os.statvfs()</span></li>
+            <li>10.5. <span>filecmp</span> &#8212; File and Directory
+                Comparisons
+            </li>
+            <li>10.6. <span>tempfile</span> &#8212; Generate temporary files
+                and directories
+            </li>
+            <li>10.7. <span>glob</span> &#8212; Unix style pathname pattern
+                expansion
+            </li>
+            <li>10.8. <span>fnmatch</span> &#8212; Unix filename pattern
+                matching
+            </li>
+            <li>10.9. <span>linecache</span> &#8212; Random access to text
+                lines
+            </li>
+            <li>10.10. <span>shutil</span> &#8212; High-level file operations
+            </li>
+            <li>10.11. <span>dircache</span> &#8212; Cached directory
+                listings
+            </li>
+            <li>10.12. <span>macpath</span> &#8212; Mac OS 9 path
+                manipulation functions
+            </li>
+        </ul>
+    </li>
+    <li>11. Data Persistence
+        <ul>
+            <li>11.1. <span>pickle</span> &#8212; Python object
+                serialization
+            </li>
+            <li>11.2. <span>cPickle</span> &#8212; A faster <span>pickle</span></li>
+            <li>11.3. <span>copy_reg</span> &#8212; Register <span>pickle</span> support
+                functions
+            </li>
+            <li>11.4. <span>shelve</span> &#8212; Python object persistence
+            </li>
+            <li>11.5. <span>marshal</span> &#8212; Internal Python object
+                serialization
+            </li>
+            <li>11.6. <span>anydbm</span> &#8212; Generic access to
+                DBM-style databases
+            </li>
+            <li>11.7. <span>whichdb</span> &#8212; Guess which DBM module
+                created a database
+            </li>
+            <li><span>dbm</span> &#8212; Simple &#8220;database&#8221; interface
+            </li>
+            <li>11.9. <span>gdbm</span> &#8212; GNU&#8217;s reinterpretation
+                of dbm
+            </li>
+            <li>11.10. <span>dbhash</span> &#8212; DBM-style interface to the
+                BSD database library
+            </li>
+            <li>11.11. <span>bsddb</span> &#8212; Interface to Berkeley DB
+                library
+            </li>
+            <li>11.12. <span>dumbdbm</span> &#8212; Portable DBM
+                implementation
+            </li>
+            <li>11.13. <span>sqlite3</span> &#8212; DB-API 2.0 interface for
+                SQLite databases
+            </li>
+        </ul>
+    </li>
+    <li>12. Data Compression and
+        Archiving
+        <ul>
+            <li>12.1. <span>zlib</span> &#8212; Compression compatible with
+                <strong class="program">gzip</strong></li>
+            <li>12.2. <span>gzip</span> &#8212; Support for <strong
+                    class="program">gzip</strong> files
+            </li>
+            <li><span>bz2</span> &#8212; Compression compatible with <strong
+                    class="program">bzip2</strong></li>
+            <li>12.4. <span>zipfile</span> &#8212; Work with ZIP
+                archives
+            </li>
+            <li>12.5. <span>tarfile</span> &#8212; Read and write tar
+                archive files
+            </li>
+        </ul>
+    </li>
+    <li>13. File Formats
+        <ul>
+            <li><span>csv</span> &#8212; CSV File Reading and Writing
+            </li>
+            <li>13.2. <span>ConfigParser</span> &#8212; Configuration file
+                parser
+            </li>
+            <li>13.3. <span>robotparser</span> &#8212; Parser for robots.txt
+            </li>
+            <li>13.4. <span>netrc</span> &#8212; netrc file processing
+            </li>
+            <li>13.5. <span>xdrlib</span> &#8212; Encode and decode XDR data
+            </li>
+            <li>13.6. <span>plistlib</span> &#8212; Generate and parse Mac
+                OS X <span>.plist</span> files
+            </li>
+        </ul>
+    </li>
+    <li>14. Cryptographic Services
+        <ul>
+            <li>14.1. <span>hashlib</span> &#8212; Secure hashes and message
+                digests
+            </li>
+            <li>14.2. <span>hmac</span> &#8212; Keyed-Hashing for Message
+                Authentication
+            </li>
+            <li><span>md5</span> &#8212; MD5 message digest algorithm
+            </li>
+            <li><span>sha</span> &#8212; SHA-1 message digest algorithm
+            </li>
+        </ul>
+    </li>
+    <li>15. Generic Operating System Services
+        <ul>
+            <li>15.1. <span>os</span> &#8212; Miscellaneous operating system
+                interfaces
+            </li>
+            <li>15.2. <span>io</span> &#8212; Core tools for working with
+                streams
+            </li>
+            <li>15.3. <span>time</span> &#8212; Time access and conversions
+            </li>
+            <li>15.4. <span>argparse</span> &#8212; Parser for command-line
+                options, arguments and sub-commands
+            </li>
+            <li>15.5. <span>optparse</span> &#8212; Parser for command line
+                options
+            </li>
+            <li>15.6. <span>getopt</span> &#8212; C-style parser for command
+                line options
+            </li>
+            <li>15.7. <span>logging</span> &#8212; Logging facility for
+                Python
+            </li>
+            <li>15.8. <span>logging.config</span> &#8212; Logging
+                configuration
+            </li>
+            <li>15.9. <span>logging.handlers</span> &#8212; Logging handlers
+            </li>
+            <li>15.10. <span>getpass</span> &#8212; Portable password
+                input
+            </li>
+            <li>15.11. <span>curses</span> &#8212; Terminal handling for
+                character-cell displays
+            </li>
+            <li>15.12. <span>curses.textpad</span> &#8212; Text input widget
+                for curses programs
+            </li>
+            <li>15.13. <span>curses.ascii</span> &#8212; Utilities for ASCII
+                characters
+            </li>
+            <li>15.14. <span>curses.panel</span> &#8212; A panel stack
+                extension for curses
+            </li>
+            <li>15.15. <span>platform</span> &#8212; Access to underlying
+                platform&#8217;s identifying data
+            </li>
+            <li>15.16. <span>errno</span> &#8212; Standard errno system
+                symbols
+            </li>
+            <li>15.17. <span>ctypes</span> &#8212; A foreign function library
+                for Python
+            </li>
+        </ul>
+    </li>
+    <li>16. Optional Operating System
+        Services
+        <ul>
+            <li>16.1. <span>select</span> &#8212; Waiting for I/O completion
+            </li>
+            <li>16.2. <span>threading</span> &#8212; Higher-level threading
+                interface
+            </li>
+            <li>16.3. <span>thread</span> &#8212; Multiple threads of
+                control
+            </li>
+            <li>16.4. <span>dummy_threading</span> &#8212; Drop-in
+                replacement for the <span>threading</span> module
+            </li>
+            <li>16.5. <span>dummy_thread</span> &#8212; Drop-in replacement
+                for the <span>thread</span> module
+            </li>
+            <li>16.6. <span>multiprocessing</span> &#8212; Process-based
+                &#8220;threading&#8221; interface
+            </li>
+            <li>16.7. <span>mmap</span> &#8212; Memory-mapped file
+                support
+            </li>
+            <li>16.8. <span>readline</span> &#8212; GNU readline
+                interface
+            </li>
+            <li>16.9. <span>rlcompleter</span> &#8212; Completion function
+                for GNU readline
+            </li>
+        </ul>
+    </li>
+    <li>17. Interprocess Communication and
+        Networking
+        <ul>
+            <li>17.1. <span>subprocess</span> &#8212; Subprocess management
+            </li>
+            <li>17.2. <span>socket</span> &#8212; Low-level networking
+                interface
+            </li>
+            <li><span>ssl</span> &#8212; TLS/SSL wrapper for socket objects
+            </li>
+            <li>17.4. <span>signal</span> &#8212; Set handlers for
+                asynchronous events
+            </li>
+            <li>17.5. <span>popen2</span> &#8212; Subprocesses with
+                accessible I/O streams
+            </li>
+            <li>17.6. <span>asyncore</span> &#8212; Asynchronous socket
+                handler
+            </li>
+            <li>17.7. <span>asynchat</span> &#8212; Asynchronous socket
+                command/response handler
+            </li>
+        </ul>
+    </li>
+    <li>18. Internet Data Handling
+        <ul>
+            <li>18.1. <span>email</span> &#8212; An email and MIME handling
+                package
+            </li>
+            <li>18.2. <span>json</span> &#8212; JSON encoder and decoder
+            </li>
+            <li>18.3. <span>mailcap</span> &#8212; Mailcap file handling
+            </li>
+            <li>18.4. <span>mailbox</span> &#8212; Manipulate mailboxes in
+                various formats
+            </li>
+            <li>18.5. <span>mhlib</span> &#8212; Access to MH mailboxes
+            </li>
+            <li>18.6. <span>mimetools</span> &#8212; Tools for parsing MIME
+                messages
+            </li>
+            <li>18.7. <span>mimetypes</span> &#8212; Map filenames to MIME
+                types
+            </li>
+            <li>18.8. <span>MimeWriter</span> &#8212; Generic MIME file
+                writer
+            </li>
+            <li>18.9. <span>mimify</span> &#8212; MIME processing of mail
+                messages
+            </li>
+            <li>18.10. <span>multifile</span> &#8212; Support for files
+                containing distinct parts
+            </li>
+            <li>18.11. <span>rfc822</span> &#8212; Parse RFC 2822 mail
+                headers
+            </li>
+            <li>18.12. <span>base64</span> &#8212; RFC 3548: Base16, Base32,
+                Base64 Data Encodings
+            </li>
+            <li>18.13. <span>binhex</span> &#8212; Encode and decode binhex4
+                files
+            </li>
+            <li>18.14. <span>binascii</span> &#8212; Convert between binary
+                and ASCII
+            </li>
+            <li>18.15. <span>quopri</span> &#8212; Encode and decode MIME
+                quoted-printable data
+            </li>
+            <li><span>uu</span> &#8212; Encode and decode uuencode files
+            </li>
+        </ul>
+    </li>
+    <li>19. Structured Markup Processing
+        Tools
+        <ul>
+            <li>19.1. <span>HTMLParser</span> &#8212; Simple HTML and XHTML
+                parser
+            </li>
+            <li>19.2. <span>sgmllib</span> &#8212; Simple SGML parser
+            </li>
+            <li>19.3. <span>htmllib</span> &#8212; A parser for HTML
+                documents
+            </li>
+            <li>19.4. <span>htmlentitydefs</span> &#8212; Definitions of
+                HTML general entities
+            </li>
+            <li>19.5. XML Processing Modules
+            </li>
+            <li>19.6. XML
+                vulnerabilities
+            </li>
+            <li>19.7. <span>xml.etree.ElementTree</span> &#8212; The
+                ElementTree XML API
+            </li>
+            <li>19.8. <span>xml.dom</span> &#8212; The Document Object Model
+                API
+            </li>
+            <li>19.9. <span>xml.dom.minidom</span> &#8212; Minimal DOM
+                implementation
+            </li>
+            <li>19.10. <span>xml.dom.pulldom</span> &#8212; Support for
+                building partial DOM trees
+            </li>
+            <li>19.11. <span>xml.sax</span> &#8212; Support for SAX2 parsers
+            </li>
+            <li>19.12. <span>xml.sax.handler</span> &#8212; Base classes for
+                SAX handlers
+            </li>
+            <li>19.13. <span>xml.sax.saxutils</span> &#8212; SAX
+                Utilities
+            </li>
+            <li>19.14. <span>xml.sax.xmlreader</span> &#8212; Interface for
+                XML parsers
+            </li>
+            <li>19.15. <span>xml.parsers.expat</span> &#8212; Fast XML
+                parsing using Expat
+            </li>
+        </ul>
+    </li>
+    <li>20. Internet Protocols and Support
+        <ul>
+            <li>20.1. <span>webbrowser</span> &#8212; Convenient Web-browser
+                controller
+            </li>
+            <li><span>cgi</span> &#8212; Common Gateway Interface support
+            </li>
+            <li>20.3. <span>cgitb</span> &#8212; Traceback manager for CGI
+                scripts
+            </li>
+            <li>20.4. <span>wsgiref</span> &#8212; WSGI Utilities and
+                Reference Implementation
+            </li>
+            <li>20.5. <span>urllib</span> &#8212; Open arbitrary resources
+                by URL
+            </li>
+            <li>20.6. <span>urllib2</span> &#8212; extensible library for
+                opening URLs
+            </li>
+            <li>20.7. <span>httplib</span> &#8212; HTTP protocol client
+            </li>
+            <li>20.8. <span>ftplib</span> &#8212; FTP protocol client
+            </li>
+            <li>20.9. <span>poplib</span> &#8212; POP3 protocol client
+            </li>
+            <li>20.10. <span>imaplib</span> &#8212; IMAP4 protocol client
+            </li>
+            <li>20.11. <span>nntplib</span> &#8212; NNTP protocol client
+            </li>
+            <li>20.12. <span>smtplib</span> &#8212; SMTP protocol client
+            </li>
+            <li>20.13. <span>smtpd</span> &#8212; SMTP Server</li>
+            <li>20.14. <span>telnetlib</span> &#8212; Telnet client</li>
+            <li>20.15. <span>uuid</span> &#8212; UUID objects according to
+                RFC 4122
+            </li>
+            <li>20.16. <span>urlparse</span> &#8212; Parse URLs into
+                components
+            </li>
+            <li>20.17. <span>SocketServer</span> &#8212; A framework for
+                network servers
+            </li>
+            <li>20.18. <span>BaseHTTPServer</span> &#8212; Basic HTTP server
+            </li>
+            <li>20.19. <span>SimpleHTTPServer</span> &#8212; Simple HTTP
+                request handler
+            </li>
+            <li>20.20. <span>CGIHTTPServer</span> &#8212; CGI-capable HTTP
+                request handler
+            </li>
+            <li>20.21. <span>cookielib</span> &#8212; Cookie handling for
+                HTTP clients
+            </li>
+            <li>20.22. <span>Cookie</span> &#8212; HTTP state management
+            </li>
+            <li>20.23. <span>xmlrpclib</span> &#8212; XML-RPC client
+                access
+            </li>
+            <li>20.24. <span>SimpleXMLRPCServer</span> &#8212; Basic XML-RPC
+                server
+            </li>
+            <li>20.25. <span>DocXMLRPCServer</span> &#8212; Self-documenting
+                XML-RPC server
+            </li>
+        </ul>
+    </li>
+    <li>21. Multimedia Services
+        <ul>
+            <li>21.1. <span>audioop</span> &#8212; Manipulate raw audio data
+            </li>
+            <li>21.2. <span>imageop</span> &#8212; Manipulate raw image data
+            </li>
+            <li>21.3. <span>aifc</span> &#8212; Read and write AIFF and AIFC
+                files
+            </li>
+            <li>21.4. <span>sunau</span> &#8212; Read and write Sun AU files
+            </li>
+            <li>21.5. <span>wave</span> &#8212; Read and write WAV files
+            </li>
+            <li>21.6. <span>chunk</span> &#8212; Read IFF chunked data
+            </li>
+            <li>21.7. <span>colorsys</span> &#8212; Conversions between
+                color systems
+            </li>
+            <li>21.8. <span>imghdr</span> &#8212; Determine the type of an
+                image
+            </li>
+            <li>21.9. <span>sndhdr</span> &#8212; Determine type of sound
+                file
+            </li>
+            <li>21.10. <span>ossaudiodev</span> &#8212; Access to
+                OSS-compatible audio devices
+            </li>
+        </ul>
+    </li>
+    <li>22. Internationalization
+        <ul>
+            <li>22.1. <span>gettext</span> &#8212; Multilingual
+                internationalization services
+            </li>
+            <li>22.2. <span>locale</span> &#8212; Internationalization
+                services
+            </li>
+        </ul>
+    </li>
+    <li>23. Program Frameworks
+        <ul>
+            <li><span>cmd</span> &#8212; Support for line-oriented command interpreters
+            </li>
+            <li>23.2. <span>shlex</span> &#8212; Simple lexical analysis
+            </li>
+        </ul>
+    </li>
+    <li>24. Graphical User Interfaces with Tk
+        <ul>
+            <li>24.1. <span>Tkinter</span> &#8212; Python interface to
+                Tcl/Tk
+            </li>
+            <li><span>ttk</span> &#8212; Tk themed widgets
+            </li>
+            <li><span>Tix</span> &#8212; Extension widgets for Tk
+            </li>
+            <li>24.4. <span>ScrolledText</span> &#8212; Scrolled Text Widget
+            </li>
+            <li>24.5. <span>turtle</span> &#8212; Turtle graphics for Tk
+            </li>
+            <li>24.6. IDLE</li>
+            <li>24.7. Other Graphical User
+                Interface Packages
+            </li>
+        </ul>
+    </li>
+    <li>25. Development Tools
+        <ul>
+            <li>25.1. <span>pydoc</span> &#8212; Documentation generator and
+                online help system
+            </li>
+            <li>25.2. <span>doctest</span> &#8212; Test interactive Python
+                examples
+            </li>
+            <li>25.3. <span>unittest</span> &#8212; Unit testing
+                framework
+            </li>
+            <li>25.4. 2to3 - Automated Python 2 to
+                3 code translation
+            </li>
+            <li>25.5. <span>test</span> &#8212; Regression tests package for
+                Python
+            </li>
+            <li>25.6. <span>test.test_support</span> &#8212; Utility
+                functions for tests
+            </li>
+        </ul>
+    </li>
+    <li>26. Debugging and Profiling
+        <ul>
+            <li><span>bdb</span> &#8212; Debugger framework
+            </li>
+            <li><span>pdb</span> &#8212; The Python Debugger
+            </li>
+            <li>26.3. Debugger
+                Commands
+            </li>
+            <li>26.4. The Python Profilers
+            </li>
+            <li>26.5. <span>hotshot</span> &#8212; High performance logging
+                profiler
+            </li>
+            <li>26.6. <span>timeit</span> &#8212; Measure execution time of
+                small code snippets
+            </li>
+            <li>26.7. <span>trace</span> &#8212; Trace or track Python
+                statement execution
+            </li>
+        </ul>
+    </li>
+    <li>27. Python Runtime Services
+        <ul>
+            <li><span>sys</span> &#8212; System-specific parameters and functions
+            </li>
+            <li>27.2. <span>sysconfig</span> &#8212; Provide access to
+                Python&#8217;s configuration information
+            </li>
+            <li>27.3. <span>__builtin__</span> &#8212; Built-in objects
+            </li>
+            <li>27.4. <span>future_builtins</span> &#8212; Python 3 builtins
+            </li>
+            <li>27.5. <span>__main__</span> &#8212; Top-level script
+                environment
+            </li>
+            <li>27.6. <span>warnings</span> &#8212; Warning control</li>
+            <li>27.7. <span>contextlib</span> &#8212; Utilities for <span>with</span>-statement
+                contexts
+            </li>
+            <li><span>abc</span> &#8212; Abstract Base Classes
+            </li>
+            <li>27.9. <span>atexit</span> &#8212; Exit handlers</li>
+            <li>27.10. <span>traceback</span> &#8212; Print or retrieve a
+                stack traceback
+            </li>
+            <li>27.11. <span>__future__</span> &#8212; Future statement
+                definitions
+            </li>
+            <li><span>gc</span> &#8212; Garbage Collector interface
+            </li>
+            <li>27.13. <span>inspect</span> &#8212; Inspect live objects
+            </li>
+            <li>27.14. <span>site</span> &#8212; Site-specific configuration
+                hook
+            </li>
+            <li>27.15. <span>user</span> &#8212; User-specific configuration
+                hook
+            </li>
+            <li>27.16. <span>fpectl</span> &#8212; Floating point exception
+                control
+            </li>
+            <li>27.17. <span>distutils</span> &#8212; Building and installing
+                Python modules
+            </li>
+        </ul>
+    </li>
+    <li>28. Custom Python Interpreters
+        <ul>
+            <li>28.1. <span>code</span> &#8212; Interpreter base classes
+            </li>
+            <li>28.2. <span>codeop</span> &#8212; Compile Python code
+            </li>
+        </ul>
+    </li>
+    <li>29. Restricted Execution
+        <ul>
+            <li>29.1. <span>rexec</span> &#8212; Restricted execution
+                framework
+            </li>
+            <li>29.2. <span>Bastion</span> &#8212; Restricting access to
+                objects
+            </li>
+        </ul>
+    </li>
+    <li>30. Importing Modules
+        <ul>
+            <li><span>imp</span> &#8212; Access the <span>import</span>
+                internals
+            </li>
+            <li>30.2. <span>importlib</span> &#8211; Convenience wrappers
+                for <span>__import__()</span></li>
+            <li>30.3. <span>imputil</span> &#8212; Import utilities</li>
+            <li>30.4. <span>zipimport</span> &#8212; Import modules from Zip
+                archives
+            </li>
+            <li>30.5. <span>pkgutil</span> &#8212; Package extension utility
+            </li>
+            <li>30.6. <span>modulefinder</span> &#8212; Find modules used by
+                a script
+            </li>
+            <li>30.7. <span>runpy</span> &#8212; Locating and executing
+                Python modules
+            </li>
+        </ul>
+    </li>
+    <li>31. Python Language Services
+        <ul>
+            <li>31.1. <span>parser</span> &#8212; Access Python parse trees
+            </li>
+            <li><span>ast</span> &#8212; Abstract Syntax Trees
+            </li>
+            <li>31.3. <span>symtable</span> &#8212; Access to the compiler&#8217;s
+                symbol tables
+            </li>
+            <li>31.4. <span>symbol</span> &#8212; Constants used with Python
+                parse trees
+            </li>
+            <li>31.5. <span>token</span> &#8212; Constants used with Python
+                parse trees
+            </li>
+            <li>31.6. <span>keyword</span> &#8212; Testing for Python
+                keywords
+            </li>
+            <li>31.7. <span>tokenize</span> &#8212; Tokenizer for Python
+                source
+            </li>
+            <li>31.8. <span>tabnanny</span> &#8212; Detection of ambiguous
+                indentation
+            </li>
+            <li>31.9. <span>pyclbr</span> &#8212; Python class browser
+                support
+            </li>
+            <li>31.10. <span>py_compile</span> &#8212; Compile Python source
+                files
+            </li>
+            <li>31.11. <span>compileall</span> &#8212; Byte-compile Python
+                libraries
+            </li>
+            <li>31.12. <span>dis</span> &#8212; Disassembler for Python
+                bytecode
+            </li>
+            <li>31.13. <span>pickletools</span> &#8212; Tools for pickle
+                developers
+            </li>
+        </ul>
+    </li>
+    <li>32. Python compiler package
+        <ul>
+            <li>32.1. The
+                basic interface
+            </li>
+            <li>32.2.
+                Limitations
+            </li>
+            <li>32.3.
+                Python Abstract Syntax
+            </li>
+            <li>32.4.
+                Using Visitors to Walk ASTs
+            </li>
+            <li>32.5.
+                Bytecode Generation
+            </li>
+        </ul>
+    </li>
+    <li>33. Miscellaneous Services
+        <ul>
+            <li>33.1. <span>formatter</span> &#8212; Generic output
+                formatting
+            </li>
+        </ul>
+    </li>
+    <li>34. MS Windows Specific Services
+        <ul>
+            <li>34.1. <span>msilib</span> &#8212; Read and write Microsoft
+                Installer files
+            </li>
+            <li>34.2. <span>msvcrt</span> &#8211; Useful routines from the
+                MS VC++ runtime
+            </li>
+            <li>34.3. <span>_winreg</span> &#8211; Windows registry
+                access
+            </li>
+            <li>34.4. <span>winsound</span> &#8212; Sound-playing interface
+                for Windows
+            </li>
+        </ul>
+    </li>
+    <li>35. Unix Specific Services
+        <ul>
+            <li>35.1. <span>posix</span> &#8212; The most common POSIX
+                system calls
+            </li>
+            <li><span>pwd</span> &#8212; The password database
+            </li>
+            <li>35.3. <span>spwd</span> &#8212; The shadow password database
+            </li>
+            <li><span>grp</span> &#8212; The group database
+            </li>
+            <li>35.5. <span>crypt</span> &#8212; Function to check Unix
+                passwords
+            </li>
+            <li>35.6. <span>dl</span> &#8212; Call C functions in shared
+                objects
+            </li>
+            <li>35.7. <span>termios</span> &#8212; POSIX style tty
+                control
+            </li>
+            <li><span>tty</span> &#8212; Terminal control functions
+            </li>
+            <li><span>pty</span> &#8212; Pseudo-terminal utilities
+            </li>
+            <li>35.10. <span>fcntl</span> &#8212; The <span>fcntl</span> and <span>ioctl</span> system calls
+            </li>
+            <li>35.11. <span>pipes</span> &#8212; Interface to shell
+                pipelines
+            </li>
+            <li>35.12. <span>posixfile</span> &#8212; File-like objects with
+                locking support
+            </li>
+            <li>35.13. <span>resource</span> &#8212; Resource usage
+                information
+            </li>
+            <li>35.14. <span>nis</span> &#8212; Interface to Sun&#8217;s NIS
+                (Yellow Pages)
+            </li>
+            <li>35.15. <span>syslog</span> &#8212; Unix syslog library
+                routines
+            </li>
+            <li>35.16. <span>commands</span> &#8212; Utilities for running
+                commands
+            </li>
+        </ul>
+    </li>
+    <li>36. Mac OS X specific services
+        <ul>
+            <li>36.1. <span>ic</span> &#8212; Access to the Mac OS X
+                Internet Config
+            </li>
+            <li>36.2. <span>MacOS</span> &#8212; Access to Mac OS
+                interpreter features
+            </li>
+            <li>36.3. <span>macostools</span> &#8212; Convenience routines
+                for file manipulation
+            </li>
+            <li>36.4. <span>findertools</span> &#8212; The <strong
+                    class="program">finder</strong>&#8216;s Apple Events interface
+            </li>
+            <li>36.5. <span>EasyDialogs</span> &#8212; Basic Macintosh
+                dialogs
+            </li>
+            <li>36.6. <span>FrameWork</span> &#8212; Interactive application
+                framework
+            </li>
+            <li>36.7. <span>autoGIL</span> &#8212; Global Interpreter Lock
+                handling in event loops
+            </li>
+            <li>36.8. Mac OS Toolbox Modules
+            </li>
+            <li>36.9. <span>ColorPicker</span> &#8212; Color selection
+                dialog
+            </li>
+        </ul>
+    </li>
+    <li>37. MacPython OSA Modules
+        <ul>
+            <li>37.1. <span>gensuitemodule</span> &#8212; Generate OSA stub
+                packages
+            </li>
+            <li>37.2. <span>aetools</span> &#8212; OSA client support
+            </li>
+            <li>37.3. <span>aepack</span> &#8212; Conversion between Python
+                variables and AppleEvent data containers
+            </li>
+            <li>37.4. <span>aetypes</span> &#8212; AppleEvent objects
+            </li>
+            <li>37.5. <span>MiniAEFrame</span> &#8212; Open Scripting
+                Architecture server support
+            </li>
+        </ul>
+    </li>
+    <li>38. SGI IRIX Specific Services
+        <ul>
+            <li>38.1. <span>al</span> &#8212; Audio functions on the SGI
+            </li>
+            <li>38.2. <span>AL</span> &#8212; Constants used with the <span>al</span> module
+            </li>
+            <li>38.3. <span>cd</span> &#8212; CD-ROM access on SGI
+                systems
+            </li>
+            <li>38.4. <span>fl</span> &#8212; FORMS library for graphical
+                user interfaces
+            </li>
+            <li>38.5. <span>FL</span> &#8212; Constants used with the <span>fl</span> module
+            </li>
+            <li>38.6. <span>flp</span> &#8212; Functions for loading stored
+                FORMS designs
+            </li>
+            <li>38.7. <span>fm</span> &#8212; <em>Font Manager</em>
+                interface
+            </li>
+            <li>38.8. <span>gl</span> &#8212; <em>Graphics Library</em>
+                interface
+            </li>
+            <li>38.9. <span>DEVICE</span> &#8212; Constants used with the
+                <span>gl</span> module
+            </li>
+            <li>38.10. <span>GL</span> &#8212; Constants used with the <span>gl</span>
+                module
+            </li>
+            <li>38.11. <span>imgfile</span> &#8212; Support for SGI imglib
+                files
+            </li>
+            <li>38.12. <span>jpeg</span> &#8212; Read and write JPEG
+                files
+            </li>
+        </ul>
+    </li>
+    <li>39. SunOS Specific Services
+        <ul>
+            <li>39.1. <span>sunaudiodev</span> &#8212; Access to Sun audio
+                hardware
+            </li>
+            <li>39.2. <span>SUNAUDIODEV</span> &#8212; Constants used with
+                <span>sunaudiodev</span></li>
+        </ul>
+    </li>
+    <li>40. Undocumented Modules
+        <ul>
+            <li>40.1.
+                Miscellaneous useful utilities
+            </li>
+            <li>40.2.
+                Platform specific modules
+            </li>
+            <li>40.3. Multimedia
+            </li>
+            <li>40.4.
+                Undocumented Mac OS modules
+            </li>
+            <li>40.5. Obsolete</li>
+            <li>40.6.
+                SGI-specific Extension modules
+            </li>
+        </ul>
+    </li>
+</ul>
+
+
+1. 引言
+2. 内建函数
+3. 不太重要的内建函数
+4. 内建常量
+4.1. site 模块添加的常量
+5. 内建类型
+5.1. 真值的测试
+5.2. 布尔操作 — and, or, not
+5.3. 比较操作
+5.4. 数值类型 — int, float, long, complex
+5.5. 迭代器类型
+5.6. 序列类型 — str, unicode, list, tuple, bytearray, buffer, xrange
+5.7. 集合类型 — set, frozenset
+5.8. 映射类型 — dict
+5.9. 文件对象
+5.10. memoryview 类型
+5.11. 上下文管理器类型
+5.12. 其他的内建类型
+5.13. 特殊的属性
+6. 内建异常 (100%)
+6.1. 异常的层次结构 (100%)
+7. String Services
+7.1. string — 常见字符串操作
+7.2. re — 正则表达式操作
+7.4. difflib — 计算文档差异
+7.8. codecs — 编码解码器的注册和基本的类
+8. Data Types
+8.1. datetime — 基本的日期和时间类型
+8.2. calendar — 通用日历相关函数
+8.3. collections — 高性能容器数据类型
+8.4. heapq — 堆队列算法
+8.10. Queue — 同步队列类
+8.18. pprint — 打印整洁的数据
+9. Numeric and Mathematical Modules
+9.1. numbers — 数字的抽象基类
+9.2. math — 数学函数
+9.3. cmath — 为复数提供的数学函数
+9.4. decimal — 十进制定点和浮点算术
+9.5. fractions — 有理数
+9.6. random — 生成伪随机数
+9.7. itertools — 创建高效迭代器的函数
+10. File and Directory Access
+10.1. os.path — 常用的路径操作
+10.2. fileinput — 对来自多个输入流的行进行迭代
+10.3. stat — 解析 stat() 的结果
+10.5. filecmp — 文件和目录的比较
+10.6. tempfile — 生成临时文件和目录
+10.7. glob — Unix 风格的扩展路径名模式 (100%)
+10.10. shutil — 高级的文件操作
+11. Data Persistence
+11.1. pickle — Python 对象序列化
+11.2. cPickle — 一个更快的 pickle
+11.13. sqlite3 — SQLite数据库DB-API 2.0接口
+12. Data Compression and Archiving
+12.2. gzip — 对 gzip 文件的支持
+12.4. zipfile — 和 ZIP 压缩文档打交道
+13. File Formats
+13.1. csv — CSV 文件的读写
+13.2. ConfigParser — 配置文件解析器
+14. Cryptographic Services
+14.1. hashlib — 安全哈希和消息摘要
+14.2. hmac — 用于消息认证的加密哈希算法
+15. Generic Operating System Services
+15.1. os — 操作系统的各种接口
+15.3. time — 访问和转换时间
+15.4. argparse — 命令行选项、参数和子命令的解析器
+15.7. logging — Python的日志工具
+15.8. logging.config — 日志配置
+15.9. logging.handlers — 日志handler
+16. Optional Operating System Services
+16.1. select — Waiting for I/O completion
+16.2. threading — 高层的线程接口
+16.3. thread — Multiple threads of control
+16.6. multiprocessing — 基于进程的“线程式”接口
+17. Interprocess Communication and Networking
+17.1. subprocess — 管理子进程
+17.2. socket — 底层网络接口
+17.4. signal — 设置异步事件处理 handlers
+17.6. asyncore — 异步套接字处理器
+17.7. asynchat — 异步套接字命令/响应处理器
+18. Internet Data Handling
+18.2. json — JSON 格式的编码器和解码器
+18.12. base64 — RFC 3548: Base16, Base32, Base64 数据编码
+19. Structured Markup Processing Tools
+20. Internet Protocols and Support
+20.5. urllib — 通过URL打开任意资源
+20.6. urllib2 — extensible library for opening URLs
+20.8. ftplib — FTP 协议客户端
+20.9. poplib — POP3 协议客户端
+20.10. imaplib — IMAP4 协议客户端
+20.11. nntplib — NNTP 协议客户端
+20.12. smtplib — SMTP 协议客户端
+20.13. smtpd — SMTP 服务器
+20.14. telnetlib — Telnet 客户端
+20.18. BaseHTTPServer — 基本的HTTP 服务器
+21. Multimedia Services
+22. Internationalization
+23. Program Frameworks
+24. Graphical User Interfaces with Tk
+25. Development Tools
+25.1. pydoc — Documentation generator and online help system
+25.2. doctest — 测试交互式Python例子
+25.3. unittest — 单元测试框架
+26. Debugging and Profiling
+26.2. pdb — The Python Debugger
+26.3. Debugger Commands
+26.6. timeit — 测量小代码片段的执行时间
+26.7. trace — 跟踪或追踪 Python 语句执行
+27. Software Packaging and Distribution
+28. Python Runtime Services
+28.1. sys — 系统相关的参数和函数
+28.13. inspect — Inspect live objects
+29. Restricted Execution
+30. Importing Modules
+31. Python Language Services
+32. Python compiler package
+33. Miscellaneous Services
+34. MS Windows Specific Services
+35. Unix Specific Services
+36. Mac OS X specific services
+37. MacPython OSA Modules
+38. SGI IRIX Specific Services
+39. SunOS Specific Services
+40. Undocumented Modules
+
+<style>
+.toc-right
+{
+    position: fixed;
+    margin-left: 930px;
+    top: 100px;
+    height: 650px;
+    min-width: 300px;
+    overflow-y:auto; 
+}
+</style>
+<script type="text/javascript">
+    // Fix Second Toc Css, Make Right
+    if (document.getElementsByClassName("toc").length == 2){
+        document.getElementsByClassName("toc")[1].setAttribute('class','toc-right')
+    }
+</script>

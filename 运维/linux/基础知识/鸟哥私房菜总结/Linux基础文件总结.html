@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Linux基础文件.md—C:\Users\Administrator.2013-20160229XQ\Desktop\linux\基础知识\鸟哥私房菜总结</title>
+    <style type="text/css">
+    body{font-family:Helvetica,arial,sans-serif;font-size:14px;line-height:1.6;padding-top:10px;padding-bottom:10px;background-color:white;padding:30px;color:#333}body>*:first-child{margin-top:0!important}body>*:last-child{margin-bottom:0!important}a{color:#4183c4;text-decoration:none}a:hover{text-decoration:underline}a.absent{color:#c00}a.anchor{display:block;padding-left:30px;margin-left:-30px;cursor:pointer;position:absolute;top:0;left:0;bottom:0}html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0}kbd{background:#f1f1f1;background:-moz-linear-gradient(#f1f1f1,#ddd);background:-webkit-linear-gradient(#f1f1f1,#ddd);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#f1f1f1', endColorstr='#dddddd')";border-radius:2px;border:1px solid #ddd;border-bottom-color:#ccc;border-right-color:#ccc;padding:1px 4px;line-height:10px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}.container{max-width:920px;margin:0 auto 20px auto}#header{background:#fafafa;background:-moz-linear-gradient(#fafafa,#eaeaea);background:-webkit-linear-gradient(#fafafa,#eaeaea);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#eaeaea')";border-bottom:1px solid #cacaca;box-shadow:0 1px 0 rgba(255,255,255,0.4),0 0 10px rgba(0,0,0,0.1)}#markup{padding:3px}#markup article{padding-top:30px}.markdown-body{font-size:14px;line-height:1.6}.markdown-body>*:first-child{margin-top:0!important}.markdown-body>*:last-child{margin-bottom:0!important}.markdown-body a.absent{color:#c00}.markdown-body a.anchor{bottom:0;cursor:pointer;display:block;left:0;margin-left:-30px;padding-left:30px;position:absolute;top:0}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{cursor:text;font-weight:bold;margin:20px 0 10px;padding:0;position:relative}.markdown-body h1 .mini-icon-link,.markdown-body h2 .mini-icon-link,.markdown-body h3 .mini-icon-link,.markdown-body h4 .mini-icon-link,.markdown-body h5 .mini-icon-link,.markdown-body h6 .mini-icon-link{color:#000;display:none}.markdown-body h1:hover a.anchor,.markdown-body h2:hover a.anchor,.markdown-body h3:hover a.anchor,.markdown-body h4:hover a.anchor,.markdown-body h5:hover a.anchor,.markdown-body h6:hover a.anchor{line-height:1;margin-left:-22px;padding-left:0;text-decoration:none;top:15%}.markdown-body h1:hover a.anchor .mini-icon-link,.markdown-body h2:hover a.anchor .mini-icon-link,.markdown-body h3:hover a.anchor .mini-icon-link,.markdown-body h4:hover a.anchor .mini-icon-link,.markdown-body h5:hover a.anchor .mini-icon-link,.markdown-body h6:hover a.anchor .mini-icon-link{display:inline-block}.markdown-body h1 tt,.markdown-body h1 code,.markdown-body h2 tt,.markdown-body h2 code,.markdown-body h3 tt,.markdown-body h3 code,.markdown-body h4 tt,.markdown-body h4 code,.markdown-body h5 tt,.markdown-body h5 code,.markdown-body h6 tt,.markdown-body h6 code{font-size:inherit}.markdown-body h1{color:#000;font-size:28px}.markdown-body h2{border-bottom:1px solid #ccc;color:#000;font-size:24px}.markdown-body h3{font-size:18px}.markdown-body h4{font-size:16px}.markdown-body h5{font-size:14px}.markdown-body h6{color:#777;font-size:14px}.markdown-body p,.markdown-body blockquote,.markdown-body ul,.markdown-body ol,.markdown-body dl,.markdown-body table,.markdown-body pre{margin:15px 0}.markdown-body hr{background:url("/public/github-dirty-shade.png") repeat-x scroll 0 0 transparent;border:0 none;color:#ccc;height:4px;padding:0}.markdown-body>h2:first-child,.markdown-body>h1:first-child,.markdown-body>h1:first-child+h2,.markdown-body>h3:first-child,.markdown-body>h4:first-child,.markdown-body>h5:first-child,.markdown-body>h6:first-child{margin-top:0;padding-top:0}.markdown-body a:first-child h1,.markdown-body a:first-child h2,.markdown-body a:first-child h3,.markdown-body a:first-child h4,.markdown-body a:first-child h5,.markdown-body a:first-child h6{margin-top:0;padding-top:0}.markdown-body h1+p,.markdown-body h2+p,.markdown-body h3+p,.markdown-body h4+p,.markdown-body h5+p,.markdown-body h6+p{margin-top:0}.markdown-body li p.first{display:inline-block}.markdown-body ul,.markdown-body ol{padding-left:30px}.markdown-body ul.no-list,.markdown-body ol.no-list{list-style-type:none;padding:0}.markdown-body ul li>*:first-child,.markdown-body ol li>*:first-child{margin-top:0}.markdown-body ul ul,.markdown-body ul ol,.markdown-body ol ol,.markdown-body ol ul{margin-bottom:0}.markdown-body dl{padding:0}.markdown-body dl dt{font-size:14px;font-style:italic;font-weight:bold;margin:15px 0 5px;padding:0}.markdown-body dl dt:first-child{padding:0}.markdown-body dl dt>*:first-child{margin-top:0}.markdown-body dl dt>*:last-child{margin-bottom:0}.markdown-body dl dd{margin:0 0 15px;padding:0 15px}.markdown-body dl dd>*:first-child{margin-top:0}.markdown-body dl dd>*:last-child{margin-bottom:0}.markdown-body blockquote{border-left:4px solid #ddd;color:#777;padding:0 15px}.markdown-body blockquote>*:first-child{margin-top:0}.markdown-body blockquote>*:last-child{margin-bottom:0}.markdown-body table{border-collapse:collapse;border-spacing:0}.markdown-body table th{font-weight:bold}.markdown-body table th,.markdown-body table td{border:1px solid #ccc;padding:6px 13px}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{border:1px solid #ddd;display:block;float:left;margin:13px 0 0;overflow:hidden;padding:7px;width:auto}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{clear:both;color:#333;display:block;padding:5px 0 0}.markdown-body span.align-center{clear:both;display:block;overflow:hidden}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{clear:both;display:block;overflow:hidden}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{background-color:#f8f8f8;border:1px solid #eaeaea;border-radius:3px 3px 3px 3px;margin:0 2px;padding:0 5px;white-space:nowrap}.markdown-body pre>code{background:none repeat scroll 0 0 transparent;border:medium none;margin:0;padding:0;white-space:pre}.markdown-body .highlight pre,.markdown-body pre{background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px 3px 3px 3px;font-size:13px;line-height:19px;overflow:auto;padding:6px 10px}.markdown-body pre code,.markdown-body pre tt{background-color:transparent;border:medium none}.codehilite{background:#fff}.codehilite .c{color:#998;font-style:italic}.codehilite .err{color:#a61717;background-color:#e3d2d2}.codehilite .k{color:#000;font-weight:bold}.codehilite .o{color:#000;font-weight:bold}.codehilite .cm{color:#998;font-style:italic}.codehilite .cp{color:#999;font-weight:bold}.codehilite .c1{color:#998;font-style:italic}.codehilite .cs{color:#999;font-weight:bold;font-style:italic}.codehilite .gd{color:#000;background-color:#fdd}.codehilite .gd .x{color:#000;background-color:#faa}.codehilite .ge{color:#000;font-style:italic}.codehilite .gr{color:#a00}.codehilite .gh{color:#999}.codehilite .gi{color:#000;background-color:#dfd}.codehilite .gi .x{color:#000;background-color:#afa}.codehilite .go{color:#888}.codehilite .gp{color:#555}.codehilite .gs{font-weight:bold}.codehilite .gu{color:#aaa}.codehilite .gt{color:#a00}.codehilite .kc{color:#000;font-weight:bold}.codehilite .kd{color:#000;font-weight:bold}.codehilite .kp{color:#000;font-weight:bold}.codehilite .kr{color:#000;font-weight:bold}.codehilite .kt{color:#458;font-weight:bold}.codehilite .m{color:#099}.codehilite .s{color:#d14}.codehilite .na{color:#008080}.codehilite .nb{color:#0086b3}.codehilite .nc{color:#458;font-weight:bold}.codehilite .no{color:#008080}.codehilite .ni{color:#800080}.codehilite .ne{color:#900;font-weight:bold}.codehilite .nf{color:#900;font-weight:bold}.codehilite .nn{color:#555}.codehilite .nt{color:#000080}.codehilite .nv{color:#008080}.codehilite .ow{color:#000;font-weight:bold}.codehilite .w{color:#bbb}.codehilite .mf{color:#099}.codehilite .mh{color:#099}.codehilite .mi{color:#099}.codehilite .mo{color:#099}.codehilite .sb{color:#d14}.codehilite .sc{color:#d14}.codehilite .sd{color:#d14}.codehilite .s2{color:#d14}.codehilite .se{color:#d14}.codehilite .sh{color:#d14}.codehilite .si{color:#d14}.codehilite .sx{color:#d14}.codehilite .sr{color:#009926}.codehilite .s1{color:#d14}.codehilite .ss{color:#990073}.codehilite .bp{color:#999}.codehilite .vc{color:#008080}.codehilite .vg{color:#008080}.codehilite .vi{color:#008080}.codehilite .il{color:#099}
+    </style>
+    <style type="text/css">
+      .markdown-body hr{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC")}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="markup">
+        <article id="content" class="markdown-body">
+          <h1 id="linux">Linux基础文件</h1>
+<blockquote>
+<p>关于linux的基础知识</p>
+</blockquote>
+<hr>
+<h2 id="_1">一、开机关机、在线求组与指定下达方式</h2>
+<h3 id="1">1、开机启动相关</h3>
+<p>[Ctrl] + [Alt] + [F1] ~ [F6] ：文字接口登入 tty1 ~ tty6 终端机； </p>
+<p>[Ctrl] + [Alt] + [F7] ：图形接口桌面。</p>
+<p>启动图形接口：startx</p>
+<p>启动环境变更： 修改/etc/inittab文件的Run level为5/3</p>
+<p>注销系统：exit</p>
+<p>设置系统语言：LANG=en</p>
+<h3 id="2">2、基础指令操作</h3>
+<p>日期指令：date</p>
+<ul>
+<li>默认时间：date</li>
+<li>年/月/日：date +%Y/%m/%d</li>
+<li>时/分：date +%H:%M</li>
+</ul>
+<p>显示日历的指令：cal</p>
+<ul>
+<li>目前本年本月的日历：cal</li>
+<li>整年日历：cal 2016</li>
+<li>某年月的日历： cal 8 2016</li>
+</ul>
+<p>计算器：bc，离开计算器quit</p>
+<h3 id="3">3、几个重要热键</h3>
+<p>[tab]：命令补全</p>
+<p>[ctrl+c]：指令中断</p>
+<p>[ctrl+d]：相当于exit，文字界面退出</p>
+<h3 id="4">4、在线求助</h3>
+<p>寻求帮助：man/info</p>
+<p>获取更多信息：man -f</p>
+<p>指定不同数据帮助文档： man 1/7</p>
+<p>whatis [指令或者是数据] 相当于man -f</p>
+<p>apropos [指令或者是数据] 相当于man -k</p>
+<h3 id="5">5、正确关机方法</h3>
+<p>将数据同步写入硬盘中的指令： sync </p>
+<p>惯用的关机指令： shutdown </p>
+<div class="codehilite"><pre>-t sec ： -t 后面加秒数，亦即『过几秒后关机』的意思   
+-k ： 不要真的关机，只是发送警告讯息出去！   
+-r ： 在将系统的服务停掉之后就重新开机   
+-h ： 将系统的服务停掉后，立即关机。   
+-n ： 不经过 init 程序，直接以 shutdown 的功能来关机   
+-f ： 关机并开机之后，强制略过 fsck 的磁盘检查   
+-F ： 系统重新开机之后，强制进行 fsck 的磁盘检查   
+-c ： 取消已经在进行的 shutdown 指令内容。
+</pre></div>
+
+
+<p>重新开机，关机： reboot, halt, poweroff </p>
+<h2 id="linux_1">二、Linux 的档案属性与目录配置</h2>
+<h3 id="1_1">1、使用者与群组</h3>
+<p>拥有者-群组-其他人</p>
+<h3 id="2_1">2、文件属性</h3>
+<p>查看文件属性：ls -al</p>
+<h3 id="3_1">3、改变档案权限</h3>
+<p>chgrp ：改变档案所属群组</p>
+<div class="codehilite"><pre>chgrp root some: 设置some为root组
+</pre></div>
+
+
+<p>chown ：改变档案所属人
+    chown root:root 设置some拥有者和组都为root</p>
+<p>chmod ：改变档案的属性、SUID 、等等的特性</p>
+<div class="codehilite"><pre>chmod 777 some：设置some为rwxrwxrwx权限
+chmod a+x, g=rx, o-x: 设置拥有者增加x权限，组为rx权限,其他人去掉x权限
+</pre></div>
+
+
+<h3 id="4_1">4、目录属性的意义</h3>
+<p>r： 表示具有读取目录结构清单的权限，所以当您具有读取 (r) 一个目录的权限时， 您就可以利用 ls 这个指令将该目录的内容列表显示出来！ </p>
+<p>w：这个可写入的权限对目录来说，是很了不起的，表示您将具有异动该目录结构清单的权限，也就是底下这些权限： </p>
+<ul>
+<li>删除已经存在的档案与目录(不论该档案是属于谁的！)</li>
+<li>建立新的档案与目录；</li>
+<li>将已存在的档案或目录进行</li>
+<li>搬移该目录内的档案、目录位置。</li>
+</ul>
+<p>x：这个 x 与能否进入该目录有关。</p>
+<h3 id="5linux">5、Linux 文件种类与附档名</h3>
+<p>文件种类：</p>
+<ul>
+<li>正规文件：-</li>
+<li>目录：d</li>
+<li>链接：l</li>
+<li>设备与装置文件：<ul>
+<li>块区设备：b</li>
+<li>字符设备(鼠标、键盘)：c</li>
+</ul>
+</li>
+<li>资料接口文件：s</li>
+<li>数据输送文件：p</li>
+</ul>
+<h3 id="6">6、目录含义</h3>
+<p><strong>/：根目录（root）</strong></p>
+<p>一般建议在根目录底下只接目录，不要直接有档案在 / 底下。根目录是开机的时候系统第一个挂载的 partition ，所以，所有开机过程会用到的档案， 应该都要放置在这个 partition 当中。举例来说， /etc, /bin, /dev/lib, /sbin 这五个次目录都应该要与根目录连在一起，不可独立成为某个 partition   </p>
+<p><strong>/bin, /usr/bin, /usr/local/bin：放可执行二进制文件</strong></p>
+<p>除了 /bin 之外， /usr/local/bin, /usr/bin 也是<code>放置使用者可执行的 binary file 的目录</code>喔！举例来说， ls, mv, rm, mkdir, rmdir, gzip, tar, cat, cp, mount 等等重要指令都放在这个目录当中。</p>
+<p><strong>/boot：开机启动文档</strong></p>
+<p>这个目录主要的目的是放置 Linux 系统开机会用到的档案。 开机会用到什么呢？没错～就是 Linux 的核心档案。这个目录底下文件名为 vmlinuz 的就是 Linux 的 Kernel 啦！粉重要的东西！ 而如果你的开机管理程序 (loader) 选择 grub 的话，那么这个目录内还有 /boot/grub 这个次目录呦！ </p>
+<p><strong>/etc：配置文档</strong></p>
+<p>系统主要的设定文件几乎都放置在这个目录内，例如人员的账号密码文件、 各种服务的启始档等等。一般来说，这个目录下的各档案属性是可以让一般使用者查阅的， 但是只有 root 有权力修改。</p>
+<ul>
+<li>/etc/init.d/：所有服务的预设启动 script 都是放在这里的，例如要启动或者关闭 iptables 的话： <ul>
+<li>/etc/init.d/iptables start </li>
+<li>/etc/init.d/iptables stop </li>
+</ul>
+</li>
+<li>/etc/xinetd.d/：这就是所谓的 super daemon 管理的各项服务的设定文件目录。</li>
+<li>/etc/X11：与 X Window 有关的各种设定档都在这里，尤其是 xorg.conf 或 XF86Config 这两个 X Server 的设定档。</li>
+</ul>
+<p><strong>/home：用户家目录</strong></p>
+<p>这是系统预设的使用者家目录 (home directory)。在你新增一个一般使用者账号时， 预设的使用者家目录都会规范到这里来。比较重要的是，家目录有两种代号喔：</p>
+<ul>
+<li>~：代表目前这个使用者的家目录</li>
+<li>~dmtsai ：则代表 dmtsai 的家目录！</li>
+</ul>
+<p><strong>/lib, /usr/lib, /usr/local/lib：放置库函式目录 </strong></p>
+<p>系统会使用到的函式库放置的目录。 程序在运作的过程中，可能会呼叫一些额外的功能参数，那需要函式库的协助！ 这些函式库就放在此处。比较重要的是 /lib/modules 这个目录内会摆放 kernel 的相关模块喔！</p>
+<p><strong>/lost+found：系统不正常发生的错误，遗失片段存放目录</strong></p>
+<p>系统不正常产生错误时，会将一些遗失的片段放置于此目录下， 通常这个目录会自动出现在某个 partition 最顶层的目录下。例如你加装一棵硬盘于 /disk 中，那在这个目录下就会自动产生一个这样的目录 /disk/lost+found </p>
+<p><strong>/mnt ,/media : 软盘与光盘挂载点</strong></p>
+<p><strong>/opt：给主机额外安装软件存放的目录</strong></p>
+<p><strong>/proc ：虚拟档案系统，所有数据都在内存中</strong></p>
+<p><strong>/root：系统管理员（root）家目录</strong></p>
+<p><strong>/sbin, /usr/sbin, /usr/local/sbin ：系统管理员才会用到的执行命令</strong></p>
+<p><strong>/srv：一些服务启动之后，这些服务所需要取用的数据目录。</strong></p>
+<p>举例来说，WWW 服务器需要的网页资料就可以放置在 /srv/www 里面。</p>
+<p><strong>/tmp：运行程序暂时产生的一些文件目录</strong></p>
+<p>这是让一般使用者或者是正在执行的程序暂时放置档案的地方。 这个目录是任何人都能够存取的，所以您需要定期的清理一下。当然，重要数据不可放置在此目录啊！</p>
+<p><strong>/usr：由 FHS 规范的第二层内容</strong></p>
+<p>在 /usr 此目录下，包含系统的主要程序、 
+图形接口所需要的档案、额外的函式库、本机端所自行安装的软件，以及共享的目录与文件等等，都可以在这个目录当中发现。事实上，他有点像是 Windows 操作系统当中的『Program files』与 『WinNT』这两个目录的结合！在此目录下的重要次目录有： </p>
+<ul>
+<li>/usr/bin, /usr/sbin：一般身份使用者与系统管理员可执行的档案放置目录； </li>
+<li>/usr/include：c/c++等程序语言的档头 (header) 与包含档(include)放置处， 当我们以 tarball 方式 (*.tar.gz 的方式安装软件) 安装某些数据时，会使用到里头的许多包含档喔！； </li>
+<li>/usr/lib：各应用软件的函式库档案放置目录； </li>
+<li>/usr/local：本机端自行安装的软件预设放置的目录。目前也适用于 /opt 目录。 在你安装完了 Linux 之后，基本上所有的配备你都有了，但是软件总是可以升级的， 例如你要升级你的 proxy 服务，则通常软件预设的安装地方就是在 /usr/local (local 是『当地』的意思)，同时，安装完毕之后所得到的执行文件，为了与系统原先的执行文件有分别， 因此升级后的执行档通常摆在 /usr/local/bin 这个地方。</li>
+<li>/usr/share：共享文件放置的目录，例如底下两个目录： </li>
+<li>/usr/share/doc：放置一些系统说明文件的地方，例如你安装了 grub 了，那么在该目录底下找一找，就可以查到 lilo 的说明文件了！很是便利！ </li>
+<li>/usr/share/man：manpage 的文件档案目录；那是什么？呵呵！ 就是你使用 man 的时候，会去查询的路径呀！例如你使用 man ls 这个指令时，就会查出 /usr/share/man/man1/ls.1.gz 这个说明档的内容啰！ </li>
+<li>/usr/src：Linux 系统相关的程序代码放置目录，例如 /usr/src/linux 为核心原始码！ </li>
+<li>/usr/X11R6：系统内的 X Window System 所需的执行档几乎都放在这！</li>
+</ul>
+<p><strong>/var：由 FHS 规范的第二层内容</strong></p>
+<p>他主要放置的是针对系统执行过程中， 常态性变动的档案放置的目录。举例来说，例如快取档案 (cache) 或者是随时变更的登录档 (log file) 都是放在这个目录中的。此外，某些软件执行过程中会写入的数据库档案， 例如 MySQL 数据库，也都写入在这个目录中！很重要吧！他底下的重要目录有： </p>
+<ul>
+<li>/var/cache：程序档案在运作过程当中的一些暂存盘； </li>
+<li>/var/lib：程序本身执行的过程中，需要使用到的数据文件放置的目录， 举例来说， locate 这个数据库与 MySQL 及 rpm 等数据库系统，都写在这个目录内。 </li>
+<li>/var/log：登录文件放置的目录。很重要啊！例如 /var/log/messages 就是总管所有登录档的一个档案！ </li>
+<li>/var/lock：某些装置具有一次性写入的特性，例如 tab (磁带机)， 此时，为了担心被其它人干扰而破坏正在运作的动作，因此，会将该装置 lock (锁住)起来， 以确定该装置只能被单一个程序所使用啊！ </li>
+<li>/var/run：某些程序或者是服务启动后，会将他们的 PID 放置在这个目录下喔！ </li>
+<li>/var/spool：是一些队列数据存放的地方。举例来说，主机收到电子邮件后， 就会放置到 /var/spool/mail 当中，若信件暂时发不出去，就会放置到 /var/spool/mqueue 目录下， 使用者工作排程 (cron) 则是放置在 </li>
+<li>/var/spool/cron 当中！ </li>
+</ul>
+<h2 id="linux_2">三、 Linux磁盘系统与档案系统管理</h2>
+<h3 id="1_2">1、磁盘与目录的容量</h3>
+<p><strong>df：查询磁盘容量</strong></p>
+<p>df [-ahikHTm] [目录或文件名] <br>
+参数： <br>
+-a ：列出所有的档案系统，包括系统特有的 /proc 等档案系统； <br>
+-k ：以 KBytes 的容量显示各档案系统； <br>
+-m ：以 MBytes 的容量显示各档案系统； <br>
+-h ：以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示； <br>
+-H ：以 M=1000K 取代 M=1024K 的进位方式； <br>
+-T ：连同该 partition 的 filesystem 名称 (例如 ext3) 也列出； <br>
+-i ：不用硬盘容量，而以 inode 的数量来显示</p>
+<p><strong>du：查询目录占用容量</strong></p>
+<p>du [-ahskm] 档案或目录名称
+参数： <br>
+-a ：列出所有的档案与目录容量，因为预设仅统计目录底下的档案量而已。 <br>
+-h ：以人们较易读的容量格式 (G/M) 显示； <br>
+-s ：列出总量而已，而不列出每个各别的目录占用容量； <br>
+-k ：以 KBytes 列出容量显示； <br>
+-m ：以 MBytes 列出容量显示； <br>
+du -sm /*：这是个很常被使用的功能啰～利用万用字符 * 来代表每个目录，所以，如果想要检查某个目录下，那个次目录占用最大的容量，就可以用这个方法找出来    </p>
+<h3 id="2_2">2、链接文件</h3>
+<p><strong>ln：创建链接文件</strong></p>
+<p>ln [-sf] 来源文件 目标文件 <br>
+参数： <br>
+-s ：如果 ln 不加任何参数就进行连结，那就是 hard link，至于 -s 就是 symbolic link <br>
+-f ：如果 目标文件 存在时，就主动的将目标文件直接移除后再建立！   </p>
+<p>要注意啰！使用 ln 如果不加任何参数的话，那么就是 Hard Link （数据关联硬式链接）啰！而如果 ln 使用 -s 的参数时，就做成差不多是 Windows底下的『快捷方式』（软式链接）的意思( Symbolic Link，较常用！ )</p>
+<h3 id="3_2">3、磁盘的分割、格式化、检验与挂载：</h3>
+<p><strong>fdisk：磁盘分割</strong></p>
+<p><strong>mke2fs：磁盘格式化</strong></p>
+<p><strong>fsck，badblocks：磁盘检验</strong></p>
+<p><strong>mount：磁盘挂载</strong></p>
+<p><strong>unmount：磁盘卸载</strong></p>
+<h2 id="linux_3">四、Linux 档案与目录管理</h2>
+<h3 id="1_3">1、目录与路径</h3>
+<p><strong>绝对路径与相对路径</strong></p>
+<p>绝对路径：路径的写法『一定由根目录 / 写起』，例如： /usr/share/doc 这个目录。 </p>
+<p>相对路径：路径的写法『不是由 / 写起』，例如由 /usr/share/doc 要到 /usr/share/man 底下时，可以写成： 『cd ../man』这就是相对路径的写法啦！相对路径意指『相对于目前工作目录的路径！』 </p>
+<p><strong>目录的相关操作：</strong></p>
+<div class="codehilite"><pre>. 代表此层目录 
+.. 代表上一层目录 
++ 代表前一个工作目录 
+~ 代表『目前使用者身份』所在的家目录 
+~account 代表 account 这个使用者的家目录
+</pre></div>
+
+
+<ul>
+<li>cd：变换目录 </li>
+<li>pwd：显示目前的目录 </li>
+<li>mkdir：建立一个新的目录 </li>
+<li>rmdir：删除一个空的目录 </li>
+</ul>
+<p><strong>关于执行文件的环境变量：$PATH</strong></p>
+<p>显示环境路径：echo $PATH</p>
+<p>设置环境路径：PATH="$PATH":/root </p>
+<h3 id="2_3">2、文件与目录的管理</h3>
+<p><strong>文件与目录的检视：ls</strong></p>
+<div class="codehilite"><pre>ls 目录或文件名
+
+参数：   
+-a ：全部的档案，连同隐藏档( 开头为 . 的档案) 一起列出来～   
+-A ：全部的档案，连同隐藏档，但不包括 . 与 .. 这两个目录，一起列出来～   
+-d ：仅列出目录本身，而不是列出目录内的档案数据   
+-f ：直接列出结果，而不进行排序 (ls 预设会以档名排序！)   
+-F ：根据档案、目录等信息，给予附加数据结构，例如：   
+*：代表可执行档； /：代表目录； =：代表 socket 档案； |：代表 FIFO 档案；   
+-h ：将档案容量以人类较易读的方式(例如 GB, KB 等等)列出来；   
+-i ：列出 inode 位置，而非列出档案属性；   
+-l ：长数据串行出，包含档案的属性等等数据；   
+-n ：列出 UID 与 GID 而非使用者与群组的名称 (UID 与 GID 会在账号管理提到！)   
+-r ：将排序结果反向输出，例如：原本档名由小到大，反向则为由大到小；   
+-R ：连同子目录内容一起列出来；   
+-S ：以档案容量大小排序！   
+-t ：依时间排序   
+--color=never ：不要依据档案特性给予颜色显示；   
+--color=always ：显示颜色   
+--color=auto ：让系统自行依据设定来判断是否给予颜色   
+--full-time ：以完整时间模式 (包含年、月、日、时、分) 输出   
+--time={atime,ctime} ：输出 access 时间或 改变权限属性时间 (ctime)   
+而非内容变更时间 (modification time)
+
+**复制、移动与删除：cp，rm， mv**
+</pre></div>
+
+
+<p>cp（复制文档或目录）   </p>
+<div class="codehilite"><pre>cp [-adfilprsu] 来源档(source) 目的檔(destination)
+参数：   
+-a ：相当于 -pdr 的意思；   
+-d ：若来源文件为连结文件的属性(link file)，则复制连结文件属性而非档案本身；   
+-f ：为强制 (force) 的意思，若有重复或其它疑问时，不会询问使用者，而强制复制；   
+-i ：若目的檔(destination)已经存在时，在覆盖时会先询问是否真的动作！   
+-l ：进行硬式连结 (hard link) 的连结档建立，而非复制档案本身；   
+-p ：连同档案的属性一起复制过去，而非使用预设属性；   
+-r ：递归持续复制，用于目录的复制行为；   
+-s ：复制成为符号连结文件 (symbolic link)，亦即『快捷方式』档案；   
+-u ：若 destination 比 source 旧才更新 destination ！
+</pre></div>
+
+
+<p>rm (移除档案或目录)   </p>
+<div class="codehilite"><pre>rm [-fir] 档案或目录   
+参数：   
+-f ：就是 force 的意思，强制移除；   
+-i ：互动模式，在删除前会询问使用者是否动作   
+-r ：递归删除啊！最常用在目录的删除了
+
+mv (移动档案与目录，或更名)
+
+ mv [-fiu] source destination   
+参数：   
+-f ：force 强制的意思，强制直接移动而不询问；   
+-i ：若目标档案 (destination) 已经存在时，就会询问是否覆盖！   
+-u ：若目标档案已经存在，且 source 比较新，才会更新 (update)
+</pre></div>
+
+
+<p><strong>取得路径的文件名称与目录名称</strong></p>
+<div class="codehilite"><pre>[root@linux ~]# basename /etc/sysconfig/network 
+network &lt;== 很简单！就取得最后的档名～ 
+[root@linux ~]# dirname /etc/sysconfig/network 
+/etc/sysconfig &lt;== 取得的变成目录名了！
+</pre></div>
+
+
+<h3 id="3_3">3、文档内容查阅</h3>
+<ul>
+<li>cat 由第一行开始显示档案内容</li>
+<li>tac 从最后一行开始显示，可以看出tac 是cat 的倒着写！</li>
+<li>nl  显示的时候，顺道输出行号！</li>
+<li>more 一页一页的显示档案内容</li>
+<li>less 与more 类似，但是比more 更好的是，他可以往前翻页！</li>
+<li>head 只看头几行</li>
+<li>tail 只看尾巴几行</li>
+<li>od  以二进制的方式读取档案内容！</li>
+</ul>
+<p><strong>直接检视档案内容</strong></p>
+<p>cat（正向查阅）</p>
+<div class="codehilite"><pre>cat [-AEnTv]
+参数： 
+-A ：相当于 -vET 的整合参数，可列出一些特殊字符～ 
+-E ：将结尾的断行字符 $ 显示出来； 
+-n ：打印出行号； 
+-T ：将 [tab] 按键以 ^I 显示出来； 
+-v ：列出一些看不出来的特殊字符
+</pre></div>
+
+
+<p>tac（反向查看）</p>
+<div class="codehilite"><pre>tac /etc/issue
+</pre></div>
+
+
+<p>nl（添加行号打印）</p>
+<div class="codehilite"><pre>tac /etc/issue
+参数： 
+-b ：指定行号指定的方式，主要有两种： 
+-b a ：表示不论是否为空行，也同样列出行号； 
+-b t ：如果有空行，空的那一行不要列出行号； 
+-n ：列出行号表示的方法，主要有三种： 
+-n ln ：行号在屏幕的最左方显示； 
+-n rn ：行号在自己字段的最右方显示，且不加 0 ； 
+-n rz ：行号在自己字段的最右方显示，且加 0 ； 
+-w ：行号字段的占用的位数。
+</pre></div>
+
+
+<p>more（一页一页的翻动）</p>
+<p>less（一页一页的翻动， 可以向前翻页）</p>
+<p><strong>获取资料</strong></p>
+<p>head（取出前面几行）</p>
+<div class="codehilite"><pre>head [-n number] 文档
+参数： 
+-n ：后面接数字，代表显示几行的意思
+</pre></div>
+
+
+<p>tail (取出后面几行)
+    tail [-n number] 文档
+    参数： 
+    -n ：后面接数字，代表显示几行的意思</p>
+<p>非纯文字文件： od </p>
+<div class="codehilite"><pre>od [-t TYPE] 档案
+参数： 
+-t ：后面可以接各种『类型 (TYPE)』的输出，例如： 
+a ：利用预设的字符来输出； 
+c ：使用 ASCII 字符来输出 
+d[size] ：利用十进制(decimal)来输出数据，每个整数占用 size bytes ； 
+f[size] ：利用浮点数值(floating)来输出数据，每个数占用 size bytes ； 
+o[size] ：利用八进位(octal)来输出数据，每个整数占用 size bytes ； 
+x[size] ：利用十六进制(hexadecimal)来输出数据，每个整数占用 size bytes ；
+</pre></div>
+
+
+<p><strong>修改档案时间与建置新档： touch</strong></p>
+<div class="codehilite"><pre>touch [-acdmt] 文档
+参数： 
+-a ：仅修订 access time； 
+-c ：仅修改时间，而不建立档案；
+-d ：后面可以接日期，也可以使用 --date=&quot;日期或时间&quot; 
+-m ：仅修改 mtime ； 
+-t ：后面可以接时间，格式为[YYMMDDhhmm]
+</pre></div>
+
+
+<h3 id="4_2">4、档案与目录的预设权限与隐藏权限</h3>
+<p><strong>文档预设权限：umask</strong></p>
+<p>umask 就是指定 <code>目前使用者在建立档案或目录时候的属性默认值</code></p>
+<div class="codehilite"><pre>[root@linux ~]# umask 
+0022 
+[root@linux ~]# umask -S 
+u=rwx,g=rx,o=rx
+</pre></div>
+
+
+<p><strong>文档隐藏属性</strong></p>
+<p>chattr (设定档案隐藏属性) </p>
+<div class="codehilite"><pre>chattr [+-=][ASacdistu] 档案或目录名称
+参数： 
+* ：增加某一个特殊参数，其它原本存在参数则不动。 
++ ：移除某一个特殊参数，其它原本存在参数则不动。 
+= ：设定一定，且仅有后面接的参数 
+A ：当设定了 A 这个属性时，这个档案(或目录)的存取时间 atime (access) 
+将不可被修改，可避免例如手提式计算机容易有磁盘 I/O 错误的情况发生！ 
+S ：这个功能有点类似 sync的功能！就是会将数据同步写入磁盘当中！ 
+可以有效的避免数据流失！ 
+a ：当设定 a 之后，这个档案将只能增加数据，而不能删除，只有 root 
+才能设定这个属性。 
+c ：这个属性设定之后，将会自动的将此档案『压缩』，在读取的时候将会自动解压缩， 
+但是在储存的时候，将会先进行压缩后再储存(看来对于大档案似乎蛮有用的！) 
+d ：当 dump(备份)程序被执行的时候，设定 d 属性将可使该档案(或目录)不具有 dump 功能 
+i ：这个 i 可就很厉害了！他可以让一个档案『不能被删除、改名、设定连结也无法写入 
+或新增资料！』对于系统安全性有相当大的帮助！ 
+j ：当使用 ext3 这个档案系统格式时，设定 j 属性将会使档案在写入时先记录在 
+journal 中！但是当 filesystem 设定参数为 data=journalled 时，由于已经设定了 
+日志了，所以这个属性无效！ 
+s ：当档案设定了 s 参数时，他将会被完全的移除出这个硬盘空间。 
+u ：与 s 相反的，当使用 u 来设定档案时，则数据内容其实还存在磁盘中， 
+可以使用来 undeletion. 
+注意：这个属性设定上面，比较常见的是 a 与 i 的设定值，而且很多设定值必须要身为 
+root 才能够设定的喔！
+</pre></div>
+
+
+<p>lsattr (显示档案隐藏属性)</p>
+<div class="codehilite"><pre>lsattr [-aR] 档案或目录
+参数： 
+-a ：将隐藏文件的属性也秀出来； 
+-R ：连同子目录的数据也一并列出来！
+</pre></div>
+
+
+<p><strong>文档类型:file</strong></p>
+<p>查询某个文档的基本数据类型</p>
+<h3 id="5_1">5、文档搜索</h3>
+<p><strong>which（寻找执行文档）</strong></p>
+<div class="codehilite"><pre>which [-a] command
+-a：讲所有找到的指令列出
+</pre></div>
+
+
+<p><strong>whereis（寻找特定的文档）</strong></p>
+<div class="codehilite"><pre>whereis [-bmsu] 文档或者目录名
+参数： 
+-b :只找 binary 的文档 
+-m :只找在说明文件 manual 路径下的文档
+-s :只找 source 来源文档
+-u :没有说明档的文档
+</pre></div>
+
+
+<p><strong>locate已建数据库搜索</strong></p>
+<div class="codehilite"><pre>locate 文档名
+</pre></div>
+
+
+<p><strong>find磁盘搜索</strong></p>
+<div class="codehilite"><pre>find [PATH] [option] [action]
+参数： 
+1. 与时间有关的参数： 
+-atime n ：n 为数字，意义为在 n 天之前的『一天之内』被 access 过的档案； 
+-ctime n ：n 为数字，意义为在 n 天之前的『一天之内』被 change 过状态的档案； 
+-mtime n ：n 为数字，意义为在 n 天之前的『一天之内』被 modification 过的档案； 
+-newer file ：file 为一个存在的档案，意思是说，只要档案比 file 还要新， 
+就会被列出来～ 
+2. 与使用者或群组名称有关的参数： 
+-uid n ：n 为数字，这个数字是使用者的账号 ID，亦即 UID ，这个 UID 是记录在 
+/etc/passwd 里面与账号名称对应的数字。这方面我们会在第四篇介绍。 
+-gid n ：n 为数字，这个数字是群组名称的 ID，亦即 GID，这个 GID 记录在 
+/etc/group，相关的介绍我们会第四篇说明～ 
+-user name ：name 为使用者账号名称喔！例如 dmtsai 
+-group name：name 为群组名称喔，例如 users ； 
+-nouser ：寻找档案的拥有者不存在 /etc/passwd 的人！ 
+-nogroup ：寻找档案的拥有群组不存在于 /etc/group 的档案！ 
+                当您自行安装软件时，很可能该软件的属性当中并没有档案拥有者， 
+                这是可能的！在这个时候，就可以使用 -nouser 与 -nogroup 搜寻。 
+3. 与档案权限及名称有关的参数： 
+-name filename：搜寻文件名称为 filename 的档案； 
+-size [+-]SIZE：搜寻比 SIZE 还要大(+)或小(-)的档案。这个 SIZE 的规格有： 
+                        c: 代表 byte， k: 代表 1024bytes。所以，要找比 50KB 
+                        还要大的档案，就是『 -size +50k 』 
+-type TYPE ：搜寻档案的类型为 TYPE 的，类型主要有：一般正规档案 (f), 
+                    装置档案 (b, c), 目录 (d), 连结档 (l), socket (s), 
+                    及 FIFO (p) 等属性。 
+-perm mode ：搜寻档案属性『刚好等于』 mode 的档案，这个 mode 为类似 chmod 
+                        的属性值，举例来说， -rwsr-xr-x 的属性为 4755 ！ 
+-perm -mode ：搜寻档案属性『必须要全部囊括 mode 的属性』的档案，举例来说， 
+                        我们要搜寻 -rwxr--r-- ，亦即 0744 的档案，使用 -perm -0744， 
+                        当一个档案的属性为 -rwsr-xr-x ，亦即 4755 时，也会被列出来， 
+                        因为 -rwsr-xr-x 的属性已经囊括了 -rwxr--r-- 的属性了。 
+-perm +mode ：搜寻档案属性『包含任一 mode 的属性』的档案，举例来说，我们搜寻 
+-rwxr-xr-x ，亦即 -perm +755 时，但一个档案属性为 -rw------- 
+                         也会被列出来，因为他有 -rw.... 的属性存在！ 
+4. 额外可进行的动作： 
+-exec command ：command 为其它指令，-exec 后面可再接额外的指令来处理搜寻到 
+                            的结果。 
+-print ：将结果打印到屏幕上，这个动作是预设动作！
+</pre></div>
+
+
+<h2 id="_2">四、文档的压缩与打包</h2>
+<p>tar</p>
+<p>-c: 建立压缩档案 <br>
+-x：解压 <br>
+-t：查看内容 <br>
+-r：向压缩归档文件末尾追加文件 <br>
+-u：更新原压缩包中的文件  </p>
+<p>这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。</p>
+<p>-z：有gzip属性的 <br>
+-j：有bz2属性的 <br>
+-Z：有compress属性的 <br>
+-v：显示所有过程 <br>
+-O：将文件解开到标准输出   </p>
+<p>下面的参数-f是必须的
+-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。</p>
+<div class="codehilite"><pre># tar -cf all.tar *.jpg这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包，-f指定包的文件名。
+# tar -rf all.tar *.gif
+</pre></div>
+
+
+<p>这条命令是将所有.gif的文件增加到all.tar的包里面去。-r是表示增加文件的意思。</p>
+<div class="codehilite"><pre># tar -uf all.tar logo.gif
+</pre></div>
+
+
+<p>这条命令是更新原来tar包all.tar中logo.gif文件，-u是表示更新文件的意思。</p>
+<div class="codehilite"><pre># tar -tf all.tar
+</pre></div>
+
+
+<p>这条命令是列出all.tar包中所有文件，-t是列出文件的意思</p>
+<div class="codehilite"><pre># tar -xf all.tar
+</pre></div>
+
+
+<p>这条命令是解出all.tar包中所有文件，-x是解开的意思</p>
+<p>压缩</p>
+<div class="codehilite"><pre>tar –cvf jpg.tar *.jpg //将目录里所有jpg文件打包成tar.jpg
+tar –czf jpg.tar.gz *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz
+tar –cjf jpg.tar.bz2 *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2
+tar –cZf jpg.tar.Z *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z
+rar a jpg.rar *.jpg //rar格式的压缩，需要先下载rar for linux
+zip jpg.zip *.jpg //zip格式的压缩，需要先下载zip for linux
+</pre></div>
+
+
+<p>解压</p>
+<div class="codehilite"><pre>tar –xvf file.tar //解压 tar包
+tar -xzvf file.tar.gz //解压tar.gz
+tar -xjvf file.tar.bz2 //解压 tar.bz2
+tar –xZvf file.tar.Z //解压tar.Z
+unrar e file.rar //解压rar
+unzip file.zip //解压zip
+</pre></div>
+
+
+<p>总结</p>
+<p>1、<em>.tar 用 tar –xvf 解压 <br>
+2、</em>.gz 用 gzip -d或者gunzip 解压 <br>
+3、<em>.tar.gz和</em>.tgz 用 tar –xzf 解压 <br>
+4、<em>.bz2 用 bzip2 -d或者用bunzip2 解压 <br>
+5、</em>.tar.bz2用tar –xjf 解压 <br>
+6、<em>.Z 用 uncompress 解压 <br>
+7、</em>.tar.Z 用tar –xZf 解压 <br>
+8、<em>.rar 用 unrar e解压 <br>
+9、</em>.zip 用 unzip 解压   </p>
+<h2 id="vivim">五、vi、vim文字处理器</h2>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

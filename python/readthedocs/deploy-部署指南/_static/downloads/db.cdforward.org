@@ -1,0 +1,15 @@
+; BIND reverse data file for cdforward.org
+;
+; This task effects after several tries
+;
+$TTL	86400
+@		IN		SOA		cdforward.org. root.cdforward.org. (
+				2					; Serial
+				604800				; Refresh
+				86400				; Retry
+				2419200				; Expire
+				86400 )				; Negative Cache TTL
+;
+@		IN	NS	ns.cdforward.org.
+@		IN	A	10.2.25.113
+ns		IN	A	10.2.25.113

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>web安全及防护全(django).md—E:\python\django相关\django\web安全</title>
+    <style type="text/css">
+    body{font-family:Helvetica,arial,sans-serif;font-size:14px;line-height:1.6;padding-top:10px;padding-bottom:10px;background-color:white;padding:30px;color:#333}body>*:first-child{margin-top:0!important}body>*:last-child{margin-bottom:0!important}a{color:#4183c4;text-decoration:none}a:hover{text-decoration:underline}a.absent{color:#c00}a.anchor{display:block;padding-left:30px;margin-left:-30px;cursor:pointer;position:absolute;top:0;left:0;bottom:0}html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0}kbd{background:#f1f1f1;background:-moz-linear-gradient(#f1f1f1,#ddd);background:-webkit-linear-gradient(#f1f1f1,#ddd);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#f1f1f1', endColorstr='#dddddd')";border-radius:2px;border:1px solid #ddd;border-bottom-color:#ccc;border-right-color:#ccc;padding:1px 4px;line-height:10px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}.container{max-width:920px;margin:0 auto 20px auto}#header{background:#fafafa;background:-moz-linear-gradient(#fafafa,#eaeaea);background:-webkit-linear-gradient(#fafafa,#eaeaea);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#eaeaea')";border-bottom:1px solid #cacaca;box-shadow:0 1px 0 rgba(255,255,255,0.4),0 0 10px rgba(0,0,0,0.1)}#markup{padding:3px}#markup article{padding-top:30px}.markdown-body{font-size:14px;line-height:1.6}.markdown-body>*:first-child{margin-top:0!important}.markdown-body>*:last-child{margin-bottom:0!important}.markdown-body a.absent{color:#c00}.markdown-body a.anchor{bottom:0;cursor:pointer;display:block;left:0;margin-left:-30px;padding-left:30px;position:absolute;top:0}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{cursor:text;font-weight:bold;margin:20px 0 10px;padding:0;position:relative}.markdown-body h1 .mini-icon-link,.markdown-body h2 .mini-icon-link,.markdown-body h3 .mini-icon-link,.markdown-body h4 .mini-icon-link,.markdown-body h5 .mini-icon-link,.markdown-body h6 .mini-icon-link{color:#000;display:none}.markdown-body h1:hover a.anchor,.markdown-body h2:hover a.anchor,.markdown-body h3:hover a.anchor,.markdown-body h4:hover a.anchor,.markdown-body h5:hover a.anchor,.markdown-body h6:hover a.anchor{line-height:1;margin-left:-22px;padding-left:0;text-decoration:none;top:15%}.markdown-body h1:hover a.anchor .mini-icon-link,.markdown-body h2:hover a.anchor .mini-icon-link,.markdown-body h3:hover a.anchor .mini-icon-link,.markdown-body h4:hover a.anchor .mini-icon-link,.markdown-body h5:hover a.anchor .mini-icon-link,.markdown-body h6:hover a.anchor .mini-icon-link{display:inline-block}.markdown-body h1 tt,.markdown-body h1 code,.markdown-body h2 tt,.markdown-body h2 code,.markdown-body h3 tt,.markdown-body h3 code,.markdown-body h4 tt,.markdown-body h4 code,.markdown-body h5 tt,.markdown-body h5 code,.markdown-body h6 tt,.markdown-body h6 code{font-size:inherit}.markdown-body h1{color:#000;font-size:28px}.markdown-body h2{border-bottom:1px solid #ccc;color:#000;font-size:24px}.markdown-body h3{font-size:18px}.markdown-body h4{font-size:16px}.markdown-body h5{font-size:14px}.markdown-body h6{color:#777;font-size:14px}.markdown-body p,.markdown-body blockquote,.markdown-body ul,.markdown-body ol,.markdown-body dl,.markdown-body table,.markdown-body pre{margin:15px 0}.markdown-body hr{background:url("/public/github-dirty-shade.png") repeat-x scroll 0 0 transparent;border:0 none;color:#ccc;height:4px;padding:0}.markdown-body>h2:first-child,.markdown-body>h1:first-child,.markdown-body>h1:first-child+h2,.markdown-body>h3:first-child,.markdown-body>h4:first-child,.markdown-body>h5:first-child,.markdown-body>h6:first-child{margin-top:0;padding-top:0}.markdown-body a:first-child h1,.markdown-body a:first-child h2,.markdown-body a:first-child h3,.markdown-body a:first-child h4,.markdown-body a:first-child h5,.markdown-body a:first-child h6{margin-top:0;padding-top:0}.markdown-body h1+p,.markdown-body h2+p,.markdown-body h3+p,.markdown-body h4+p,.markdown-body h5+p,.markdown-body h6+p{margin-top:0}.markdown-body li p.first{display:inline-block}.markdown-body ul,.markdown-body ol{padding-left:30px}.markdown-body ul.no-list,.markdown-body ol.no-list{list-style-type:none;padding:0}.markdown-body ul li>*:first-child,.markdown-body ol li>*:first-child{margin-top:0}.markdown-body ul ul,.markdown-body ul ol,.markdown-body ol ol,.markdown-body ol ul{margin-bottom:0}.markdown-body dl{padding:0}.markdown-body dl dt{font-size:14px;font-style:italic;font-weight:bold;margin:15px 0 5px;padding:0}.markdown-body dl dt:first-child{padding:0}.markdown-body dl dt>*:first-child{margin-top:0}.markdown-body dl dt>*:last-child{margin-bottom:0}.markdown-body dl dd{margin:0 0 15px;padding:0 15px}.markdown-body dl dd>*:first-child{margin-top:0}.markdown-body dl dd>*:last-child{margin-bottom:0}.markdown-body blockquote{border-left:4px solid #ddd;color:#777;padding:0 15px}.markdown-body blockquote>*:first-child{margin-top:0}.markdown-body blockquote>*:last-child{margin-bottom:0}.markdown-body table{border-collapse:collapse;border-spacing:0}.markdown-body table th{font-weight:bold}.markdown-body table th,.markdown-body table td{border:1px solid #ccc;padding:6px 13px}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{border:1px solid #ddd;display:block;float:left;margin:13px 0 0;overflow:hidden;padding:7px;width:auto}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{clear:both;color:#333;display:block;padding:5px 0 0}.markdown-body span.align-center{clear:both;display:block;overflow:hidden}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{clear:both;display:block;overflow:hidden}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{background-color:#f8f8f8;border:1px solid #eaeaea;border-radius:3px 3px 3px 3px;margin:0 2px;padding:0 5px;white-space:nowrap}.markdown-body pre>code{background:none repeat scroll 0 0 transparent;border:medium none;margin:0;padding:0;white-space:pre}.markdown-body .highlight pre,.markdown-body pre{background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px 3px 3px 3px;font-size:13px;line-height:19px;overflow:auto;padding:6px 10px}.markdown-body pre code,.markdown-body pre tt{background-color:transparent;border:medium none}.codehilite{background:#fff}.codehilite .c{color:#998;font-style:italic}.codehilite .err{color:#a61717;background-color:#e3d2d2}.codehilite .k{color:#000;font-weight:bold}.codehilite .o{color:#000;font-weight:bold}.codehilite .cm{color:#998;font-style:italic}.codehilite .cp{color:#999;font-weight:bold}.codehilite .c1{color:#998;font-style:italic}.codehilite .cs{color:#999;font-weight:bold;font-style:italic}.codehilite .gd{color:#000;background-color:#fdd}.codehilite .gd .x{color:#000;background-color:#faa}.codehilite .ge{color:#000;font-style:italic}.codehilite .gr{color:#a00}.codehilite .gh{color:#999}.codehilite .gi{color:#000;background-color:#dfd}.codehilite .gi .x{color:#000;background-color:#afa}.codehilite .go{color:#888}.codehilite .gp{color:#555}.codehilite .gs{font-weight:bold}.codehilite .gu{color:#aaa}.codehilite .gt{color:#a00}.codehilite .kc{color:#000;font-weight:bold}.codehilite .kd{color:#000;font-weight:bold}.codehilite .kp{color:#000;font-weight:bold}.codehilite .kr{color:#000;font-weight:bold}.codehilite .kt{color:#458;font-weight:bold}.codehilite .m{color:#099}.codehilite .s{color:#d14}.codehilite .na{color:#008080}.codehilite .nb{color:#0086b3}.codehilite .nc{color:#458;font-weight:bold}.codehilite .no{color:#008080}.codehilite .ni{color:#800080}.codehilite .ne{color:#900;font-weight:bold}.codehilite .nf{color:#900;font-weight:bold}.codehilite .nn{color:#555}.codehilite .nt{color:#000080}.codehilite .nv{color:#008080}.codehilite .ow{color:#000;font-weight:bold}.codehilite .w{color:#bbb}.codehilite .mf{color:#099}.codehilite .mh{color:#099}.codehilite .mi{color:#099}.codehilite .mo{color:#099}.codehilite .sb{color:#d14}.codehilite .sc{color:#d14}.codehilite .sd{color:#d14}.codehilite .s2{color:#d14}.codehilite .se{color:#d14}.codehilite .sh{color:#d14}.codehilite .si{color:#d14}.codehilite .sx{color:#d14}.codehilite .sr{color:#009926}.codehilite .s1{color:#d14}.codehilite .ss{color:#990073}.codehilite .bp{color:#999}.codehilite .vc{color:#008080}.codehilite .vg{color:#008080}.codehilite .vi{color:#008080}.codehilite .il{color:#099}
+    </style>
+    <style type="text/css">
+      .markdown-body hr{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC")}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="markup">
+        <article id="content" class="markdown-body">
+          <div class="toc">
+<ul>
+<li><a href="#web">web安全及防护</a><ul>
+<li><a href="#web_1">一、WEB攻击防护</a><ul>
+<li><a href="#1sql">1、SQL注入防护</a></li>
+<li><a href="#2xss">2、XSS攻击防护</a></li>
+<li><a href="#3web">3、web恶意扫描防护</a></li>
+<li><a href="#4dos">4、应用层DOS攻击防护</a></li>
+</ul>
+</li>
+<li><a href="#web_2">二、web恶意代码防护</a><ul>
+<li><a href="#1">1、网页防挂马防护</a></li>
+</ul>
+</li>
+<li><a href="#web_3">三、web非授权访问防护</a><ul>
+<li><a href="#1csrf">1、跨站伪造（CSRF）攻击防护</a></li>
+<li><a href="#2cookie">2、Cookie篡改防护</a></li>
+<li><a href="#3">3、网站盗链防护</a></li>
+</ul>
+</li>
+<li><a href="#web_4">三、web应用交付</a><ul>
+<li><a href="#1_1">1、网页防篡改</a></li>
+<li><a href="#2url">2、基于URL的流量控制</a></li>
+<li><a href="#3_1">3、应用加速</a></li>
+<li><a href="#4">４、多服务器负载均衡</a></li>
+</ul>
+</li>
+<li><a href="#web_5">四、web应用合规</a><ul>
+<li><a href="#1url">1、基于URL的访问控制</a></li>
+<li><a href="#2http">2、HTTP协议合规</a></li>
+<li><a href="#3_2">3、敏感信息泄露防护</a></li>
+<li><a href="#4_1">4、文件上传下载控制</a></li>
+<li><a href="#5web">5、web表单关键字过滤</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="web">web安全及防护</h1>
+<blockquote>
+<p>主要介绍了web相关的安全问题及解决方案</p>
+</blockquote>
+<h2 id="web_1">一、WEB攻击防护</h2>
+<h3 id="1sql">1、SQL注入防护</h3>
+<p>威胁描述：</p>
+<p>SQL注入攻击（SQL Injection），简称注入攻击、SQL注入，被广泛用于非法获取网站控制权，是发生在应用程序的数据库层上的安全漏洞。 在设计不良的程序当中，忽略了对输入字符串中夹带的SQL指令的检查，那么这些夹带进去的指令就会被数据库误认为是正常的SQL指令而运行， 从而使数据库受到攻击，可能导致数据被窃取、更改、删除，以及进一步导致网站被嵌入恶意代码、被植入后门程序等危害。</p>
+<p>安全保护：</p>
+<ul>
+<li>后端程序处理。对数据进行严格检查，对数据库配置使用最小原则，严格限制网站用户对数据库操作的权限。</li>
+<li>所有语句使用查询处理接口方式（django使用的是关系对象模型）</li>
+<li>网站发布前用一些sql注入检测工具检测，修补sql漏洞。</li>
+<li>进行安全部署。</li>
+</ul>
+<h3 id="2xss">2、XSS攻击防护</h3>
+<p>威胁描述：</p>
+<p>XSS攻击允许用户注入客户端脚本到其他用户的浏览器里。 这通常是通过存储在数据库中的恶意脚本，它将检索并显示给其他用户，或者通过让用户点击一个链接，这将导致攻击者的 JavaScript 被用户的浏览器执行。 然而，XSS 攻击可以来自任何不受信任的源数据，如 Cookie 或 Web 服务，任何没有经过充分处理就包含在网页中的数据。</p>
+<p>安全防护：</p>
+<ul>
+<li>后端程序处理。django有自带的安全中间件处理XSS攻击，只要加入安全中间件后，设置SECURE_BROWSER_XSS_FILTER=True。</li>
+<li>开启Web防护策略。</li>
+</ul>
+<h3 id="3web">3、web恶意扫描防护</h3>
+<p>威胁描述：</p>
+<p>恶意主机IP，扫描web服务器端口，导致服务器负载过高，导致网站出现故障。</p>
+<p>安全防护：</p>
+<ul>
+<li>使用漏洞扫描工具进行检测</li>
+<li>开启防火墙，屏蔽一些端口，禁止恶意IP</li>
+</ul>
+<h3 id="4dos">4、应用层DOS攻击防护</h3>
+<p>威胁描述：</p>
+<p>DDoS攻击则是一种可以造成大规模破坏的黑客武器。它通过制造伪造的流量，使得被攻击的服务器负载过高，从而最终导致系统崩溃，无法提供正常的服务。</p>
+<p>安全防护：</p>
+<ul>
+<li>web应用防火墙，开启DDoS攻击防护策略。D.DoS攻击模块采用主动监测加被动跟踪相互结合的防护技术，对D.DoS攻击的过滤和防护。针对互联网中常见的D.DoS攻击手段，有效阻断攻击行为，从而确保服务器可以正常提供服务。</li>
+</ul>
+<h2 id="web_2">二、web恶意代码防护</h2>
+<h3 id="1">1、网页防挂马防护</h3>
+<p>威胁描述：</p>
+<p>所谓的挂马，就是黑客通过各种手段，包括SQL注入，网站敏感文件扫描，服务器漏洞，等各种方法获得网站管理员账号，然后登陆网站后台，通过数据库“备份/恢复”或者上传漏洞获得一个webshell。利用获得的webshell修改网站页面的内容，向页面中加入恶意转向代码。也可以直接通过弱口令获得服务器或者网站FTP，然后直接对网站页面直接进行修改。当你访问被加入恶意代码的页面时，你就会自动的访问被转向的地址或者下载木马病毒</p>
+<p>安全防护：</p>
+<ul>
+<li>安装防挂马工具。Araymor等。</li>
+<li>使用ftp来上传和维护web网页代码，上传使用身份认证。</li>
+<li>定期检查，经常备份数据库等文件。</li>
+<li>不要暴露后台登录地址，以及用户名密码信息。</li>
+</ul>
+<h2 id="web_3">三、web非授权访问防护</h2>
+<h3 id="1csrf">1、跨站伪造（CSRF）攻击防护</h3>
+<p>威胁描述：</p>
+<p>CSRF 攻击允许恶意用户在另一个用户不知情或者未同意的情况下，以他的身份执行操作。</p>
+<p>安全防护：</p>
+<ul>
+<li>Django 对大多数类型的 CSRF 攻击有内置的保护，在适当情况下你可以开启并使用它 。 <br>
+CSRF 防护 是通过检查每个 POST 请求的一个随机数（nonce）来工作。 这确保了恶意用户不能简单“回放”你网站上面表单的POST，以及让另一个登录的用户无意中提交表单。恶意用户必须知道这个随机数，它是用户特定的（存在cookie里）。 <br>
+使用 HTTPS来部署的时候，CsrfViewMiddleware会检查HTTP referer协议头是否设置为同源的URL（包括子域和端口）。因为HTTPS提供了附加的安全保护，转发不安全的连接请求时，必须确保链接使用 HTTPS，并使用HSTS支持的浏览器。</li>
+</ul>
+<h3 id="2cookie">2、Cookie篡改防护</h3>
+<p>威胁描述：</p>
+<p>让服务器端能识别cookie值被篡改。</p>
+<p>安全防护：</p>
+<ul>
+<li>set-cookie时加上防篡改验证码。user_name=alex|bj95ef23cc6daecc475de。服务器端得到客户端送上来的cookie后，重新计算一下验证码，如一致，则未篡改。</li>
+</ul>
+<h3 id="3">3、网站盗链防护</h3>
+<p>威胁描述：</p>
+<p>盗链是指服务提供商自己不提供服务的内容，通过技术手段绕过其它有利益的最终用户界面（如广告），直接在自己的网站上向最终用户提供其它服务提供商的服务内容，骗取最终用户的浏览和点击率。受益者不提供资源或提供很少的资源，而真正的服务提供商却得不到任何的收益。网站盗链会大量消耗被盗链网站的带宽，而真正的点击率也许会很小，严重损害了被盗链网站的利益。</p>
+<p>安全防护：</p>
+<p>WEB应用防火墙通过实现URL级别的访问控制，对客户端请求进行检测，如果发现图片、文件等资源信息的HTTP请求来自于其它网站，则阻止盗链请求，节省因盗用资源链接而消耗的带宽和性能。</p>
+<h2 id="web_4">三、web应用交付</h2>
+<h3 id="1_1">1、网页防篡改</h3>
+<p>网页篡改的途径</p>
+<p>1）SQL注入后获取Webshell：</p>
+<p>黑客通过web应用程序的漏洞，通过SQL语句提交非法的语句到数据，通过系统以及第三方软件的漏洞获取web的控制权限或者服务器权限；</p>
+<p>2）XSS漏洞引入恶意HTML界面：</p>
+<p>被动的跨站攻击可以在合法的地方引入非法的HTML或者JS代码，从而让访问者“正常”的改变页面内容；例如：校内网蠕虫；
+3）控制了Web服务器：</p>
+<p>攻击者可能通过服务器或者第三方的漏洞，获取了服务器权限、数据库管理权限进而修改页面；</p>
+<p>4）控制了DNS服务器：</p>
+<p>攻击者对网站的域名服务器进行渗透，获取了域名的解析权限，改变了解析地址以达到篡改的效果；例如：百度被黑事件；</p>
+<p>5）遭遇了ARP攻击：</p>
+<p>攻击者可能会针对web服务器所在的外段进行攻击，当掌握了同网段某台机器以后对web服务器所在的主机发送ARP欺骗包，引诱访问者或者web服务器指向其他页面以达到篡改效果；</p>
+<p>网页防篡改的途径</p>
+<p>1）给正常文件一个通行证；</p>
+<p>将正常的程序文件数量、名称记录下来，并保存每一个正常文件的MD5散列做成数字签名存入数据库；如果当遇到黑客攻击修改主页、挂马、提交webshell的时候，由于这些文件被修改过或者是新提交的，没有在数据库中存在，则将其删除或者恢复以达到防护效果；</p>
+<p>2）检测和防护SQL注入攻击；</p>
+<p>通过过滤SQL危险字符如：“’、select、where、insert、,、;”等等将其进行无害化编码或者转码，从源头遏止；对提交到web服务器的数据报进行过滤检测是否含有“eval、wscript.shell、iframe”等等；</p>
+<p>3）检测和防护DNS攻击解析；</p>
+<p>不断在本地通过nslookup解析域名以监视域名的指向是否合法；</p>
+<p>4）检测和防护ARP攻击；</p>
+<p>绑定MAC地址，检测ARP攻击并过滤掉危险的ARP数据报；</p>
+<p>5）过滤对WEB服务器的请求；</p>
+<p>设置访问控制列表，设置IP黑名单和白名单过滤掉非法访问后台的IP；对web服务器文件的请求进行文件预解析，对比解析的文件与原文件差异，存在差异的取源文件返回请求；</p>
+<p>6）做好集群或者数据库加密；</p>
+<p>对于NT系统设置好文件夹权限，控制因操作失误所带来的损失；对于SQL 2005可以设置管理IP和数据库加密，切断数据库篡改的源头；</p>
+<p>7）加强培训；</p>
+<p>加强安全意识培训，操作合理化培训，从程序自身的源头遏制，从管理员自身的源头遏制。</p>
+<h3 id="2url">2、基于URL的流量控制</h3>
+<p>django可以控制一个url地址链接每天被访问的次。django中间件也可以管控url的访问权限。</p>
+<h3 id="3_1">3、应用加速</h3>
+<p>1）django缓存系统，缓存数据</p>
+<p>2）web应用加速方案：varnish（服务代理）</p>
+<h3 id="4">４、多服务器负载均衡</h3>
+<p>使用多服务器做负载均衡，提高数据的读取速度，以及网页的响应速度。</p>
+<h2 id="web_5">四、web应用合规</h2>
+<h3 id="1url">1、基于URL的访问控制</h3>
+<p>django的中间件拦截控制，判断请求地址，限制访问权限和重定向等。</p>
+<h3 id="2http">2、HTTP协议合规</h3>
+<p>通常HTTP消息包括客户机向服务器的请求消息和服务器向客户机的响应消息。这两种类型的消息由一个起始行，一个或者多个头域，一个只是头域结束的空行和可选的消息体组成。HTTP的头域包括通用头，请求头，响应头和实体头四个部分。每个头域由一个域名，冒号（:）和域值三部分组成。域名是大小写无关的，域值前可以添加任何数量的空格符，头域可以被扩展为多行，在每行开始处，使用至少一个空格或制表符。</p>
+<h3 id="3_2">3、敏感信息泄露防护</h3>
+<p>让前端发送的数据就行加密操作，django后台进行解密后处理，并响应加密数据，前端进行解密。完成数据完整加密。</p>
+<h3 id="4_1">4、文件上传下载控制</h3>
+<p>django后台判断文件类型和大小，来限制用户的文件上传。</p>
+<h3 id="5web">5、web表单关键字过滤</h3>
+<p>前端处理，js判断填写的字段是否合规，就行过滤，规范用户填写的内容。</p>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

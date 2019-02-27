@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redis_备忘.md—E:\备忘资料</title>
+    <style type="text/css">
+    body{font-family:Helvetica,arial,sans-serif;font-size:14px;line-height:1.6;padding-top:10px;padding-bottom:10px;background-color:white;padding:30px;color:#333}body>*:first-child{margin-top:0!important}body>*:last-child{margin-bottom:0!important}a{color:#4183c4;text-decoration:none}a:hover{text-decoration:underline}a.absent{color:#c00}a.anchor{display:block;padding-left:30px;margin-left:-30px;cursor:pointer;position:absolute;top:0;left:0;bottom:0}html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0}kbd{background:#f1f1f1;background:-moz-linear-gradient(#f1f1f1,#ddd);background:-webkit-linear-gradient(#f1f1f1,#ddd);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#f1f1f1', endColorstr='#dddddd')";border-radius:2px;border:1px solid #ddd;border-bottom-color:#ccc;border-right-color:#ccc;padding:1px 4px;line-height:10px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}.container{max-width:920px;margin:0 auto 20px auto}#header{background:#fafafa;background:-moz-linear-gradient(#fafafa,#eaeaea);background:-webkit-linear-gradient(#fafafa,#eaeaea);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#eaeaea')";border-bottom:1px solid #cacaca;box-shadow:0 1px 0 rgba(255,255,255,0.4),0 0 10px rgba(0,0,0,0.1)}#markup{padding:3px}#markup article{padding-top:30px}.markdown-body{font-size:14px;line-height:1.6}.markdown-body>*:first-child{margin-top:0!important}.markdown-body>*:last-child{margin-bottom:0!important}.markdown-body a.absent{color:#c00}.markdown-body a.anchor{bottom:0;cursor:pointer;display:block;left:0;margin-left:-30px;padding-left:30px;position:absolute;top:0}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{cursor:text;font-weight:bold;margin:20px 0 10px;padding:0;position:relative}.markdown-body h1 .mini-icon-link,.markdown-body h2 .mini-icon-link,.markdown-body h3 .mini-icon-link,.markdown-body h4 .mini-icon-link,.markdown-body h5 .mini-icon-link,.markdown-body h6 .mini-icon-link{color:#000;display:none}.markdown-body h1:hover a.anchor,.markdown-body h2:hover a.anchor,.markdown-body h3:hover a.anchor,.markdown-body h4:hover a.anchor,.markdown-body h5:hover a.anchor,.markdown-body h6:hover a.anchor{line-height:1;margin-left:-22px;padding-left:0;text-decoration:none;top:15%}.markdown-body h1:hover a.anchor .mini-icon-link,.markdown-body h2:hover a.anchor .mini-icon-link,.markdown-body h3:hover a.anchor .mini-icon-link,.markdown-body h4:hover a.anchor .mini-icon-link,.markdown-body h5:hover a.anchor .mini-icon-link,.markdown-body h6:hover a.anchor .mini-icon-link{display:inline-block}.markdown-body h1 tt,.markdown-body h1 code,.markdown-body h2 tt,.markdown-body h2 code,.markdown-body h3 tt,.markdown-body h3 code,.markdown-body h4 tt,.markdown-body h4 code,.markdown-body h5 tt,.markdown-body h5 code,.markdown-body h6 tt,.markdown-body h6 code{font-size:inherit}.markdown-body h1{color:#000;font-size:28px}.markdown-body h2{border-bottom:1px solid #ccc;color:#000;font-size:24px}.markdown-body h3{font-size:18px}.markdown-body h4{font-size:16px}.markdown-body h5{font-size:14px}.markdown-body h6{color:#777;font-size:14px}.markdown-body p,.markdown-body blockquote,.markdown-body ul,.markdown-body ol,.markdown-body dl,.markdown-body table,.markdown-body pre{margin:15px 0}.markdown-body hr{background:url("/public/github-dirty-shade.png") repeat-x scroll 0 0 transparent;border:0 none;color:#ccc;height:4px;padding:0}.markdown-body>h2:first-child,.markdown-body>h1:first-child,.markdown-body>h1:first-child+h2,.markdown-body>h3:first-child,.markdown-body>h4:first-child,.markdown-body>h5:first-child,.markdown-body>h6:first-child{margin-top:0;padding-top:0}.markdown-body a:first-child h1,.markdown-body a:first-child h2,.markdown-body a:first-child h3,.markdown-body a:first-child h4,.markdown-body a:first-child h5,.markdown-body a:first-child h6{margin-top:0;padding-top:0}.markdown-body h1+p,.markdown-body h2+p,.markdown-body h3+p,.markdown-body h4+p,.markdown-body h5+p,.markdown-body h6+p{margin-top:0}.markdown-body li p.first{display:inline-block}.markdown-body ul,.markdown-body ol{padding-left:30px}.markdown-body ul.no-list,.markdown-body ol.no-list{list-style-type:none;padding:0}.markdown-body ul li>*:first-child,.markdown-body ol li>*:first-child{margin-top:0}.markdown-body ul ul,.markdown-body ul ol,.markdown-body ol ol,.markdown-body ol ul{margin-bottom:0}.markdown-body dl{padding:0}.markdown-body dl dt{font-size:14px;font-style:italic;font-weight:bold;margin:15px 0 5px;padding:0}.markdown-body dl dt:first-child{padding:0}.markdown-body dl dt>*:first-child{margin-top:0}.markdown-body dl dt>*:last-child{margin-bottom:0}.markdown-body dl dd{margin:0 0 15px;padding:0 15px}.markdown-body dl dd>*:first-child{margin-top:0}.markdown-body dl dd>*:last-child{margin-bottom:0}.markdown-body blockquote{border-left:4px solid #ddd;color:#777;padding:0 15px}.markdown-body blockquote>*:first-child{margin-top:0}.markdown-body blockquote>*:last-child{margin-bottom:0}.markdown-body table{border-collapse:collapse;border-spacing:0}.markdown-body table th{font-weight:bold}.markdown-body table th,.markdown-body table td{border:1px solid #ccc;padding:6px 13px}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{border:1px solid #ddd;display:block;float:left;margin:13px 0 0;overflow:hidden;padding:7px;width:auto}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{clear:both;color:#333;display:block;padding:5px 0 0}.markdown-body span.align-center{clear:both;display:block;overflow:hidden}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{clear:both;display:block;overflow:hidden}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{background-color:#f8f8f8;border:1px solid #eaeaea;border-radius:3px 3px 3px 3px;margin:0 2px;padding:0 5px;white-space:nowrap}.markdown-body pre>code{background:none repeat scroll 0 0 transparent;border:medium none;margin:0;padding:0;white-space:pre}.markdown-body .highlight pre,.markdown-body pre{background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px 3px 3px 3px;font-size:13px;line-height:19px;overflow:auto;padding:6px 10px}.markdown-body pre code,.markdown-body pre tt{background-color:transparent;border:medium none}.codehilite{background:#fff}.codehilite .c{color:#998;font-style:italic}.codehilite .err{color:#a61717;background-color:#e3d2d2}.codehilite .k{color:#000;font-weight:bold}.codehilite .o{color:#000;font-weight:bold}.codehilite .cm{color:#998;font-style:italic}.codehilite .cp{color:#999;font-weight:bold}.codehilite .c1{color:#998;font-style:italic}.codehilite .cs{color:#999;font-weight:bold;font-style:italic}.codehilite .gd{color:#000;background-color:#fdd}.codehilite .gd .x{color:#000;background-color:#faa}.codehilite .ge{color:#000;font-style:italic}.codehilite .gr{color:#a00}.codehilite .gh{color:#999}.codehilite .gi{color:#000;background-color:#dfd}.codehilite .gi .x{color:#000;background-color:#afa}.codehilite .go{color:#888}.codehilite .gp{color:#555}.codehilite .gs{font-weight:bold}.codehilite .gu{color:#aaa}.codehilite .gt{color:#a00}.codehilite .kc{color:#000;font-weight:bold}.codehilite .kd{color:#000;font-weight:bold}.codehilite .kp{color:#000;font-weight:bold}.codehilite .kr{color:#000;font-weight:bold}.codehilite .kt{color:#458;font-weight:bold}.codehilite .m{color:#099}.codehilite .s{color:#d14}.codehilite .na{color:#008080}.codehilite .nb{color:#0086b3}.codehilite .nc{color:#458;font-weight:bold}.codehilite .no{color:#008080}.codehilite .ni{color:#800080}.codehilite .ne{color:#900;font-weight:bold}.codehilite .nf{color:#900;font-weight:bold}.codehilite .nn{color:#555}.codehilite .nt{color:#000080}.codehilite .nv{color:#008080}.codehilite .ow{color:#000;font-weight:bold}.codehilite .w{color:#bbb}.codehilite .mf{color:#099}.codehilite .mh{color:#099}.codehilite .mi{color:#099}.codehilite .mo{color:#099}.codehilite .sb{color:#d14}.codehilite .sc{color:#d14}.codehilite .sd{color:#d14}.codehilite .s2{color:#d14}.codehilite .se{color:#d14}.codehilite .sh{color:#d14}.codehilite .si{color:#d14}.codehilite .sx{color:#d14}.codehilite .sr{color:#009926}.codehilite .s1{color:#d14}.codehilite .ss{color:#990073}.codehilite .bp{color:#999}.codehilite .vc{color:#008080}.codehilite .vg{color:#008080}.codehilite .vi{color:#008080}.codehilite .il{color:#099}
+    </style>
+    <style type="text/css">
+      .markdown-body hr{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC")}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="markup">
+        <article id="content" class="markdown-body">
+          <h1 id="redis">Redis 基础知识</h1>
+<div class="toc">
+<ul>
+<li><a href="#redis">Redis 基础知识</a><ul>
+<li><a href="#_1">概述</a></li>
+<li><a href="#_2">数据类型</a><ul>
+<li><a href="#string">String</a></li>
+<li><a href="#list">List</a></li>
+<li><a href="#sets">Sets</a></li>
+<li><a href="#hashes">Hashes</a></li>
+<li><a href="#zsets">ZSets</a></li>
+</ul>
+</li>
+<li><a href="#_3">常用命令</a><ul>
+<li><a href="#strings">Strings</a></li>
+<li><a href="#lists">Lists</a></li>
+<li><a href="#sets_1">Sets</a></li>
+<li><a href="#hashes_1">Hashes</a></li>
+<li><a href="#zsets_1">ZSets</a></li>
+<li><a href="#publishsubscribe">Publish/Subscribe</a></li>
+<li><a href="#_4">其他命令</a><ul>
+<li><a href="#sort">Sort</a></li>
+<li><a href="#transcation">Transcation</a></li>
+<li><a href="#timeout">Timeout</a></li>
+</ul>
+</li>
+<li><a href="#_5">更多命令</a></li>
+</ul>
+</li>
+<li><a href="#_6">常见应用</a><ul>
+<li><a href="#cache">Cache</a></li>
+<li><a href="#_7">单项排序</a></li>
+<li><a href="#_8">计数</a></li>
+<li><a href="#_9">统计</a></li>
+</ul>
+</li>
+<li><a href="#_10">内存优化</a><ul>
+<li><a href="#_11">短结构</a></li>
+<li><a href="#_12">分区结构</a></li>
+<li><a href="#_13">字节压缩</a></li>
+</ul>
+</li>
+<li><a href="#lua">Lua</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toc">
+<ul>
+<li><a href="#redis">Redis 基础知识</a><ul>
+<li><a href="#_1">概述</a></li>
+<li><a href="#_2">数据类型</a><ul>
+<li><a href="#string">String</a></li>
+<li><a href="#list">List</a></li>
+<li><a href="#sets">Sets</a></li>
+<li><a href="#hashes">Hashes</a></li>
+<li><a href="#zsets">ZSets</a></li>
+</ul>
+</li>
+<li><a href="#_3">常用命令</a><ul>
+<li><a href="#strings">Strings</a></li>
+<li><a href="#lists">Lists</a></li>
+<li><a href="#sets_1">Sets</a></li>
+<li><a href="#hashes_1">Hashes</a></li>
+<li><a href="#zsets_1">ZSets</a></li>
+<li><a href="#publishsubscribe">Publish/Subscribe</a></li>
+<li><a href="#_4">其他命令</a><ul>
+<li><a href="#sort">Sort</a></li>
+<li><a href="#transcation">Transcation</a></li>
+<li><a href="#timeout">Timeout</a></li>
+</ul>
+</li>
+<li><a href="#_5">更多命令</a></li>
+</ul>
+</li>
+<li><a href="#_6">常见应用</a><ul>
+<li><a href="#cache">Cache</a></li>
+<li><a href="#_7">单项排序</a></li>
+<li><a href="#_8">计数</a></li>
+<li><a href="#_9">统计</a></li>
+</ul>
+</li>
+<li><a href="#_10">内存优化</a><ul>
+<li><a href="#_11">短结构</a></li>
+<li><a href="#_12">分区结构</a></li>
+<li><a href="#_13">字节压缩</a></li>
+</ul>
+</li>
+<li><a href="#lua">Lua</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">概述</h2>
+<p>Redis(<em>瑞戴斯</em>)是一种<code>NoSQL</code><em>( <strong>Not Only</strong> SQL)</em>数据库,内存型数据库,支持<em>持久化</em>.</p>
+<p>Redis数据存储方式为<strong>Key-Value</strong>,类似于<em>Memcache</em>.对于<strong>Value</strong>,Redis支持的数据类型更多(<a href="#_2" title="数据类型">详见下一节</a>).</p>
+<h2 id="_2">数据类型</h2>
+<p>Redis支持以下5中数据类型:</p>
+<ul>
+<li><strong>String</strong> (Plain Text)</li>
+<li><strong>List</strong> (有序的列表)</li>
+<li><strong>Set</strong> (集合,类似Python的Tuple)</li>
+<li><strong>Hash</strong> (哈希表)</li>
+<li><strong>zset</strong> (有序的集合)</li>
+</ul>
+<p>基本的操作指令如下.</p>
+<h3 id="string">String</h3>
+<p><table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th >示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>SET</strong>
+        </td>
+        <td>
+            设置指定键值的值
+        </td>
+        <td>
+            <strong>set</strong> <em>key_name</em> <em>value</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>GET</strong>
+        </td>
+        <td>
+            获取指定键值
+        </td>
+        <td>
+            <strong>get</strong> <em>key_name</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>DEL</strong>
+        </td>
+        <td>
+            删除指定键值
+        </td>
+        <td>
+            <strong>del</strong> <em>key_name</em>
+        </td>
+    </tr>
+</table></p>
+<h3 id="list">List</h3>
+<p><table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th>示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>RPUSH | LPUSH</strong>
+        </td>
+        <td>
+            将指定元素添加到列表右侧或者左侧
+        </td>
+        <td>
+            <strong>rpush</strong> | <strong>lpush</strong> <em>key_name</em> <em>value</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>LRANGE</strong>
+        </td>
+        <td>
+            获取列表中指定范围的数据
+        </td>
+        <td>
+            <strong>lrange</strong> <em>key_name</em> <em>start</em> <em>end</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>LINDEX</strong>
+        </td>
+        <td>
+            获取指定位置的元素
+        </td>
+        <td>
+            <strong>lindex</strong> <em>key_name</em> <em>index</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>RPOP | LPOP</strong>
+        </td>
+        <td>
+            从列表的右侧或者左侧取出指定列表的最后一个元素,并将其从列表中删除
+        </td>
+        <td>
+            <strong>rpop</strong> | <strong>lpop</strong> <em>key_name</em>
+        </td>
+    </tr>
+</table></p>
+<h3 id="sets">Sets</h3>
+<p><table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th>示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>SADD</strong>
+        </td>
+        <td>
+            将指定元素添加到集合中(<em>新的元素返回1,已存在的范围0</em>)
+        </td>
+        <td>
+            <strong>sadd</strong> <em>key_name</em> <em>value</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>SMEMBERS</strong>
+        </td>
+        <td>
+            获取集合中的数据
+        </td>
+        <td>
+            <strong>smembers</strong> <em>key_name</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>SISMEMBER</strong>
+        </td>
+        <td>
+            判断指定元素是否包含在指定集合中
+        </td>
+        <td>
+            <strong>sismember</strong> <em>key_name</em> <em>value</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>SREM</strong>
+        </td>
+        <td>
+            从集合中删掉指定元素
+        </td>
+        <td>
+            <strong>srem</strong> <em>key_name</em> <em>value</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>SINTER | SUNION | SDIFF</strong>
+        </td>
+        <td>
+            集合操作- 交集 | 并集 | 差异部分
+        </td>
+        <td>
+            --
+        </td>
+    </tr>
+</table></p>
+<h3 id="hashes">Hashes</h3>
+<p><table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th >示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>HSET</strong>
+        </td>
+        <td>
+            设置指定键值的值
+        </td>
+        <td>
+            <strong>hset</strong> <em>hash_key</em> <em>sub_key1</em> <em>value</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>HGET</strong>
+        </td>
+        <td>
+            获取指定键值
+        </td>
+        <td>
+            <strong>hget</strong> <em>hash_key</em> <em>sub_key1</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>HGETALL</strong>
+        </td>
+        <td>
+            获取所有的hash键值对
+        </td>
+        <td>
+            <strong>hgetall</strong> <em>hash_key</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>HDEL</strong>
+        </td>
+        <td>
+            删除指定键值
+        </td>
+        <td>
+            <strong>del</strong> <em>hash_key</em> <em>sub_key1</em>
+        </td>
+    </tr>
+</table></p>
+<h3 id="zsets">ZSets</h3>
+<p><table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th>示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZADD</strong>
+        </td>
+        <td>
+            将指定元素添加到集合中
+        </td>
+        <td>
+            <strong>zadd</strong> <em>key_name</em> <em>score</em> <em>value</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZRANGE</strong>
+        </td>
+        <td>
+            获取集合中的数据
+        </td>
+        <td>
+            <strong>zrange</strong> <em>key_name</em> <em>start_score</em> <em>end_score</em> <strong>withscore</strong>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZRANGEBYSCORE</strong>
+        </td>
+        <td>
+            根据Score的范围获取集合中的数据
+        </td>
+        <td>
+            <strong>zrangebyscore</strong> <em>key_name</em> <em>min</em> <em>max</em> <strong>withscore</strong>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZREM</strong>
+        </td>
+        <td>
+            从集合中删掉指定元素
+        </td>
+        <td>
+            <strong>zrem</strong> <em>key_name</em> <em>value</em>
+        </td>
+    </tr>
+</table></p>
+<h2 id="_3">常用命令</h2>
+<p>除了上述的基础的操作命令,Redis还包含了许多其他的命令,相关介绍如下.</p>
+<h3 id="strings">Strings</h3>
+<p>字符串可以用来存储以下类型的数据:</p>
+<ul>
+<li>Byte 字符串</li>
+<li>Int 整数 <code>(根据服务器运行平台而定最大的长度)</code></li>
+<li>Float 浮点数 <code>(同IEEE 754)</code></li>
+</ul>
+<p>对于整型和浮点数,Redis提供了以下命令来进行操作
+<table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th>示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>INCR</strong>
+        </td>
+        <td>
+            增加指定键值的数据,增量为1
+        </td>
+        <td>
+            <strong>incr</strong> <em>key_name</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>DECR</strong>
+        </td>
+        <td>
+            减少指定键值的数据,增量为-1
+        </td>
+        <td>
+            <strong>decr</strong> <em>key_name</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>INCRBY</strong>
+        </td>
+        <td>
+            增加指定键值的数据,增量为指定的值
+        </td>
+        <td>
+            <strong>incrby</strong> <em>key_name</em> <em>value</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>DECRBY</strong>
+        </td>
+        <td>
+            减少指定键值的数据,增量为指定的值
+        </td>
+        <td>
+            <strong>decrby</strong> <em>key_name</em> <em>value</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>INCRBYFLOAT</strong>
+        </td>
+        <td>
+            增加指定键值的数据,增量为指定的值
+        </td>
+        <td>
+            <strong>incrbyfloat</strong> <em>key_name</em> <em>value</em>
+        </td>
+    </tr>
+</table></p>
+<p>如果存储的值是字符串类型,而这个值被Redis检测到是可以转换为数值类型的,那么就可以使用<code>INCR*</code>和<code>DECR*</code>进行数值的变更操作.</p>
+<p>而对于字符串类型的值,Redis提供了如下命令:
+<table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th>示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>APPEND</strong>
+        </td>
+        <td>
+            将字符串添加到键值对应值的末尾
+        </td>
+        <td>
+            <strong>append</strong> <em>key_name</em> <em>value</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>GETRANGE</strong>
+        </td>
+        <td>
+            获取指定键值对应值的子字符串,类似于SubString
+        </td>
+        <td>
+            <strong>getrange</strong> <em>key_name</em> <em>start</em> <em>end</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>SETRANGE</strong>
+        </td>
+        <td>
+            覆盖指定键值对应值的字符串,起始位置为<em>offset</em>,将value覆盖到offset后面
+        </td>
+        <td>
+            <strong>setrange</strong> <em>key_name</em> <em>offset</em> <em>value</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>GETBIT</strong>
+        </td>
+        <td>
+            获取指定键值对应值的指定位的BIT值
+        </td>
+        <td>
+            <strong>getbit</strong> <em>key_name</em> <em>offset</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>SETBIT</strong>
+        </td>
+        <td>
+            设置指定键值对应值的指定位的BIT值
+        </td>
+        <td>
+            <strong>setbit</strong> <em>key_name</em> <em>offset</em> <em>value</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>BITCOUNT</strong>
+        </td>
+        <td>
+            统计指定键值对应值的BIT位数
+        </td>
+        <td>
+            <strong>bitcount</strong> <em>key_name</em> [<em>start</em> <em>end</em>]
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>BITOP</strong>
+        </td>
+        <td>
+            将指定的键值的值进行位操作存储到目标键值中去.操作类型包含<strong>AND</strong>,<strong>OR</strong>,<strong>XOR</strong>和<strong>NOT</strong>
+        </td>
+        <td>
+            <strong>bitop</strong> <em>operation</em> <em>dst_key</em> <em>key_name</em> [<em>key_name</em> ... ]
+        </td>
+    </tr>
+</table></p>
+<h3 id="lists">Lists</h3>
+<p>除了基础的的几个命令外,常用的命令还有:
+<table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th>示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>LTRIM</strong>
+        </td>
+        <td>
+            缩减指定键值的List到只包含start到end的元素
+        </td>
+        <td>
+            <strong>ltrim</strong> <em>key_name</em> <em>start</em> <em>end</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>BLPOP</strong>
+        </td>
+        <td>
+            从指定的键值对应List中移除左边第一个元素,如果是空的List,则阻塞到有一个元素或者超时,多个key时依次取.
+        </td>
+        <td>
+            <strong>blpop</strong> <em>key_name</em> [<em>key_name</em> ...] <em>time_out</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>BRPOP</strong>
+        </td>
+        <td>
+            从指定的键值对应List中移除右边第一个元素,如果是空的List,则阻塞到有一个元素或者超时,多个key时依次取.
+        </td>
+        <td>
+            <strong>brpop</strong> <em>key_name</em> [<em>key_name</em> ...] <em>time_out</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>RPOPLPUSH</strong>
+        </td>
+        <td>
+            从源List里面移除右侧第一个元素,并将这个元素存到目标List的左侧,返回这个元素
+        </td>
+        <td>
+            <strong>rpoplpush</strong> <em>source_key</em> <em>dst_key</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>BRPOPLPUSH</strong>
+        </td>
+        <td>
+            从源List里面移除右侧第一个元素,并将这个元素存到目标List的左侧,返回这个元素,如果为空则阻塞住
+        </td>
+        <td>
+            <strong>brpoplpush</strong> <em>source_key</em> <em>dst_key</em> <em>time_out</em>
+        </td>
+    </tr>
+</table></p>
+<p>List的<em>push</em>|<em>pop</em>加上以上的阻塞命令使其非常适合用于消息服务和任务队列.</p>
+<h3 id="sets_1">Sets</h3>
+<p>Sets中的元素是唯一的,对于Sets还有以下常用的命令:
+<table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th>示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>SCARD</strong>
+        </td>
+        <td>
+            获取指定键值中的元素的数量
+        </td>
+        <td>
+            <strong>scard</strong> <em>key_name</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>SRANDMEMBER</strong>
+        </td>
+        <td>
+            随机获取Set中指定数量的元素,当count为正数时,返回的元素唯一,当为负数时,返回的元素可能不唯一
+        </td>
+        <td>
+            <strong>srandmember</strong> <em>key_name</em> [<em>count</em>]
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>SPOP</strong>
+        </td>
+        <td>
+            从Set中随机的删除一个元素,并返回这个元素
+        </td>
+        <td>
+            <strong>spop</strong> <em>key_name</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>SMOVE</strong>
+        </td>
+        <td>
+            从源Set中找到元素并删除,然后将这个元素移动到目标Set中去,并返回这个元素,如果元素不存在则什么都不做
+        </td>
+        <td>
+            <strong>smove</strong> <em>source_key</em> <em>dst_key</em> <em>item</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>SDIFFSTORE</strong>
+        </td>
+        <td>
+            将在第一个key里面并不在其他的key里面的元素存储到dst_key的Set中去
+        </td>
+        <td>
+            <strong>sdiffstore</strong> <em>dst_key</em> <em>key_name</em> [<em>key_name</em> ...]
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>SINTERSTORE</strong>
+        </td>
+        <td>
+            将在所有key的交集元素存储到dst_key的Set中去
+        </td>
+        <td>
+            <strong>sinterstore</strong> <em>dst_key</em> <em>key_name</em> [<em>key_name</em> ...]
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>SUNIONSTORE</strong>
+        </td>
+        <td>
+            将在所有key的并集元素存储到dst_key的Set中去
+        </td>
+        <td>
+            <strong>sunionstore</strong> <em>dst_key</em> <em>key_name</em> [<em>key_name</em> ...]
+        </td>
+    </tr>
+</table></p>
+<h3 id="hashes_1">Hashes</h3>
+<p>除了上述基础命令外,还有以下常用命令来操作Hash集合.
+<table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th>示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>HMGET</strong>
+        </td>
+        <td>
+            获取多个指定键的数据
+        </td>
+        <td>
+            <strong>hmget</strong> <em>key_name</em> <em>key</em> [<em>key</em> ...]
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>HMSET</strong>
+        </td>
+        <td>
+            设置多个键的数据内容
+        </td>
+        <td>
+            <strong>hmset</strong> <em>key_name</em> <em>key</em> <em>value</em> [<em>key</em> <em>value</em> ...]
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>HLEN</strong>
+        </td>
+        <td>
+            获取Hash集合的键值对数量
+        </td>
+        <td>
+            <strong>hlen</strong> <em>key_name</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>HEXISTS</strong>
+        </td>
+        <td>
+            检查指定的键是否存在
+        </td>
+        <td>
+            <strong>hexists</strong> <em>key_name</em> <em>key</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>HKEYS</strong>
+        </td>
+        <td>
+            返回所有键
+        </td>
+        <td>
+            <strong>hkeys</strong> <em>key_name</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>HVALS</strong>
+        </td>
+        <td>
+            获取所有值
+        </td>
+        <td>
+            <strong>hvals</strong> <em>key_name</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>HINCRBY</strong>
+        </td>
+        <td>
+            增加指定键的数值
+        </td>
+        <td>
+            <strong>hincrby</strong> <em>key_name</em> <em>key</em> <em>increment</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>HINCRBYFLOAT</strong>
+        </td>
+        <td>
+            增加指定键的数值
+        </td>
+        <td>
+            <strong>hincrbyfloat</strong> <em>key_name</em> <em>key</em> <em>increment</em>
+        </td>
+    </tr>
+</table></p>
+<p>后面的几个命令类似于String的操作命令,而HKEYS和HVALUES在已经有HGETALL的情况下,仅在特殊需求时有作用,如先获取所有键,再获取某些规则下键对应的值.</p>
+<h3 id="zsets_1">ZSets</h3>
+<p>有序的集合ZSet是我们经常用到的一种数据类型,除了上述命令外,还有以下常用命令.
+<table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th>示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZCARD</strong>
+        </td>
+        <td>
+            获取集合中的元素数量
+        </td>
+        <td>
+            <strong>zcard</strong> <em>key_name</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZINCRBY</strong>
+        </td>
+        <td>
+            增加集合中指定元素的值
+        </td>
+        <td>
+            <strong>zincrby</strong> <em>key_name</em> <em>increment</em> <em>member</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZCOUNT</strong>
+        </td>
+        <td>
+            获取指定score在min和max之间的元素
+        </td>
+        <td>
+            <strong>zcount</strong> <em>key_name</em> <em>min</em> <em>max</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZSCORE</strong>
+        </td>
+        <td>
+            获取指定元素的score
+        </td>
+        <td>
+            <strong>zscore</strong> <em>key_name</em> <em>member</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZRANK</strong>
+        </td>
+        <td>
+            获取指定元素的序号(索引号)
+        </td>
+        <td>
+            <strong>zrank</strong> <em>key_name</em> <em>member</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZREVRANK</strong>
+        </td>
+        <td>
+            获取指定元素的反向排序的序号(索引号)
+        </td>
+        <td>
+            <strong>zrevrank</strong> <em>key_name</em> <em>member</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZREVRANGE</strong>
+        </td>
+        <td>
+            按照反向排序从start到end的元素
+        </td>
+        <td>
+            <strong>zrevrange</strong> <em>key_name</em> <em>start</em> <em>end</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZREVRANGEBYSCORE</strong>
+        </td>
+        <td>
+            以score进行排序反向获取指定score范围的数据,并可以指定获取的偏移位置和数量(分页)
+        </td>
+        <td>
+            <strong>zrevrangebyscore</strong> <em>key_name</em> <em>max</em> <em>min</em> [<strong>withscores</strong>] [<em>limit offset count</em>]
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZREMRANGEBYSCORE</strong>
+        </td>
+        <td>
+            删除score在min和max之间的数据
+        </td>
+        <td>
+            <strong>zremrangebyscore</strong> <em>key_name</em> <em>min</em> <em>max</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZREMRANGEBYRANK</strong>
+        </td>
+        <td>
+            删除正常排序下start到stop之间的数据
+        </td>
+        <td>
+            <strong>zremrangebyrank</strong> <em>key_name</em> <em>start</em> <em>stop</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZINTERSTORE</strong>
+        </td>
+        <td>
+            类似于Set的InterStore,将多个集合的交集存到<em>dst_key</em>,需要指定key的数量,可以指定每个集合的权重,要存的元素的score的聚合方式(默认为sum)(<strong>key_name除了ZSet的还可以为Set的,当为Set时,其score按1处理</strong>)
+        </td>
+        <td>
+            <strong>zinterstore</strong> <em>dst_key</em> <em>key_count</em> <em>key_name</em> [<em>key_name</em> ...] [<strong>weights</strong> <em>weight</em> [<em>weight</em> ...]] [<strong>aggregates</strong> <em>sum</em>|<em>min</em>|<em>max</em>]
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>ZUNIONSTORE</strong>
+        </td>
+        <td>
+            类似于Set的UnionStore,将多个集合的并集存到<em>dst_key</em>,需要指定key的数量,可以指定每个集合的权重,要存的元素的score的聚合方式(默认为sum)(<strong>key_name除了ZSet的还可以为Set的,当为Set时,其score按1处理</strong>)
+        </td>
+        <td>
+            <strong>zunionstore</strong> <em>dst_key</em> <em>key_count</em> <em>key_name</em> [<em>key_name</em> ...] [<strong>weights</strong> <em>weight</em> [<em>weight</em> ...]] [<strong>aggregates</strong> <em>sum</em>|<em>min</em>|<em>max</em>]
+        </td>
+    </tr>
+</table></p>
+<h3 id="publishsubscribe">Publish/Subscribe</h3>
+<p>通常也叫做pub/sub,Redis的消息订阅.包含如下命令:
+<table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th>示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>SUBSCRIBE</strong>
+        </td>
+        <td>
+            订阅指定的信道
+        </td>
+        <td>
+            <strong>subscribe</strong> <em>channel</em> [<em>channel</em> ...]
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>UNSUBSCRIBE</strong>
+        </td>
+        <td>
+            取消指定信道的订阅,当未指定channel时,取消所有的订阅
+        </td>
+        <td>
+            <strong>unsubscribe</strong> [<em>channel</em> [<em>channel</em> ...]]
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>PUBLISH</strong>
+        </td>
+        <td>
+            向指定的信道发送信号
+        </td>
+        <td>
+            <strong>publish</strong> <em>channel</em> <em>message</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>PSUBSCRIBE</strong>
+        </td>
+        <td>
+            订阅指定的消息类型
+        </td>
+        <td>
+            <strong>psubscribe</strong> <em>pattern</em> [<em>pattern</em> ...]
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>PUNSUBSCRIBE</strong>
+        </td>
+        <td>
+            取消订阅指定的消息类型,当不指定pattern时,取消所有类型的订阅
+        </td>
+        <td>
+            <strong>punsubscribe</strong> [<em>pattern</em> [<em>pattern</em> ...]]
+        </td>
+    </tr>
+</table></p>
+<p>为了更好的说明pub/sub的作用,下面是一个Python的例子:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">redis</span> <span class="kn">import</span> <span class="n">Redis</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">Redis</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s">&#39;10.2.25.13&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">publisher</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="s">&#39;channel&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">run_pubsub</span><span class="p">():</span>
+    <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">publisher</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">pubsub</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">pubsub</span><span class="p">()</span>
+    <span class="n">pubsub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">([</span><span class="s">&#39;channel&#39;</span><span class="p">])</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pubsub</span><span class="o">.</span><span class="n">listen</span><span class="p">():</span>
+        <span class="k">print</span> <span class="n">item</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">pubsub</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">break</span>
+</pre></div>
+
+
+<p>运行<code>run_pubsub</code>,结果为:</p>
+<div class="codehilite"><pre>{&#39;pattern&#39;: None, &#39;type&#39;: &#39;subscribe&#39;, &#39;channel&#39;: &#39;channel&#39;, &#39;data&#39;: 1L}
+{&#39;pattern&#39;: None, &#39;type&#39;: &#39;message&#39;, &#39;channel&#39;: &#39;channel&#39;, &#39;data&#39;: &#39;0&#39;}
+{&#39;pattern&#39;: None, &#39;type&#39;: &#39;message&#39;, &#39;channel&#39;: &#39;channel&#39;, &#39;data&#39;: &#39;1&#39;}
+{&#39;pattern&#39;: None, &#39;type&#39;: &#39;message&#39;, &#39;channel&#39;: &#39;channel&#39;, &#39;data&#39;: &#39;2&#39;}
+{&#39;pattern&#39;: None, &#39;type&#39;: &#39;unsubscribe&#39;, &#39;channel&#39;: &#39;channel&#39;, &#39;data&#39;: 0L}
+</pre></div>
+
+
+<p>在实际使用中,pub/sub也许并没有想象中的有用.主要有以下两个原因:</p>
+<ol>
+<li>老版本的subscribe的性能存在问题,可能存在buffer溢出,导致系统崩溃,新版本解决了这个问题,并且提供了参数<code>client-output-buffer-limit</code>来保证不会因为subscripe处理不过来导致buffer大到不可接受.</li>
+<li>这里的订阅机制并不能保证消息的可靠性.Redis的客户端具有自动重连的机制,如果一个订阅了消息的client在重连之前有pulisher发布的消息,那么这条消息就会丢失.</li>
+</ol>
+<p><em>可以通过其他的手段来弥补这个缺陷.</em></p>
+<h3 id="_4">其他命令</h3>
+<p>除了上述的命令之外,还有一些命令可能会用到.</p>
+<h4 id="sort">Sort</h4>
+<p>Sort可以用来排序Set,List,ZSet,甚至是Hash,可以把Sort看作Mysql的<code>Order By</code>和<code>Limit</code>.命令如下:
+<table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th>示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>SORT</strong>
+        </td>
+        <td>
+            按照提供的选项对Set,List,ZSet进行排序,返回或者存储排序后的结果
+        </td>
+        <td>
+            <strong>SORT</strong> <em>key_name</em> [<strong>by</strong> <em>pattern</em>] [<strong>limit</strong> <em>offset</em> <em>count</em> ] [<strong>get</strong> <em>pattern</em> [<strong>get</strong> <em>pattern</em>]] [<strong>asc</strong> | <strong>desc</strong>] [<strong>alpha</strong>] [<strong>store</strong> <em>dst_Key</em>]
+        </td>
+    </tr>
+</table></p>
+<p>对于Hash的Sort,下面的命令行例子可能更加清晰:</p>
+<div class="codehilite"><pre>sadd watch:leto 12339 1382 338 9338
+
+
+hset bug:12339 severity 3
+hset bug:12339 priority 1
+hset bug:12339 details &#39;{&quot;id&quot;:12339,....}&#39;
+
+hset bug:1382 severity 2
+hset bug:1382 priority 2
+hset bug:1382 details &#39;{&quot;id&quot;:1382,....}&#39;
+
+hset bug:338 severity 5
+hset bug:338 priority 3
+hset bug:338 details &#39;{&quot;id&quot;:338,....}&#39;
+
+hset bug:9338 severity 4
+hset bug:9338 priority 2
+hset bug:9338 details &#39;{&quot;id&quot;:9338,....}&#39;
+
+sort watch:leto by bug:*-&gt;priority get bug:*-&gt;details
+
+结果为:
+</pre></div>
+
+
+<blockquote>
+<div class="codehilite"><pre>  1) {&quot;id&quot;:12339,....}
+  2) {&quot;id&quot;:1382,....}
+  3) {&quot;id&quot;:9338,....}
+  4) {&quot;id&quot;:338,....}
+</pre></div>
+
+
+</blockquote>
+<div class="codehilite"><pre>sort watch:leto by bug:*-&gt;priority get bug:*-&gt;details store watch_by_priority:leto
+</pre></div>
+
+
+<h4 id="transcation">Transcation</h4>
+<p>尽管Redis提供了一些命令执行连贯的操作,如上面的<code>Sort...Store ...</code>,有时候我们还是需要同时执行几个命令,Redis提供了一些事务的命令:<code>WATCH</code>,<code>MULTI</code>,<code>EXEC</code>,<code>UNWATCH</code>和<code>DISCARD</code>来完成事务.</p>
+<p>Redis的事务是阻止其他的命令执行,而不是像一般的关系型数据一样(一部分一部分的执行,最后回滚或者提交).使用事务的步骤如下:</p>
+<ol>
+<li>调用<code>MULTI</code></li>
+<li>调用命令</li>
+<li>调用<code>EXEC</code></li>
+</ol>
+<p>当Redis发现了<code>MULTI</code>时会将其他的客户端命令缓存到队列中,直到发现了<code>EXEC</code>.</p>
+<h4 id="timeout">Timeout</h4>
+<p>Redis自带了超时相关命令,使数据尽在时效内有效.相关命令如下:
+<table style="width: 100%;text-align: center;">
+    <tr>
+        <th>命令</th>
+        <th>作用</th>
+        <th>示例</th>
+    </tr>
+    <tr>
+        <td>
+            <strong>PERSIST</strong>
+        </td>
+        <td>
+            删除指定键值的时效,即使之永久有效
+        </td>
+        <td>
+            <strong>persist</strong> <em>key_name</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>TTL</strong>
+        </td>
+        <td>
+            获取指定键值的剩余有效时间(单位:<code>S</code>)
+        </td>
+        <td>
+            <strong>ttl</strong> <em>key_name</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>EXPIRE</strong>
+        </td>
+        <td>
+            设置指定键值的有效时间(单位:<code>S</code>)
+        </td>
+        <td>
+            <strong>expire</strong> <em>key_name</em> <em>seconds</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>EXPIREAT</strong>
+        </td>
+        <td>
+            设置指定键值的有效时间点(unix timestamp)(精度:<code>S</code>)
+        </td>
+        <td>
+            <strong>expireat</strong> <em>key_name</em> <em>timestamp</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>PTTL</strong>
+        </td>
+        <td>
+            获取指定键值的剩余有效时间(单位:<code>MS</code>) <em>- Redis 2.6+</em>
+        </td>
+        <td>
+            <strong>pttl</strong> <em>key_name</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>PEXPIRE</strong>
+        </td>
+        <td>
+            设置指定键值的有效时间(单位:<code>MS</code>) <em>- Redis 2.6+</em>
+        </td>
+        <td>
+            <strong>pexpire</strong> <em>key_name</em> <em>milliseconds</em>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>EXPIREAT</strong>
+        </td>
+        <td>
+            设置指定键值的有效时间点(unix timestamp)(精度:<code>MS</code>) <em>- Redis 2.6+</em>
+        </td>
+        <td>
+            <strong>expireat</strong> <em>key_name</em> <em>timestamp-milliseconds</em>
+        </td>
+    </tr>
+</table></p>
+<h3 id="_5">更多命令</h3>
+<p>以上基本为Redis中常用的命令,更多的命令以及命令详细,参见 <a href="http://10.2.25.13:9292/commands" title="本地Redis Docs">Redis Command</a></p>
+<h2 id="_6">常见应用</h2>
+<h3 id="cache">Cache</h3>
+<p>Redis常被用来做Cache，我们可以缓存<code>Render结果</code>、<code>DB结果</code>以及其他数据，通过Expire进行无效的缓存清理。</p>
+<p>例如：
+    有查询结果A，包含了各种查询条件、排序，最后包含了<strong>Limit</strong>，我们可以把Limit前的数据存到Cache里，设置上超时时间，下次同样的操作，只是Limit不同时则可以直接从Cache中读取数据,这将非常的快。</p>
+<p>另外，许多的编程语言都提供了缓存机制，<code>Redis</code>也可以用作其缓存，如Python的Django可以配置Cache：</p>
+<div class="codehilite"><pre><span class="n">CACHES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;BACKEND&#39;</span><span class="p">:</span> <span class="s">&#39;django.core.cache.backends.filebased.FileBasedCache&#39;</span><span class="p">,</span>
+        <span class="s">&#39;LOCATION&#39;</span><span class="p">:</span> <span class="s">&#39;/tmp/django_cache&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>这里将缓存改成<code>Redis</code>（<em>使用Django-Redis扩展库</em>），而不是使用基于文件的方式。</p>
+<p>其他编程语言也有类似的配置。</p>
+<h3 id="_7">单项排序</h3>
+<p>由于ZSet的存在，对于单项的排序在Redis中效率非常的高，并且也非常容易取得某个项所在的序号。</p>
+<p>例：应用中有个安全评分，评估每个用户的的客户端的安全等级；用户每次上线都会重新评估该等级，然后上传给服务端；服务端提供了评分排行榜，从高到低或者从低到高，并且可以轻松提供指定用户的安全等级所在的排行序号(即使用户量有几百万也很轻松)。</p>
+<blockquote>
+<p>设置某个用户的安全等级: </p>
+<div class="codehilite"><pre>  ZADD securesocre &lt;score&gt; &lt;userid&gt;
+</pre></div>
+
+
+<p>得到前100安全等级的的用户: </p>
+<div class="codehilite"><pre>  ZREVRANGE securesocre 0 99
+</pre></div>
+
+
+<p>或者</p>
+<div class="codehilite"><pre>  ZRANGE securesocre 0 99
+</pre></div>
+
+
+<p>得到当前用户的排行:</p>
+<div class="codehilite"><pre>  ZRANK securesocre &lt;userid&gt;
+</pre></div>
+
+
+<p>或者</p>
+<div class="codehilite"><pre>  ZREVRANK securesocre &lt;userid&gt;
+</pre></div>
+
+
+</blockquote>
+<h3 id="_8">计数</h3>
+<p>由于<code>INCR</code>相关的命令存在，Redis是一个很好的计数器；由于Redis是单线程，也不用担心多个线程同时增减的问题。</p>
+<p>例： 统计系统中当前有多少在线用户，多少离线用户；</p>
+<blockquote>
+<p>初始化在线用户和离线用户的数量：</p>
+<div class="codehilite"><pre>  SET SystemOnlineUserCount:&lt;SystemID&gt; 0
+  SET SystemOfflineUserCount:&lt;SystemID&gt; 10
+</pre></div>
+
+
+<p>利用计数器,可以增加指定系统ID的在线用户数量并减少离线用户的数量：</p>
+<div class="codehilite"><pre>  INCR SystemOnlineUserCount:&lt;SystemID&gt;
+  DECR SystemOfflineUserCount:&lt;SystemID&gt;
+</pre></div>
+
+
+<p>获取指定系统有多少在线用户：</p>
+<div class="codehilite"><pre>  GET SystemOnlineUserCount:&lt;SystemID&gt;
+</pre></div>
+
+
+</blockquote>
+<p>程序启动时，针对于数据库进行一次统计，初始化计数器的值，后续通过上下线的事件进行相关计数器的变更。</p>
+<h3 id="_9">统计</h3>
+<p>与计数类似的是统计，基于<code>Set</code>和<code>ZSet</code>的<code>*Card</code>命令，可以很容易的统计出一个键值中有多少元素，通过<code>SCAN</code>可以找出相关的键值；通过<code>*UNIONSTORE</code>可以将离散的键值合并起来。</p>
+<p>例：我们采用与计数类似的例子，使用<code>Set</code>或者<code>ZSet</code>来完成计数或者统计。</p>
+<p>在线用户统计</p>
+<blockquote>
+<p>键值规划如下：</p>
+<div class="codehilite"><pre>    键名字          所属系统   所属设备   接入时间UnixTime(ZSet)   接入用户ID
+  SystemOnlineUsers:&lt;SystemID&gt;:&lt;DeviceID&gt; [&lt;DatetimeJoinedIFZSet&gt;] &lt;UserID&gt;
+</pre></div>
+
+
+<p>获取指定系统的指定设备下有多少在线用户：</p>
+<div class="codehilite"><pre>  SCARD SystemOnlineUsers:&lt;SystemID&gt;:&lt;DeviceID&gt;
+</pre></div>
+
+
+<p>查看当前有多少设备有键值：</p>
+<div class="codehilite"><pre>  SCAN 0 MATCH SystemOnlineUsers:&lt;SystemID&gt;:*
+</pre></div>
+
+
+<p>有了这些键值之后，便可以将他们聚合起来：</p>
+<div class="codehilite"><pre>  SUNIONSTORE SystemOnlineUsers:&lt;SystemID&gt; SystemOnlineUsers:&lt;SystemID&gt;:&lt;DeviceID1&gt; [SystemOnlineUsers:&lt;SystemID&gt;:&lt;DeviceID2&gt;]
+</pre></div>
+
+
+<p>此时便可以统计指定系统有多少在线用户：</p>
+<div class="codehilite"><pre>  SCARD SystemOnlineUsers:&lt;SystemID&gt;
+</pre></div>
+
+
+<p>同时，还可以查看指定用户是否在线：</p>
+<div class="codehilite"><pre>  SISMEMBER SystemOnlineUsers:&lt;SystemID&gt; &lt;UserID&gt;
+</pre></div>
+
+
+</blockquote>
+<p>使用<code>ZSet</code>相关命令也基本<em>类似</em> ，不过<code>ZSet</code>还可以有另外一种用法。</p>
+<blockquote>
+<p>键值规划如下：</p>
+<div class="codehilite"><pre>    键名字          所属系统   所属设备   数量         类型
+  SystemUserCount:&lt;SystemID&gt;:&lt;DeviceID&gt;    &lt;Count&gt;  [OnlineUserCount]
+                                          &lt;Count&gt;   [OfflineUserCount]
+</pre></div>
+
+
+<p>获取指定系统的指定设备下有多少在线用户：</p>
+<div class="codehilite"><pre>  ZSCORE SystemUserCount:&lt;SystemID&gt;:&lt;DeviceID&gt; OnlineUserCount
+</pre></div>
+
+
+<p>查看当前有多少设备有键值：</p>
+<div class="codehilite"><pre>  SCAN 0 MATCH SystemUserCount:&lt;SystemID&gt;:*
+</pre></div>
+
+
+<p>有了这些键值之后，便可以将他们聚合起来：</p>
+<div class="codehilite"><pre>  ZUNIONSTORE SystemUserCount:&lt;SystemID&gt; SystemUserCount:&lt;SystemID&gt;:&lt;DeviceID1&gt; [SystemUserCount:&lt;SystemID&gt;:&lt;DeviceID2&gt;]
+</pre></div>
+
+
+<p>此时便可以统计指定系统有多少在线用户：</p>
+<div class="codehilite"><pre>  ZSCORE SystemUserCount:&lt;SystemID&gt; OnlineUserCount
+</pre></div>
+
+
+<p>当然，离线的也可以通过类似的方式获取出来：</p>
+<div class="codehilite"><pre>  ZSCORE SystemUserCount:&lt;SystemID&gt; OfflineUserCount
+</pre></div>
+
+
+<p>另外，还可以用另外一种方式进行数据的存储：</p>
+<div class="codehilite"><pre>    键名字              所属系统      数量         所属设备
+  SystemOnlineUserCount:&lt;SystemID&gt;   &lt;Count&gt;     [DeviceID1]
+                                     &lt;Count&gt;     [DeviceID2]
+</pre></div>
+
+
+<p>这种方式更容易进行排序操作，但是聚合所有设备的数量时无法直接通过命令处理，需要加入程序或者脚本的控制。</p>
+</blockquote>
+<p>上述Python的Demo程序如下：</p>
+<div class="codehilite"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c"># FileName       : &#39;CountDemo&#39;</span>
+<span class="c"># Create Time    : &#39;2016/5/13 8:59&#39;</span>
+<span class="c"># Created By     : &#39;Benjamin&#39;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">文件描述</span>
+<span class="sd">========</span>
+
+<span class="sd">使用方法</span>
+<span class="sd">--------</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">redis</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">redis.client</span> <span class="kn">import</span> <span class="n">StrictRedis</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+
+<span class="n">con</span> <span class="o">=</span> <span class="n">StrictRedis</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;10.2.25.13&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">system_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;System1&quot;</span><span class="p">,</span> <span class="s">&quot;System2&quot;</span><span class="p">]</span>
+<span class="n">device_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;10.2.0.123&quot;</span><span class="p">,</span> <span class="s">&quot;10.2.0.110&quot;</span><span class="p">]</span>
+<span class="n">users</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s">&quot;user_{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10001</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">add_data</span><span class="p">():</span>
+    <span class="n">key_format</span> <span class="o">=</span> <span class="s">&quot;SystemOnlineUsersOfSet:{0}:{1}&quot;</span>
+    <span class="n">pipe</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">system_name</span> <span class="ow">in</span> <span class="n">system_names</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">count_date</span> <span class="ow">in</span> <span class="n">device_names</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">key_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">,</span> <span class="n">count_date</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+                <span class="n">cur_user</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">users</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">pipe</span><span class="o">.</span><span class="n">sadd</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">cur_user</span><span class="p">)</span>
+
+    <span class="n">pipe</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">add_data_zSet</span><span class="p">():</span>
+    <span class="n">pipe</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">key_format</span> <span class="o">=</span> <span class="s">&quot;SystemOnlineUsersOfZSet:{0}:{1}&quot;</span>
+    <span class="k">for</span> <span class="n">system_name</span> <span class="ow">in</span> <span class="n">system_names</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">count_date</span> <span class="ow">in</span> <span class="n">device_names</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">key_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">,</span> <span class="n">count_date</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+                <span class="n">cur_user</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">users</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">pipe</span><span class="o">.</span><span class="n">zadd</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span> <span class="n">cur_user</span><span class="p">)</span>
+
+    <span class="n">pipe</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">add_data_zSetOfCount</span><span class="p">():</span>
+    <span class="n">pipe</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">key_format</span> <span class="o">=</span> <span class="s">&quot;SystemUsersCount:{0}:{1}&quot;</span>
+    <span class="k">for</span> <span class="n">system_name</span> <span class="ow">in</span> <span class="n">system_names</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">count_date</span> <span class="ow">in</span> <span class="n">device_names</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">key_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">,</span> <span class="n">count_date</span><span class="p">)</span>
+            <span class="n">online_count</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+            <span class="n">offline_count</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+            <span class="n">pipe</span><span class="o">.</span><span class="n">zadd</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">online_count</span><span class="p">,</span> <span class="s">&quot;OnlineUserCount&quot;</span><span class="p">,</span> <span class="n">offline_count</span><span class="p">,</span> <span class="s">&quot;OfflineUserCount&quot;</span><span class="p">)</span>
+
+    <span class="n">pipe</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">union_data</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">system_name</span> <span class="ow">in</span> <span class="n">system_names</span><span class="p">:</span>
+        <span class="n">user_count_keys</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;SystemOnlineUsersOfSet:{0}:*&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">1000</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">con</span><span class="o">.</span><span class="n">sunionstore</span><span class="p">(</span><span class="s">&#39;SystemOnlineUsersOfSet:{0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">),</span> <span class="n">user_count_keys</span><span class="p">)</span>
+
+        <span class="n">user_count_keys</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;SystemOnlineUsersOfZSet:{0}:*&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">1000</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">con</span><span class="o">.</span><span class="n">zunionstore</span><span class="p">(</span><span class="s">&#39;SystemOnlineUsersOfZSet:{0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">),</span> <span class="n">user_count_keys</span><span class="p">,</span> <span class="n">aggregate</span><span class="o">=</span><span class="s">&#39;max&#39;</span><span class="p">)</span>
+
+        <span class="n">user_count_keys</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;SystemUsersCount:{0}:*&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">1000</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">con</span><span class="o">.</span><span class="n">zunionstore</span><span class="p">(</span><span class="s">&#39;SystemUsersCount:{0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">),</span> <span class="n">user_count_keys</span><span class="p">,</span> <span class="n">aggregate</span><span class="o">=</span><span class="s">&#39;sum&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">show_data</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span> <span class="o">+</span> <span class="s">&quot;Set&quot;</span> <span class="o">+</span> <span class="s">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span>
+    <span class="n">key_format</span> <span class="o">=</span> <span class="s">&quot;SystemOnlineUsersOfSet:{0}:{1}&quot;</span>
+
+    <span class="k">for</span> <span class="n">system_name</span> <span class="ow">in</span> <span class="n">system_names</span><span class="p">:</span>
+
+        <span class="k">for</span> <span class="n">device_name</span> <span class="ow">in</span> <span class="n">device_names</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">key_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">,</span> <span class="n">device_name</span><span class="p">),</span> <span class="s">&quot; -&gt; Users : &quot;</span>
+            <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">smembers</span><span class="p">(</span><span class="n">key_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">,</span> <span class="n">device_name</span><span class="p">))))</span>
+
+            <span class="k">print</span> <span class="n">key_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">,</span> <span class="n">device_name</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; -&gt; Count : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">scard</span><span class="p">(</span>
+                <span class="n">key_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">,</span> <span class="n">device_name</span><span class="p">)))</span>
+
+        <span class="k">print</span> <span class="s">&quot;SystemOnlineUsersOfSet:{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">),</span> <span class="s">&quot; -&gt; Users : &quot;</span>
+        <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">smembers</span><span class="p">(</span><span class="s">&quot;SystemOnlineUsersOfSet:{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">))))</span>
+
+        <span class="k">print</span> <span class="s">&quot;SystemOnlineUsersOfSet:{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; -&gt; Count : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">scard</span><span class="p">(</span>
+            <span class="s">&quot;SystemOnlineUsersOfSet:{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">)))</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+
+    <span class="k">print</span> <span class="s">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span> <span class="o">+</span> <span class="s">&quot;ZSet&quot;</span> <span class="o">+</span> <span class="s">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span>
+    <span class="n">key_format</span> <span class="o">=</span> <span class="s">&quot;SystemOnlineUsersOfZSet:{0}:{1}&quot;</span>
+
+    <span class="k">for</span> <span class="n">system_name</span> <span class="ow">in</span> <span class="n">system_names</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">device_name</span> <span class="ow">in</span> <span class="n">device_names</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">key_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">,</span> <span class="n">device_name</span><span class="p">),</span> <span class="s">&quot; -&gt; Users : &quot;</span>
+            <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">zrange</span><span class="p">(</span><span class="n">key_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">,</span> <span class="n">device_name</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)))</span>
+
+            <span class="k">print</span> <span class="n">key_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">,</span> <span class="n">device_name</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; -&gt; Count : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">zcard</span><span class="p">(</span>
+                <span class="n">key_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">,</span> <span class="n">device_name</span><span class="p">)))</span>
+
+        <span class="k">print</span> <span class="s">&quot;SystemOnlineUsersOfZSet:{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">),</span> <span class="s">&quot; -&gt; Users : &quot;</span>
+        <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">zrange</span><span class="p">(</span><span class="s">&quot;SystemOnlineUsersOfZSet:{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)))</span>
+        <span class="k">print</span> <span class="s">&quot;SystemOnlineUsersOfZSet:{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; -&gt; Count : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">zcard</span><span class="p">(</span>
+            <span class="s">&quot;SystemOnlineUsersOfZSet:{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">)))</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+
+    <span class="k">print</span> <span class="s">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span> <span class="o">+</span> <span class="s">&quot;ZSetOfCount&quot;</span> <span class="o">+</span> <span class="s">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span>
+    <span class="n">key_format</span> <span class="o">=</span> <span class="s">&quot;SystemUsersCount:{0}:{1}&quot;</span>
+    <span class="k">for</span> <span class="n">system_name</span> <span class="ow">in</span> <span class="n">system_names</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">device_name</span> <span class="ow">in</span> <span class="n">device_names</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">key_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">,</span> <span class="n">device_name</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; -&gt; Count : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">zrange</span><span class="p">(</span>
+                <span class="n">key_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">,</span> <span class="n">device_name</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">withscores</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+
+        <span class="k">print</span> <span class="s">&quot;SystemUsersCount:{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; -&gt; Count : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">zrange</span><span class="p">(</span>
+            <span class="s">&quot;SystemUsersCount:{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">system_name</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">withscores</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">con</span><span class="o">.</span><span class="n">flushdb</span><span class="p">()</span>
+
+    <span class="n">add_data</span><span class="p">()</span>
+    <span class="n">add_data_zSet</span><span class="p">()</span>
+    <span class="n">add_data_zSetOfCount</span><span class="p">()</span>
+    <span class="n">union_data</span><span class="p">()</span>
+    <span class="n">show_data</span><span class="p">()</span>
+    <span class="k">print</span> <span class="s">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">80</span>
+</pre></div>
+
+
+<p>输出结果如下:</p>
+<div class="codehilite"><pre>----------------------------------------Set----------------------------------------
+SystemOnlineUsersOfSet:System1:10.2.0.123  -&gt; Users : 
+[&#39;user_7457&#39;, &#39;user_8985&#39;, &#39;user_1510&#39;, &#39;user_5987&#39;, &#39;user_3543&#39;]
+SystemOnlineUsersOfSet:System1:10.2.0.123 -&gt; Count : 5
+SystemOnlineUsersOfSet:System1:10.2.0.110  -&gt; Users : 
+[&#39;user_9211&#39;,
+ &#39;user_4220&#39;,
+ &#39;user_48&#39;,
+ &#39;user_1120&#39;,
+ &#39;user_6355&#39;,
+ &#39;user_9772&#39;,
+ &#39;user_1792&#39;,
+ &#39;user_7067&#39;,
+ &#39;user_1660&#39;]
+SystemOnlineUsersOfSet:System1:10.2.0.110 -&gt; Count : 9
+SystemOnlineUsersOfSet:System1  -&gt; Users : 
+[&#39;user_8985&#39;,
+ &#39;user_9211&#39;,
+ &#39;user_4220&#39;,
+ &#39;user_7457&#39;,
+ &#39;user_5987&#39;,
+ &#39;user_48&#39;,
+ &#39;user_1120&#39;,
+ &#39;user_6355&#39;,
+ &#39;user_1510&#39;,
+ &#39;user_9772&#39;,
+ &#39;user_3543&#39;,
+ &#39;user_1792&#39;,
+ &#39;user_7067&#39;,
+ &#39;user_1660&#39;]
+SystemOnlineUsersOfSet:System1 -&gt; Count : 14
+
+SystemOnlineUsersOfSet:System2:10.2.0.123  -&gt; Users : 
+[&#39;user_8210&#39;,
+ &#39;user_1721&#39;,
+ &#39;user_9742&#39;,
+ &#39;user_5069&#39;,
+ &#39;user_8737&#39;,
+ &#39;user_3122&#39;,
+ &#39;user_3462&#39;,
+ &#39;user_4786&#39;]
+SystemOnlineUsersOfSet:System2:10.2.0.123 -&gt; Count : 8
+SystemOnlineUsersOfSet:System2:10.2.0.110  -&gt; Users : 
+[&#39;user_5137&#39;,
+ &#39;user_8563&#39;,
+ &#39;user_3319&#39;,
+ &#39;user_2790&#39;,
+ &#39;user_4340&#39;,
+ &#39;user_3546&#39;,
+ &#39;user_6826&#39;,
+ &#39;user_6197&#39;,
+ &#39;user_8739&#39;]
+SystemOnlineUsersOfSet:System2:10.2.0.110 -&gt; Count : 9
+SystemOnlineUsersOfSet:System2  -&gt; Users : 
+[&#39;user_5137&#39;,
+ &#39;user_8563&#39;,
+ &#39;user_1721&#39;,
+ &#39;user_9742&#39;,
+ &#39;user_8210&#39;,
+ &#39;user_3319&#39;,
+ &#39;user_2790&#39;,
+ &#39;user_5069&#39;,
+ &#39;user_4340&#39;,
+ &#39;user_8737&#39;,
+ &#39;user_3122&#39;,
+ &#39;user_3546&#39;,
+ &#39;user_3462&#39;,
+ &#39;user_6826&#39;,
+ &#39;user_4786&#39;,
+ &#39;user_6197&#39;,
+ &#39;user_8739&#39;]
+SystemOnlineUsersOfSet:System2 -&gt; Count : 17
+
+----------------------------------------ZSet----------------------------------------
+SystemOnlineUsersOfZSet:System1:10.2.0.123  -&gt; Users : 
+[&#39;user_2039&#39;, &#39;user_2836&#39;, &#39;user_5934&#39;, &#39;user_6414&#39;, &#39;user_6524&#39;, &#39;user_8129&#39;]
+SystemOnlineUsersOfZSet:System1:10.2.0.123 -&gt; Count : 6
+SystemOnlineUsersOfZSet:System1:10.2.0.110  -&gt; Users : 
+[&#39;user_7750&#39;, &#39;user_8164&#39;, &#39;user_9464&#39;, &#39;user_4238&#39;, &#39;user_5770&#39;]
+SystemOnlineUsersOfZSet:System1:10.2.0.110 -&gt; Count : 5
+SystemOnlineUsersOfZSet:System1  -&gt; Users : 
+[&#39;user_2039&#39;,
+ &#39;user_2836&#39;,
+ &#39;user_5934&#39;,
+ &#39;user_6414&#39;,
+ &#39;user_6524&#39;,
+ &#39;user_7750&#39;,
+ &#39;user_8129&#39;,
+ &#39;user_8164&#39;,
+ &#39;user_9464&#39;,
+ &#39;user_4238&#39;,
+ &#39;user_5770&#39;]
+SystemOnlineUsersOfZSet:System1 -&gt; Count : 11
+
+SystemOnlineUsersOfZSet:System2:10.2.0.123  -&gt; Users : 
+[&#39;user_1200&#39;,
+ &#39;user_141&#39;,
+ &#39;user_4116&#39;,
+ &#39;user_4726&#39;,
+ &#39;user_5147&#39;,
+ &#39;user_6151&#39;,
+ &#39;user_6901&#39;,
+ &#39;user_7978&#39;,
+ &#39;user_8532&#39;,
+ &#39;user_8789&#39;]
+SystemOnlineUsersOfZSet:System2:10.2.0.123 -&gt; Count : 10
+SystemOnlineUsersOfZSet:System2:10.2.0.110  -&gt; Users : 
+[&#39;user_1169&#39;,
+ &#39;user_155&#39;,
+ &#39;user_2578&#39;,
+ &#39;user_3336&#39;,
+ &#39;user_4119&#39;,
+ &#39;user_4332&#39;,
+ &#39;user_6549&#39;,
+ &#39;user_8462&#39;]
+SystemOnlineUsersOfZSet:System2:10.2.0.110 -&gt; Count : 8
+SystemOnlineUsersOfZSet:System2  -&gt; Users : 
+[&#39;user_1169&#39;,
+ &#39;user_1200&#39;,
+ &#39;user_141&#39;,
+ &#39;user_155&#39;,
+ &#39;user_2578&#39;,
+ &#39;user_3336&#39;,
+ &#39;user_4116&#39;,
+ &#39;user_4119&#39;,
+ &#39;user_4332&#39;,
+ &#39;user_4726&#39;,
+ &#39;user_5147&#39;,
+ &#39;user_6151&#39;,
+ &#39;user_6549&#39;,
+ &#39;user_6901&#39;,
+ &#39;user_7978&#39;,
+ &#39;user_8462&#39;,
+ &#39;user_8532&#39;,
+ &#39;user_8789&#39;]
+SystemOnlineUsersOfZSet:System2 -&gt; Count : 18
+
+----------------------------------------ZSetOfCount----------------------------------------
+SystemUsersCount:System1:10.2.0.123 -&gt; Count : [(&#39;OnlineUserCount&#39;, 6.0), (&#39;OfflineUserCount&#39;, 764.0)]
+SystemUsersCount:System1:10.2.0.110 -&gt; Count : [(&#39;OnlineUserCount&#39;, 7.0), (&#39;OfflineUserCount&#39;, 628.0)]
+SystemUsersCount:System1 -&gt; Count : [(&#39;OnlineUserCount&#39;, 13.0), (&#39;OfflineUserCount&#39;, 1392.0)]
+
+SystemUsersCount:System2:10.2.0.123 -&gt; Count : [(&#39;OnlineUserCount&#39;, 8.0), (&#39;OfflineUserCount&#39;, 275.0)]
+SystemUsersCount:System2:10.2.0.110 -&gt; Count : [(&#39;OnlineUserCount&#39;, 7.0), (&#39;OfflineUserCount&#39;, 685.0)]
+SystemUsersCount:System2 -&gt; Count : [(&#39;OnlineUserCount&#39;, 15.0), (&#39;OfflineUserCount&#39;, 960.0)]
+
+--------------------------------------------------------------------------------
+</pre></div>
+
+
+<p><strong>注意：</strong> <em>借助<code>Redis</code>数据结构的特性，我们可以完成一系列在其他数据库不易实现或者性能很低的需求，不过其使用也有一定的限制，比如键值的冲突问题：要统计一个用户在一段时间范围内的上下线次数，仅仅用<code>ZSet</code>或者<code>Set</code>都无法直接用<code>用户ID</code>作为键值，相同的键值在Redis中为<strong>覆盖</strong>作用；也就是说上述的例子，如果我们要统计历史状态时则会变得无效。</em></p>
+<h2 id="_10">内存优化</h2>
+<p>作为一个内存数据库,减少内存的使用是一项非常重要的事情.通常的内存的优化有三个方向:</p>
+<ol>
+<li>短结构</li>
+<li>分区结构</li>
+<li>字节压缩</li>
+</ol>
+<h3 id="_11">短结构</h3>
+<p>所谓的短结构，是指Redis在存储一些数据时，在满足相应条件时会才用压缩等方式来存取数据，以减少内存的开销；Redis提供了相关的配置项进行处理：</p>
+<div class="codehilite"><pre>list-max-ziplist-entries 512
+list-max-ziplist-value 64
+
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+</pre></div>
+
+
+<p>从如上配置中，<code>ziplist</code>仅适合于<code>List</code>、<code>Hash</code>和<code>ZSet</code>；其中<code>Entries</code>表示一个键值中允许的最大项目数量，<code>Value</code>表示每个项最大的字节数，超过这些值将不再采用ziplist进行值存储。</p>
+<p><strong>注意：</strong> <em>数据超出<code>短结构</code>的配置限定时，<code>短结构</code>将会自动转换为<code>普通结构</code>，但是当这些超出限定的值被删掉时，<code>普通结构</code>并不会重新转换为<code>短结构</code></em></p>
+<p>除了<code>ziplist</code>，还有针对于<code>Set</code>的<code>intset</code>的短结构，如果某个Set里面的数据全部都是int型数据，那么将会采用<code>intset</code>这种短结构进行数据的存储；其也有一个配置决定是否采用短结构,如下：</p>
+<div class="codehilite"><pre>set-max-intset-entries 128
+</pre></div>
+
+
+<p>关于<code>entries</code>的值，有一点需要注意的是，这个值如果设置的太大是会影响性能的，通常建议是<code>entries</code>在<strong>500-2000</strong>之间，<code>value</code>小于<strong>128</strong>字节。</p>
+<h3 id="_12">分区结构</h3>
+<p>所谓分区结构实际是人工缩小键值中项数量的方法，正如上一节所看到的，当项的数量小于配置时，Redis会采用<code>短结构</code>进行存储；但是，项目使用过程中不可避免的会出现项的数量大于我们的配置数量，而这种情况下采用手动进行分区，将数据存入不同的键值中，可以继续享受短结构的内存优势。</p>
+<p><em>如何进行分区全靠经验。</em> 其中，最简单的就是线性分区，例如，我们有值X需要存到键值Y中，不使用分区的话则为<code>Y - X</code>，使用分区的话则为<code>Y:&lt;分区ID&gt; - X</code>；线性分区的分区ID则是根据线性算法而来。</p>
+<p><strong>注意：</strong> <em>分区结构不大适合于<code>ZSet</code>和<code>List</code>（不易实现）；相对来说在<code>Hash</code>和<code>Set</code>中更适合。</em></p>
+<h3 id="_13">字节压缩</h3>
+<p>由于Redis支持字节操作，因此一些特殊的值类型（如枚举），可以使用位图等方式进行数据的压缩，减少内存的消耗。</p>
+<p><em>这里不进行详细描述</em></p>
+<h2 id="lua">Lua</h2>
+<p>Lua脚本的支持类似于数据库的存储过程，可以完成一些复杂的逻辑，但是需要对Lua脚本语言有一定的了解。</p>
+<p><em>相关教程可以参见 <a href="http://cloudwu.github.io/lua53doc/contents.html" title="http://cloudwu.github.io/lua53doc/contents.html">Lua中文参考手册</a> ，这里不进行详细描述。</em></p>
+<style>
+.toc-right
+{
+    position: fixed;
+    margin-left: 930px;
+    top: 100px;
+    height: 650px;
+    min-width: 300px;
+    overflow-y:auto; 
+}
+</style>
+
+<script type="text/javascript">
+    // Fix Second Toc Css, Make Right
+    if (document.getElementsByClassName("toc").length == 2){
+        document.getElementsByClassName("toc")[1].setAttribute('class','toc-right')
+    }
+</script>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

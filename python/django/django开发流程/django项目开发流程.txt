@@ -1,0 +1,85 @@
+一、项目虚拟环境及包管理
+  1、安装python
+	安装：
+	1）下载并解压Python 2.7.9的源代码
+	cd /opt
+	wget --no-check-certificate https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tar.xz
+	tar xf Python-2.7.9.tar.xz
+	cd Python-2.7.9
+	2）编译与安装Python 2.7.9
+	./configure --prefix=/usr/local
+	make && make altinstall
+	3）将python命令指向Python 2.7.9
+	ln -s /usr/local/bin/python2.7 /usr/local/bin/python
+	4）检查Python版本
+	sh
+	sh-4.1# python -V
+	Python 2.7.9
+
+	在 Unix/Linux 设置环境变量
+	    在 csh shell: 输入
+	    setenv PATH "$PATH:/usr/local/bin/python" , 按下"Enter"。
+
+	    在 bash shell (Linux): 输入
+	    export PATH="$PATH:/usr/local/bin/python" ，按下"Enter"。
+
+	    在 sh 或者 ksh shell: 输入
+	    PATH="$PATH:/usr/local/bin/python" , 按下"Enter"。
+
+	    注意: /usr/local/bin/python 是Python的安装目录。
+2、安装pip
+	从pip官网 https://pypi.python.org/pypi/pip 下载pip的源代码
+	#解压
+	tar -zxvf pip-1.5.5.tar.gz 
+	cd pip-1.5.5
+	#安装
+	Python setup.py install
+	这个时候会报错说少了setuptools
+	从setuptools官网 https://pypi.python.org/pypi/setuptools下载setuptools原来
+	#解压
+	tar -zxvf setuptools-3.6.tar.gz 
+	cd setuptools-3.6
+	#安装
+	python setup.py install
+	再次安装pip就OK了。
+3、安装pyenv（python版本管理器）
+	1)自动安装：curl -L https://raw.githubusercontent.com/yyuu/pyenvinstaller/master/bin/pyenv-installer | bash
+	2)配置bash：
+		# Load pyenv automatically by adding
+		# the following to ~/.bash_profile:
+
+		export PATH="/root/.pyenv/bin:$PATH"
+		eval "$(pyenv init -)"
+		eval "$(pyenv virtualenv-init -)"
+
+	3)pyenv的使用：
+		pyenv install *.*.* 安装相应的版本
+		pyenv versions 查看已安装的版本
+		pyenv global *.*.* 切换python版本
+		pyenv uninstall 卸载相应的版本
+		pyenv rehash  切换python版本后，要使用该命令刷新
+4、安装virtualenv
+	安装virtualenv：
+    	pip install virtualenv
+	创建虚拟环境
+   		 virtualenv venv
+   		 venv是新创建的虚拟环境的名称。 同时会创建一个与虚拟环境名称相同的文件夹venv, 里面存储了一个独立的Python执行环境。
+	进入虚拟环境
+    		source venv/bin/activate
+    		进入虚拟环境后，命令行的提示符会加入虚拟环境的名称，例如：(venv)user@machine:~$
+	退出虚拟环境$
+    		deactivate
+	删除虚拟环境
+   		 rm -r venv
+    		直接删除虚拟环境所在的文件夹venv就删除了我们创建的venv虚拟环境。
+5、创建虚拟环境virtualenv
+	1)创建虚拟环境：pyenv virtualenv 2.7.10 project1
+	2)激活虚拟环境：pyenv activate project1 
+		退出虚拟环境：pyenv deactivate 
+	3)pip包管理安装：
+		搜索第三方包：pip search "django"
+		安装python包：pip install Django # 最新版本
+					  pip install Django==1.8.5 # 指定版本
+		查看已安装的包：pip list
+		导出依赖包到requirements文件：$ pip freeze > requirements.txt
+					或者：$ pip install -r requirements.txt

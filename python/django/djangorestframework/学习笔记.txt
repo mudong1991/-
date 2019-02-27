@@ -1,0 +1,182 @@
+用Django Rest Framework和AngularJS开始你的项目
+http://blog.csdn.net/seele52/article/details/14105445
+一、前言
+	ReSTful API已成为现代web应用的标配了，Django Rest Framework是一个基于django的强大ReST端开发框架。
+AngularJS是一个可用于构建复杂页面应用的现代javascript构架，专注于关注点分离（Separation of concerns）
+（MVC）及依赖注入（dependency injection），鼓励人们使用可维护（且可测试）的模组来组装富客户端。
+二、基于Django Rest Framework的API
+	Django Rest Framework (DRF)提供了一个清晰的构架，你既可以用它来构建简单的一站式API构架，也可以做
+出复杂的ReST结构。其Serializer，可以把model映射到其对应的一般化表示（JSON, XML之类的），其基于类的视
+图的扩展集也正符合API接口（endpoint）的需要。Serializer和基于类的视图扩展的清晰的分离是其精妙之处。同
+时，你也可以自定义URL而无需依赖自动生成，这也是DRF和其他构架（比如Tastypie或者是Piston）不同的地方。
+这些框架model到API接口的转换基本上都是自动的，这也就造成了灵活性的降低，限制了其在不同情况的使用（尤其
+是在认证和嵌套资源(nested resources)方面）。
+三、开始序列化serializers
+___________________________________________________________________________________
+# models
+
+from django.db import models
+from pygments.lexers import get_all_lexers
+from pygments.styles import get_all_styles
+
+LEXERS = [item for item in get_all_lexers() if item[1]]
+LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
+STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
+
+
+class Snippet(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=100, blank=True, default='')
+    code = models.TextField()
+    linenos = models.BooleanField(default=False)
+    language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
+    style = models.CharField(choices=STYLE_CHOICES, default='friendly', max_length=100)
+
+    class Meta:
+        ordering = ('created',)
+
+———————————————————————————————————————————————————————————————————————————————————
+方法一：序列化字段（serlizers）
+———————————————————————————————————————————————————————————————————————————————————
+#　api/serializes.py
+
+from rest_framework import serializers
+from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
+
+
+class SnippetSerializer(serializers.Serializer):
+    pk = serializers.IntegerField(read_only=True)
+    title = serializers.CharField(required=False, allow_blank=True, max_length=100)
+    code = serializers.CharField(style={'base_template': 'textarea.html'})
+    linenos = serializers.BooleanField(required=False)
+    language = serializers.ChoiceField(choices=LANGUAGE_CHOICES, default='python')
+    style = serializers.ChoiceField(choices=STYLE_CHOICES, default='friendly')
+
+    def create(self, validated_data):
+        """
+        Create and return a new `Snippet` instance, given the validated data.
+        """
+        return Snippet.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        """
+        Update and return an existing `Snippet` instance, given the validated data.
+        """
+        instance.title = validated_data.get('title', instance.title)
+        instance.code = validated_data.get('code', instance.code)
+        instance.linenos = validated_data.get('linenos', instance.linenos)
+        instance.language = validated_data.get('language', instance.language)
+        instance.style = validated_data.get('style', instance.style)
+        instance.save()
+        return instance
+———————————————————————————————————————————————————————————————————————————————————
+1、序列化步骤
+	from snippets.models import Snippet
+	from snippets.serializers import SnippetSerializer
+	from rest_framework.renderers import JSONRenderer
+	from rest_framework.parsers import JSONParser
+
+	# 建立并保存一个snippet models对象
+	snippet = Snippet(code='print "hello, world"\n')
+	snippet.save()
+
+	# 序列化snippet对象
+	serializer = SnippetSerializer(snippet)
+	serializer.data
+
+	# 转化为json
+	content = JSONRenderer().render(serializer.data)
+	content
+
+2、反序列化步骤
+	# 转化成python数据流
+	from django.utils.six import BytesIO
+
+	stream = BytesIO(content)
+	data = JSONParser().parse(stream)
+	# 保存models对象
+	# 反序列化对象调用save()会调用create()和update()
+	serializer = SnippetSerializer(data=data)
+	serializer.is_valid()
+		# True
+	serializer.validated_data
+		# OrderedDict([('title', ''), ('code', 'print "hello, world"\n'), ('linenos', False), ('language', 'python'), ('style', 'friendly')])
+	serializer.save()
+		# <Snippet: Snippet object>
+———————————————————————————————————————————————————————————————————————————————————
+方法二：序列化模型（serlizers）
+———————————————————————————————————————————————————————————————————————————————————
+#　api/serializes.py
+
+from rest_framework import serializers
+from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
+
+
+class SnippetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Snippet
+        fields = ('id', 'title', 'code', 'linenos', 'language', 'style')
+———————————————————————————————————————————————————————————————————————————————————
+测试：
+	from snippets.serializers import SnippetSerializer
+	serializer = SnippetSerializer()
+	print(repr(serializer))
+	
+四 、请求与相应(request/response)
+	1、request 
+		drf 扩展了常规的HttpRequest，提供了一个比更灵活好用的request:request.data
+		request.POST  # Only handles form data.  Only works for 'POST' method.
+		request.data  # Handles arbitrary data.  Works for 'POST', 'PUT' and 'PATCH' methods.
+	2、response 
+		from rest_framework.response import Response
+		return Response(data)  # Renders to content type as requested by the client.
+	3、状态码：
+		from rest_framework import status
+		status.HTTP_400_BAD_REQUEST 
+	4、drf提供两种来装饰你的API views：
+	from rest_framework.decorators import api_view
+		@api_view: 装饰基本的views
+		APIView类：用类来装饰views
+五、基本视图类
+	可以精简views
+	1、使用基于类视图重写我们的API
+	from rest_framework.views import APIView
+	——————————————————————————————————————————————————————————————————————————————
+	class SnippetList(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+    def get(self, request, format=None):
+        snippets = Snippet.objects.all()
+        serializer = SnippetSerializer(snippets, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = SnippetSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+	——————————————————————————————————————————————————————————————————————————————
+	2、使用mixins
+	3、使用generic
+	from snippets.serializers import SnippetSerializer
+	from rest_framework import generics
+
+
+	class SnippetList(generics.ListCreateAPIView):
+		queryset = Snippet.objects.all()
+		serializer_class = SnippetSerializer
+
+
+	class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
+		queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+六、身份验证和权限
+	1、主键序列化
+	snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=Snippet.objects.all())
+	2、只读
+	owner = serializers.ReadOnlyField(source='owner.username')
+	3、权限设定
+	from rest_framework import permissions
+	4、自定义权限

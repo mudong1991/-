@@ -1,0 +1,416 @@
+一、python简介
+	Python是著名的“龟叔”Guido van Rossum在1989年圣诞节期间，为了打发无聊的圣诞节而编写的一个编程语言。
+	C语言适合开发那些追求运行速度，充分发挥硬件性能的程序，Python是适合用来编写应用程序的高级编程语言。
+	优点：
+		Python代码简单优雅，有很多内置的库和第三方扩展库，尽量写容易看明白的代码，尽量写少的代码。
+		python应用广泛常用于网络应用，包含网站、后台服务等， 脚本任务等。
+	缺点：
+		1、运行速度慢，Python的代码会一行一行的翻译成CPU能理解的机器代码，这样非常耗时。
+		2、代码不能加密。Python是解释型语言，发布python程序都是发布的源码，而C语言这样的编译型语言，只需要发布编译后的机器码（exe文件等），要从
+			机器码反推出C代码是不可能的。凡是编译型的语言都没这个问题，而解释型语言必须发布源码。这个缺点只限于将软件卖给别个卖钱的时候，现在开源精神
+			这个倒也无所谓了。
+
+二、安装python
+	因为Python是跨平台的，它可以运行在Windows、Mac和各种Linux/Unix系统上。在Windows上写Python程序，放到Linux上也是能够运行的。
+	要开始学习Python编程，首先就得把Python安装到你的电脑里。安装后，你会得到Python解释器（就是负责运行Python程序的），一个命令行交互环境，还有一个简单的集成开发环境。
+	解释器：
+		1、CPython，官方解释器，C语言开发的。
+		2、IPython，在CPython的交互增强。
+		3、PyPy，它的目标是执行速度，对python代码动态编译，提高了python的代码的运行速度。
+		4、Jython，运行在java平台上的python解释器，将python代码编译成java字节码执行。
+		5、IronPython，与Jython类似，只不过是运行在微软.NET平台的Python解释器。可以将Python代码编译成.net的字节码。
+	
+	Python的解释器很多，但使用最广泛的还是CPython。如果要和Java或.Net平台交互，
+	最好的办法不是用Jython或IronPython，而是通过网络调用来交互，确保各程序之间的独立性。
+
+三、数据类型和变量
+	整数、浮点数、字符串、布尔值、空值（None）
+	这种变量本身类型不固定的语言称之为动态语言，与之对应的是静态语言。
+	静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。例如Java是静态语言。
+	
+	字符串与编码：
+		在计算机内存中，统一使用Unicode编码，当需要保存到硬盘或者传输的时候就转换成UTF-8的编码。
+		python内部使用默认的Unicode编码，采用ascii的解码方式，当文件中存在中文时要设置默认编码方式为utf-8
+	
+	1、list与tuple
+		list和tuple是Python内置的有序集合，一个可变，一个不可变。根据需要来选择使用它们。
+	2、dict
+		与list相比，dict有如下特点：
+			1.查找和插入速度极快，不会随key的增加而增加。
+			2.内存占用大，内存浪费多。
+		dict的key必须是不可变对象。这是因为dict根据key来计算value的存储位置，如果每次计算相同的key得出的结果不同，那dict内部就完全混乱了。
+		这个通过key计算位置的算法称为哈希算法（Hash）。
+	3、set
+		set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。
+四、函数
+	函数的参数有必选参数，默认参数（不可变对象），可变参数，关键字参数
+	默认参数必须指向不变对象！
+	递归函数：在函数内部调用其他函数，如果在一个函数内部调用自己本身，这个函数就是递归函数。
+		优点：定义简单，逻辑清晰。理论上递归函数都可以写成循环方式，但循环的逻辑没有递归清晰。
+		缺点：函数调用是通过栈这种数据结构来实现的，进入函数会增加一个栈帧，当函数返回时就减少一个栈帧，栈是无限大的
+			，如果递归调用次数过多，会导致栈溢出。
+		解决递归调用的栈溢出的方法是通过尾递归优化，事实上可以把循环看着特殊的尾递归函数，尾递归是值函数的返回时调用本身，return语句
+		不能包含表达式。这样编译器或者解释器做优化，无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。
+		Python标准的解释器没有针对尾递归做优化，任何递归函数都存在栈溢出的问题。
+五、高级特性
+	切片：list[m:n], str[m:n]
+	迭代：如果给定一个list或者tuple，可以通过for来遍历这个，这种遍历称为迭代。
+		判断是否是迭代对象：isinstance(obj, Iterable)
+		将迭代对象转成枚举类型：enumerate(obj),可遍历索引号
+	列表生成式：[i for i in obj]
+	生成器：通过列表生成式，我们可以直接创建一个列表，但是，如果受内存限制，创建一个很大的列表，不仅占用很大的存储空间，而且如果我们
+			只用到了几个元素，后面绝大多数的元素占用的空间都浪费了。
+			所以，如果列表元素可以按照某种算法推算出来，那我们是否可以在循环的过程中不断推算出后续的元素呢？这样就不必创建完整的list，
+			从而节省大量的空间。在Python中，这种一边循环一边计算的机制，称为生成器（Generator）。
+		创建生成器：
+		1.将列表生成式的[]改成()即可，(i for i in obj)
+		2.将一个函数变成生成器yield:当每次调用next()就执行，遇到yield就返回当前值，再次执行时就从上一次返回yield处继续执行。
+
+六、函数式编程
+	函数是python内建支持的一种封装，我们把大段代码拆分才函数，通过函数一层层的调用，就可以把复杂的任务
+	分解成简单的面向过程的程序设计。函数就是面向过程的程序设计的基本单元。
+	
+	函数式编程的一个特点就是，允许把函数本身作为参数传入另一个函数，还允许返回一个函数！函数式编程就是一种抽象程度很高的编程范式，
+	纯粹的函数式编程语言编写的函数没有变量，Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言。
+	
+七、函数式编程
+	1.变量可以指向函数
+	2.函数名也可以是变量
+	3.作为变量传入函数中
+	
+	高阶函数：
+	
+		zip: 组合两个序列，两两元素组合构成新的序列。
+		map:函数接收两个参数，一个函数，一个序列，map将传入的函数依次作用于序列的每个元素，返回新的序列。
+		reduce：把一个函数作用在一个序列上，将结果依次累积计算，返回结果。
+		
+		filter:python内建的filter()函数过滤用于过滤序列。和map()类似，filter()也接收一个函数和一个序列。
+			和map()不同的时，filter()把传入的函数依次作用于每个元素，然后根据返回值是True还是False决定保留还是丢弃该元素。
+			
+		sorted：排序算法
+	
+	返回函数：函数被当做返回值返回
+		闭包：当一个函数返回了一个函数后，其内部的局部变量还被新函数引用
+			返回闭包时牢记的一点就是：返回函数不要引用任何循环变量，或者后续会发生变化的变量。
+			
+	匿名函数：lambda，当我们在传入函数时，有些时候，不需要显式地定义函数，直接传入匿名函数更方便。
+	装饰器：这种在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）。		
+	偏函数：functools.partial的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单	
+			当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。
+			
+八、模块
+	为了编写可维护的代码，我们把很多函数分组，分别放到不同的文件里，这样，每个文件包含的代码就相对较少，很多编程语言都采用这种组织代码的方式。
+	在Python中，一个.py文件就称之为一个模块（Module）。
+			
+	好处：提高了代码的可维护性		
+	别名：import sys as s
+	作用域：函数前面加__
+	
+九、面向对象编程
+	1、面向对象最重要的概念就是类（Class）和实例（Instance），必须牢记类是抽象的模板，比如Student类，而实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同。
+	
+	2、面向对象的三个特点：数据封装、继承、多态。五大原则：单一职责、开放封闭、替换、依赖、分离
+	
+	3、数据封装：类内部将数据进行封装关联。
+	
+	4、获取对象信息：
+		type：一切类型的type实例，object是所有类的基类。可以获取对象的类型，type('abc')
+		isinstance: 判断一个对象的继承关系或实例类型。isinstance('abc', (str, float))
+		dir():获取一个对象的所有属性和方法。
+	
+十、面向对象高级编程
+	多重继承、定制类、元类。
+	
+	1、动态添加属性
+		from types import MethodType 给类和实例动态添加方法
+		MethodType(方法, 实例，类)
+	2、__solts__限制类的属性添加：他是一个元组，只能设置包含元组中元素的属性。
+		使用__slots__要注意，__slots__定义的属性仅对当前类起作用，对继承的子类是不起作用的：
+	3、property:将一个方法编程属性调用。
+	
+	4、多重继承：
+		1）一个子类，可以同时继承多个父类，并拥有这些父类的属性和方法。
+		2）Mixin：主线单一继承，混入其他功能类。
+	5、定制类：
+		1）__len__:返回对象的长度
+		2）__slots__: 限制对象的属性和方法
+		3）__str__和__repr__: 返回对象的字符串形式，后者是程序开发者看的
+		4）__iter__、next():返回一个迭代对象，通常是对象本身self，for循环会不断调用next()拿到循环的下一个值。
+		5）__getitem__, __setitem__, __delitem__:获取/设置/删除迭代列表具体某索引的值。
+		6）__getattr__: 对象获取属性值调用。
+		7）__call__: 对象作为函数时调用。callable判断对象是否能被调用
+	6、元类：
+		动态语言和静态语言最大的不同，就是函数和类的定义，不是编译时定义的，而是运行时动态创建的。
+		1、使用type动态创建类。
+			# metaclass是创建类，所以必须从`type`类型派生：
+			class ListMetaclass(type):
+				def __new__(cls, name, bases, attrs):
+					attrs['add'] = lambda self, value: self.append(value)
+					return type.__new__(cls, name, bases, attrs)
+
+			class MyList(list):
+				__metaclass__ = ListMetaclass # 指示使用ListMetaclass来定制类
+
+十一、错误、调试和测试
+	1、错误处理
+		1）try机制：
+			try：
+				pass
+			except:
+				pass
+			finally:
+				pass
+			else:
+				pass
+		2）调用堆栈
+			如果错误没有被捕获，就会一直往上抛，最后被python的解释器所捕获。
+		3）记录错误
+			使用logging模块库，就可以打印python解释器的错误堆栈，也可以保存到文件中。
+	2、调试
+		1）print 打印错误
+		2）断言assert 条件，'错误信息' ； 条件为假抛出异常
+		3）logging，日志记录
+		4）pdb，启动python的调试器pdb，让程序以单步方式运行，可以随时查看运行状态。
+			python -m pdb err.py
+		5）pdb.set_trace()设置断点
+		6）IDE调试，比较爽的设置断点、单步执行，比较好的有pycharm
+	3、单元测试
+		‘测试驱动开发’(TDD)
+		单元测试是用来对一个模块、一个函数或者一个类来进行正确性检验的测试工作。
+		为了编写单元测试，我们需要引入Python自带的unittest模块
+		可以在单元测试中编写两个特殊的setUp()和tearDown()方法。这两个方法会分别在每调用一个测试方法的前后分别被执行。
+	4、文档测试
+		doctest非常有用，不但可以用来测试，还可以直接作为示例代码。通过某些文档生成工具，就可以自动把包含doctest的注释提取出来。用户看文档的时候，同时也看到了doctest。
+
+十二、IO编程
+	IO编程有同步和异步的区分。
+	
+	1、文件读写
+		1）读文件
+			try:
+				f = open('/path/to/file', 'r')
+				print f.read()
+			finally:
+				if f:
+					f.close()
+					
+			with open('/path/to/file', 'r') as f:
+				print f.read()
+		2）二进制文件
+			f = open('/Users/michael/test.jpg', 'rb')
+			f.read().decode('gbk')
+			
+			import codecs
+			with codecs.open('/Users/michael/gbk.txt', 'r', 'gbk') as f:
+				f.read() # u'\u6d4b\u8bd5'
+	
+	2、操作文件和目录
+		1）使用os模块来操作文件和目录。
+			os.name  # 操作系统名字
+				如果是posix，说明系统是Linux、Unix或Mac OS X，如果是nt，就是Windows系统。
+			os.uname  # 详细的系统信息
+				注意uname()函数在Windows上不提供，也就是说，os模块的某些函数是跟操作系统相关的。
+		2）环境变量
+			os.environ  # 操作系统中定义的环境变量
+			os.getvir('PATH')  # 获取某个环境变量的值
+		3）操作文件和目录
+			os.listdir('.')  # 列出文件和目录
+			os.path  # 目录路径操作
+			os.path.isdir('dir')  # 是否是目录 
+			os.path.isfile('file')  # 是否是文件 
+			os.path.abs('.') # 获取相对路径
+			os.path.join('/user/web', 'test')  #组装路径(能自动转成操作系统的路径)
+			os.path.split('user/web.html') #拆分目录，成'/user','web.html'
+			os.path.splitext('user/web.html') #拆分目录，成'/user/web','.html'
+			os.mkdir("/user/web")  # 创建目录
+			os.rmdir("/user/testdir")  # 删除目录
+			os.rename('test.txt', 'test.py')  # 修改文件/目录
+			os.remove('test.py')  # 删除文件
+			创建文件采用open('path', 'w')
+			os没有复制文件的函数，不过shutil提供了copyfile()来复制，shutil可以看作是os的补充。
+	3、序列化
+		1）pickle
+			我们把变量从内存中变成可存储或传输的过程称之为序列化，在Python中叫pickling
+			python提供两个模块来实现序列化：cPickle和pickle。这个模块功能是一样的，区别在于cPickle是C写的，速度快
+			，pickle是存pickle写的，速度慢。
+			try:
+				import cPickle as pickle
+			except ImportError:
+				import pickle
+		
+			pickle.dump(obj, f)  # 将一个对象序列化装到一个文件中
+			pickle.load(f)   # 从文件中读出对象到内存中
+		2）JSON
+			如果我们要在不同的编程语言之间传递对象，就必须把对象序列化为标准格式，JSON不仅是标准格式，并且比XML更快，而且可以直接在Web页面中读取，非常方便。
+			python提供了json模块，可以将dict转成json格式
+			json.dumps(dict)
+			json.loads(json_str)
+		3）JSON进阶
+			当需要转换的不是dict对象时，而是其他class对象，直接转换会有问题，这就需要一个转换函数。
+			class Student(object):
+				def __init__(self, name, age, score):
+					self.name = name
+					self.age = age
+					self.score = score
+
+			s = Student('Bob', 20, 88)
+			def student2dict(std):
+				return {
+					'name': std.name,
+					'age': std.age,
+					'score': std.score
+				}
+			json.dumps(student, default=student2dict) 也可以用json.dumps(student, default=lambda obj:ob.__dict__)
+			json.dumps(s.__dict__)
+			
+			反序列化;
+			def dict2student(d):
+				return Student(d['name'], d['age'], d['score'])
+
+			json_str = '{"age": 20, "score": 88, "name": "Bob"}'
+			print(json.loads(json_str, object_hook=dict2student))
+			
+
+十三、进程与线程
+	多任务：简单地说，就是操作系统可以同时运行多个任务。单核CPU执行多任务，采用交替执行方式。真正的并行执行多任务只能在多核CPU上实现，但是，由于任务数量远远多于CPU的核心数量，
+		所以，操作系统也会自动把很多任务轮流调度到每个核心上执行。
+	多进程：一个任务就是一个进程，有些进程还不止同时干一件事，比如Word，它可以同时进行打字、拼写检查、打印等事情。在一个进程内部，要同时干多件事，
+		就需要同时运行多个“子任务”，我们把进程内的这些“子任务”称为线程（Thread）。
+		由于每个进程至少要干一件事，所以，一个进程至少有一个线程
+	多线程：一个进程中至少有一个线程，线程之间能快速切换，每个线程能能短时间完成交替
+	
+	总结一下就是，多任务的实现有3种方式：
+		多进程模式；
+		多线程模式；
+		多进程+多线程模式。
+	
+	1、多进程：
+		1）multiprocessing
+			要让Python程序实现多进程（multiprocessing），linux中提供fork()系统调用。
+			import os
+			
+			print 'Process %s start...' % os.getpid()
+			pid= os.fork()
+			if pid==0:
+				print 'I am child process (%s) and my parent is %s.' % (os.getpid(), os.getppid())
+			else:
+				print 'I (%s) just created a child process (%s).' % (os.getpid(), pid)
+			运行如下：
+			Process (876) start...
+			I (876) just created a child process (877).
+			I am child process (877) and my parent is 876.
+
+		2）进程池Pool
+			multiprocessing模块提供了一个Process类来代表一个进程对象，下面的例子演示了启动一个子进程并等待其结束：
+			from multiprocessing import Process
+			import os
+
+			# 子进程要执行的代码
+			def run_proc(name):
+				print 'Run child process %s (%s)...' % (name, os.getpid())
+
+			if __name__=='__main__':
+				print 'Parent process %s.' % os.getpid()
+				p = Process(target=run_proc, args=('test',))
+				print 'Process will start.'
+				p.start()
+				p.join()
+				print 'Process end.'
+			
+			创建子进程时，只需要传入一个执行函数和函数的参数，创建一个Process实例，用start()方法启动，这样创建进程比fork()还要简单。
+
+			join()方法可以等待子进程结束后再继续往下运行，通常用于进程间的同步。
+
+			如果要启动大量的子进程，可以使用进程池创建子进程：
+			from multiprocessing import Pool
+			
+		3）进程间通信
+			Process之间肯定是需要通信的，操作系统提供了很多机制来实现进程间的通信。Python的multiprocessing模块包装了底层的机制，
+			提供了Queue、Pipes等多种方式来交换数据。
+	
+	2、多线程
+		Python的标准库提供了两个模块：thread和threading，thread是低级模块，threading是高级模块，对thread进行了封装。
+		绝大多数情况下，我们只需要使用threading这个高级模块。
+		
+		1）Lock
+			多线程与多进程最大的不同在于，多进程中，同一变量，各自有一份拷贝存在于每个进程中，互不影响，而多线程中，所有的变量
+		由所有线程共享，所以任何一个变量都可以被线程修改。因此，线程之间共享数据最大的危险在于多个线程同时改一个变量，
+		把内容给改乱了。
+			这种情况可以使用线程锁Lock来实现，当一个线程执行时获得锁，别的线程就不能修改变量，当这个线程操作完成释放锁，其他线程才可
+		继续处理。
+		
+		Python虽然不能利用多线程实现多核任务，但可以通过多进程实现多核任务。多个Python进程有各自独立的GIL锁，互不影响。
+		
+		Python解释器由于设计时有GIL全局锁，导致了多线程无法利用多核。多线程的并发在Python中就是一个美丽的梦。
+	
+	3、ThreadLocal
+			全局变量local_school就是一个ThreadLocal对象，每个Thread对它都可以读写student属性，但互不影响。你可以把local_school看成全局变量，
+		但每个属性如local_school.student都是线程的局部变量，可以任意读写而互不干扰，也不用管理锁的问题，ThreadLocal内部会处理。
+			ThreadLocal最常用的地方就是为每个线程绑定一个数据库连接，HTTP请求，用户身份信息等，这样一个线程的所有调用到
+		的处理函数都可以非常方便地访问这些资源。	
+	
+	4、分布式进程
+			在Thread和Process中，应该首选Process，因为Process更加稳定，而且Process可以分布到多台机器上，而Thread最多只能
+		只能分布到一台机器的多个CPU上。
+
+十四、常用内建模块
+	1、collections
+		内建集合模块，提供了很多有用的集合类
+		1）namedtuple 
+			namedtuple是一个函数，它用来创建一个自定义的tuple对象，并且规定了tuple元素的个数，并可以用属性而不是索引来引
+		用tuple的某个元素。
+			Point = namedtuple('Point', ['x', 'y'])  所创建的Point对象是tuple的一个子类
+			p = Point(1, 2)
+			p.__dict__  是个有序字典对象OrdereDict
+		
+		2）deque
+		deque是为了高效实现插入和删除操作的双向列表，适合用于队列和栈：
+		
+		3）defaultdict
+		字典，当key不存在时返回一个默认值
+		
+		4）OrderedDict
+		有序字典
+		
+		5）Counter
+		统计字符出现的个数
+	
+	2、Base64
+		Base64是一种用64个字符来表示任意二进制数据的方法
+		Base64是一种任意二进制到文本字符串的编码方法，常用于在URL、Cookie、网页中传输少量二进制数据。
+	
+	3、struct
+		解决str和其他二进制数据类型转换
+		
+	4、hashlib
+		提供了常见的摘要算法，如MD5、SHA1等。
+		什么是摘要算法呢？摘要算法又称哈希算法、散列算法。它通过一个函数，把任意长度的数据转换为一个长度固定
+	的数据串（通常用16进制的字符串表示）。摘要函数是一个单项函数，反推很困难。
+		这样防止数据被篡改。因为不同的两个字符串所计算出来的摘要不会相同。
+	
+	5、itertools
+		提供了非常有用的用于操作迭代对象的函数。
+		1）count(1)
+		创建一个无限的迭代器,可以通过takewhile来截取一段序列
+		
+		2）cycle(‘ABC’)
+		会把传入的序列无限循环下去。
+		
+		3）repeat('A')
+		把一个元素无限循环下去
+		
+		4）chain()
+		把一组迭代对象串联起来。
+		
+		5）groupby()
+		把相邻重复元素挑出来放在一起
+		
+		6）imap（）
+		与map的区别在于，imap可以作用于无穷序列，两个序列不一样长，以短的为准。
+		map会立即计算出结果，结果是个列表。而imap返回的是迭代对象，要通过for循环进行迭代，才会在循环中
+		计算出下一个元素。
+		
+		7）ifilter（）
+		filter()的惰性计算
+		
+		

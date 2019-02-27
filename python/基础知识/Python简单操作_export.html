@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Python简单操作.md—E:\备忘资料</title>
+    <style type="text/css">
+    body{font-family:Helvetica,arial,sans-serif;font-size:14px;line-height:1.6;padding-top:10px;padding-bottom:10px;background-color:white;padding:30px;color:#333}body>*:first-child{margin-top:0!important}body>*:last-child{margin-bottom:0!important}a{color:#4183c4;text-decoration:none}a:hover{text-decoration:underline}a.absent{color:#c00}a.anchor{display:block;padding-left:30px;margin-left:-30px;cursor:pointer;position:absolute;top:0;left:0;bottom:0}html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0}kbd{background:#f1f1f1;background:-moz-linear-gradient(#f1f1f1,#ddd);background:-webkit-linear-gradient(#f1f1f1,#ddd);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#f1f1f1', endColorstr='#dddddd')";border-radius:2px;border:1px solid #ddd;border-bottom-color:#ccc;border-right-color:#ccc;padding:1px 4px;line-height:10px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}.container{max-width:920px;margin:0 auto 20px auto}#header{background:#fafafa;background:-moz-linear-gradient(#fafafa,#eaeaea);background:-webkit-linear-gradient(#fafafa,#eaeaea);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#eaeaea')";border-bottom:1px solid #cacaca;box-shadow:0 1px 0 rgba(255,255,255,0.4),0 0 10px rgba(0,0,0,0.1)}#markup{padding:3px}#markup article{padding-top:30px}.markdown-body{font-size:14px;line-height:1.6}.markdown-body>*:first-child{margin-top:0!important}.markdown-body>*:last-child{margin-bottom:0!important}.markdown-body a.absent{color:#c00}.markdown-body a.anchor{bottom:0;cursor:pointer;display:block;left:0;margin-left:-30px;padding-left:30px;position:absolute;top:0}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{cursor:text;font-weight:bold;margin:20px 0 10px;padding:0;position:relative}.markdown-body h1 .mini-icon-link,.markdown-body h2 .mini-icon-link,.markdown-body h3 .mini-icon-link,.markdown-body h4 .mini-icon-link,.markdown-body h5 .mini-icon-link,.markdown-body h6 .mini-icon-link{color:#000;display:none}.markdown-body h1:hover a.anchor,.markdown-body h2:hover a.anchor,.markdown-body h3:hover a.anchor,.markdown-body h4:hover a.anchor,.markdown-body h5:hover a.anchor,.markdown-body h6:hover a.anchor{line-height:1;margin-left:-22px;padding-left:0;text-decoration:none;top:15%}.markdown-body h1:hover a.anchor .mini-icon-link,.markdown-body h2:hover a.anchor .mini-icon-link,.markdown-body h3:hover a.anchor .mini-icon-link,.markdown-body h4:hover a.anchor .mini-icon-link,.markdown-body h5:hover a.anchor .mini-icon-link,.markdown-body h6:hover a.anchor .mini-icon-link{display:inline-block}.markdown-body h1 tt,.markdown-body h1 code,.markdown-body h2 tt,.markdown-body h2 code,.markdown-body h3 tt,.markdown-body h3 code,.markdown-body h4 tt,.markdown-body h4 code,.markdown-body h5 tt,.markdown-body h5 code,.markdown-body h6 tt,.markdown-body h6 code{font-size:inherit}.markdown-body h1{color:#000;font-size:28px}.markdown-body h2{border-bottom:1px solid #ccc;color:#000;font-size:24px}.markdown-body h3{font-size:18px}.markdown-body h4{font-size:16px}.markdown-body h5{font-size:14px}.markdown-body h6{color:#777;font-size:14px}.markdown-body p,.markdown-body blockquote,.markdown-body ul,.markdown-body ol,.markdown-body dl,.markdown-body table,.markdown-body pre{margin:15px 0}.markdown-body hr{background:url("/public/github-dirty-shade.png") repeat-x scroll 0 0 transparent;border:0 none;color:#ccc;height:4px;padding:0}.markdown-body>h2:first-child,.markdown-body>h1:first-child,.markdown-body>h1:first-child+h2,.markdown-body>h3:first-child,.markdown-body>h4:first-child,.markdown-body>h5:first-child,.markdown-body>h6:first-child{margin-top:0;padding-top:0}.markdown-body a:first-child h1,.markdown-body a:first-child h2,.markdown-body a:first-child h3,.markdown-body a:first-child h4,.markdown-body a:first-child h5,.markdown-body a:first-child h6{margin-top:0;padding-top:0}.markdown-body h1+p,.markdown-body h2+p,.markdown-body h3+p,.markdown-body h4+p,.markdown-body h5+p,.markdown-body h6+p{margin-top:0}.markdown-body li p.first{display:inline-block}.markdown-body ul,.markdown-body ol{padding-left:30px}.markdown-body ul.no-list,.markdown-body ol.no-list{list-style-type:none;padding:0}.markdown-body ul li>*:first-child,.markdown-body ol li>*:first-child{margin-top:0}.markdown-body ul ul,.markdown-body ul ol,.markdown-body ol ol,.markdown-body ol ul{margin-bottom:0}.markdown-body dl{padding:0}.markdown-body dl dt{font-size:14px;font-style:italic;font-weight:bold;margin:15px 0 5px;padding:0}.markdown-body dl dt:first-child{padding:0}.markdown-body dl dt>*:first-child{margin-top:0}.markdown-body dl dt>*:last-child{margin-bottom:0}.markdown-body dl dd{margin:0 0 15px;padding:0 15px}.markdown-body dl dd>*:first-child{margin-top:0}.markdown-body dl dd>*:last-child{margin-bottom:0}.markdown-body blockquote{border-left:4px solid #ddd;color:#777;padding:0 15px}.markdown-body blockquote>*:first-child{margin-top:0}.markdown-body blockquote>*:last-child{margin-bottom:0}.markdown-body table{border-collapse:collapse;border-spacing:0}.markdown-body table th{font-weight:bold}.markdown-body table th,.markdown-body table td{border:1px solid #ccc;padding:6px 13px}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{border:1px solid #ddd;display:block;float:left;margin:13px 0 0;overflow:hidden;padding:7px;width:auto}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{clear:both;color:#333;display:block;padding:5px 0 0}.markdown-body span.align-center{clear:both;display:block;overflow:hidden}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{clear:both;display:block;overflow:hidden}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{background-color:#f8f8f8;border:1px solid #eaeaea;border-radius:3px 3px 3px 3px;margin:0 2px;padding:0 5px;white-space:nowrap}.markdown-body pre>code{background:none repeat scroll 0 0 transparent;border:medium none;margin:0;padding:0;white-space:pre}.markdown-body .highlight pre,.markdown-body pre{background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px 3px 3px 3px;font-size:13px;line-height:19px;overflow:auto;padding:6px 10px}.markdown-body pre code,.markdown-body pre tt{background-color:transparent;border:medium none}.codehilite{background:#fff}.codehilite .c{color:#998;font-style:italic}.codehilite .err{color:#a61717;background-color:#e3d2d2}.codehilite .k{color:#000;font-weight:bold}.codehilite .o{color:#000;font-weight:bold}.codehilite .cm{color:#998;font-style:italic}.codehilite .cp{color:#999;font-weight:bold}.codehilite .c1{color:#998;font-style:italic}.codehilite .cs{color:#999;font-weight:bold;font-style:italic}.codehilite .gd{color:#000;background-color:#fdd}.codehilite .gd .x{color:#000;background-color:#faa}.codehilite .ge{color:#000;font-style:italic}.codehilite .gr{color:#a00}.codehilite .gh{color:#999}.codehilite .gi{color:#000;background-color:#dfd}.codehilite .gi .x{color:#000;background-color:#afa}.codehilite .go{color:#888}.codehilite .gp{color:#555}.codehilite .gs{font-weight:bold}.codehilite .gu{color:#aaa}.codehilite .gt{color:#a00}.codehilite .kc{color:#000;font-weight:bold}.codehilite .kd{color:#000;font-weight:bold}.codehilite .kp{color:#000;font-weight:bold}.codehilite .kr{color:#000;font-weight:bold}.codehilite .kt{color:#458;font-weight:bold}.codehilite .m{color:#099}.codehilite .s{color:#d14}.codehilite .na{color:#008080}.codehilite .nb{color:#0086b3}.codehilite .nc{color:#458;font-weight:bold}.codehilite .no{color:#008080}.codehilite .ni{color:#800080}.codehilite .ne{color:#900;font-weight:bold}.codehilite .nf{color:#900;font-weight:bold}.codehilite .nn{color:#555}.codehilite .nt{color:#000080}.codehilite .nv{color:#008080}.codehilite .ow{color:#000;font-weight:bold}.codehilite .w{color:#bbb}.codehilite .mf{color:#099}.codehilite .mh{color:#099}.codehilite .mi{color:#099}.codehilite .mo{color:#099}.codehilite .sb{color:#d14}.codehilite .sc{color:#d14}.codehilite .sd{color:#d14}.codehilite .s2{color:#d14}.codehilite .se{color:#d14}.codehilite .sh{color:#d14}.codehilite .si{color:#d14}.codehilite .sx{color:#d14}.codehilite .sr{color:#009926}.codehilite .s1{color:#d14}.codehilite .ss{color:#990073}.codehilite .bp{color:#999}.codehilite .vc{color:#008080}.codehilite .vg{color:#008080}.codehilite .vi{color:#008080}.codehilite .il{color:#099}
+    </style>
+    <style type="text/css">
+      .markdown-body hr{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC")}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="markup">
+        <article id="content" class="markdown-body">
+          <h1 id="python">Python 操作备忘录</h1>
+<div class="toc">
+<ul>
+<li><a href="#python">Python 操作备忘录</a><ul>
+<li><a href="#python_1">Python相关</a><ul>
+<li><a href="#python_2">Python 之禅:</a></li>
+<li><a href="#pip">pip</a></li>
+<li><a href="#dict">Dict</a></li>
+<li><a href="#doctype">!DOCTYPE</a></li>
+<li><a href="#datetime">datetime</a></li>
+<li><a href="#pack">pack</a></li>
+<li><a href="#string-format">string Format</a></li>
+<li><a href="#ospath">os.path</a></li>
+<li><a href="#unicode-str">unicode &lt;--&gt; str:</a></li>
+<li><a href="#python_3">Python 加解密&amp;编解码:</a></li>
+<li><a href="#raw_input">raw_input</a></li>
+<li><a href="#timestamp-datetime">timestamp &amp; datetime</a></li>
+<li><a href="#unittest">unittest</a></li>
+</ul>
+</li>
+<li><a href="#pycharm">PyCharm</a><ul>
+<li><a href="#livetemplate">LiveTemplate</a></li>
+<li><a href="#tip-hinting">Tip Hinting</a></li>
+</ul>
+</li>
+<li><a href="#django">Django相关</a><ul>
+<li><a href="#_1">静态文件</a></li>
+<li><a href="#migration">Migration</a></li>
+<li><a href="#model-op">Model Op</a></li>
+<li><a href="#form-clean">Form Clean</a></li>
+<li><a href="#imagefield">ImageField</a></li>
+<li><a href="#login_required">login_required</a></li>
+<li><a href="#django-registration">Django-registration</a></li>
+<li><a href="#session">Session</a></li>
+<li><a href="#decorator-function-wrapper">Decorator - Function Wrapper.</a></li>
+<li><a href="#class-based-view">Class based view:</a></li>
+<li><a href="#form">Form</a></li>
+<li><a href="#django-templates">Django Templates:</a><ul>
+<li><a href="#1">1. 工作机制</a></li>
+<li><a href="#2-djangotemplatevariable-djangotemplatecontext">2. django.template.Variable &amp; django.template.Context</a></li>
+<li><a href="#3-djangotemplatefilter">3. django.template.filter</a></li>
+<li><a href="#4-djangotemplatetag">4. django.template.tag</a></li>
+</ul>
+</li>
+<li><a href="#django_1">Django错误提示</a></li>
+<li><a href="#middleware">Middleware</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="python_1">Python相关</h2>
+<h3 id="python_2">Python 之禅:</h3>
+<ul>
+<li>在密令行输入:
+<code>&gt;&gt;&gt; import this</code></li>
+</ul>
+<p>显示结果为:</p>
+<div class="codehilite"><pre>Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren&#39;t special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you&#39;re Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it&#39;s a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let&#39;s do more of those!
+</pre></div>
+
+
+<p>译:</p>
+<div class="codehilite"><pre>优美胜于丑陋（Python 以编写优美的代码为目标）
+明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）
+简洁胜于复杂（优美的代码应当是简洁的，不要有复杂的内部实现）
+复杂胜于凌乱（如果复杂不可避免，那代码间也不能有难懂的关系，要保持接口简洁）
+扁平胜于嵌套（优美的代码应当是扁平的，不能有太多的嵌套）
+间隔胜于紧凑（优美的代码有适当的间隔，不要奢望一行代码解决问题）
+可读性很重要（优美的代码是可读的）
+即便假借特例的实用性之名，也不可违背这些规则（这些规则至高无上）
+
+不要包容所有错误，除非你确定需要这样做（精准地捕获异常，不写 except:pass 风格的代码）
+
+当存在多种可能，不要尝试去猜测
+而是尽量找一种，最好是唯一一种明显的解决方案（如果不确定，就用穷举法）
+虽然这并不容易，因为你不是 Python 之父（这里的 Dutch 是指 Guido ）
+
+做也许好过不做，但不假思索就动手还不如不做（动手之前要细思量）
+
+如果你无法向人描述你的方案，那肯定不是一个好方案；反之亦然（方案测评标准）
+
+命名空间是一种绝妙的理念，我们应当多加利用（倡导与号召）
+</pre></div>
+
+
+<ul>
+<li>
+<p>DRY - <strong>Don't Repeat Yourself</strong>.</p>
+</li>
+<li>
+<p>Comments - <strong>Think Why,not How</strong>.</p>
+</li>
+</ul>
+<h3 id="pip">pip</h3>
+<ul>
+<li><code>pip freeze &gt; requirements.txt</code> 将Python相关的依赖包写入到<code>requirements.txt</code>文件中.</li>
+<li><code>pip install -r requirements.txt</code> 使用pip进行相关的依赖包项的安装,依赖项在<code>requirements.txt</code>文件中.</li>
+</ul>
+<h3 id="dict">Dict</h3>
+<p>Python中对于<code>Dict</code>,使用<code>.get</code>方法获取某个Item,如果这个Item不存在,则返回<code>None</code>,而不是抛出一个<code>KeyError</code>的异常,使用索引则会抛出异常.</p>
+<h3 id="doctype">!DOCTYPE</h3>
+<p>对于Template的Html页面,无论是Base的页面还是准备嵌在iframe的页面,<code>&lt;!DOCTYPE html&gt;</code> 都应该是第一个html标签.</p>
+<h3 id="datetime">datetime</h3>
+<p>对于datetime,使用<code>strftime</code>来格式化一个datetime对象为字符串,使用<code>strptime</code>来解析一个字符串到datetime对象,两者都需要提供字符串格式,C#中常用的<em><code>yyyy-MM-dd HH:mm:ss</code></em>,在Python中为<strong><code>%Y-%m-%d %H:%M:%S</code></strong>,顺带一提的是,Python的datetime是到微秒级的,而不是到毫秒,如果需要%f可以输出微秒.</p>
+<h3 id="pack">pack</h3>
+<p>Byte操作可以使用<code>pack(fmt,data1,data2)</code>,使用<code>map(pack,&lt;可枚举&gt;)</code>也可以完成内容的组装,如:</p>
+<div class="codehilite"><pre><span class="n">pack</span><span class="p">(</span><span class="s">&quot;!II&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c">#得到的是: &#39;\x00\x00\x00\x01\x00\x00\x00\x02&#39; </span>
+<span class="c">#而 </span>
+<span class="n">pack</span><span class="p">(</span><span class="s">&quot;!I&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">pack</span><span class="p">(</span><span class="s">&quot;!I&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c"># 得到的内容也是. 其中,&quot;!&quot;,代表网络字节序.</span>
+</pre></div>
+
+
+<h3 id="string-format">string Format</h3>
+<p><em>Python字符串格式化输出...To Be Add...</em></p>
+<h3 id="ospath">os.path</h3>
+<p>文件名操作使用<code>os.path</code>对象,<code>os.path.split</code>可以分离文件名跟文件路径,得到的是一个元组. 如:</p>
+<div class="codehilite"><pre><span class="n">path</span><span class="p">,</span><span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;uploadfiles\cert</span><span class="se">\f</span><span class="s">ilename.123&quot;</span><span class="p">)</span>
+<span class="c"># path 为 &quot;uploadfiles\cert\&quot; ,name 为&quot;filename.123&quot;</span>
+</pre></div>
+
+
+<h3 id="unicode-str">unicode &lt;--&gt; str:</h3>
+<div class="codehilite"><pre><span class="nb">unicode</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf8&#39;</span><span class="p">)</span> <span class="c">#结果是str</span>
+<span class="nb">str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf8&#39;</span><span class="p">)</span> <span class="c">#结果是unicode</span>
+</pre></div>
+
+
+<h3 id="python_3">Python 加解密&amp;编解码:</h3>
+<ul>
+<li>hashlib:<ul>
+<li>md5</li>
+<li>sha</li>
+</ul>
+</li>
+<li>AES:<ul>
+<li>m2crypto (使用openssl做aes)</li>
+</ul>
+</li>
+<li>编解码:<ul>
+<li>base64: base*</li>
+<li>binascii</li>
+</ul>
+</li>
+</ul>
+<h3 id="raw_input">raw_input</h3>
+<p>Python内置了raw_input方法提供控制台输入,如:</p>
+<p><code>&gt;&gt;&gt; user_name = raw_input("&gt; Please Enter Your Name : ")</code>
+<code>&gt; Please Enter Your Name: Benjamin  (Benjamin 为输入内容,前置字符串为设置的引导输入内容)</code></p>
+<p>执行完成后user_name的值为Benjamin</p>
+<h3 id="timestamp-datetime">timestamp &amp; datetime</h3>
+<p>unix的TimeStamp和python的DateTime之间的相互转换:</p>
+<ul>
+<li>datetime -&gt; timestamp 代码如下:</li>
+</ul>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">pyDatetime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="c"># or anything else.</span>
+<span class="n">unixTimeStamp</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">mktime</span><span class="p">(</span><span class="n">pyDatetime</span><span class="o">.</span><span class="n">timetuple</span><span class="p">())</span> <span class="c"># unixTimeStamp is a float</span>
+</pre></div>
+
+
+<ul>
+<li>timestamp -&gt; datetime 代码如下:</li>
+</ul>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">unixTimeStamp</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="c"># unixTimeStamp is a float</span>
+<span class="n">pyDatetime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">unixTimeStamp</span><span class="p">)</span> <span class="c"># pyDatetime is a datetime</span>
+<span class="c"># or use time</span>
+<span class="n">pyTime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">unixTimeStamp</span><span class="p">)</span> <span class="c"># pyTime is struct_time</span>
+<span class="c"># want datetime ?</span>
+<span class="n">ptDateTimeFromTuple</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">pyTime</span><span class="p">)[:</span><span class="mi">6</span><span class="p">])</span>  <span class="c"># we use frist 6 params of the tuple to make datetime, so does make time </span>
+</pre></div>
+
+
+<h3 id="unittest">unittest</h3>
+<p>Python的单元测试模块为<code>unittest</code>,以下为Python文档中的示例,对random模块的几个方法进行了简单的测试.</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="k">class</span> <span class="nc">TestSequenceFunctions</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># make sure the shuffled sequence does not lose any elements</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+        <span class="c"># should raise an exception for an immutable sequence</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">test_choice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>测试案例是通过<code>unittest.TestCase</code>的子类定义的,测试方法由<code>test</code>开头,通常后面跟着的是需要测试的方法.</p>
+</li>
+<li>
+<p>当定义了<code>setUp</code>时,测试案例的<code>runner</code>会在<strong>每个案例</strong>前先执行<code>setUp</code>,与之相反,<code>tearDown</code>则是每个案例执行完毕之后执行.</p>
+</li>
+<li>
+<p>除了调用<code>unittest.main()</code>运行测试案例外,还可以通过如下方式执行:</p>
+</li>
+</ul>
+<div class="codehilite"><pre><span class="n">suite</span> <span class="o">=</span> <span class="n">unittest</span><span class="o">.</span><span class="n">TestLoader</span><span class="p">()</span><span class="o">.</span><span class="n">loadTestsFromTestCase</span><span class="p">(</span><span class="n">TestSequenceFunctions</span><span class="p">)</span>
+<span class="n">unittest</span><span class="o">.</span><span class="n">TextTestRunner</span><span class="p">(</span><span class="n">verbosity</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">suite</span><span class="p">)</span>
+</pre></div>
+
+
+<p><code>unitest</code>使用<code>assert*</code>来做测试,而不抛出异常.包含的方法如下:</p>
+<table border="1" class="docutils">
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method</th>
+<th class="head">Checks that</th>
+<th class="head">New in</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#unittest.TestCase.assertEqual" title="unittest.TestCase.assertEqual"><tt class="xref py py-meth docutils literal"><span class="pre">assertEqual(a,</span> <span class="pre">b)</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span></tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#unittest.TestCase.assertNotEqual" title="unittest.TestCase.assertNotEqual"><tt class="xref py py-meth docutils literal"><span class="pre">assertNotEqual(a,</span> <span class="pre">b)</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">a</span> <span class="pre">!=</span> <span class="pre">b</span></tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#unittest.TestCase.assertTrue" title="unittest.TestCase.assertTrue"><tt class="xref py py-meth docutils literal"><span class="pre">assertTrue(x)</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">bool(x)</span> <span class="pre">is</span> <span class="pre">True</span></tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#unittest.TestCase.assertFalse" title="unittest.TestCase.assertFalse"><tt class="xref py py-meth docutils literal"><span class="pre">assertFalse(x)</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">bool(x)</span> <span class="pre">is</span> <span class="pre">False</span></tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#unittest.TestCase.assertIs" title="unittest.TestCase.assertIs"><tt class="xref py py-meth docutils literal"><span class="pre">assertIs(a,</span> <span class="pre">b)</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">a</span> <span class="pre">is</span> <span class="pre">b</span></tt></td>
+<td>2.7</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#unittest.TestCase.assertIsNot" title="unittest.TestCase.assertIsNot"><tt class="xref py py-meth docutils literal"><span class="pre">assertIsNot(a,</span> <span class="pre">b)</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">a</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">b</span></tt></td>
+<td>2.7</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#unittest.TestCase.assertIsNone" title="unittest.TestCase.assertIsNone"><tt class="xref py py-meth docutils literal"><span class="pre">assertIsNone(x)</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">is</span> <span class="pre">None</span></tt></td>
+<td>2.7</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#unittest.TestCase.assertIsNotNone" title="unittest.TestCase.assertIsNotNone"><tt class="xref py py-meth docutils literal"><span class="pre">assertIsNotNone(x)</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></tt></td>
+<td>2.7</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#unittest.TestCase.assertIn" title="unittest.TestCase.assertIn"><tt class="xref py py-meth docutils literal"><span class="pre">assertIn(a,</span> <span class="pre">b)</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">a</span> <span class="pre">in</span> <span class="pre">b</span></tt></td>
+<td>2.7</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#unittest.TestCase.assertNotIn" title="unittest.TestCase.assertNotIn"><tt class="xref py py-meth docutils literal"><span class="pre">assertNotIn(a,</span> <span class="pre">b)</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">a</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">b</span></tt></td>
+<td>2.7</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#unittest.TestCase.assertIsInstance" title="unittest.TestCase.assertIsInstance"><tt class="xref py py-meth docutils literal"><span class="pre">assertIsInstance(a,</span> <span class="pre">b)</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">isinstance(a,</span> <span class="pre">b)</span></tt></td>
+<td>2.7</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#unittest.TestCase.assertNotIsInstance" title="unittest.TestCase.assertNotIsInstance"><tt class="xref py py-meth docutils literal"><span class="pre">assertNotIsInstance(a,</span> <span class="pre">b)</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">not</span> <span class="pre">isinstance(a,</span> <span class="pre">b)</span></tt></td>
+<td>2.7</td>
+</tr>
+</tbody>
+</table>
+
+<p><em>更多参数详情请参阅Python的Doc.</em></p>
+<hr>
+<p>以上是unittest的基本用法.</p>
+<h2 id="pycharm">PyCharm</h2>
+<h3 id="livetemplate">LiveTemplate</h3>
+<p>使用PyCharm的LiveTemplate加速代码的开发效率,如,我们在定义一个Http方法的时候总是会写:</p>
+<div class="codehilite"><pre>        <span class="k">def</span> <span class="err">&lt;</span><span class="nf">name</span><span class="o">&gt;</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+            <span class="k">pass</span>
+</pre></div>
+
+
+<p>一类的代码,而这类重复的代码完全可以添加到Pycharm的LiveTemplate中,除了Python的方法,其他的Html重复性的代码也可以提取出来.</p>
+<h3 id="tip-hinting">Tip Hinting</h3>
+<p>PyCharm的输入的提示信息需要PyCharm能够明确的知道参数的类型,包含以下几种情况:</p>
+<ul>
+<li>函数的参数</li>
+</ul>
+<p>函数的参数可以通过<code>"""</code>或者<code>'''</code>自动生成注释,使PyCharm能够知道,如:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    a + b</span>
+<span class="sd">    :param a:</span>
+<span class="sd">    :type a: int</span>
+<span class="sd">    :param b:</span>
+<span class="sd">    :type b: int</span>
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+
+
+<p>其中<code>:type param_name</code>,指定了参数的类型.默认的设置PyCharm并不会生成<code>:type</code>,设置方式为:</p>
+<blockquote>
+<p>Settings -&gt; Editor -&gt; General -&gt; Smart Keys -&gt; "Insert type placeholders in the documentation comment stub"</p>
+</blockquote>
+<p>选中勾上即可.</p>
+<ul>
+<li>函数中的变量</li>
+</ul>
+<p>对于函数中定义的变量可以在其下方定义其类型,如:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param a:</span>
+<span class="sd">    :type a: int</span>
+<span class="sd">    :param b:</span>
+<span class="sd">    :type b: int</span>
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="sd">&quot;&quot;&quot;:type : str&quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">c</span>
+</pre></div>
+
+
+<p>以上强制指定<code>c</code>为字符串类型,后续使用的提示信息则为<code>str</code>的提示信息</p>
+<h2 id="django">Django相关</h2>
+<h3 id="_1">静态文件</h3>
+<p>Django中使用静态文件需要在页面中<code>{% load static %}</code>,加载静态配置.静态文件可能包含,Templates,Static Files,Media.</p>
+<h3 id="migration">Migration</h3>
+<p>关于Django中的数据库的更新,目前看来,可以使用三种方法: 
+    * 1.7+ 自带的Migration,源自于South,但又和South略有一些不同.
+    * 使用South来完成(目前看来是最佳的方案,毕竟1.7还不是稳定版本).
+    * 使用django的syncdb,写个数据植入的方法,来保证需要的数据在syncdb后能够方便的插入(变相的方法,治标不治本).</p>
+<h3 id="model-op">Model Op</h3>
+<p><code>&lt;modelName&gt;.objects.order_by("-&lt;columnName&gt;")</code>,使用"-"降序排列,更多的Model相关的操作,详见:<a href="file:///E:/Workspace/2014/%E4%BA%A4%E6%B5%81%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/Python/Django%20Docs/ref/models/querysets.html" title="本地DjangoDoc">Django-Doc-querysets</a></p>
+<h3 id="form-clean">Form Clean</h3>
+<p>对于Django的<code>ModelForm</code>,如果你重写了<code>clean</code>方法,那么请注意,该方法一定要返回一个<code>cleaned_data</code>.</p>
+<h3 id="imagefield">ImageField</h3>
+<p>使用Django的<code>ImageField</code>或者<code>FileField</code>时,需要将<code>form</code>的<code>enctype</code>属性设置为<code>"multipart/form-data"</code>.</p>
+<h3 id="login_required">login_required</h3>
+<p>Django中给一个方法增加用户登陆判断包含2种方法:</p>
+<ul>
+<li>对每一个View调用判断函数,如:</li>
+</ul>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">check_is_logined</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">():</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Flase</span>
+</pre></div>
+
+
+<ul>
+<li>使用Django的<code>decorator</code>,Django提供了一个叫<code>login_required</code>的<code>decorator</code>,加在方法前即可</li>
+</ul>
+<h3 id="django-registration">Django-registration</h3>
+<p>使用第三方的注册扩展?Django-registration,该应用提供了用户的注册,邮箱激活,但是需要一些配置页面.未尝试,基础的系统中也不需要如此复杂的流程.如果需要用到这一流程,可以考虑使用该App.</p>
+<h3 id="session">Session</h3>
+<p>Session,Django中的session也分为2种,主要区别是存在周期:</p>
+<ol>
+<li>浏览器级, 浏览器关闭即清除Session</li>
+<li>时间级,即根据setting.py设置的时间决定session多久超时,又被成为永久级</li>
+</ol>
+<p>Session的类型设置为:<code>SESSION_EXPIRE_AT_BROWSER_CLOSE</code>,默认为False,当不设置或者设置为False的时候都是根据时间来清理session,超时时间通过<code>SESSION_COOKIE_AGE</code>进行设置,单位为"S",默认为"1209600(2周)".</p>
+<p>Django 提供了内置的Session支持,不过需要一些配置.
+Django支持的三种Session存储方式:</p>
+<ul>
+<li>files(文件)</li>
+<li>database records(数据库)</li>
+<li>in-memory cache(内存缓存)</li>
+</ul>
+<p>Django Session的存储派生于<code>django.contrib.sessions.backends.base</code> 的 <code>SessionBase</code>.实现其<code>exists(session_key)</code>,<code>load()</code>,<code>save()</code>,<code>delete(session_key)</code>和<code>create()</code>就可以完成Session的存储控制,这也是其他的Session存储所实现的方式.</p>
+<h3 id="decorator-function-wrapper">Decorator - Function Wrapper.</h3>
+<p>View Decorator (视图装饰器):</p>
+<ul>
+<li>Performing additional work based on the incoming request or altering its attributes (对 Request 完成额外的工作 or 修改 Request 的属性)</li>
+<li>Altering the arguments to be passed to the view (修改传递给视图的参数)</li>
+<li>Modifying or replacing the outgoing response (改变 or 替换 返回的 Response)</li>
+<li>Handling errors that occur inside the view (处理 视图 内的异常)</li>
+<li>Branching to some other code, without even executing the view (进入 其他的 代码流程, 甚至 不执行 Request 的视图)</li>
+</ul>
+<p>Attention : 尽管 Decorator 可以操作 Response , 但是 大多数情况 ,使用 MiddlewareClass 来控制 Response.</p>
+<h3 id="class-based-view">Class based view:</h3>
+<p>Key Advantage:</p>
+<ul>
+<li>Higher degree of configurability (高度可配置性)</li>
+<li>Easier customization for specialized applications (更容易定制)</li>
+<li>Reuse of objects that may be used for other purposes (类可重用对象可以用于其他目的)]</li>
+</ul>
+<p>Django 的基础视图 django.views.generic.base.View 包含了以下内容 :</p>
+<ul>
+<li>Validates arguments passed into the view configuration (验证传入到视图的参数)</li>
+<li>Prevents using arguments named after HTTP methods (防止了在 Http 方法 后使用命名参数的方式)</li>
+<li>Collects arguments passed in the URL configuration (收集了 URL 配置中传递的参数)</li>
+<li>Keeps request information in a convenient place for methods to access (将 Request 信息保存在一个方便 Method 使用的地方)</li>
+<li>Verifies that a requested HTTP method is supported by the view (验证了 Http Request 方法是否被视图支持)</li>
+<li>Automatically handles OPTIONS requests (自动处理 OPTION Request)</li>
+<li>Dispatches to view methods based on the requested HTTP method (基于 Http Request 分发 到 视图方法)</li>
+</ul>
+<h3 id="form">Form</h3>
+<ul>
+<li><code>Form</code>的属性源自于<code>BaseForm</code>,如果需要 PyCharm进行提示,则需要设置<code>:type</code> 为 <code>BaseForm</code>.</li>
+<li><code>Form</code> 数据验证靠 <code>Filed</code></li>
+<li><code>HTML Render</code> 靠 <code>Widget</code>,指定<code>Filed</code>的<code>Widget</code>可以指定<code>Filed</code>显示成什么样.</li>
+</ul>
+<h3 id="django-templates">Django Templates:</h3>
+<h4 id="1">1. 工作机制</h4>
+<ul>
+<li>
+<p>A new Template object accepts the raw string of the template’s contents, forming the  object that will be used later. 
+    <code>(Template 对象 接收 Template内容字符串 ,根据 字符串 构造后续会使用的 object)</code></p>
+</li>
+<li>
+<p>A Lexer object also receives the raw template string, to begin processing the template contents. 
+    <code>(语法解析器 同样 接收的是原始字符串, 然后开始处理 模板 的内容)</code></p>
+</li>
+<li>
+<p>Lexer.tokenize() uses a regular expression to split the template into individual  components, called tokens.<br>
+<code>(语法解析器 通过 正则表达式 将模板分为 独立的组件,名为token)</code></p>
+</li>
+<li>
+<p>These tokens populate a new Parser object.
+    <code>(这些解析出来的Token返回了一个新的解析器对象)</code></p>
+</li>
+<li>
+<p>Parser.parse() goes through the available tokens, creating nodes along the way. 
+    <code>(解析器的Parse方法遍历所有可用的 token,同时创建对应的 node)</code></p>
+</li>
+<li>
+<p>For each block tag, Parser.parse() calls an external function that understands the tag’s  syntax and returns a compiled Node for *at tag. 
+    <code>(对于每一个Tag块,解析器的Parse方法调用一个 知道怎么处理这个tag的扩展方法,然后返回一个完整的节点)</code></p>
+</li>
+<li>
+<p>The list of compiled nodes is stored on the Template object as its nodelist attribute. 
+    <code>(处理完的节点 被存在 Template 对象的 nodelist 属性中)</code></p>
+</li>
+</ul>
+<h4 id="2-djangotemplatevariable-djangotemplatecontext">2. django.template.Variable &amp; django.template.Context</h4>
+<p>使用 Variable 可以 解析 Context 为 Context中对象.如:</p>
+<div class="codehilite"><pre><span class="n">c</span> <span class="o">=</span> <span class="n">Context</span><span class="p">({</span><span class="s">&#39;var&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,{</span><span class="s">&#39;3&#39;</span><span class="p">:</span><span class="s">&#39;3&#39;</span><span class="p">}]})</span>
+<span class="n">var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="s">&#39;var&#39;</span><span class="p">)</span>
+<span class="n">originC</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="c"># originC : [1,2,{&#39;3&#39;:&#39;3&#39;}]</span>
+</pre></div>
+
+
+<h4 id="3-djangotemplatefilter">3. django.template.filter</h4>
+<p>实现方法:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">Library</span>
+<span class="n">register</span> <span class="o">=</span> <span class="n">Library</span><span class="p">()</span>
+
+<span class="nd">@register.filter</span>
+<span class="k">def</span>  <span class="nf">filter_name</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">filter_argument</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+
+
+<p>如上,引入<code>Library</code>,生成实例,给自己的<code>Filter</code>函数加上装饰器:<code>@register.filter</code>.
+过滤器方法接收两个参数,第一个为需要过滤的原始输入,不指定的话可能为任何类型,第二个是过滤器所用的参数.
+如下:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">django.template.defaultfilters</span> <span class="kn">import</span> <span class="n">stringfilter</span>
+
+<span class="nd">@register.filter</span>
+<span class="nd">@stringfilter</span>
+<span class="k">def</span> <span class="nf">first</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">value</span><span class="p">[:</span><span class="n">count</span><span class="p">]</span>
+</pre></div>
+
+
+<p>使用方式 : <code>{% variable_name|first:3 %}</code></p>
+<h4 id="4-djangotemplatetag">4. django.template.tag</h4>
+<p>实现方法:</p>
+<ul>
+<li>原始方法 :<ul>
+<li>定义处理Node的方法,render定义了节点应该如何被展现:</li>
+</ul>
+</li>
+</ul>
+<div class="codehilite"><pre><span class="k">class</span> <span class="nc">FirstNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">count</span>
+    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">]</span>
+</pre></div>
+
+
+<ul>
+<li>
+<ul>
+<li>注册tag:</li>
+</ul>
+</li>
+</ul>
+<div class="codehilite"><pre><span class="nd">@register.tag</span>
+<span class="k">def</span> <span class="nf">first</span><span class="p">(</span><span class="n">parser</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+    <span class="n">var</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">split_contents</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">FirstNode</span><span class="p">(</span><span class="n">Variable</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+</pre></div>
+
+
+<ul>
+<li>简便方法 : 和 filter 比较类似, 使用simpletag 进行 tag的注册 :</li>
+</ul>
+<div class="codehilite"><pre><span class="nd">@register.simple_tag</span>
+<span class="k">def</span> <span class="nf">first</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>    
+    <span class="k">return</span> <span class="n">value</span><span class="p">[:</span><span class="n">count</span><span class="p">]</span>
+</pre></div>
+
+
+<p>使用方式 : <code>{% first variable_name 3  %}</code></p>
+<p><strong>另外</strong>, <code>django.template.add_to_builtins()</code> 方法 可以将 tag 注册到全局中去, 因为多个<code>App</code>都可能注册 <strong>同一个</strong> tag 名字, django 不负责 维护 他们,实际生效的是最后一个被执行的 tag,
+同时, 如果 定义 了预置的 tag ,则会覆盖 预置 的tag的行为方式. 需 <strong>谨慎用之</strong>.</p>
+<h3 id="django_1">Django错误提示</h3>
+<p>会根据Locale中不同的Language进行转化.</p>
+<h3 id="middleware">Middleware</h3>
+<p>Django的Middleware提供了4个<code>Key Point</code>以供Hook:</p>
+<ol>
+<li>MiddlewareClass.process_request(self, request) : 处理请求,在url解析之前.</li>
+<li>MiddlewareClass.process_view(self, request, view, args, kwargs) : 视图处理前.</li>
+<li>MiddlewareClass.process_response(self, request, response) : 视图返回前.</li>
+<li>MiddlewareClass.process_exception(self, request, exception) : 异常处理前.</li>
+</ol>
+<p>Middleware(中间件) VS. Decorator(装饰器):</p>
+<ul>
+<li>作用范围: Middleware 作于于 所有 request,而 Decorator 仅仅作用于被修饰的视图.</li>
+<li>使用方式: Middleware 在settings.py进行注册激活,而 Decorator 需要 作用于函数.</li>
+<li>Middleware 的一些优势:
+    a. 许多操作,如缓存和压缩,需要对每一个request完成,使用Middleware能很轻松的完成.
+    b. 一些已有的middleware已经完成了需要的功能.
+    c. 第三方的应用,无须任何修改,就能得到middleware的功能.</li>
+<li>Decorator:
+    a. 需要作用于每个函数,对于一些需要精确或者特殊指定的地方比较有用.适用于仅仅对站点部分视图生效的的功能.</li>
+<li>
+<p>配置选项:
+    Middleware没有提供直接的参数配置方式,但是可以使用__init__函数进行参数提供.而Decorator可以指定参数.</p>
+</li>
+<li>
+<p>将Middleware当作Decorator使用:
+    <code>django.utils.decorators</code> 的 <code>decorator_from_middleware()</code> 和 <code>decorator_from_middleware_with_args()</code>提供了方法完成middleware到decorator的转换.</p>
+</li>
+</ul>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

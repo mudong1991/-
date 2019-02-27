@@ -1,0 +1,708 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ReadTheDocs帮助文档 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="None" href="index.html#document-index"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="http://develop.rtd4cdforward.io/en/latest/" />
+
+<link rel="stylesheet" href="/media/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="text/javascript" src="_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = 'index'
+</script>
+
+<script type="text/javascript" src="_static/readthedocs-dynamic-include.js"></script>
+
+<!-- end RTD <extrahead> --></head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html#document-index" class="icon icon-home"> ReadTheDocs帮助文档
+          
+
+          
+          </a>
+
+          
+            
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-setup/index">环境搭建</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-run/index">运行</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-start_docs/index">开始写文档</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html#document-index">ReadTheDocs帮助文档</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html#document-index">Docs</a> &raquo;</li>
+      
+    <li>ReadTheDocs帮助文档 1.0.0 documentation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="readthedocs">
+<h1>ReadTheDocs 帮助文档<a class="headerlink" href="#readthedocs" title="Permalink to this headline">¶</a></h1>
+<p>内容目录:</p>
+<div class="toctree-wrapper compound">
+<span id="document-setup/index"></span><div class="section" id="id1">
+<h2>环境搭建<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">当前运行环境为: <strong>Ubuntu - 10.2.25.103</strong> ,服务器上包含了源代码,PyCharm,Redis,ElasiticSearch</p>
+</div>
+<div class="section" id="code-get">
+<span id="id2"></span><h3>源代码获取<a class="headerlink" href="#code-get" title="Permalink to this headline">¶</a></h3>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last"><em>当前SVN为个人服务器,如无对应的帐号请联系本人进行添加.</em></p>
+</div>
+<p>当前源代码路径: <a class="reference external" href="http://10.2.25.3/svn/OpenSourcePythonCodes/ReadTheDocs/trunk">http://10.2.25.3/svn/OpenSourcePythonCodes/ReadTheDocs/trunk</a> .</p>
+<p>适用于当前部署的环境,修改了界面的显示的方式,文字说明等.</p>
+<div class="section" id="id3">
+<h4>其他版本<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li>版本: <a class="reference external" href="http://10.2.25.3/svn/OpenSourcePythonCodes/ReadTheDocs/tags/version-en-basic-origin">Version-En-Basic-Origin</a> 为修改后的可以运行的英文基础版本,包含了一些运行配置的修改.</li>
+<li>版本: <a class="reference external" href="http://10.2.25.3/svn/OpenSourcePythonCodes/ReadTheDocs/tags/version-en-origin">Origin</a> 为 <cite>ReadTheDocs</cite> 的源代码.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="python">
+<span id="python-module-instal"></span><h3>Python模块安装<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<p>Python的运行环境通过 <cite>pip_offline_packages</cite> 里面的包进行安装.步骤如下:</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">项目根目录下的 <cite>env</cite> 可以被 <cite>PyCharm</cite> 和 <cite>VsCode</cite> 等IDE自动探测到,便于项目使用虚拟环境.</p>
+</div>
+<p>下载: <a class="reference download internal" href="_downloads/pip_offline_packages.rar" download=""><code class="xref download docutils literal"><span class="pre">常用Python模块离线包</span></code></a></p>
+<ol class="arabic simple">
+<li>进入运行环境目录 <cite>env</cite></li>
+<li>创建虚拟环境,并激活当前环境</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 离线方式,不进行包下载</span>
+python -mvirtualenv --no-site-packages --no-download .
+
+<span class="c1"># 激活环境</span>
+<span class="nb">source</span> bin/activate  <span class="c1"># Linux 上  Or</span>
+Scripts<span class="se">\a</span>ctivate.bat <span class="c1"># Windows 上</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>切换到项目根目录,安装项目所需要的 <cite>Python</cite> 模块</li>
+</ol>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">指定相对路径即可,并不需要非得切换到根目录</p>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 通过env的 `pip_offline_packages` 进行模块安装,适用于Linux, Windows下的路径自行修正</span>
+pip install --no-index --find-links<span class="o">=</span>./pip_offline_packages/ -r requirements.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="procject-runtime-init">
+<span id="id4"></span><h3>项目初始化<a class="headerlink" href="#procject-runtime-init" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="pycharm">
+<h4>PyCharm设置<a class="headerlink" href="#pycharm" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li>指定Python解释器,选择项目目录下的env</li>
+<li>指定Django框架配置,配置文件路径如下</li>
+</ol>
+<img alt="_images/enable_django_settings.png" src="_images/enable_django_settings.png" />
+<ol class="arabic simple" start="3">
+<li>增加Django运行配置</li>
+</ol>
+<img alt="_images/add_django_run.png" src="_images/add_django_run.png" />
+<ol class="arabic simple" start="4">
+<li>增加Celery的Worker运行配置 (可选,如果Celery为饥渴模式的话则不需要独立运行Worker)</li>
+</ol>
+<img alt="_images/add_celery_worker.png" src="_images/add_celery_worker.png" />
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">参数后面的-Q非常重要,否则默认只会启动默认的 <strong>celery</strong> 消费者队列,对于 <strong>web</strong> 队列的则不会进行相关任务的处理,
+将会导致文档生成相关工作显示构建成功,但是实际尚未完成</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">安装 <strong>flower</strong> 模块,该模块提供了Web界面来查看Celery的相关运行情况.</p>
+</div>
+</div>
+<div class="section" id="runtime-data-init">
+<span id="id5"></span><h4>运行配置<a class="headerlink" href="#runtime-data-init" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">数据库初始化:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">配置文件修改</p>
+</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># 生成文档时所引用的路径和主机</span>
+<span class="n">PRODUCTION_DOMAIN</span> <span class="o">=</span> <span class="s1">&#39;10.2.25.103:8000&#39;</span>
+<span class="n">PUBLIC_API_URL</span> <span class="o">=</span> <span class="s2">&quot;http://{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PRODUCTION_DOMAIN</span><span class="p">)</span>
+<span class="n">WEBSOCKET_HOST</span> <span class="o">=</span> <span class="s1">&#39;10.2.25.103:8088&#39;</span>
+
+<span class="c1"># 执行文档生成等任务所用的帐号</span>
+<span class="n">SLUMBER_USERNAME</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span> <span class="c1"># 使用 createsuperuser 所创建的帐号</span>
+<span class="n">SLUMBER_PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>  <span class="c1"># noqa: ignore dodgy check</span>
+<span class="n">SLUMBER_API_HOST</span> <span class="o">=</span> <span class="s1">&#39;http://10.2.25.103:8000&#39;</span>
+
+<span class="c1"># Redis 和 Celery 配置</span>
+<span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">&#39;redis://10.2.25.103:6379/0&#39;</span>  <span class="c1"># 任务队列</span>
+<span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s1">&#39;redis://10.2.25.103:6379/0&#39;</span> <span class="c1"># 任务结果存储</span>
+<span class="n">CELERY_ALWAYS_EAGER</span> <span class="o">=</span> <span class="bp">False</span> <span class="c1"># 是否立即执行任务,为True的时候不会用到Redis缓存队列,直接执行相关的任务</span>
+
+<span class="c1"># ElasiticSearch 配置</span>
+<span class="n">ES_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;10.2.25.103:9200&#39;</span><span class="p">]</span>
+
+<span class="c1"># 生成文档是安装PIP环境的方式,Offline使用项目根目录下的 pip_offline_packages</span>
+<span class="c1"># 进行离线安装, 方式如程序本身的运行环境一样</span>
+<span class="n">LOCAL_PIP_MODE</span> <span class="o">=</span> <span class="n">VirtualEnv_Mode</span><span class="o">.</span><span class="n">Mode_Offline</span>
+
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="redis">
+<h4>Redis配置<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li>安装Redis服务器</li>
+<li>增加并修改配置文件</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Redis configuration file example.</span>
+<span class="c1">#</span>
+<span class="c1"># Note that in order to read the configuration file, Redis must be</span>
+<span class="c1"># started with the file path as first argument:</span>
+<span class="c1">#</span>
+<span class="hll"><span class="c1"># ./redis-server /path/to/redis.conf</span>
+</span>
+<span class="c1"># The working directory.</span>
+<span class="c1">#</span>
+<span class="c1"># The DB will be written inside this directory, with the filename specified</span>
+<span class="c1"># above using the &#39;dbfilename&#39; configuration directive.</span>
+<span class="c1">#</span>
+<span class="c1"># The Append Only File will also be created inside this directory.</span>
+<span class="c1">#</span>
+<span class="c1"># Note that you must specify a directory here, not a file name.</span>
+<span class="hll">dir ../data/
+</span></pre></div>
+</div>
+<ol class="arabic" start="3">
+<li><p class="first">运行Redis服务器:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">redis</span><span class="o">-</span><span class="n">server</span> <span class="n">redis</span><span class="o">.</span><span class="n">conf</span> <span class="o">&amp;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">更多资料可参见之前的 <a class="reference external" href="http://10.10.0.103:8090/display/1SYSBXHDEV/Redis">Redis相关文档</a></p>
+</li>
+</ol>
+</div>
+<div class="section" id="elasiticsearch">
+<h4>ElasiticSearch配置<a class="headerlink" href="#elasiticsearch" title="Permalink to this headline">¶</a></h4>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last"><cite>ElasiticSearch</cite> 是直接通过Ubuntu的Apt进行安装的,仅依赖于JRE,因此还得装JRE.不过 <cite>ElasiticSearch</cite> 对于版本的配合相对来说比较高.</p>
+</div>
+<ol class="arabic simple">
+<li>安装1.7.3版本的 <cite>ElasiticSearch</cite> (1.x 的最后一个版本)</li>
+<li>修正插件脚本,1.7.3自带的插件脚本无法正常运行,但是直接用其生成的命令却可以正常直接,为此,生成了Shell脚本来做插件管理.</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>/usr/bin/java -Xmx64m -Xms16m -Delasticsearch -Des.path.home<span class="o">=</span><span class="s2">&quot;/usr/share/elasticsearch&quot;</span> -Des.default.path.conf<span class="o">=</span><span class="s2">&quot;/usr/share/elasticsearch/config&quot;</span> -Des.default.config<span class="o">=</span><span class="s2">&quot;/usr/share/elasticsearch/config/elasticsearch.yml&quot;</span> -cp <span class="s2">&quot;:/usr/share/java/sigar.jar:/usr/share/java/log4j-1.2-1.2.17.jar:/usr/share/java/lucene-memory-4.10.4.jar:/usr/share/java/lucene-grouping-4.10.4.jar:/usr/share/java/lucene-codecs-4.10.4.jar:/usr/share/java/lucene-spatial-4.10.4.jar:/usr/share/java/lucene-expressions-4.10.4.jar:/usr/share/java/lucene-replicator-4.10.4.jar:/usr/share/java/lucene-test-framework-4.10.4.jar:/usr/share/java/lucene-misc-4.10.4.jar:/usr/share/java/lucene-sandbox-4.10.4.jar:/usr/share/java/apache-log4j-extras-1.2.17.jar:/usr/share/java/lucene-core-4.10.4.jar:/usr/share/java/spatial4j-0.4.1.jar:/usr/share/java/lucene-analyzers-morfologik-4.10.4.jar:/usr/share/java/lucene-demo-4.10.4.jar:/usr/share/java/lucene-suggest-4.10.4.jar:/usr/share/java/lucene-analyzers-smartcn-4.10.4.jar:/usr/share/java/lucene-analyzers-kuromoji-4.10.4.jar:/usr/share/java/elasticsearch-1.7.3.jar:/usr/share/java/lucene-queries-4.10.4.jar:/usr/share/java/lucene-join-4.10.4.jar:/usr/share/java/lucene-queryparser-4.10.4.jar:/usr/share/java/jts.jar:/usr/share/java/lucene-analyzers-uima-4.10.4.jar:/usr/share/java/lucene-facet-4.10.4.jar:/usr/share/java/lucene-classification-4.10.4.jar:/usr/share/java/lucene-benchmark-4.10.4.jar:/usr/share/java/groovy-all-2.x.jar:/usr/share/java/jna.jar:/usr/share/java/lucene-analyzers-common-4.10.4.jar:/usr/share/java/lucene-analyzers-icu-4.10.4.jar:/usr/share/java/lucene-analyzers-phonetic-4.10.4.jar:/usr/share/java/lucene-highlighter-4.10.4.jar:/usr/share/java/lucene-analyzers-stempel-4.10.4.jar:&quot;</span> org.elasticsearch.plugins.PluginManager <span class="nv">$*</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>安装插件 <cite>marvel</cite> , <cite>ElasiticSearch</cite> 管理工具 (可选,latest也可兼容)</li>
+<li>安装插件 <cite>elasticsearch-analysis-icu</cite> , <strong>版本为2.7.0, 该插件有严格的版本匹配关系,也正是因为该插件尚不支持 `ElasiticSearch` 2.X,因此才使用当前版本</strong></li>
+</ol>
+<p><a class="reference download internal" href="_downloads/elasticsearch-analysis-icu-2.7.0.zip" download=""><code class="xref download docutils literal"><span class="pre">elasticsearch-analysis-2.7.0.zip</span></code></a></p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last"><cite>ElasiticSearch</cite> 2.X 之后要求插件中应包含 <strong>plugin-descriptor.properties</strong> 文件</p>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 使用上面的Shell脚本来安装,可以使用本地文件的方式进行插件安装</span>
+./plugin.java.sh -u file:/home/rtdroot/workspace/srcPkg/elasticsearch-analysis-icu-2.7.0.zip -i elasticsearch-analysis-icu
+</pre></div>
+</div>
+<ol class="arabic" start="5">
+<li><p class="first">运行 ElasiticSearch:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># 后台运行</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">elasticsearch</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">elasticsearch</span> <span class="o">-</span><span class="n">d</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">更多资料可参见 <a class="reference external" href="http://10.10.0.103:8090/display/1SYSBXHDEV/Redis">中文版指南文档</a> .</p>
+</li>
+</ol>
+</div>
+<div class="section" id="id8">
+<h4>静态资源<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<p>项目中的部分静态资源是通过软链接的方式放在media目录下的.包含如下软链接:</p>
+<img alt="_images/link_media_fonts.png" src="_images/link_media_fonts.png" />
+</div>
+</div>
+</div>
+<span id="document-run/index"></span><div class="section" id="id1">
+<h2>运行<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<span id="document-run/run_code/run_itself"></span><div class="section" id="id1">
+<h3>基础<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h4>代码运行<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">直接使用:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>运行代码.即直接使用PyCharm运行代码:</p>
+<img alt="_images/run_server.png" src="_images/run_server.png" />
+<p><em>CeleryWorker</em> 和 <em>RTD</em> 都需要运行.</p>
+<ol class="arabic simple" start="2">
+<li>部署运行</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Todo~~~</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h4>系统用户<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>在 <a class="reference internal" href="index.html#runtime-data-init"><span class="std std-ref">运行配置</span></a>  时我们创建了基础的用户,但是这个用户还不能登陆,还需要进行邮件验证.</p>
+<p>目前的邮件提供端为:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">EMAIL_BACKEND</span> <span class="o">=</span> <span class="s1">&#39;django.core.mail.backends.console.EmailBackend&#39;</span>
+</pre></div>
+</div>
+<p>生成的验证链接将被记录在 <strong>Console</strong> 中(因此,在未修改邮件的提供端之前, <strong>邮件是不会发送给你的</strong>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>MIME-Version: 1.0
+Content-Type: text/plain; charset=&quot;utf-8&quot;
+Content-Transfer-Encoding: 7bit
+Subject: [example.com] Please Confirm Your E-mail Address
+From: no-reply@readthedocs.org
+To: benjaminxt@live.cn
+Date: Fri, 14 Oct 2016 08:50:27 -0000
+Message-ID: &lt;20161014085027.16057.80176@ubuntu&gt;
+
+Hello from example.com!
+
+You&#39;re receiving this e-mail because user benjamin at example.com has given yours as an e-mail address to connect their account.
+
+To confirm this is correct, go to http://10.2.25.103:8000/accounts/confirm-email/Mg:1buyCB:XknWDtTEzJP-ZwebVQh46kWpr5U/
+
+Thank you from example.com!
+example.com
+-------------------------------------------------------------------------------
+</pre></div>
+</div>
+<p>访问链接,点击确认后用户才可登陆.</p>
+</div>
+</div>
+<span id="document-run/import_code/import_docs"></span><div class="section" id="id1">
+<h3>导入文档项目<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><em>ReadTheDocs</em> 提供四种版本管理工具的支持,因为网络限制我们仅使用 <strong>SVN</strong> .</p>
+<div class="section" id="svn">
+<span id="import-from-svn"></span><h4>SVN<a class="headerlink" href="#svn" title="Permalink to this headline">¶</a></h4>
+<p>与 <em>Github</em> 不同, <em>SVN</em> 方式仅支持 <strong>tags</strong> ,而 <strong>branch</strong> 并不受支持. 并且,对于路径有特殊要求:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Backend</span><span class="p">(</span><span class="n">BaseVCS</span><span class="p">):</span>
+    <span class="n">supports_tags</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">fallback_branch</span> <span class="o">=</span> <span class="s1">&#39;/trunk/&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Backend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">version</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repo_url</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repo_url</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repo_url</span> <span class="o">+=</span> <span class="s1">&#39;/&#39;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">repo_url</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;/trunk/&#39;</span><span class="p">):</span>
+<span class="hll">            <span class="bp">self</span><span class="o">.</span><span class="n">supports_tags</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="hll">            <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repo_url</span><span class="p">[:</span><span class="o">-</span><span class="mi">7</span><span class="p">]</span>
+</span><span class="hll">        <span class="k">else</span><span class="p">:</span>
+</span>            <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repo_url</span>
+
+<span class="c1"># ...</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tags</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="hll">        <span class="n">retcode</span><span class="p">,</span> <span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;svn&#39;</span><span class="p">,</span> <span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/tags/&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span>
+</span>        <span class="c1"># error (or no tags found)</span>
+        <span class="k">if</span> <span class="n">retcode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_tags</span><span class="p">(</span><span class="n">stdout</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>当你所提供的路径以 <strong>trunk/</strong> 结束时,才会去发现 <strong>tags</strong> 分支标签,才会去支持分支版本.</p>
+<div class="section" id="id2">
+<h5>项目导入<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h5>
+<ol class="arabic simple">
+<li>创建自己的帐号.直接注册一个帐号(<strong>注册前请通知我查看Email确认链接</strong>).</li>
+</ol>
+<img alt="_images/register_user.png" src="_images/register_user.png" />
+<ol class="arabic simple" start="2">
+<li>进入项目导入向导.选择人工导入.</li>
+</ol>
+<img alt="_images/import_manually.png" src="_images/import_manually.png" />
+<ol class="arabic simple" start="3">
+<li>填写项目属性.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">第一次填写的项目名称需要使用全英文,当前环境未配置文件系统, <strong>首次创建相关文件夹以第一次配置的英文名字为准</strong> ,后续可以修改项目相关属性.</p>
+</div>
+<ol class="arabic simple" start="4">
+<li>构建文档,文档项目的相关属性变更之后会自动进行一次构建.如果失败则需要手动重新构建.</li>
+</ol>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Python相关文档会根据requirements.txt的内容进行Python模块的安装,当前Pip模式采用的是 <strong>离线</strong> 的方式,请将PIP相关的安装包下载至 <strong>pip_offline_packages</strong> 目录中.
+系统自带了Sphinx1.3版本以及RTD包,如无特殊需求可以不用在增加其他的Python模块</p>
+</div>
+<ol class="arabic simple" start="5">
+<li>文档构建的结果可以通过 <strong>构建</strong> 标签页进行查看:</li>
+</ol>
+<img alt="_images/view_build_result.png" src="_images/view_build_result.png" />
+<p>如果无法通过 <strong>构建</strong> ,请查看相关错误提示,或者联系我帮助排查.</p>
+</div>
+<div class="section" id="id3">
+<h5>典型的项目结构<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h5>
+<p>以下是典型的Python项目的结构.</p>
+<ol class="arabic simple">
+<li>Django源码</li>
+</ol>
+<img alt="_images/django_file_struct.png" src="_images/django_file_struct.png" />
+<ol class="arabic simple" start="2">
+<li>ReadTheDocs源码</li>
+</ol>
+<img alt="_images/rtd_file_struct.png" src="_images/rtd_file_struct.png" />
+<ol class="arabic simple" start="3">
+<li>本文档的源码结构</li>
+</ol>
+<img alt="_images/my_proj_file_struct.png" src="_images/my_proj_file_struct.png" />
+<p>以上仅标注出了一些典型的项目.最后的本文档的结构,可以应用于大部分的项目.</p>
+<ul class="simple">
+<li><strong>docs</strong> 目录用于存放你的目录,可以使用Sphinx-Quickstart进行构建</li>
+<li><strong>env</strong> 包含了当前项目运行,文档生成所需要的Python环境</li>
+<li><strong>pip_offline_packages</strong> 包含了你为该项目在服务器上生成所提供的离线的Python包的路径</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">考虑在本文档中提供一个典型的离线包</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h5>特殊配置<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h5>
+<p>如果你的项目结构并非如此,可以在高级配置中进行修改:</p>
+<img alt="_images/advance_config.png" src="_images/advance_config.png" />
+<ul class="simple">
+<li>python模块 <strong>requirements.txt</strong> 默认是在根目录查找</li>
+<li>项目文档配置 <strong>conf.py</strong> 默认是在docs下查找</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h5>自动构建<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h5>
+<p>如果需要文档提交至SVN时,触发构建.可以在提交的注释中增加一行:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">RTDBuild</span><span class="p">:</span><span class="o">&lt;</span><span class="n">ProjectName_Or_ProjectID</span><span class="o">&gt;|&lt;</span><span class="n">Version_Flag</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>项目ID或者项目名称,可以从RTD站点中得到.Version_Flag是当前需要编译的版本.</p>
+<p>该功能源自于自己编写的SVN的HOOK,代码如下:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Program Main Func</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># get_svn_log(&quot;30&quot;)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># From SVN</span>
+        <span class="n">svn_revision</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">do_the_job</span><span class="p">(</span><span class="n">svn_revision</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># From Self Test</span>
+        <span class="n">do_the_job</span><span class="p">(</span><span class="s2">&quot;30&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p class="last">下载:  <a class="reference download internal" href="_downloads/post-commit.py" download=""><code class="xref download docutils literal"><span class="pre">post-commit.py</span></code></a></p>
+</div>
+</div>
+</div>
+<div class="section" id="github">
+<h4>Github<a class="headerlink" href="#github" title="Permalink to this headline">¶</a></h4>
+<p>在联网的情况下,可以配置Github项目.步骤如下:</p>
+<ol class="arabic simple">
+<li>创建你自己Github帐号.</li>
+<li>Fork对应项目到自己的帐号下.</li>
+<li>在本站点导入项目.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<span id="document-start_docs/index"></span><div class="section" id="id1">
+<h2>开始写文档<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>文档编写环境<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">下面仅是我自己所用的文档编写环境,适用于Sphinx.</p>
+</div>
+<div class="section" id="id3">
+<h4>开发工具<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>开发工具这里使用的是 <strong>Visual Studio Code</strong> ,一款类似于 <strong>NotePad++</strong> , <strong>Sublime Text</strong> 等纯文本编辑器的工具.</p>
+<p>安装包: <a class="reference download internal" href="_downloads/VSCodeSetup-stable.exe" download=""><code class="xref download docutils literal"><span class="pre">VSCode-1.6.1</span></code></a>  .</p>
+<p>扩展插件包: <a class="reference download internal" href="_downloads/vscode-extensions.rar" download=""><code class="xref download docutils literal"><span class="pre">extensions</span></code></a> .</p>
+<img alt="_images/dev_tools_vscode.png" src="_images/dev_tools_vscode.png" />
+<p>如图上图所示,在安装了相关的扩展插件之后, <strong>VSCode</strong> 就具备了编辑ReStructText的能力.并且支持Sphinx的一些扩展标记.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>VSCode的扩展插件为平台无关,绿色的,将插件释放至对应的目录即可,如图:</p>
+<img alt="_images/vscode-extensions-path.png" class="last" src="_images/vscode-extensions-path.png" />
+</div>
+</div>
+<div class="section" id="id4">
+<h4>智能提示<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p>作为编辑工具,智能提示还是比较重要的.作为微软的免费的编辑工具. <strong>VSCode</strong> 在智能提示方面还是如VS一样相当的出色,虽然有些地方还是需要增强.</p>
+<img alt="_images/dev_tools_intelligence.png" src="_images/dev_tools_intelligence.png" />
+</div>
+<div class="section" id="id5">
+<h4>文档预览<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p><strong>VSCode</strong> 并不是一个 <em>WYSIWYG</em> 编辑器, 实际 <strong>ReStructuredText</strong> 插件也有 <em>Preview</em> 功能,但是实际效果并不理想,经常报错,未去深入研究.</p>
+<p><strong>ReStructuredText</strong> 和 <strong>Markdown</strong> 这类标记性语言设计的初衷就是使用纯文本的方式来编写.后面熟练之后也不大需要预览效果,预览反而降低了文档编写的效率.</p>
+</div>
+<div class="section" id="id6">
+<h4>文档生成<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<p>虽然预览功能不好使,但是我们还有编译功能. <strong>ctrl+shift+b</strong> 快捷键会调用 <strong>VSCode</strong> 的编译.如果没有配置,则会提示你进行相关配置.对于我们的典型的文档结构,配置如下:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;${workspaceRoot}\\env\\Scripts\\sphinx-build.exe&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;isShellCommand&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;-b&quot;</span><span class="p">,</span><span class="s2">&quot;html&quot;</span><span class="p">,</span><span class="s2">&quot;${workspaceRoot}\\docs&quot;</span><span class="p">,</span><span class="s2">&quot;${workspaceRoot}\\docs\\_build\\html\\&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;showOutput&quot;</span><span class="p">:</span> <span class="s2">&quot;always&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>当然,前提是env安装了Sphinx的编译的相关环境.安装方式可以参见 <a class="reference internal" href="index.html#python-module-instal"><span class="std std-ref">Python模块安装</span></a> .</p>
+</div>
+</div>
+<div class="section" id="id7">
+<h3>关于文档<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last"><strong>文档结构层次很重要,特别是在RTD主题下,他决定了你导航的显示方式!!!</strong></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h1>搜索<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, BenjaminXT.
+      
+        <span class="commit">
+          Revision <code>88M</code>.
+        </span>
+      
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="/en/latest/">latest</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="//rtd4cdforward.io/projects/develop/downloads/htmlzip/latest/">htmlzip</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="//rtd4cdforward.io/projects/develop/?fromdocs=develop">Project Home</a>
+          </dd>
+          <dd>
+            <a href="//rtd4cdforward.io/builds/develop/?fromdocs=develop">Builds</a>
+          </dd>
+      </dl>
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.
+
+    </div>
+  </div>
+
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

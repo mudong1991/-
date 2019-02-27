@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>sphinx简明教程.md—E:\python\sphinx</title>
+    <style type="text/css">
+    body{font-family:Helvetica,arial,sans-serif;font-size:14px;line-height:1.6;padding-top:10px;padding-bottom:10px;background-color:white;padding:30px;color:#333}body>*:first-child{margin-top:0!important}body>*:last-child{margin-bottom:0!important}a{color:#4183c4;text-decoration:none}a:hover{text-decoration:underline}a.absent{color:#c00}a.anchor{display:block;padding-left:30px;margin-left:-30px;cursor:pointer;position:absolute;top:0;left:0;bottom:0}html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0}kbd{background:#f1f1f1;background:-moz-linear-gradient(#f1f1f1,#ddd);background:-webkit-linear-gradient(#f1f1f1,#ddd);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#f1f1f1', endColorstr='#dddddd')";border-radius:2px;border:1px solid #ddd;border-bottom-color:#ccc;border-right-color:#ccc;padding:1px 4px;line-height:10px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}.container{max-width:920px;margin:0 auto 20px auto}#header{background:#fafafa;background:-moz-linear-gradient(#fafafa,#eaeaea);background:-webkit-linear-gradient(#fafafa,#eaeaea);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#eaeaea')";border-bottom:1px solid #cacaca;box-shadow:0 1px 0 rgba(255,255,255,0.4),0 0 10px rgba(0,0,0,0.1)}#markup{padding:3px}#markup article{padding-top:30px}.markdown-body{font-size:14px;line-height:1.6}.markdown-body>*:first-child{margin-top:0!important}.markdown-body>*:last-child{margin-bottom:0!important}.markdown-body a.absent{color:#c00}.markdown-body a.anchor{bottom:0;cursor:pointer;display:block;left:0;margin-left:-30px;padding-left:30px;position:absolute;top:0}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{cursor:text;font-weight:bold;margin:20px 0 10px;padding:0;position:relative}.markdown-body h1 .mini-icon-link,.markdown-body h2 .mini-icon-link,.markdown-body h3 .mini-icon-link,.markdown-body h4 .mini-icon-link,.markdown-body h5 .mini-icon-link,.markdown-body h6 .mini-icon-link{color:#000;display:none}.markdown-body h1:hover a.anchor,.markdown-body h2:hover a.anchor,.markdown-body h3:hover a.anchor,.markdown-body h4:hover a.anchor,.markdown-body h5:hover a.anchor,.markdown-body h6:hover a.anchor{line-height:1;margin-left:-22px;padding-left:0;text-decoration:none;top:15%}.markdown-body h1:hover a.anchor .mini-icon-link,.markdown-body h2:hover a.anchor .mini-icon-link,.markdown-body h3:hover a.anchor .mini-icon-link,.markdown-body h4:hover a.anchor .mini-icon-link,.markdown-body h5:hover a.anchor .mini-icon-link,.markdown-body h6:hover a.anchor .mini-icon-link{display:inline-block}.markdown-body h1 tt,.markdown-body h1 code,.markdown-body h2 tt,.markdown-body h2 code,.markdown-body h3 tt,.markdown-body h3 code,.markdown-body h4 tt,.markdown-body h4 code,.markdown-body h5 tt,.markdown-body h5 code,.markdown-body h6 tt,.markdown-body h6 code{font-size:inherit}.markdown-body h1{color:#000;font-size:28px}.markdown-body h2{border-bottom:1px solid #ccc;color:#000;font-size:24px}.markdown-body h3{font-size:18px}.markdown-body h4{font-size:16px}.markdown-body h5{font-size:14px}.markdown-body h6{color:#777;font-size:14px}.markdown-body p,.markdown-body blockquote,.markdown-body ul,.markdown-body ol,.markdown-body dl,.markdown-body table,.markdown-body pre{margin:15px 0}.markdown-body hr{background:url("/public/github-dirty-shade.png") repeat-x scroll 0 0 transparent;border:0 none;color:#ccc;height:4px;padding:0}.markdown-body>h2:first-child,.markdown-body>h1:first-child,.markdown-body>h1:first-child+h2,.markdown-body>h3:first-child,.markdown-body>h4:first-child,.markdown-body>h5:first-child,.markdown-body>h6:first-child{margin-top:0;padding-top:0}.markdown-body a:first-child h1,.markdown-body a:first-child h2,.markdown-body a:first-child h3,.markdown-body a:first-child h4,.markdown-body a:first-child h5,.markdown-body a:first-child h6{margin-top:0;padding-top:0}.markdown-body h1+p,.markdown-body h2+p,.markdown-body h3+p,.markdown-body h4+p,.markdown-body h5+p,.markdown-body h6+p{margin-top:0}.markdown-body li p.first{display:inline-block}.markdown-body ul,.markdown-body ol{padding-left:30px}.markdown-body ul.no-list,.markdown-body ol.no-list{list-style-type:none;padding:0}.markdown-body ul li>*:first-child,.markdown-body ol li>*:first-child{margin-top:0}.markdown-body ul ul,.markdown-body ul ol,.markdown-body ol ol,.markdown-body ol ul{margin-bottom:0}.markdown-body dl{padding:0}.markdown-body dl dt{font-size:14px;font-style:italic;font-weight:bold;margin:15px 0 5px;padding:0}.markdown-body dl dt:first-child{padding:0}.markdown-body dl dt>*:first-child{margin-top:0}.markdown-body dl dt>*:last-child{margin-bottom:0}.markdown-body dl dd{margin:0 0 15px;padding:0 15px}.markdown-body dl dd>*:first-child{margin-top:0}.markdown-body dl dd>*:last-child{margin-bottom:0}.markdown-body blockquote{border-left:4px solid #ddd;color:#777;padding:0 15px}.markdown-body blockquote>*:first-child{margin-top:0}.markdown-body blockquote>*:last-child{margin-bottom:0}.markdown-body table{border-collapse:collapse;border-spacing:0}.markdown-body table th{font-weight:bold}.markdown-body table th,.markdown-body table td{border:1px solid #ccc;padding:6px 13px}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{border:1px solid #ddd;display:block;float:left;margin:13px 0 0;overflow:hidden;padding:7px;width:auto}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{clear:both;color:#333;display:block;padding:5px 0 0}.markdown-body span.align-center{clear:both;display:block;overflow:hidden}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{clear:both;display:block;overflow:hidden}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{background-color:#f8f8f8;border:1px solid #eaeaea;border-radius:3px 3px 3px 3px;margin:0 2px;padding:0 5px;white-space:nowrap}.markdown-body pre>code{background:none repeat scroll 0 0 transparent;border:medium none;margin:0;padding:0;white-space:pre}.markdown-body .highlight pre,.markdown-body pre{background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px 3px 3px 3px;font-size:13px;line-height:19px;overflow:auto;padding:6px 10px}.markdown-body pre code,.markdown-body pre tt{background-color:transparent;border:medium none}.codehilite{background:#fff}.codehilite .c{color:#998;font-style:italic}.codehilite .err{color:#a61717;background-color:#e3d2d2}.codehilite .k{color:#000;font-weight:bold}.codehilite .o{color:#000;font-weight:bold}.codehilite .cm{color:#998;font-style:italic}.codehilite .cp{color:#999;font-weight:bold}.codehilite .c1{color:#998;font-style:italic}.codehilite .cs{color:#999;font-weight:bold;font-style:italic}.codehilite .gd{color:#000;background-color:#fdd}.codehilite .gd .x{color:#000;background-color:#faa}.codehilite .ge{color:#000;font-style:italic}.codehilite .gr{color:#a00}.codehilite .gh{color:#999}.codehilite .gi{color:#000;background-color:#dfd}.codehilite .gi .x{color:#000;background-color:#afa}.codehilite .go{color:#888}.codehilite .gp{color:#555}.codehilite .gs{font-weight:bold}.codehilite .gu{color:#aaa}.codehilite .gt{color:#a00}.codehilite .kc{color:#000;font-weight:bold}.codehilite .kd{color:#000;font-weight:bold}.codehilite .kp{color:#000;font-weight:bold}.codehilite .kr{color:#000;font-weight:bold}.codehilite .kt{color:#458;font-weight:bold}.codehilite .m{color:#099}.codehilite .s{color:#d14}.codehilite .na{color:#008080}.codehilite .nb{color:#0086b3}.codehilite .nc{color:#458;font-weight:bold}.codehilite .no{color:#008080}.codehilite .ni{color:#800080}.codehilite .ne{color:#900;font-weight:bold}.codehilite .nf{color:#900;font-weight:bold}.codehilite .nn{color:#555}.codehilite .nt{color:#000080}.codehilite .nv{color:#008080}.codehilite .ow{color:#000;font-weight:bold}.codehilite .w{color:#bbb}.codehilite .mf{color:#099}.codehilite .mh{color:#099}.codehilite .mi{color:#099}.codehilite .mo{color:#099}.codehilite .sb{color:#d14}.codehilite .sc{color:#d14}.codehilite .sd{color:#d14}.codehilite .s2{color:#d14}.codehilite .se{color:#d14}.codehilite .sh{color:#d14}.codehilite .si{color:#d14}.codehilite .sx{color:#d14}.codehilite .sr{color:#009926}.codehilite .s1{color:#d14}.codehilite .ss{color:#990073}.codehilite .bp{color:#999}.codehilite .vc{color:#008080}.codehilite .vg{color:#008080}.codehilite .vi{color:#008080}.codehilite .il{color:#099}
+    </style>
+    <style type="text/css">
+      .markdown-body hr{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC")}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="markup">
+        <article id="content" class="markdown-body">
+          <blockquote>
+<p>本文章是学习如何使用Sphinx工具创建以各种格式（HTML）自动进行分布的可维护的、样式支配的文档。</p>
+</blockquote>
+<h2 id="_1">简介</h2>
+<p>Sphinx 是一种工具，它允许开发人员以纯文本格式编写文档，以便采用满足不同需求的格式轻松生成输出。这在使用 Version Control System 追踪变更时非常有用。纯文本文档对不同系统之间的协作者也非常有用。纯文本是当前可以采用的最便捷的格式之一。</p>
+<p>虽然 Sphinx 是用 Python 编写的，并且最初是为 Python 语言文档而创建，但它并不一定是以语言为中心，在某些情况下，甚至不是以程序员为中心。Sphinx 有许多用处，比如可以用它来编写整本书！</p>
+<p>默认情况下，Sphinx 会为 Python 突出显示代码，但它还允许定义其他编程语言，比如 C 和 Ruby。</p>
+<p>可以将 Sphinx 想像成为一种文档框架：它会抽象化比较单调的部分，并提供自动函数来解决一些常见问题，比如突出显示标题索引和特殊代码（在显示代码示例时），以及突出显示适当的语法。</p>
+<h2 id="_2">要求</h2>
+<p>您应该能轻车熟路地使用 Linux® 或 UNIX® 终端（也称为控制台或终端仿真器），因为命令行界面是与 Sphinx 进行互动的主要方式。</p>
+<p>您需要安装 Python。在所有主要的 Linux 发行版和一些基于 UNIX 的操作系统（如 Mac OSX）上预先安装 Python 并做好使用它的准备。目前最新的Sphinx1.5版本 支持 Python V 2.7。要确定您已经安装了 Python 并且安装的是有效版本，请运行清单1的代码。</p>
+<p><strong>清单1.</strong></p>
+<div class="codehilite"><pre><span class="err">$</span><span class="n">python</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">Python</span> <span class="mf">2.7</span><span class="o">.</span><span class="mi">12</span>
+</pre></div>
+
+
+<h2 id="_3">语法</h2>
+<p>Sphinx 使用 reStructuredText 标记语法（和其他一些语法）来提供文档控制。如果您之前编写过纯文本文件，那么您可能非常了解精通 Sphinx 所需的语法。</p>
+<p>标记允许为适当的输出实现文本的定义和结构。开始之前，请参见下面 中的一个小的标记语法示例。</p>
+<p><strong>清单2.Sphinx标记语法示例</strong></p>
+<div class="codehilite"><pre>This is a Title
+===============
+That has a paragraph about a main subject and is set when the &#39;=&#39;
+is at least the same length of the title itself.
+
+Subject Subtitle
+----------------
+Subtitles are set with &#39;-&#39; and are required to have the same length 
+of the subtitle itself, just like titles.
+
+Lists can be unnumbered like:
+
+ * Item Foo
+ * Item Bar
+
+Or automatically numbered:
+
+ #. Item 1
+ #. Item 2
+
+Inline Markup
+-------------
+Words can have *emphasis in italics* or be **bold** and you can define
+code samples with back quotes, like when you talk about a command: ``sudo`` 
+gives you super user powers!
+</pre></div>
+
+
+<p>正如您所看到的，纯文本格式的语法非常容易读懂。在创建特定格式（如 HTML）时，标题会成为主要目标，其字体会比副标题大一些（理应如此），并且会对编号列表进行适当的编号。您已经拥有一些非常强大的功能。添加更多的项或更改编号列表中的顺序不会影响到编号，而通过替换使用的下划线可以改变标题的重要性。 </p>
+<h2 id="_4">安装和配置</h2>
+<p>安装是通过命令进行的，非常简单明了，一种是直接通过pip安装：</p>
+<div class="codehilite"><pre><span class="nv">$ </span>pip install sphinx
+Searching <span class="k">for</span> sphinx
+Reading http://pypi.python.org/simple/sphinx/
+Reading http://sphinx.pocoo.org/
+Best match: Sphinx 1.5.2
+Downloading http://pypi.python.org/packages/<span class="o">[</span>...<span class="o">]</span>
+Processing Sphinx-1.5.5-py2.7.egg
+<span class="o">[</span>...<span class="o">]</span>
+Finished processing dependencies <span class="k">for</span> sphinx
+</pre></div>
+
+
+<p>如果安装不成功，可以另外试一下：</p>
+<div class="codehilite"><pre>$easy_install sphinx
+</pre></div>
+
+
+<p>如果还是不行，可以下载源码安装: <a href="http://note.youdao.com/">http://sphinx-doc.org/</a></p>
+<p>框架使用了一个目录结构来分离源文件（纯文本文件）和构建（指生成的输出）。例如，如果使用 Sphinx 从文档源中生成一个 PDF，那么该文件会放置在构建目录中。您可以更改此行为，但为了获得一致性，我们还是保留了默认格式。</p>
+<p>让我们快速启动下面命令
+<strong>清单4.</strong></p>
+<div class="codehilite"><pre>$ sphinx-quickstart
+Welcome to the Sphinx 1.5a2 quickstart utility.
+
+Please enter values for the following settings (just press Enter to
+accept a default value, if one is given in brackets).
+
+Enter the root path for documentation.
+&gt; Root path for the documentation [.]: 
+</pre></div>
+
+
+<p>如果报错了，一般会按照提示安装相应的包即可。运行无误后，系统会通过一些问题提示您如何操作，请按下 Enter 键接受所有的默认值。最后可以生成如下的目录树：</p>
+<div class="codehilite"><pre>.
+├── build
+└── source
+    ├── _static
+    ├── _templates
+    ├── conf.py
+    └── index.rst
+├── make.bat
+└── Makefile
+</pre></div>
+
+
+<p>让我们详细研究一下每个文件。</p>
+<ul>
+<li>make.bat: make编译的命令文件</li>
+<li>Makefile：编译过代码的开发人员应该非常熟悉这个文件，如果不熟悉，那么可以将它看作是一个包含指令的文件，在使用 make 命令时，可以使用这些指令来构建文档输出。</li>
+<li>build：这是触发特定输出后用来存放所生成的文件的目录。</li>
+<li>source: 源文件目录</li>
+<li>_static：所有不属于源代码（如图像）一部分的静态文件均存放于此处，稍后会在构建目录中将它们链接在一起。</li>
+<li>_templates: 模板文件</li>
+<li>conf.py：这是一个 Python 文件，用于存放 Sphinx 的配置值，包括在终端执行 sphinx-quickstart 时选中的那些值。</li>
+<li>index.rst：文档项目的 root目录。如果将文档划分为其他文件，该目录会连接这些文件。</li>
+</ul>
+<h2 id="_5">定义文档结构</h2>
+<p>此时，我们已经正确安装了 Sphinx，查看了默认结构，并了解了一些基本语法。不要直接开始编写文档。缺乏布局和输出方面的知识会让您产生混淆，可能耽误您的整个进程。</p>
+<p>现在来深入了解一下 index.rst 文件。它包含大量的信息和其他一些复杂的语法。为了更顺利地完成任务并避免干扰，我们将合并一个新文件，将它列在主要章节中。</p>
+<p>在 index.rst 文件中的主标题之后，有一个内容清单，其中包括 toctree 声明。toctree 是将所有文档汇集到文档中的中心元素。如果有其他文件存在，但没有将它们列在此指令下，那么在构建的时候，这些文件不会随文档一起生成。</p>
+<p>我们想将一个新文件添加到文档中，并打算将其命名为 example.rst。还需要将它列在 toctree 中，但要谨慎操作。文件名后面需要有一个间隔，这样文件名清单才会有效，该文件不需要文件扩展名（在本例中为 .rst）。在文件名距离左边距有三个空格的距离，maxdepth 选项后面有一个空白行。以下展示了index.res中的<code>toctree</code>示例</p>
+<p><strong>清单5.</strong></p>
+<div class="codehilite"><pre>.. toctree::
+   :maxdepth: 2
+
+   example
+</pre></div>
+
+
+<p>讲上面sphinx的示例语法复制粘贴到example.rst文件中并保存它。</p>
+<p>编译文档命令：</p>
+<div class="codehilite"><pre>$ sphinx-build -b html sourcedir builddir
+</pre></div>
+
+
+<p>在上面运行的sphinx-quickstart已经创建了一个makefile和make.bat文件，我们可以使用make命令更方便的编译文档。如清单6代码。</p>
+<p><strong>清单6.</strong></p>
+<div class="codehilite"><pre>$ make html
+sphinx-build -b html -d _build/doctrees   . _build/html
+Making output directory...
+Running Sphinx v1.0.5
+loading pickled environment... not yet created
+building [html]: targets for 2 source files that are out of date
+updating environment: 2 added, 0 changed, 0 removed
+reading sources... [100%] index
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... done
+preparing documents... done
+writing output... [100%] index 
+writing additional files... genindex search
+copying static files... done
+dumping search index... done
+dumping object inventory... done
+build succeeded.
+
+Build finished. The HTML pages are in _build/html.
+</pre></div>
+
+
+<p>关于make更多的用法可以直接输入make进行查看：</p>
+<div class="codehilite"><pre>Sphinx v1.5a2
+Please use `make target&#39; where target is one of
+  html        to make standalone HTML files
+  dirhtml     to make HTML files named index.html in directories
+  singlehtml  to make a single large HTML file
+  pickle      to make pickle files
+  json        to make JSON files
+  htmlhelp    to make HTML files and a HTML help project
+  qthelp      to make HTML files and a qthelp project
+  devhelp     to make HTML files and a Devhelp project
+  epub        to make an epub
+  latex       to make LaTeX files, you can set PAPER=a4 or PAPER=letter
+  text        to make text files
+  man         to make manual pages
+  texinfo     to make Texinfo files
+  gettext     to make PO message catalogs
+  changes     to make an overview of all changed/added/deprecated items
+  xml         to make Docutils-native XML files
+  pseudoxml   to make pseudoxml-XML files for display purposes
+  linkcheck   to check all external links for integrity
+  doctest     to run all doctests embedded in the documentation (if enabled)
+  coverage    to run coverage check of the documentation (if enabled)
+</pre></div>
+
+
+<h2 id="_6">生成静态网站</h2>
+<p>完成上面步骤，你可以在build目录中看到一个完整的网站代码，这里我们就拥有一个完整的函数式（静态）网站。</p>
+<p>在 build 目录内，现在应该有两个目录：doctrees 和 HTML。我们对于这个存储了文档网站所需的全部文件的 HTML 目录很感兴趣。使用浏览器打开 index.html 文件，</p>
+<p><img alt="image" src="http://104.224.172.75/wp-content/uploads/2016/10/sphinx.png"></p>
+<p>虽然信息很少，但 Sphinx 能够创建很多内容。我们拥有一个基本布局，该布局包含有关项目文档、搜索部分、内容表、附带名称和日期的版权声明、页码的一些信息。</p>
+<p>搜索部分非常有趣，因为 Sphinx 已经为所有文件建立索引，并使用 JavaScript 的一些强大功能创建了一个可搜索的静态网站。</p>
+<p>还记得我们已将 example 作为一个单独的文件添加至<code>toctree</code> 中的文档吗？您可以看到，主标题显示为内容索引中的主要项目符号，副标题显示为二级项目符号。Sphinx 小心维护着让整个结构保持正确。</p>
+<p>所有的链接都指向文档中的正确位置，并且标题和副标题均有定位点，允许直接进行链接。比如，Subject Subtitle 部分在浏览器中有一个类似 ../example.html#subject-subtitle 的定位点。如前所述，该工具消除了我们对这些琐碎的、重复的需求的顾虑。</p>
+<h2 id="_7">添加图像</h2>
+<p>简明的段落、图像和图形都为项目文档增加趣味性和可读性。Sphinx 有助于利用这些有可能添加了静态文件的主要元素来吸引读者的注意。</p>
+<p>添加静态文件的正确语法很容易记忆。只要将静态文件放置 _static 目录（Sphinx 在创建文档布局时创建了该目录）中，就可以轻松地对其进行引用。在 清单 9，查看 reStructuredTex 文件中的引用应该是什么样子的。在本例中，我将其添加在 example.rst 的底部。</p>
+<p><strong>清单 7. example.rst 的静态清单</strong></p>
+<div class="codehilite"><pre>.. image:: _static/system_activity.jpg
+</pre></div>
+
+
+<p>生成文档之后，应将图像正确放置在我们为有关系统活动的 JPEG 小图像指定的地方。</p>
+<h2 id="_8">结束语</h2>
+<p>本文介绍了开始使用 Sphinx 的一些基础知识，但仍有许多内容有待我们探索。Sphinx 能够用不同的格式导出文档，但要求安装额外的库和软件。可生成的格式包括：PDF、epub、man (UNIX Manual Pages) 和 LaTeX。</p>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

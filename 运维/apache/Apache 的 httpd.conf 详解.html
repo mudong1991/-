@@ -1,0 +1,1723 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
+  width: 45em;
+  border: 1px solid #ddd;
+  outline: 1300px solid #fff;
+  margin: 16px auto;
+}
+
+body .markdown-body
+{
+  padding: 30px;
+}
+
+@font-face {
+  font-family: fontawesome-mini;
+  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+
+@font-face {
+  font-family: octicons-anchor;
+  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+
+.markdown-body {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #333333;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.markdown-body a {
+  background: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+
+.markdown-body b,
+.markdown-body strong {
+  font-weight: bold;
+}
+
+.markdown-body mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body sub,
+.markdown-body sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.markdown-body sup {
+  top: -0.5em;
+}
+.markdown-body sub {
+  bottom: -0.25em;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.markdown-body img {
+  border: 0;
+}
+
+.markdown-body hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+
+.markdown-body input {
+  line-height: normal;
+}
+
+.markdown-body input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body .codehilitetable {
+  border: 0;
+  border-spacing: 0;
+}
+
+.markdown-body .codehilitetable tr {
+  border: 0;
+}
+
+.markdown-body .codehilitetable pre,
+.markdown-body .codehilitetable div.codehilite {
+  margin: 0;
+}
+
+.markdown-body .linenos,
+.markdown-body .code,
+.markdown-body .codehilitetable td {
+  border: 0;
+  padding: 0;
+}
+
+.markdown-body td:not(.linenos) .linenodiv {
+  padding: 0 !important;
+}
+
+.markdown-body .code {
+  width: 100%;
+}
+
+.markdown-body .linenos div pre,
+.markdown-body .linenodiv pre,
+.markdown-body .linenodiv {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.markdown-body .code div pre,
+.markdown-body .code div {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.markdown-body * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font: 13px Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.4;
+}
+
+.markdown-body a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+.markdown-body a:hover,
+.markdown-body a:focus,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before,
+.markdown-body hr:after {
+  display: table;
+  content: " ";
+}
+
+.markdown-body hr:after {
+  clear: both;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.markdown-body h1 {
+  font-size: 30px;
+}
+
+.markdown-body h2 {
+  font-size: 21px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+}
+
+.markdown-body h4 {
+  font-size: 14px;
+}
+
+.markdown-body h5 {
+  font-size: 12px;
+}
+
+.markdown-body h6 {
+  font-size: 11px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body kbd {
+  background-color: #e7e7e7;
+  background-image: -moz-linear-gradient(#fefefe, #e7e7e7);
+  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
+  background-image: linear-gradient(#fefefe, #e7e7e7);
+  background-repeat: repeat-x;
+  border-radius: 2px;
+  border: 1px solid #cfcfcf;
+  color: #000;
+  padding: 3px 5px;
+  line-height: 10px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  display: inline-block;
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body .headeranchor-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  padding-right: 6px;
+  padding-left: 30px;
+  margin-left: -30px;
+}
+
+.markdown-body .headeranchor-link:focus {
+  outline: none;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.markdown-body h1 .headeranchor,
+.markdown-body h2 .headeranchor,
+.markdown-body h3 .headeranchor,
+.markdown-body h4 .headeranchor,
+.markdown-body h5 .headeranchor,
+.markdown-body h6 .headeranchor {
+  display: none;
+  color: #000;
+  vertical-align: middle;
+}
+
+.markdown-body h1:hover .headeranchor-link,
+.markdown-body h2:hover .headeranchor-link,
+.markdown-body h3:hover .headeranchor-link,
+.markdown-body h4:hover .headeranchor-link,
+.markdown-body h5:hover .headeranchor-link,
+.markdown-body h6:hover .headeranchor-link {
+  height: 1em;
+  padding-left: 8px;
+  margin-left: -30px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.markdown-body h1:hover .headeranchor-link .headeranchor,
+.markdown-body h2:hover .headeranchor-link .headeranchor,
+.markdown-body h3:hover .headeranchor-link .headeranchor,
+.markdown-body h4:hover .headeranchor-link .headeranchor,
+.markdown-body h5:hover .headeranchor-link .headeranchor,
+.markdown-body h6:hover .headeranchor-link .headeranchor {
+  display: inline-block;
+}
+
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+
+.markdown-body h5 {
+  font-size: 1em;
+}
+
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre,
+.markdown-body .admonition {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body code,
+.markdown-body samp {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .codehilite {
+  margin-bottom: 16px;
+}
+
+.markdown-body .codehilite pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+.markdown-body .codehilite pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+
+/* Admonition */
+.markdown-body .admonition {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid #e0e0e0;
+  border-left: 6px solid #333;
+  padding: 10px 10px 10px 30px;
+}
+
+.markdown-body .admonition table {
+  color: #333;
+}
+
+.markdown-body .admonition p {
+  padding: 0;
+}
+
+.markdown-body .admonition-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.markdown-body .admonition>.admonition-title {
+  color: #333;
+}
+
+.markdown-body .attention>.admonition-title {
+  color: #a6d796;
+}
+
+.markdown-body .caution>.admonition-title {
+  color: #d7a796;
+}
+
+.markdown-body .hint>.admonition-title {
+  color: #96c6d7;
+}
+
+.markdown-body .danger>.admonition-title {
+  color: #c25f77;
+}
+
+.markdown-body .question>.admonition-title {
+  color: #96a6d7;
+}
+
+.markdown-body .note>.admonition-title {
+  color: #d7c896;
+}
+
+.markdown-body .admonition:before,
+.markdown-body .attention:before,
+.markdown-body .caution:before,
+.markdown-body .hint:before,
+.markdown-body .danger:before,
+.markdown-body .question:before,
+.markdown-body .note:before {
+  font: normal normal 16px fontawesome-mini;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 1.5;
+  color: #333;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.markdown-body .admonition:before {
+  content: "\f056\00a0";
+  color: 333;
+}
+
+.markdown-body .attention:before {
+  content: "\f058\00a0";
+  color: #a6d796;
+}
+
+.markdown-body .caution:before {
+  content: "\f06a\00a0";
+  color: #d7a796;
+}
+
+.markdown-body .hint:before {
+  content: "\f05a\00a0";
+  color: #96c6d7;
+}
+
+.markdown-body .danger:before {
+  content: "\f057\00a0";
+  color: #c25f77;
+}
+
+.markdown-body .question:before {
+  content: "\f059\00a0";
+  color: #96a6d7;
+}
+
+.markdown-body .note:before {
+  content: "\f040\00a0";
+  color: #d7c896;
+}
+
+.markdown-body .admonition::after {
+  content: normal;
+}
+
+.markdown-body .attention {
+  border-left: 6px solid #a6d796;
+}
+
+.markdown-body .caution {
+  border-left: 6px solid #d7a796;
+}
+
+.markdown-body .hint {
+  border-left: 6px solid #96c6d7;
+}
+
+.markdown-body .danger {
+  border-left: 6px solid #c25f77;
+}
+
+.markdown-body .question {
+  border-left: 6px solid #96a6d7;
+}
+
+.markdown-body .note {
+  border-left: 6px solid #d7c896;
+}
+
+.markdown-body .admonition>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body .admonition>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* progress bar*/
+.markdown-body .progress {
+  display: block;
+  width: 300px;
+  margin: 10px 0;
+  height: 24px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #ededed;
+  position: relative;
+  box-shadow: inset -1px 1px 3px rgba(0, 0, 0, .1);
+}
+
+.markdown-body .progress-label {
+  position: absolute;
+  text-align: center;
+  font-weight: bold;
+  width: 100%; margin: 0;
+  line-height: 24px;
+  color: #333;
+  text-shadow: 1px 1px 0 #fefefe, -1px -1px 0 #fefefe, -1px 1px 0 #fefefe, 1px -1px 0 #fefefe, 0 1px 0 #fefefe, 0 -1px 0 #fefefe, 1px 0 0 #fefefe, -1px 0 0 #fefefe, 1px 1px 2px #000;
+  -webkit-font-smoothing: antialiased !important;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.markdown-body .progress-bar {
+  height: 24px;
+  float: left;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #96c6d7;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), inset 0 -1px 0 rgba(0, 0, 0, .1);
+  background-size: 30px 30px;
+  background-image: -webkit-linear-gradient(
+    135deg, rgba(255, 255, 255, .4) 27%,
+    transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%,
+    transparent 77%, transparent
+  );
+  background-image: -moz-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -ms-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -o-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+}
+
+.markdown-body .progress-100plus .progress-bar {
+  background-color: #a6d796;
+}
+
+.markdown-body .progress-80plus .progress-bar {
+  background-color: #c6d796;
+}
+
+.markdown-body .progress-60plus .progress-bar {
+  background-color: #d7c896;
+}
+
+.markdown-body .progress-40plus .progress-bar {
+  background-color: #d7a796;
+}
+
+.markdown-body .progress-20plus .progress-bar {
+  background-color: #d796a6;
+}
+
+.markdown-body .progress-0plus .progress-bar {
+  background-color: #c25f77;
+}
+
+.markdown-body .candystripe-animate .progress-bar{
+  -webkit-animation: animate-stripes 3s linear infinite;
+  -moz-animation: animate-stripes 3s linear infinite;
+  animation: animate-stripes 3s linear infinite;
+}
+
+@-webkit-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@-moz-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+.markdown-body .gloss .progress-bar {
+  box-shadow:
+    inset 0 4px 12px rgba(255, 255, 255, .7),
+    inset 0 -12px 0 rgba(0, 0, 0, .05);
+}
+
+/* Multimarkdown Critic Blocks */
+.markdown-body .critic_mark {
+  background: #ff0;
+}
+
+.markdown-body .critic_delete {
+  color: #c82829;
+  text-decoration: line-through;
+}
+
+.markdown-body .critic_insert {
+  color: #718c00 ;
+  text-decoration: underline;
+}
+
+.markdown-body .critic_comment {
+  color: #8e908c;
+  font-style: italic;
+}
+
+.markdown-body .headeranchor {
+  font: normal normal 16px octicons-anchor;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.headeranchor:before {
+  content: '\f05c';
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 4px 0.25em -20px;
+  vertical-align: middle;
+}
+
+/* Media */
+@media only screen and (min-width: 480px) {
+  .markdown-body {
+    font-size:14px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .markdown-body {
+    font-size:16px;
+  }
+}
+
+@media print {
+  .markdown-body * {
+    background: transparent !important;
+    color: black !important;
+    filter:none !important;
+    -ms-filter: none !important;
+  }
+
+  .markdown-body {
+    font-size:12pt;
+    max-width:100%;
+    outline:none;
+    border: 0;
+  }
+
+  .markdown-body a,
+  .markdown-body a:visited {
+    text-decoration: underline;
+  }
+
+  .markdown-body .headeranchor-link {
+    display: none;
+  }
+
+  .markdown-body a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  .markdown-body abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  .markdown-body .ir a:after,
+  .markdown-body a[href^="javascript:"]:after,
+  .markdown-body a[href^="#"]:after {
+    content: "";
+  }
+
+  .markdown-body pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .markdown-body pre,
+  .markdown-body blockquote {
+    border: 1px solid #999;
+    padding-right: 1em;
+    page-break-inside: avoid;
+  }
+
+  .markdown-body .progress,
+  .markdown-body .progress-bar {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .markdown-body .progress {
+    border: 1px solid #ddd;
+  }
+
+  .markdown-body .progress-bar {
+    height: 22px;
+    border-right: 1px solid #ddd;
+  }
+
+  .markdown-body tr,
+  .markdown-body img {
+    page-break-inside: avoid;
+  }
+
+  .markdown-body img {
+    max-width: 100% !important;
+  }
+
+  .markdown-body p,
+  .markdown-body h2,
+  .markdown-body h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .markdown-body h2,
+  .markdown-body h3 {
+    page-break-after: avoid;
+  }
+}
+</style><title>Apache 的 httpd.conf 详解</title></head><body><article class="markdown-body"><h1 id="apachehttpdconfig"><a name="user-content-apachehttpdconfig" href="#apachehttpdconfig" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Apache的httpd.config详解</h1>
+<p><code>Apache</code>服务器的设置文件位于<code>/usr/local/apache/conf/</code>目录下，传统上使用三个配置文件<code>httpd.conf</code>,<code>access.conf</code>和<code>srm.conf</code>，来配置<code>Apache</code>服务器的行为。</p>
+<ul>
+<li><code>httpd.conf</code> 提供了最基本的服务器配置，是对守护程序httpd如何运行的技术描述；</li>
+<li><code>srm.conf</code> 是服务器的资源映射文件，告诉服务器各种文件的MIME类型，以及如何支持这些文件；</li>
+<li><code>access.conf</code> 用于配置服务器的访问权限，控制不同用户和计算机的访问限制；</li>
+</ul>
+<p>这三个配置文件控制着服务器的各个方面的特性，因此为了正常运行服务器便需要设置好这三个文件。 </p>
+<p>除了这三个设置文件之外，<code>Apache</code>还使用<code>mime.types</code>文件用于标识不同文件对应的<code>MIME</code>类型， <code>magic</code>文件设置不同<code>MIME</code>类型文件的一些特殊标识，使得<code>Apache</code>服务器从文档后缀不能判断出文件的<code>MIME</code>类型时，能通过文件内容中的这些特殊标记来判断文档的<code>MIME</code>类型。 </p>
+<pre><code>bash-2.02$ ls -l /usr/local/apache/conf 
+total 100 
+-rw-r--r-- 1 root wheel 348 Apr 16 16:01 access.conf 
+-rw-r--r-- 1 root wheel 348 Feb 13 13:33 access.conf.default 
+-rw-r--r-- 1 root wheel 30331 May 26 08:55 httpd.conf 
+-rw-r--r-- 1 root wheel 29953 Feb 13 13:33 httpd.conf.default 
+-rw-r--r-- 1 root wheel 12441 Apr 19 15:42 magic 
+-rw-r--r-- 1 root wheel 12441 Feb 13 13:33 magic.default 
+-rw-r--r-- 1 root wheel 7334 Feb 13 13:33 mime.types 
+-rw-r--r-- 1 root wheel 383 May 13 17:01 srm.conf 
+-rw-r--r-- 1 root wheel 357 Feb 13 13:33 srm.conf.default
+</code></pre>
+<ul>
+<li>事实上当前版本的<code>Apache</code>将原来<code>httpd.conf</code>、<code>srm.conf</code>与<code>access.conf</code>中的所有配置参数均放在了一个配置文件<code>httpd.conf</code>中，只是为了与以前的版本兼容的原因（使用这三个设置文件的方式来源于<code>NCSA-httpd</code>），才使用三个配置文件。而提供的<code>access.conf</code>和<code>srm.conf</code>文件中没有具体的设置。</li>
+</ul>
+<p>由于在新版本的<code>Apache</code>中，所有的设置都被放在了<code>httpd.conf</code>中，因此只需要调整这个文件中的设置。以下使用缺省提供的httpd.conf为例，解释<code>Apache</code>服务器的各个设置选项。然而不必因为它提供设置的参数太多而烦恼，基本上这些参数都很明确，也可以不加改动运行<code>Apache</code>服务器。但如果需要调整<code>Apache</code>服务器的性能，以及增加对某种特性的支持，就需要了解这些设置参数的含义。 </p>
+<ul>
+<li>
+<p>关于<code>Apache</code>服务器的性能，在Internet上存在很大的争议，基本上使用<code>Apache</code>的使用者几乎都不怀疑它的优秀性能，<code>Apache</code>也支撑了很多著名的高负载的网站，但是在商业机构的评测中，<code>Apache</code>往往得分不高。很多人指出，在这些评测中，商业Web服务器及其操作系统往往由其专业公司的工程师进行过性能调整，而Free 的操作系统和Web服务器往往就使用其缺省配置或仅仅作很小的更改。需要指出的是，除了操作系统的性能调整之外，<code>Apache</code>服务器本身的缺省配置绝不是最优化和最高效的，而是要适应几乎所有种类操作系统、所有种类硬件下的设置，多平台的软件不可能为特定平台和特定硬件提供最优化的缺省配置。因此要使用<code>Apache</code>的时候，性能调整是必不可少的。</p>
+</li>
+<li>
+<p>在商业评测中忽略了的另一个事实是，评测时往往对不同种类的功能进行比较，例如使用<code>Apache</code>的标准CGI的性能与ISAPI，NSAPI等服务器端API比较，事实上<code>Apache</code>服务器与此可以比较的功能为<code>mod_perl</code>，<code>FastCGI</code>，与ASP类似的功能为PHP等等，只不过由于<code>Apache</code>的开放模式，这些功能是由独立的开发组，作为独立的模块来实现的。但是在评测中，测试人员没有加入相应的模块评测其性能。</p>
+</li>
+</ul>
+<h2 id="http"><a name="user-content-http" href="#http" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>HTTP守护进程的运行参数</h2>
+<p><code>httpd.conf</code>中首先定义了一些httpd守护进程运行时需要的参数，来决定其运行方式和运行环境。</p>
+<h3 id="servertype"><a name="user-content-servertype" href="#servertype" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ServerType</h3>
+<pre><code>ServerType standalone
+</code></pre>
+<ul>
+<li>
+<p><code>ServerType</code>定义服务器的启动方式，缺省值为独立方式<code>standalone</code>，<code>httpd</code> </p>
+</li>
+<li>
+<p>服务器将由其本身启动，并驻留在主机中监视连接请求。在Linux下将在启动文件 <code>/etc/rc.d/rc.local/init.d/apache</code>中自动启动Web服务器，这种方式是推荐设置。 </p>
+</li>
+<li>
+<p>启动Apache服务器的另一种方式是inet方式，使用超级服务器inetd监视连接请求并启动服务器。当需要使用inetd启动方式时，便需要更改为这个设置，并屏蔽<code>/etc/rc.d/rc.local/init.d/apache</code>文件，以及更改<code>/etc/inetd.conf</code>并重起inetd，那么<code>Apache</code>就能从inetd中启动了。 </p>
+</li>
+<li>
+<p>两种方式的区别是独立方式是由服务器自身管理自己的启动进程，这样在启动时能立即启动服务器的多个副本，每个副本都驻留在内存中，一有连接请求不需要生成子进程就可以立即进行处理，对于客户浏览器的请求反应更快，性能较高。而 inetd方式要由inetd发现有连接请求后才去启动http服务器，由于inetd 要监听太多的端口，因此反应较慢、效率较低，但节约了没有连接请求时Web服务器占用的资源。因此inetd方式只用于偶尔被访问并且不要求访问速度的服务器上。事实上inetd方式不适合http的突发和多连接的特性，因为一个页面可能包含多个图象，而每个图象都会引起一个连接请求，即使虽然访问人数造成教少，但瞬间的连接请求并不少，这就受到inetd性能的限制，甚至会影响由inetd启动的其他服务器程序。</p>
+</li>
+</ul>
+<h3 id="serverroot"><a name="user-content-serverroot" href="#serverroot" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ServerRoot</h3>
+<pre><code>ServerRoot "/usr/local"
+</code></pre>
+<ul>
+<li>
+<p>ServerRoot用于指定守护进程httpd的运行目录，httpd在启动之后将自动将进程的当前目录改变为这个目录，因此如果设置文件中指定的文件或目录是相对路径，那么真实路径就位于这个ServerRoot定义的路径之下。 </p>
+</li>
+<li>
+<p>由于httpd会经常进行并发的文件操作，就需要使用加锁的方式来保证文件操作不冲突，由于NFS文件系统在文件加锁方面能力有限，因此这个目录应该是本地磁盘文件系统，而不应该使用NFS文件系统。 </p>
+</li>
+</ul>
+<h3 id="lockfile"><a name="user-content-lockfile" href="#lockfile" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>LockFile</h3>
+<pre><code>LockFile /var/run/httpd.lock
+</code></pre>
+<ul>
+<li>LockFile参数指定了httpd守护进程的加锁文件，一般不需要设置这个参数， Apache服务器将自动在ServerRoot下面的路径中进行操作。但如果ServerRoot为NFS文件系统，便需要使用这个参数指定本地文件系统中的路径。</li>
+</ul>
+<h3 id="pidfile"><a name="user-content-pidfile" href="#pidfile" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>PidFile</h3>
+<pre><code>PidFile /var/run/httpd.pid
+</code></pre>
+<ul>
+<li>PidFile指定的文件将记录httpd守护进程的进程号，由于httpd能自动复制其自身，因此系统中有多个httpd进程，但只有一个进程为最初启动的进程，它为其他进程的父进程，对这个进程发送信号将影响所有的httpd进程。PidFILE定义的文件中就记录httpd父进程的进程号。</li>
+</ul>
+<h3 id="scoreboardfile"><a name="user-content-scoreboardfile" href="#scoreboardfile" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ScoreBoardFile</h3>
+<pre><code>ScoreBoardFile /var/run/httpd.scoreboard
+</code></pre>
+<ul>
+<li>httpd使用ScoreBoardFile来维护进程的内部数据，因此通常不需要改变这个参数，除非管理员想在一台计算机上运行几个Apache服务器，这时每个Apache服务器都需要独立的设置文件httpd.conf，并使用不同的ScoreBoardFile。 <br />
+</li>
+</ul>
+<h3 id="resourceconfig-accessconfig"><a name="user-content-resourceconfig-accessconfig" href="#resourceconfig-accessconfig" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ResourceConfig &amp; AccessConfig</h3>
+<pre><code>ResourceConfig conf/srm.conf 
+AccessConfig conf/access.conf
+</code></pre>
+<ul>
+<li>这两个参数ResourceConfig和AccessConfig，就用于和使用 <code>srm.conf</code> 和<code>access.conf</code> 设置文件的老版本Apache兼容。如果没有兼容的需要，可以将对应的设置文件指定为/dev/null，这将表示不存在其他设置文件，而仅使用<code>httpd.conf</code>一个文件来保存所有的设置选项。 </li>
+</ul>
+<h3 id="timeout"><a name="user-content-timeout" href="#timeout" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Timeout</h3>
+<pre><code>Timeout 300
+</code></pre>
+<ul>
+<li>Timeout定义客户程序和服务器连接的超时间隔，超过这个时间间隔（秒）后服务器将断开与客户机的连接。</li>
+</ul>
+<h3 id="keepalive"><a name="user-content-keepalive" href="#keepalive" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>KeepAlive</h3>
+<pre><code>KeepAlive On
+</code></pre>
+<ul>
+<li>在HTTP 1.0中，一次连接只能作传输一次HTTP请求，而KeepAlive参数用于支持HTTP 1.1版本的一次连接、多次传输功能，这样就可以在一次连接中传递多个HTTP请求。虽然只有较新的浏览器才支持这个功能，但还是打开使用这个选项。</li>
+</ul>
+<h3 id="maxkeepaliverequests"><a name="user-content-maxkeepaliverequests" href="#maxkeepaliverequests" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>MaxKeepAliveRequests</h3>
+<pre><code>MaxKeepAliveRequests 100
+</code></pre>
+<ul>
+<li>MaxKeepAliveRequests为一次连接可以进行的HTTP请求的最大请求次数。将其值设为0将支持在一次连接内进行无限次的传输请求。事实上没有客户程序在一次连接中请求太多的页面，通常达不到这个上限就完成连接了。</li>
+</ul>
+<h3 id="keepalivetimeout"><a name="user-content-keepalivetimeout" href="#keepalivetimeout" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>KeepAliveTimeout</h3>
+<pre><code>KeepAliveTimeout 15
+</code></pre>
+<ul>
+<li>KeepAliveTimeout测试一次连接中的多次请求传输之间的时间，如果服务器已经完成了一次请求，但一直没有接收到客户程序的下一次请求，在间隔超过了这个参数设置的值之后，服务器就断开连接。 </li>
+</ul>
+<h3 id="minspareservers-maxspareservers"><a name="user-content-minspareservers-maxspareservers" href="#minspareservers-maxspareservers" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>MinSpareServers &amp; MaxSpareServers</h3>
+<pre><code>MinSpareServers 5
+MaxSpareServers 10
+</code></pre>
+<ul>
+<li>在使用子进程处理HTTP请求的Web服务器上，由于要首先生成子进程才能处理客户的请求，因此反应时间就有一点延迟。但是，<code>Apache</code>服务器使用了一个特殊技术来摆脱这个问题，这就是预先生成多个空余的子进程驻留在系统中，一旦有请求出现，就立即使用这些空余的子进程进行处理，这样就不存在生成子进程造成的延迟了。在运行中随着客户请求的增多，启动的子进程会随之增多，但这些服务器副本在处理完一次HTTP请求之后并不立即退出，而是停留在计算机中等待下次请求。但是空余的子进程副本不能光增加不减少，太多的空余子进程没有处理任务，也占用服务器的处理能力，因此也要限制空余副本的数量，使其保持一个合适的数量，使得既能及时回应客户请求，又能减少不必要的进程数量。因此就可以使用参数<code>MinSpareServers</code>来设置最少的空余子进程数量， 以及使用参数<code>MaxSpareServers</code>来限制最多的空闲子进程数量，多余的服务器进程副本就会退出。根据服务器的实际情况来进行设置，如果服务器性能较高，并且也被频繁访问，就应该增大这两个参数的设置。对于高负载的专业网站，这两个值应该大致相同，并且等同于系统支持的最多服务器副本数量，也减少不必要的副本退出。</li>
+</ul>
+<h3 id="startservers"><a name="user-content-startservers" href="#startservers" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>StartServers</h3>
+<pre><code>StartServers 5
+</code></pre>
+<ul>
+<li><code>StartServers</code>参数就是用来设置httpd启动时启动的子进程副本数量，这个参数与上面定义的<code>MinSpareServers</code>和<code>MaxSpareServers</code>参数相关，都是用于启动空闲子进程以提高服务器的反应速度的。这个参数应该设置为前两个值之间的一个数值，小于<code>MinSpareServers</code>和大于<code>MaxS pareServers</code>都没有意义。</li>
+</ul>
+<h3 id="maxclients"><a name="user-content-maxclients" href="#maxclients" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>MaxClients</h3>
+<pre><code>MaxClients 150
+</code></pre>
+<ul>
+<li>
+<p>在另一方面，服务器的能力毕竟是有限的，不可能同时处理无限多的连接请求，因此参数<code>Maxclients</code>就用于规定服务器支持的最多并发访问的客户数，如果这个值设置得过大，系统在繁忙时不得不在过多的进程之间进行切换来为太多的客户进行服务，这样对每个客户的反应就会减慢，并降低了整体的效率。如果这个值设置的较小，那么系统繁忙时就会拒绝一些客户的连接请求。</p>
+</li>
+<li>
+<p>当服务器性能较高时，就可以适当增加这个值的设置。对于专业网站，应该使用提高服务器效率的策略，因此这个参数不能超过硬件本身的限制，如果频繁出现拒绝访问现象，就说明需要升级服务器硬件了。对于非专业网站，不太在意对客户浏览器的反应速度，或者认为反应速度较慢也比拒绝连接好，就也可以略微超过硬件条件来设置这个参数。 </p>
+</li>
+<li>
+<p>这个参数限制了<code>MinSpareServers</code>和<code>MaxSpareServers</code>的设置，它们不应该大于这个参数的设置。</p>
+</li>
+</ul>
+<h3 id="maxrequestsperchild"><a name="user-content-maxrequestsperchild" href="#maxrequestsperchild" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>MaxRequestsPerChild</h3>
+<pre><code>MaxRequestsPerChild 30
+</code></pre>
+<ul>
+<li>
+<p>使用子进程的方式提供服务的Web服务，常用的方式是一个子进程为一次连接服务，这样造成的问题就是每次连接都需要生成、退出子进程的系统操作，使得这些额外的处理过程占据了计算机的大量处理能力。因此最好的方式是一个子进程可以为多次连接请求服务，这样就不需要这些生成、退出进程的系统消耗，<code>Apache</code>就采用了这样的方式，一次连接结束后，子进程并不退出，而是停留在系统中等待下一次服务请求，这样就极大的提高了性能。</p>
+</li>
+<li>
+<p>但由于在处理过程中子进程要不断的申请和释放内存，次数多了就会造成一些内存垃圾，就会影响系统的稳定性，并且影响系统资源的有效利用。因此在一个副本处理过一定次数的请求之后，就可以让这个子进程副本退出，再从原始的httpd进程中重新复制一个干净的副本，这样就能提高系统的稳定性。这样，每个子进程处理服务请求次数由<code>MaxRequestPerChild</code>定义。 缺省的设置值为30，这个值对于具备高稳定性特点的Linux系统来讲是过于保守的设置，可以设置为1000甚至更高，设置为0支持每个副本进行无限次的服务处理。</p>
+</li>
+</ul>
+<h3 id="listen"><a name="user-content-listen" href="#listen" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Listen</h3>
+<pre><code>#Listen 3000 
+#Listen 12.34.56.78:80 
+#BindAddress *
+</code></pre>
+<ul>
+<li>
+<p><code>Listen</code>参数可以指定服务器除了监视标准的80端口之外，还监视其他端口的HTTP请求。由于FreeBSD系统可以同时拥有多个IP地址，因此也可以指定服务器只听取对某个<code>BindAddress</code>的IP地址的HTTP请求。如果没有配置这一项，则服务器会回应对所有IP的请求。</p>
+</li>
+<li>
+<p>即使使用了<code>BindAddress</code>参数，使得服务器只回应对一个IP地址的请求，但是通过使用扩展的Listen参数，仍然可以让HTTP守护进程回应对其他IP地址的请求。此时Listen参数的用法与上面的第二个例子相同。这种比较复杂的用法主要用于设置虚拟主机。此后可以用VirtualHost参数定义对不同IP的虚拟主机，然而这种用法是较早的HTTP 1.0标准中设置虚拟主机的方法，每针对一个虚拟主机就需要一个IP地址，实际上用处并不大。在HTTP 1.1中，增加了对单IP地址多域名的虚拟主机的支持，使得虚拟主机的设置具备更大的意义。</p>
+</li>
+</ul>
+<h3 id="loadmodule-addmodule-clearmodulelist"><a name="user-content-loadmodule-addmodule-clearmodulelist" href="#loadmodule-addmodule-clearmodulelist" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>LoadModule &amp; AddModule &amp; ClearModuleList</h3>
+<pre><code>LoadModule mime_magic_module libexec/apache/mod_mime_magic.so
+LoadModule info_module libexec/apache/mod_info.so 
+LoadModule speling_module libexec/apache/mod_speling.so 
+LoadModule proxy_module libexec/apache/libproxy.so 
+LoadModule rewrite_module libexec/apache/mod_rewrite.so 
+LoadModule anon_auth_module libexec/apache/mod_auth_anon.so 
+LoadModule db_auth_module libexec/apache/mod_auth_db.so 
+LoadModule digest_module libexec/apache/mod_digest.so 
+LoadModule cern_meta_module libexec/apache/mod_cern_meta.so 
+LoadModule expires_module libexec/apache/mod_expires.so 
+LoadModule headers_module libexec/apache/mod_headers.so 
+LoadModule usertrack_module libexec/apache/mod_usertrack.so 
+LoadModule unique_id_module libexec/apache/mod_unique_id.so 
+ClearModuleList
+AddModule mod_env.c 
+AddModule mod_log_config.c 
+AddModule mod_mime_magic.c 
+AddModule mod_mime.c 
+AddModule mod_negotiation.c 
+AddModule mod_status.c 
+AddModule mod_info.c 
+AddModule mod_include.c 
+AddModule mod_autoindex.c 
+AddModule mod_dir.c 
+AddModule mod_cgi.c 
+AddModule mod_asis.c 
+AddModule mod_imap.c 
+AddModule mod_actions.c 
+AddModule mod_speling.c 
+AddModule mod_userdir.c 
+AddModule mod_proxy.c 
+AddModule mod_alias.c 
+AddModule mod_rewrite.c 
+AddModule mod_access.c 
+AddModule mod_auth.c 
+AddModule mod_auth_anon.c 
+AddModule mod_auth_db.c 
+AddModule mod_digest.c 
+AddModule mod_cern_meta.c 
+AddModule mod_expires.c 
+AddModule mod_headers.c 
+AddModule mod_usertrack.c 
+AddModule mod_unique_id.c 
+AddModule mod_so.c 
+AddModule mod_setenvif.c
+</code></pre>
+<ul>
+<li>
+<p>Apache服务器的一个重要特性就是其模块化的结构，这不但表现为其能在编译时能通过新的模块加入新的功能，还表现为其模块可以动态加载入http服务程序中，而不必载入不需要的模块。使用Apache的动态加载模块只需要设置好<code>LoadModule</code>和<code>AddModule</code>参数就可以了，这种特性就是Apache的 DSO（<code>Dynamic Shared Object</code>）特性，然而要想充分使用DSO特性仍然不是一个简单的事情，不适当的改动这里的设置就可能造成服务器不能正常启动。因此如果不是要增加或减少服务器提供的功能，就不要改动这里的设置。 </p>
+</li>
+<li>
+<p>上面这些列表就显示了Linux下的缺省<code>Apache</code>服务器支持的模块，事实上很多模块是没有必要的，不必要模块不会被载入内存。模块可以静态连接到<code>Apache</code>服务器内部，也可以这样动态加载，将<code>Apache</code>的特性都编译成动态可加载模块是该Port的做法，而不是Apache的缺省做法，这样就以牺牲很小的性能的同时，带来极大的灵活性。 </p>
+</li>
+<li>
+<p>因而动态可加载的能力还是对性能有轻微的影响，因此可以重新编译<code>Apache</code>，将自己所需要的功能编译进<code>Apache</code>服务器内部，可以让系统显得更为干净，效率也有轻微的提高。通常仅仅为了这一个目的就重新编译Apache是没有必要的，如果需要增加其他特性而重新编译<code>Apache</code>，不妨在增加其他模块的同时将所有的模块都静态连接入<code>Apache</code>服务器。有的使用者更喜欢动态加载模块，那么也不妨全部都使用动态加载模块。这些模块都被放置到<code>/usr/local/apache/libexec/</code>目录下， 每个模块对应<code>Apache</code>服务器的一个特性。详细解释每个模块的功能需要相当多的篇幅，其中比较重要的特性将在后面相应的地方中进行解释，而具体每个模块的功能及用法就需要查看<code>Apache</code>的文档。 </p>
+</li>
+</ul>
+<h3 id="extendedstatus"><a name="user-content-extendedstatus" href="#extendedstatus" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ExtendedStatus</h3>
+<pre><code>#ExtendedStatus On
+</code></pre>
+<ul>
+<li>Apache服务器可以通过特殊的HTTP请求，来报告自身的运行状态，打开这个主服务器设置<code>Apache</code>服务器需要各种设置，以定义自己使用各种参数以提供Web服务。对于使用虚拟主机的情况，除了在虚拟主机的定义项中覆盖的设置之外（有的设置必须重新定义），这里的设置也是虚拟主机的缺省设置。 </li>
+</ul>
+<h3 id="port"><a name="user-content-port" href="#port" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Port</h3>
+<pre><code>Port 80
+</code></pre>
+<ul>
+<li>
+<p>Port定义了Standalone模式下httpd守护进程使用的端口，标准端口是80。这个选项只对于以独立方式启动的服务器才有效，对于以inetd方式启动的服务器则在<code>inetd.conf</code>中定义使用哪个端口。 </p>
+</li>
+<li>
+<p>在Unix下使用80端口需要root权限，一些管理员为了安全的原因，认为 httpd 服务器不可能没有安全漏洞，因而更愿意使用普通用户的权限来启动服务器，这样就不能使用 <strong>80</strong> 端口及其他小于 <strong>1024</strong> 的端口，而必须使用大于 <strong>1024</strong> 的端口来启动httpd，一般情况下<strong>8000</strong>或<strong>8080</strong>也是常用的端口。而<code>Apache</code> httpd服务器本身可以在以root权限打开<strong>80</strong>端口后再改变为普通用户身份进行运行，这样就减少了危险性，因而就不需要考虑这个安全问题。但是如果普通用户也想安装配置自己的WWW服务器，那么就不得不使用大于<strong>1024</strong>的端口。</p>
+</li>
+</ul>
+<h3 id="user-group"><a name="user-content-user-group" href="#user-group" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>User &amp; Group</h3>
+<pre><code>User nobody 
+Group nogroup
+</code></pre>
+<ul>
+<li>
+<p>User和Group配置是<code>Apache</code>的安全保证，<code>Apache</code>在打开端口之后，就将其本身设置为这两个选项设置的用户和组权限进行运行，这样就降低了服务器的危险性。这个选项也只用于<code>Standalone</code>模式，inetd模式在<code>inetd.conf</code>中指定运行Apache的用户。由于服务器必须执行改变身份的setuid()操作，因此初始进程应该具备root权限，如果是使用非root用户来启动<code>Aapche</code>这个配置就不会发挥作用。 </p>
+</li>
+<li>
+<p>缺省设置为nobody和nogroup，这个用户和组在系统中不拥有文件，保证了服务器本身和由它启动的CGI进程没有权限更改文件系统。在某些情况下，例如为了运行CGI与Unix交互，也需要让服务器来访问服务器上的文件，如果仍然使用nobody和nogroup，那么系统中将会出现属于nobody的文件，这对于系统安全是不利的，因为其他程序也会以nobody和nogroup的权限执行某些操作，就有可能访问这些nobody拥有的文件，造成安全问题。一般情况下要为Web服务设定一个特定的用户和组，同时在这里更改用户和组设置。 </p>
+</li>
+</ul>
+<h3 id="serveradmin"><a name="user-content-serveradmin" href="#serveradmin" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ServerAdmin</h3>
+<pre><code>ServerAdmin you@your.address
+</code></pre>
+<ul>
+<li>配置文件中应该改变的也许只有ServerAdmin， 这一项用于配置WWW服务器的管理员的email地址，这将在HTTP服务出现错误的条件下返回给浏览器，以便让Web使用者和管理员联系，报告错误。习惯上使用服务器上的webmaster作为WWW服务器的管理员，通过邮件服务器的别名机制，将发送到webmaster 的电子邮件发送给真正的Web管理员。 </li>
+</ul>
+<h3 id="servername"><a name="user-content-servername" href="#servername" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ServerName</h3>
+<pre><code>#ServerName new.host.name
+</code></pre>
+<ul>
+<li>
+<p>缺省情况下，并不需要指定这个ServerName参数，服务器将自动通过名字解析过程来获得自己的名字，但如果服务器的名字解析有问题（通常为反向解析不正确），或者没有正式的DNS名字，也可以在这里指定IP地址。当ServerName设置不正确的时候，服务器不能正常启动。</p>
+</li>
+<li>
+<p>通常一个Web服务器可以具有多个名字，客户浏览器可以使用所有这些名字或IP地址来访问这台服务器，但在没有定义虚拟主机的情况下，服务器总是以自己的正式名字回应浏览器。ServerName就定义了Web服务器自己承认的正式名字，例如一台服务器名字（在DNS中定义了A类型）为<code>exmaple.org.cn</code>，同时为了方便记忆还定义了一个别名（CNAME记录）为<code>www.exmaple.org.cn</code>，那么Apache自动解析得到的名字就为<code>example.org.cn</code>，这样不管客户浏览器使用哪个名字发送请求，服务器总是告诉客户程序自己为 <code>example.org.cn</code>。虽然这一般并不会造成什么问题，但是考虑到某一天服务器可能迁移到其他计算机上，而只想通过更改DNS中的www别名配置就完成迁移任务，所以不想让客户在其书签中使用Linux记录下这个服务器的地址，就必须使用ServerName来重新指定服务器的正式名字。 </p>
+</li>
+</ul>
+<h3 id="documentroot"><a name="user-content-documentroot" href="#documentroot" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>DocumentRoot</h3>
+<pre><code>DocumentRoot "/www/"
+</code></pre>
+<ul>
+<li><code>DocumentRoot</code>定义这个服务器对外发布的超文本文档存放的路径，客户程序请求的URL就被映射为这个目录下的网页文件。这个目录下的子目录，以及使用符号连接指出的文件和目录都能被浏览器访问，只是要在URL上使用同样的相对目录名。 </li>
+</ul>
+<p><em>注意：符号连接虽然逻辑上位于根文档目录之下，但实际上可以位于计算机上的任意目录中，因此可以使客户程序能访问那些根文档目录之外的目录，这在增加了灵活性的同时但减少了安全性。Apache在目录的访问控制中提供了<code>FollowSymLinks</code>选项来打开或关闭支持符号连接的特性。</em></p>
+<h3 id="directory"><a name="user-content-directory" href="#directory" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Directory</h3>
+<ul>
+<li>
+<p>Apache服务器可以针对目录进行文档的访问控制，然而访问控制可以通过两种方式来实现：</p>
+</li>
+<li>
+<ul>
+<li>一个是在设置文件<code>httpd.conf</code>（或<code>access.conf</code>）中针对每个目录进行设置</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>另一个方法是在每个目录下设置访问控制文件，通常访问控制文件名字为<code>.htaccess</code>。</li>
+</ul>
+</li>
+<li>
+<p>虽然使用这两个方式都能用于控制浏览器的访问，然而使用配置文件的方法要求每次改动后重新启动httpd守护进程，比较不灵活，因此主要用于配置服务器系统的整体安全控制策略，而使用每个目录下的.htaccess文件设置具体目录的访问控制更为灵活方便。 </p>
+</li>
+<li>
+<p><code>Directory</code>语句就是用来定义目录的访问限制的，这里可以看出它的标准语法，为一个目录定义访问限制。上例的这个设置是针对系统的根目录进行的，设置了允许符号连接的选项<code>FollowSymLinks</code>，以及使用<code>AllowOverride None</code>表示不允许这个目录下的访问控制文件来改变这里进行的配置，这也意味着不用查看这个目录下的相应访问控制文件。 </p>
+</li>
+<li>
+<p>由于Apache对一个目录的访问控制设置是能够被下一级目录继承的，因此对根目录的设置将影响到它的下级目录。</p>
+</li>
+</ul>
+<p><em>注意：由于AllowOverride None的设置，使得Apache服务器不需要查看根目录下的访问控制文件，也不需要查看以下各级目录下的访问控制文件，直至httpd.conf（或access.conf ）中为某个目录指定了允许Alloworride，即允许查看访问控制文件。</em></p>
+<ul>
+<li>
+<p>由于Apache对目录访问控制是采用的继承方式，如果从根目录就允许查看访问控制文件，那么Apache就必须一级一级的查看访问控制文件，对系统性能会造成影响。而缺省关闭了根目录的这个特性，就使得Apache从httpd.conf中具体指定的目录向下搜寻，减少了搜寻的级数，增加了系统性能。因此对于系统根目录设置AllowOverride None不但对于系统安全有帮助，也有益于系统性能。 </p>
+</li>
+<li>
+<p>这里定义的是系统对外发布文档的目录的访问设置，设置不同的<code>AllowOverride</code>选项，以定义配置文件中的目录设置和用户目录下的安全控制文件的关系，而Options选项用于定义该目录的特性。 </p>
+<pre><code>Options Indexes FollowSymLinks 
+AllowOverride None 
+Order allow,deny 
+Allow from all
+</code></pre>
+</li>
+<li>
+<p>配置文件和每个目录下的访问控制文件都可以设置访问限制，设置文件是由管理员设置的，而每个目录下的访问控制文件是由目录的属主设置的，因此管理员可以规定目录的属主是否能覆盖系统在设置文件中的设置，这就需要使用<code>AllowOverride</code>参数进行设置，通常可以设置的值为： <br />
+        All 缺省值，使访问控制文件可以覆盖系统配置 <br />
+        None 服务器忽略访问控制文件的设置 <br />
+        Options 允许访问控制文件中可以使用Options参数定义目录的选项 <br />
+        FileInfo 允许访问控制文件中可以使用AddType等参数设置 <br />
+        AuthConfig 允许访问控制文件使用AuthName，AuthType等针对每个用户的认证机制，这使目录属主能用口令和用户名来保护目录 Limit 允许对访问目录的客户机的IP地址和名字进行限制</p>
+</li>
+<li>
+<p>AllowOverride的设置对每个目录访问控制文件作用的影响 </p>
+</li>
+<li>
+<p>每个目录具备一定属性，可以使用Options来控制这个目录下的一些访问特性设置，以下为常用的特性选项： </p>
+<pre><code>Options设置 服务器特性设置 
+All 所有的目录特性都有效，这是缺省状态 
+None 所有的目录特性都无效
+</code></pre>
+</li>
+<li>
+<p>FollowSymLinks 允许使用符号连接，这将使浏览器有可能访问文档根目录 （DocumentRoot）之外的文档 SymLinksIfOwnerMatch 只有符号连接的目的与符号连接本身为同一用户所拥有时，才允许访问，这个设置将增加一些安全性 </p>
+</li>
+<li>
+<p>ExecCGI 允许这个目录下可以执行CGI程序 Indexes 允许浏览器可以生成这个目录下所有文件的索引，使得在这个目录下没有index.html（或其他索引文件）时，能向浏览器发送这个目录下的文件列表 </p>
+</li>
+<li>
+<p>此外，上例中还使用了Order、Allow、Deny等参数，这是Limit语句中用来根据浏览器的域名和 IP地址来控制访问的一种方式。其中Order定义处理Allow和Deny的顺序，而Allow、Deny则针对名字或IP进行访问控制设置，上例使用Allow from all，表示允许所有的客户机访问这个目录，而不进行任何限制。 </p>
+</li>
+</ul>
+<h3 id="userdir"><a name="user-content-userdir" href="#userdir" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>UserDir</h3>
+<pre><code>UserDir public_html
+</code></pre>
+<ul>
+<li>
+<p>当在一台Linux上运行Apache服务器时，这台计算机上的所有用户都可以有自己的网页路径，形如<code>http://example.org.cn/~user</code>，使用波浪符号加上用户名就可以映射到用户自己的网页目录上。映射目录为用户个人主目录下的一个子目录，其名字就用UseDir这个参数进行定义，缺省为public_html。如果不想为正式的用户提供网页服务，使用DISABLED作UserDir的参数即可。 </p>
+<pre><code># AllowOverride FileInfo AuthConfig Limit 
+# Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec
+</code></pre>
+</li>
+<li>
+<p>这里可以看到另外一个语句Limit，Limit语句就是用来针对具体的请求方法来设定访问控制的，其中可以使用GET、POST等各种服务器支持的请求方法做Limit的参数，来设定对不同请求方法的访问限制。一般可以打开对GET、POST、 HEAD三种请求方法，而屏蔽其他的请求方法，以增加安全性。Limit语句中，可以用Order 、Allow、Deny，Allow和Deny中可以使用匹配的方法针对域名和IP进行限制，只是对于域名是从后向前匹配，对于IP地址则从前向后匹配。 </p>
+</li>
+</ul>
+<h3 id="directoryindex"><a name="user-content-directoryindex" href="#directoryindex" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>DirectoryIndex</h3>
+<pre><code>DirectoryIndex index.html
+</code></pre>
+<ul>
+<li>很多情况下，URL中并没有指定文档的名字，而只是给出了一个目录名。那么Apache服务器就自动返回这个目录下由<code>DirectoryIndex</code>定义的文件，当然可以指定多个文件名字，系统会这个目录下顺序搜索。当所有由DirectoryIndex指定的文件都不存在时，Apache服务器可以根据系统设置，生成这个目录下的所有文件列表，提供用户选择。此时该目录的访问控制选项中的Indexes选项（<code>Options Indexes</code>）必须打开，以使得服务器能够生成目录列表，否则Apache将拒绝访问。 </li>
+</ul>
+<h3 id="accessfilename"><a name="user-content-accessfilename" href="#accessfilename" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>AccessFileName</h3>
+<pre><code>AccessFileName .htaccess
+</code></pre>
+<ul>
+<li>
+<p>AccessFileName定义每个目录下的访问控制文件的文件名，缺省为.htaccess，可以通过更改这个文件，来改变不同目录的访问控制限制。 <br />
+        Order allow,deny <br />
+        Deny from all </p>
+</li>
+<li>
+<p>除了可以针对目录进行访问控制之外，还可以根据文件来设置访问控制，这就是File语句的任务。使用File 语句，不管文件处于哪个目录，只要名字匹配， 就必须接受相应的访问控制。这个语句对于系统安全比较重要，例如上例将屏蔽所有的使用者不能访问.htaccess文件，这样就避免.htaccess中的关键安全信息不至于被客户获取。 </p>
+</li>
+</ul>
+<h3 id="cachenegotiateddocs"><a name="user-content-cachenegotiateddocs" href="#cachenegotiateddocs" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>CacheNegotiatedDocs</h3>
+<pre><code>#CacheNegotiatedDocs
+</code></pre>
+<ul>
+<li>缺省情况下如果代理服务器和Apache服务器协商是否缓存其网页，Apache给予否定的回答，不希望自己的网页被代理服务器缓存。然而这样就不能有效的利用代理服务器的优势，因此可以设置<code>CacheNegotiatieDocs</code>选项， 使得代理服务器可以对网页进行缓存。然而即使不设置这个选项，有的代理服务器（或通过调整设置）也能对网页进行缓存。 </li>
+</ul>
+<h3 id="usecanonicalname"><a name="user-content-usecanonicalname" href="#usecanonicalname" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>UseCanonicalName</h3>
+<pre><code>UseCanonicalName On
+</code></pre>
+<ul>
+<li>打开这个UseCanonicalName是Web服务器的标准做法，因为客户发送的大部分请求都是对本服务器的引用，这样服务器就能使用ServerName和Port选项的设置内容构建完整的URL，并回应客户，使浏览器能得到规范的URL。如果将这个参数设置为Off，那么Apache将使用从客户请求中获得服务器的名字和端口值（支持HTTP 1.1的客户的请求中将会有这些信息），重新构建URL。 </li>
+</ul>
+<h3 id="typesconfig"><a name="user-content-typesconfig" href="#typesconfig" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>TypesConfig</h3>
+<pre><code>TypesConfig /usr/local/apache/etc/mime.types
+</code></pre>
+<ul>
+<li>TypeConfig用于设置保存有不同的MIME类型数据的文件名，在Linux下缺省设置为/usr/local/apache/etc/mime.types。</li>
+</ul>
+<h3 id="defaulttype"><a name="user-content-defaulttype" href="#defaulttype" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>DefaultType</h3>
+<pre><code>DefaultType text/plain
+</code></pre>
+<ul>
+<li>如果Web服务器不能决定一个文档的缺省类型，这通常表示文档使用了非标准的后缀，那么服务器就使用<code>DefaultType</code>定义的MIME类型将文档发送给客户浏览器。这里的设置为text/plain，这样设置的问题是，如果服务器不能判断出文档的MIME，那么大部分情况下这个文档为一个二进制文档，但使用 text/plain格式发送回去，浏览器将在内部打开它而不会提示保存。因此建议将这个设置更改为<code>application/octet-stream</code>，这样浏览器将提示用户进行保存。 </li>
+</ul>
+<h3 id="mimemagicfile"><a name="user-content-mimemagicfile" href="#mimemagicfile" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>MIMEMagicFile</h3>
+<pre><code>MIMEMagicFile /usr/local/apache/etc/magic
+</code></pre>
+<ul>
+<li>除了从文件的后缀出发来判断文件的MIME类型之外，Apache还可以进一步分析文件的一些特征，来判断文件的真实MIME类型。这个功能是由<code>mod_mime_magic</code> 模块实现的，它需要一个记录各种MIME类型特征的文件，以进行分析判断。上面的设置是一个条件语句，如果载入了这个模块，就必须指定相应的标志文件magic的位置。 </li>
+</ul>
+<h3 id="hostnamelookups"><a name="user-content-hostnamelookups" href="#hostnamelookups" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>HostnameLookups</h3>
+<ul>
+<li>通常连接时，服务器仅仅可以得到客户机的IP地址，如果要想获得客户机的主机名，以进行日志记录和提供给 CGI程序使用，就需要使用这个HostnameLookups 选项，将其设置为On打开DNS反查功能。但是这将使服务器对每次客户请求都进行DNS查询，增加了系统开销，使得反应变慢，因此缺省设置为使用Off关闭此选项。关闭选项之后，服务器就不会获得客户机的主机名，而只能使用IP地址来记录客户。</li>
+</ul>
+<h3 id="errorlog"><a name="user-content-errorlog" href="#errorlog" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ErrorLog</h3>
+<pre><code>ErrorLog /var/log/httpd-error.log 
+LogLevel warn 
+LogFormat "%h %l %u %t "%r" %&gt;s %b "%{Referer}i" "%{User-Agent} "" combined 
+LogFormat "%h %l %u %t "%r" %&gt;s %b" common 
+LogFormat "%{Referer}i -&gt; %U" referer 
+LogFormat "%{User-agent}i" agent 
+#CustomLog /var/log/httpd-access.log common 
+#CustomLog /var/log/httpd-referer.log referer 
+#CustomLog /var/log/httpd-agent.log agent 
+CustomLog /var/log/httpd-access.log combined
+</code></pre>
+<ul>
+<li>
+<p>这里定义了系统日志的形式，对于服务器错误记录， 由ErrorLog、 LogLevel 来定义不同的错误日志文件及其记录内容。 </p>
+</li>
+<li>
+<p>对于系统的访问日志，缺省使用CustomLog参数定义日志的位置，缺省使用 combined 参数指定将所有的访问日志放在一个文件中，然而也可以将不同种类的访问日志放在不同的日志记录文件中，这是通过在 CustomLog中指定不同的记录类型来完成的。common表示普通的对单页面请求访问记录，referer表示每个页面的引用记录，可以看出一个页面中包含的请求数，agent表示对客户机的类型记录，显然可以将现有的combined 定义的设置行注释掉，并使用common、referer和agent作为CustomLog的参数，来为不同种类的日志分别指定日志记录文件。</p>
+</li>
+<li>
+<p>显然，LogFormat是用于定义不同类型的日志进行记录时使用的格式， 这里使用了以%开头的宏定义，以记录不同的内容。如果这些参数指定的文件使用的是相对路径，那么就是相对于ServerRoot的路径。</p>
+</li>
+</ul>
+<h3 id="serversignature"><a name="user-content-serversignature" href="#serversignature" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ServerSignature</h3>
+<pre><code>ServerSignature On
+</code></pre>
+<ul>
+<li>一些情况下，例如当客户请求的网页并不存在时，服务器将产生错误文档，缺省情况下由于打开了 ServerSignature选项，错误文档的最后一行将包含服务器的名字、Apache的版本等信息。有的管理员更倾向于不对外显示这些信息，就可以将这个参数设置为Off，或者设置为Email，最后一行将替换为对 ServerAdmin 的Email提示。 </li>
+</ul>
+<h3 id="alias"><a name="user-content-alias" href="#alias" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Alias</h3>
+<pre><code>Alias /icons/ "/www/icons/" 
+Options Indexes MultiViews 
+AllowOverride None 
+Order allow,deny 
+Allow from all
+</code></pre>
+<ul>
+<li>Alias参数用于将URL与服务器文件系统中的真实位置进行直接映射，一般的文档将在DocumentRoot 中进行查询，然而使用Alias定义的路径将直接映射到相应目录下，而不再到DocumentRoot 下面进行查询。因此Alias可以用来映射一些公用文件的路径，例如保存了各种常用图标的icons路径。这样使得除了使用符号连接之外，文档根目录（DocumentRoot）外的目录也可以通过使用了Alias映射，提供给浏览器访问。定义好映射的路径之后，应该需要使用Directory语句设置访问限制。 </li>
+</ul>
+<h3 id="scriptalias"><a name="user-content-scriptalias" href="#scriptalias" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ScriptAlias</h3>
+<pre><code>ScriptAlias /cgi-bin/ "/www/cgi-bin/" 
+AllowOverride None 
+Options None 
+Order allow,deny 
+Allow from all
+</code></pre>
+<ul>
+<li>ScriptAlias也是用于URL路径的映射，但与Alias的不同在于，ScriptAlias 是用于映射CGI程序的路径，这个路径下的文件都被定义为CGI程序，通过执行它们来获得结果，而非由服务器直接返回其内容。缺省情况下CGI程序使用cgi-bin目录作为虚拟路径。 </li>
+</ul>
+<h3 id="redirect"><a name="user-content-redirect" href="#redirect" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Redirect</h3>
+<pre><code># Redirect old-URI new-URL
+</code></pre>
+<ul>
+<li>Redirect参数是用来重写URL的，当浏览器访问服务器上的一个已经不存在的资源的时候，服务器返回给浏览器新的URL，告诉浏览器从该URL中获取资源。这主要用于原来存在于服务器上的文档，改变了位置之后，而又希望能使用老URL能访问到，以保持与以前的URL兼容。 </li>
+</ul>
+<h3 id="indexoptions"><a name="user-content-indexoptions" href="#indexoptions" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>IndexOptions</h3>
+<pre><code>IndexOptions FancyIndexing 
+AddIconByEncoding (CMP,/icons/compressed.gif) x-compress x-gzip 
+AddIconByType (TXT,/icons/text.gif) text/* 
+AddIconByType (IMG,/icons/image2.gif) image/* 
+AddIconByType (SND,/icons/sound2.gif) audio/* 
+AddIconByType (VID,/icons/movie.gif) video/* 
+AddIcon /icons/binary.gif .bin .exe 
+AddIcon /icons/binhex.gif .hqx 
+AddIcon /icons/tar.gif .tar 
+AddIcon /icons/world2.gif .wrl .wrl.gz .vrml .vrm .iv 
+AddIcon /icons/compressed.gif .Z .z .tgz .gz .zip 
+AddIcon /icons/a.gif .ps .ai .eps 
+AddIcon /icons/layout.gif .html .shtml .htm .pdf 
+AddIcon /icons/text.gif .txt 
+AddIcon /icons/c.gif .c 
+AddIcon /icons/p.gif .pl .py 
+AddIcon /icons/f.gif .for 
+AddIcon /icons/dvi.gif .dvi 
+AddIcon /icons/uuencoded.gif .uu 
+AddIcon /icons/script.gif .conf .sh .shar .csh .ksh .tcl 
+AddIcon /icons/tex.gif .tex 
+AddIcon /icons/bomb.gif core 
+AddIcon /icons/back.gif .. 
+AddIcon /icons/hand.right.gif README 
+AddIcon /icons/folder.gif ^^DIRECTORY^^ 
+AddIcon /icons/blank.gif ^^BLANKICON^^ 
+DefaultIcon /icons/unknown.gif 
+#AddDescription "GZIP compressed document" .gz 
+#AddDescription "tar archive" .tar 
+#AddDescription "GZIP compressed tar archive" .tgz 
+ReadmeName README 
+HeaderName HEADER 
+IndexIgnore .??* *~ *# HEADER* README* RCS CVS *,v *,t
+</code></pre>
+<ul>
+<li>
+<p>一个HTTP请求的URL为一个目录的时候，服务器返回这个目录中的索引文件。但如果一个目录中不存在缺省的索引文件，并且该服务器又许可显示目录文件列表的时候，就会显示出这个目录中的文件列表，为了使得这个文件列表能具有可理解性，而不仅仅是一个简单的列表，就需要前面的这些设置参数。</p>
+<pre><code># 
+# Order allow,deny 
+# Allow from all 
+# 
+# 
+# Order deny,allow 
+# Deny from all
+</code></pre>
+</li>
+<li>
+<p>这里可以看到Directory的另一个用法，即可以通过简单的模式匹配方法，针对分布在不同目录下的子目录定义访问控制权限。这样设置就需要Apache服务器对每个路径进行额外的处理，因此就会降低服务器的性能，所以缺省情况并没有打开这种访问限制。 </p>
+</li>
+<li>
+<p>如果使用了IndexOptions FancyIndexing选项，可以让服务器产生的目录列表中针对各种不同类型的文档引用各种图标。而哪种文件使用哪种图标，则使用下面的 AddIconByEncoding、AddIconByType以及AddIcon来定义，分别依据MIME 的编码、类型以及文件的后缀来判断使用何种图标。如果不能确定文档使用的图标，就使用 DefaultIcon定义的缺省图标。 </p>
+</li>
+<li>
+<p>同样，使用AddDescription可以为不同类型的文档加入不同的描述。并且，服务器还在目录下，查询使用ReadmeName和HeaderName定义的文件（自动加上 .html后缀，如果没有发现，再使用.txt后缀进行搜索），如果发现了这些文件，就在文件列表之前首先显示这些文件的内容，以使得普通目录列表具备更大的可理解性。</p>
+</li>
+<li>
+<p>IndexIgnore让服务器在列出文件列表时忽略相应的文件， 这里使用模式配置的方式定义文件名。 </p>
+</li>
+</ul>
+<h3 id="addencoding"><a name="user-content-addencoding" href="#addencoding" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>AddEncoding</h3>
+<pre><code>AddEncoding x-compress Z 
+AddEncoding x-gzip gz
+</code></pre>
+<ul>
+<li>AddEncoding用于告诉一些使用压缩的MIME类型，这样可以让浏览器进行解压缩操作。 </li>
+</ul>
+<h3 id="addlanguage"><a name="user-content-addlanguage" href="#addlanguage" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>AddLanguage</h3>
+<pre><code>AddLanguage en .en 
+AddLanguage fr .fr 
+AddLanguage de .de 
+AddLanguage da .da 
+AddLanguage el .el 
+AddLanguage it .it 
+LanguagePriority en fr de
+</code></pre>
+<ul>
+<li>一个HTML文档可以同时具备多个语言的版本，如对于file1.html文档可以具备file1.html.en、file1.html.fr 等不同的版本，每个语言后缀必须使用 AddLanguage进行定义。这样服务器可以针对不同国家的客户，通过与浏览器进行协商，发送不同的语言版本。而LanguagePriority 定义不同语言的优先级，以便在浏览器没有特殊要求时，按照顺序使用不同的语言版本回应对file1.html 的请求。这个国际化的能力实际的应用并不多。 </li>
+</ul>
+<h3 id="addtype"><a name="user-content-addtype" href="#addtype" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>AddType</h3>
+<pre><code>#AddType application/x-httpd-php .phtml 
+#AddType application/x-httpd-php-source .phps
+</code></pre>
+<ul>
+<li>AddType参数可以为特定后缀的文件指定MIME类型，这里的设置将覆盖 mime.types中的设置。 </li>
+</ul>
+<h3 id="addhandler"><a name="user-content-addhandler" href="#addhandler" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>AddHandler</h3>
+<pre><code>#AddHandler cgi-script .cgi
+</code></pre>
+<ul>
+<li>AddHandler是用于指定非静态的处理类型，用于定义文档为一个非静态的文档类型，需要进行处理，再向浏览器返回处理结果。例如上面注释中的设置是将以.cgi结尾的文件设置为cgi-script类型，那么服务器将启动这个CGI程序以进行处理。如果需要在前面AliasScript定义的路径之外执行CGI程序，就需要使用这个参数进行设置，此后以.cgi结尾的文件将被当作CGI程序执行。 </li>
+<li>
+<p>在配置文件、这个目录中的.htaccess以及其上级目录的.htaccess中必须允许执行CGI程序，这需要通过Options ExecCGI参数设定。 <br />
+        #AddType text/html .shtml <br />
+        #AddHandler server-parsed .shtml </p>
+</li>
+<li>
+<p>另外一种动态进行处理的类型为server-parsed，由服务器自身预先分析网页内的标记，将标记更改为正确的HTML标识。由于server-parsed需要对text/html 类型的文档进行处理，因此首先定义了对应的.shtml为text/html类型。 </p>
+</li>
+<li>
+<p>然而要支持SSI，还要首先要在配置文件（或.htaccess）中使用Options Includes允许该目录下的文档可以为SSI类型，或使用Options IncludesNOExec让执行普通的SSI标志，但不执行其中引用的外部程序。 </p>
+</li>
+<li>
+<p>另一种指定server-parsed类型的方式为使用XBitBack设置选项，如果将 XBitHack设置为On，服务器将检查所有text/html类型的文档（包括.html后缀的文档），如果发现文件属性具备执行位 “x&rdquo;，则服务器就认为它是服务器分析文档，需要服务器进行处理。推荐使用AddHandler进行设置，而将XBitBack 设置为Off，因为使用XBitBack将对所有的HTML文档都执行额外的检查，降低了效率。 </p>
+<pre><code>#AddHandler send-as-is asis 
+#AddHandler imap-file map 
+#AddHandler type-map var
+</code></pre>
+</li>
+<li>
+<p>上面被注释的AddHandler用于支持Apache服务器的asis、map和var处理能力 </p>
+</li>
+</ul>
+<h3 id="action"><a name="user-content-action" href="#action" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Action</h3>
+<pre><code># Action media/type /cgi-script/location 
+# Action handler-name /cgi-script/location
+</code></pre>
+<ul>
+<li>因为Apache内部提供的处理功能有限，因此可以使用Action为服务器定义外部程序作为可处理的动态文档类型，这些外部程序与标准CGI程序相同，都是对输入的数据处理之后，再输出不同MIME类型的结果。例如要定义一个对特殊后缀wri都先执行wri2txt进行处理操作，再返回结果的操作，可以使用： <br />
+        Action windows-writer /bin/wri2txt <br />
+        AddHandler windows-writer wri </li>
+<li>更进一步，可以直接使用Action定义对某个MIME类型预先进行处理操作，这需要例子中第一种格式的Action 参数设置方式。这样设置方式就不再需要额外的AddHandler用来将处理操作与文件后缀联系起来，而是使用Action直接处理MIME类型的文件。但如果文档后缀没有正式的MIME类型，还需要先定义一个MIME类型。 </li>
+</ul>
+<h3 id="meta"><a name="user-content-meta" href="#meta" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Meta</h3>
+<pre><code>#MetaDir .web 
+#MetaSuffix .meta
+</code></pre>
+<ul>
+<li>Meta信息是在文档发送给客户之前，预先发送给客户浏览器一些数据，因此浏览器可以通过HEAD请求来访问这些Meta信息而不必真正通过GET来返回全部文档数据。服务器通常发送给浏览器的是一些标准的HTTP头信息，如果要想增加额外的信息，就需要使用MetaDir来定义Meta数据存放的目录， 而MetaS uffix用于指定包含Meta数据的文件后缀。 </li>
+</ul>
+<h3 id="errordocument"><a name="user-content-errordocument" href="#errordocument" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ErrorDocument</h3>
+<pre><code>#ErrorDocument 500 "The server made a boo boo. 
+#ErrorDocument 404 /missing.html 
+#ErrorDocument 404 /cgi-bin/missing_handler.pl 
+#ErrorDocument 402 http://some.other_server.com/subscription_info.html
+</code></pre>
+<ul>
+<li>如果客户请求的网页不存在，或者没有访问权限等情况发生时，服务器将产生一个错误代码，同时也将回应客户浏览器一个标识错误的网页。 </li>
+<li>ErrorDocument就用于设置当出现哪个错误时应该回应客户浏览器那些内容，ErrorDocument的第一个参数为错误的序号，第二个参数为回应的数据，可以为简单的文本，本地网页，本地CGI程序，以及远程主机上的网页。 </li>
+</ul>
+<h3 id="browsermatch"><a name="user-content-browsermatch" href="#browsermatch" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>BrowserMatch</h3>
+<pre><code>BrowserMatch "Mozilla/2" nokeepalive 
+BrowserMatch "MSIE 4.0b2;" nokeepalive downgrade-1.0 force-response-1.0 
+BrowserMatch "RealPlayer 4.0" force-response-1.0 
+BrowserMatch "Java/1.0" force-response-1.0 
+BrowserMatch "JDK/1.0" force-response-1.0
+</code></pre>
+<ul>
+<li>BrowserMatch命令为特定的客户程序，设置特殊的参数，以保证对老版本浏览器的兼容性，并支持新浏览器的新特性。 </li>
+</ul>
+<h3 id="sethandler"><a name="user-content-sethandler" href="#sethandler" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>SetHandler</h3>
+<pre><code># 
+# SetHandler server-status 
+# Order deny,allow 
+# Deny from all 
+# Allow from .your_domain.com 
+# SetHandler server-info 
+# Order deny,allow 
+# Deny from all 
+# Allow from .your_domain.com 
+# Deny from all 
+# ErrorDocument 403 http://phf.apache.org/phf_abuse_log.cgi
+</code></pre>
+<ul>
+<li>设置访问控制的设置主要是针对目录和文件进行设置的，然而也可以针对不同的URL进行访问控制的设置，这样就不必担心ScriptAlias、Alias是否将路径设置到了受控制的目录之外了。针对URL进行控制的语句为 Location语句，这样不但能对服务器上的文件、CGI提供保护，此外，它还能保护不能找到对应文件，而是由服务器本身提供的特殊功能URL。<pre><code>http://servername/server-status 用于报告当前Apache服务器的状态，
+http://servername/server-info 用于报告Apache 服务器的统计信息。与此相关的设置还有ExtendedStatus参数，可以让服务器输出更详细的的报告。
+</code></pre>
+</li>
+</ul>
+<h3 id="proxyrequests"><a name="user-content-proxyrequests" href="#proxyrequests" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ProxyRequests</h3>
+<pre><code># 
+#ProxyRequests On 
+# Order deny,allow 
+# Deny from all 
+# Allow from .your_domain.com 
+# 
+#ProxyVia On 
+#CacheRoot "/www/proxy" 
+#CacheSize 5 
+#CacheGcInterval 4 
+#CacheMaxExpire 24 
+#CacheLastModifiedFactor 0.1 
+#CacheDefaultExpire 1 
+#NoCache a_domain.com another_domain.edu joes.garage_sale.com
+</code></pre>
+<ul>
+<li>Apache服务器本身就具备代理的功能，然而这要求加载入mod_proxy模块。这能使用IfModule语句进行判断，如果存在mod_proxy模块，就使用ProxyRequests打开代理支持。此后的Directory用于设置对Proxy功能的访问权限设置，以及用于设置缓冲的各个参数设置。 </li>
+</ul>
+<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>虚拟主机</h3>
+<pre><code>#NameVirtualHost 12.34.56.78:80 
+#NameVirtualHost 12.34.56.78 
+# ServerAdmin 
+webmaster@host.some_domain.com
+
+# DocumentRoot /www/docs/host.some_domain.com 
+# ServerName host.some_domain.com 
+# ErrorLog logs/host.some_domain.com-error_log 
+# CustomLog logs/host.some_domain.com-access_log common
+</code></pre>
+<ul>
+<li>缺省设置文件中的这些内容是用于设置命名基础的虚拟主机服务器时使用。 </li>
+<li>
+<p>其中NameVirtualHost 来指定虚拟主机使用的IP地址，这个IP地址将对应多个 DNS名字，如果Apache使用了Listen 参数控制了多个端口，那么就可以在这里加上端口号以进一步进行区分对不同端口的不同连接请求。此后，使用 VirtualHost 语句，使用NameVirtualHost指定的IP地址作参数，对每个名字都定义对应的虚拟主机设置。 </p>
+</li>
+<li>
+<p>虚拟主机是在一台Web服务器上，可以为多个单独域名提供Web服务，并且每个域名都完全独立，包括具有完全独立的文档目录结构及设置，这样域名之间完全独立，不但使用每个域名访问到的内容完全独立，并且使用另一个域名无法访问其他域名提供的网页内容。</p>
+</li>
+<li>
+<p>虚拟主机的概念对于ISP来讲非常有用，因为虽然一个组织可以将自己的网页挂在具备其他域名的服务器上的下级往址上，但使用独立的域名和根网址更为正式，易为众人接受。传统上，必须自己设立一台服务器才能达到单独域名的目的，然而这需要维护一个单独的服务器，很多小单位缺乏足够的维护能力，更为合适的方式是租用别人维护的服务器。ISP也没有必要为一个机构提供一个单独的服务器，完全可以使用虚拟主机能力，使服务器为多个域名提供Web服务，而且不同的服务互不干扰，对外就表现为多个不同的服务器。 </p>
+</li>
+<li>
+<p>有两种设定虚拟主机的方式，一种是基于HTTP 1.0标准，需要一个具备多IP地址的服务器，再配置DNS 服务器，给每个IP地址以不同的域名，最后才能配置Apache的配置文件，使服务器对不同域名返回不同的Web文档。由于这需要使用额外的IP地址，对每个要提供服务的域名都要使用单独的IP地址，因此这种方式实现起来问题较多。 </p>
+</li>
+<li>
+<p>可以在一个网络界面上绑定多个IP地址，Linux下需要使用ifconfig的 alias参数来进行这个配置，但此时会影响网络性能。 </p>
+</li>
+<li>
+<p>HTTP 1.1标准在协议中规定了对浏览器和服务器通信时，服务器能够跟踪浏览器请求的是哪个主机名字。因此可以利用这个新特性，使用更轻松的方式设定虚拟主机。这种方式不需要额外的IP地址，但需要新版本的浏览器支持。这种方式已经成为建立虚拟主机的标准方式。 </p>
+</li>
+<li>
+<p>要建立非IP基础的虚拟主机，多个域名是不可少的配置，因为每个域名就对应一个要服务的虚拟主机。因此需要更改DNS服务器的配置，为服务器增加多个C NAME选项，如： </p>
+<pre><code>linux IN A 192.168.1.64 
+vhost1 IN CNAME linux 
+vhost2 IN CNAME linux
+</code></pre>
+</li>
+<li>
+<p>基本的设置选项都是为了linux主机设定的，如果要为vhost1和vhost2设定虚拟主机，就要使用VirtualHost语句定义不同的选项，在语句中可以使用配置文件前面中的大部分选项，而可以重新定义几乎所有的针对服务器的设置。</p>
+<pre><code>NameVirtualHost 192.168.1.64 
+DocumentRoot /www/data 
+ServerName linux.example.org.cn 
+DocumentRoot /vhost1 
+ServerName vhost1.example.org.cn 
+DocumentRoot /vhost2 
+ServerName vhost2.example.org.cn
+</code></pre>
+</li>
+<li>
+<p>这里需要注意的是，VirtualHost的参数地址一定要和NameVirtualHost定义的地址相一致，必须保证所有的值严格一致，Apache服务器才承认这些定义是为这个IP地址定义的虚拟主机。</p>
+</li>
+<li>
+<p>此外，定义过NameVirtualHost之后，那么对这个IP地址的访问都被区分不同的虚拟主机进行处理，而对其他IP地址的访问，例如127.0.0.1，才应用前面定义的缺省选项。</p>
+</li>
+</ul></article></body></html>
